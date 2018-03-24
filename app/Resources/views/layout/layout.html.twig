@@ -43,11 +43,11 @@
                         </div>
                     </div>
 
+
                     <div class="col-xs-12 col-sm-6">
                         <ul class="hdr_tp_right text-right">
-                            <li class="account_area"><a href="login.html"><i class="fa fa-lock"></i> My Account</a></li>
-
-                            </li>
+                            <li class="account_area"><a href="{{ path('fos_user_registration_register') }}"><i class="fa fa-lock"></i> Register</a></li>
+                            <li class="account_area"><a href="{{ path('fos_user_security_login') }}"><i class="fa fa-lock"></i> Se Connecter</a></li>
                         </ul>
                     </div>
                 </div>
@@ -164,9 +164,14 @@
     </div>
     </header>
 </head>
+
 <body>
 
-{% block body %}{% endblock %}
+{% block body %}
+
+    {% block fos_user_content %}
+    {% endblock %}
+{% endblock %}
 {% block javascripts %}{% endblock %}
 
 <script src="{{ asset('js/vendor/jquery-1.12.4.min.js') }}"></script>
