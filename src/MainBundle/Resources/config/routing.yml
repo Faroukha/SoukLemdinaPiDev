@@ -1,0 +1,10 @@
+main_homepage:
+    path:     /
+    defaults: { _controller: MainBundle:Default:index }
+contact:
+    path:     /contact
+    defaults: { _controller: MainBundle:Default:contact }
+about:
+    path:     /about
+    defaults: { _controller: MainBundle:Default:about }
+

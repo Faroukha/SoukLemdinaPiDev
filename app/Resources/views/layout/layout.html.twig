@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>SoukLemdina - E-commerce Traditionnel </title>
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,500,600,700,800" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Handlee" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/animate.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('css/owl.theme.default.min.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('css/owl.carousel.min.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('css/meanmenu.min.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('css/venobox.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('css/font-awesome.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('style.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('css/responsive.css') }}"/>
+    {% block stylesheets %}{% endblock %}
+
+
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
+    <div class="preloader">
+        <div class="status-mes">
+            <div class="bigSqr">
+                <div class="square first"></div>
+                <div class="square second"></div>
+                <div class="square third"></div>
+                <div class="square fourth"></div>
+            </div>
+            <div class="text_loading text-center">loading</div>
+        </div>
+    </div>
+
+    <header id="header_area">
+        <div class="header_top_area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-6">
+                        <div class="hdr_tp_left">
+                            <div class="call_area">
+                                <span class="single_con_add"><i class="fa fa-envelope"></i> example@gmail.com</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-12 col-sm-6">
+                        <ul class="hdr_tp_right text-right">
+                            <li class="account_area"><a href="login.html"><i class="fa fa-lock"></i> My Account</a></li>
+
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <div class="header_btm_area">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-3">
+                    <a class="logo" href="{{ path('main_homepage') }}"> <img alt="" src="img/logo.png"></a>
+                </div>
+                <!--  End Col -->
+
+                <div class="col-xs-12 col-sm-12 col-md-9 text-right">
+                    <div class="menu_wrap">
+                        <div class="main-menu">
+                            <nav>
+                                <ul>
+                                    <li><a href="{{path('main_homepage')}}">home</a>
+                                    </li>
+
+                                    <li><a href="shop.html">Shop <i class="fa fa-angle-down"></i></a>
+                                        <!-- Sub Menu -->
+                                        <ul class="sub-menu">
+                                            <li><a href="product-details.html">Product Details</a></li>
+                                            <li><a href="cart.html">Cart</a></li>
+                                            <li><a href="checkout.html">Checkout</a></li>
+                                            <li><a href="wishlist.html">Wishlist</a></li>
+                                        </ul>
+                                    </li>
+
+                                    </li>
+
+                                    <li><a href="#">pages <i class="fa fa-angle-down"></i></a>
+                                        <!-- Sub Menu -->
+                                        <ul class="sub-menu">
+                                            <li><a href="{{ path('blog') }}">Blog</a></li>
+                                            <li><a href="{{ path('about') }}">About Us</a></li>
+
+                                            <li><a href="404.html">404 Page</a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a href="{{ path('contact') }}">contact</a></li>
+                                </ul>
+                            </nav>
+                        </div>
+                        <!--  End Main Menu -->
+
+
+
+                        <div class="right_menu">
+                            <ul class="nav justify-content-end">
+                                <li>
+                                    <div class="search_icon">
+                                        <i class="fa fa-search search_btn" aria-hidden="true"></i>
+                                        <div class="search-box">
+                                            <form action="#" method="get">
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control"  placeholder="enter keyword"/>
+                                                    <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </li>
+
+                                <li>
+                                    <div class="cart_menu_area">
+                                        <div class="cart_icon">
+                                            <a href="#"><i class="fa fa-shopping-bag " aria-hidden="true"></i></a>
+                                            <span class="cart_number">2</span>
+                                        </div>
+
+
+                                        <!-- Mini Cart Wrapper -->
+                                        <div class="mini-cart-wrapper">
+                                            <!-- Product List -->
+                                            <div class="mc-pro-list fix">
+                                                <div class="mc-sin-pro fix">
+                                                    <a href="#" class="mc-pro-image float-left"><img src="img/mini-cart/1.jpg" alt="" /></a>
+                                                    <div class="mc-pro-details fix">
+                                                        <a href="#">This is Product Name</a>
+                                                        <span>1x$25.00</span>
+                                                        <a class="pro-del" href="#"><i class="fa fa-times-circle"></i></a>
+                                                    </div>
+                                                </div>
+                                                <div class="mc-sin-pro fix">
+                                                    <a href="#" class="mc-pro-image float-left"><img src="img/mini-cart/2.jpg" alt="" /></a>
+                                                    <div class="mc-pro-details fix">
+                                                        <a href="#">This is Product Name</a>
+                                                        <span>1x$25.00</span>
+                                                        <a class="pro-del" href="#"><i class="fa fa-times-circle"></i></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- Sub Total -->
+                                            <div class="mc-subtotal fix">
+                                                <h4>Subtotal <span>$50.00</span></h4>
+                                            </div>
+                                            <!-- Cart Button -->
+                                            <div class="mc-button">
+                                                <a href="#" class="checkout_btn">checkout</a>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div><!--  End Col -->
+            </div>
+        </div>
+    </div>
+    </header>
+</head>
+<body>
+
+{% block body %}{% endblock %}
+{% block javascripts %}{% endblock %}
+
+<script src="{{ asset('js/vendor/jquery-1.12.4.min.js') }}"></script>
+<script src="{{ asset('js/bootstrap.min.js') }}"></script>
+<script src="{{ asset('js/jquery.meanmenu.min.js') }}"></script>
+<script src="{{ asset('js/jquery.mixitup.js') }}"></script>
+<script src="{{ asset('js/jquery.counterup.min.js') }}"></script>
+<script src="{{ asset('js/waypoints.min.js') }}"></script>
+<script src="{{ asset('js/wow.min.js') }}"></script>
+<script src="{{ asset('js/venobox.min.js') }}"></script>
+<script src="{{ asset('js/owl.carousel.min.js') }}"></script>
+<script src="{{ asset('js/simplePlayer.js') }}"></script>
+<script src="{{ asset('js/main.js') }}"></script>
+<footer class="footer_area">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3 col-sm-6">
+                <div class="single_ftr">
+                    <h4 class="sf_title">Contacts</h4>
+                    <ul>
+                        <li>Z.I. Chotrana II B.P. 160، Pôle Technologique El Ghazela ، Ariana 2088</li>
+                        <li>(+216) 92 74 74 00 <br> (+216) 52 28 26 81</li>
+                        <li>pidevk@gmail.com</li>
+                    </ul>
+                </div>
+            </div> <!--  End Col -->
+
+            <div class="col-md-3 col-sm-6">
+                <div class="single_ftr">
+                    <h4 class="sf_title">Information</h4>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Delivery Information</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms & Conditions</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                    </ul>
+                </div>
+            </div> <!--  End Col -->
+
+            <div class="col-md-3 col-sm-6">
+                <div class="single_ftr">
+                    <h4 class="sf_title">Services</h4>
+                    <ul>
+                        <li><a href="#">Returns</a></li>
+                        <li><a href="#">Site Map</a></li>
+                        <li><a href="#">Wish List</a></li>
+                        <li><a href="#">My Account</a></li>
+                        <li><a href="#">Order History</a></li>
+                    </ul>
+                </div>
+            </div> <!--  End Col -->
+
+            <div class="col-md-3 col-sm-6">
+                <div class="single_ftr">
+                    <h4 class="sf_title">Newsletter</h4>
+                    <div class="newsletter_form">
+                        <p>There are many variations of passages of Lorem Ipsum available, but the majority have </p>
+                        <form method="post" class="form-inline">
+                            <input name="EMAIL" id="email" placeholder="Enter Your Email" class="form-control" type="email">
+                            <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                        </form>
+                    </div>
+                </div>
+            </div> <!--  End Col -->
+
+        </div>
+    </div>
+
+
+    <div class="ftr_btm_area">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-4">
+                </div>
+                <div class="col-sm-4">
+                    <p class="copyright_text text-center">&copy; 2018 All Rights Reserved SoukLemdina</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+</body>
+</html>
