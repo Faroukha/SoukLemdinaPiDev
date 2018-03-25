@@ -2,11 +2,11 @@ produit_homepage:
     path:     /
     defaults: { _controller: ProduitBundle:Default:index }
 nouveau_produit:
-    path:     /
-    defaults: { _controller: ProduitBundle:Default:index }
+    path:     /ajouter
+    defaults: { _controller: ProduitBundle:Default:ajouter }
 Ajouter_promotion:
-    path:     /
-    defaults: { _controller: ProduitBundle:Default:index }
+    path:     /promotion
+    defaults: { _controller: ProduitBundle:Default:promotion }
 product_details:
     path:     /details
     defaults: { _controller: ProduitBundle:Default:details  }
