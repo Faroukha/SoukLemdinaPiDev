@@ -1,3 +1,18 @@
 produit_homepage:
     path:     /
     defaults: { _controller: ProduitBundle:Default:index }
+nouveau_produit:
+    path:     /
+    defaults: { _controller: ProduitBundle:Default:index }
+Ajouter_promotion:
+    path:     /
+    defaults: { _controller: ProduitBundle:Default:index }
+product_details:
+    path:     /details
+    defaults: { _controller: ProduitBundle:Default:details  }
+shop_produit:
+    path:     /shop
+    defaults: { _controller: ProduitBundle:Default:shop  }
+cart_produit:
+    path:     /cart
+    defaults: { _controller: ProduitBundle:Default:cart  }

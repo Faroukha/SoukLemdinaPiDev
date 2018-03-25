@@ -8,6 +8,21 @@ class DefaultController extends Controller
 {
     public function indexAction()
     {
-        return $this->render('ProduitBundle:Default:index.html.twig');
+        return $this->render('ProduitBundle:Produit:index.html.twig');
+    }
+
+    public function detailsAction()
+{
+    return $this->render('ProduitBundle:Produit:product-details.html.twig');
+}
+    public function shopAction()
+    {
+        return $this->render('ProduitBundle:Produit:shop.html.twig');
+    }
+
+    public function cartAction()
+    {
+        return $this->render('ProduitBundle:Produit:cart.html.twig');
     }
 }
+

@@ -57,7 +57,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-3">
-                    <a class="logo" href="{{ path('main_homepage') }}"> <img alt="" src="img/logo.png"></a>
+                    <a class="logo" href="{{ path('main_homepage') }}"> <img alt="" src="{{ asset('bundles/main/img/logo.png')}}"></a>
                 </div>
                 <!--  End Col -->
 
@@ -69,18 +69,24 @@
                                     <li><a href="{{path('main_homepage')}}">home</a>
                                     </li>
 
-                                    <li><a href="shop.html">Shop <i class="fa fa-angle-down"></i></a>
+                                    <li><a href="{{path('shop_produit')}}">Shop <i class="fa fa-angle-down"></i></a>
                                         <!-- Sub Menu -->
                                         <ul class="sub-menu">
-                                            <li><a href="product-details.html">Product Details</a></li>
-                                            <li><a href="cart.html">Cart</a></li>
-                                            <li><a href="checkout.html">Checkout</a></li>
+                                            <li><a href="{{path('product_details')}}">Product Details</a></li>
+                                            <li><a href="{{path('cart_produit')}}">Cart</a></li>
                                             <li><a href="wishlist.html">Wishlist</a></li>
                                         </ul>
                                     </li>
 
                                     </li>
+                                    <li><a href="#">Ajouter Produit <i class="fa fa-angle-down"></i></a>
+                                        <ul class="sub-menu">
+                                            <li><a href="{{ path('nouveau_produit') }}">Ajouter un nouveau  Produit</a></li>
+                                            <li><a href="{{ path('Ajouter_promotion') }}">Ajouter une Promotion</a></li>
 
+                                        </ul>
+                                    </li>
+                                    </li>
                                     <li><a href="#">pages <i class="fa fa-angle-down"></i></a>
                                         <!-- Sub Menu -->
                                         <ul class="sub-menu">
@@ -127,7 +133,7 @@
                                             <!-- Product List -->
                                             <div class="mc-pro-list fix">
                                                 <div class="mc-sin-pro fix">
-                                                    <a href="#" class="mc-pro-image float-left"><img src="img/mini-cart/1.jpg" alt="" /></a>
+                                                    <a href="#" class="mc-pro-image float-left"><img src="{{ asset('bundles/main/img/mini-cart/1.jpg')}}" alt="" /></a>
                                                     <div class="mc-pro-details fix">
                                                         <a href="#">This is Product Name</a>
                                                         <span>1x$25.00</span>
@@ -135,7 +141,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="mc-sin-pro fix">
-                                                    <a href="#" class="mc-pro-image float-left"><img src="img/mini-cart/2.jpg" alt="" /></a>
+                                                    <a href="#" class="mc-pro-image float-left"><img src="{{ asset('bundles/main/img/mini-cart/2.jpg')}}" alt="" /></a>
                                                     <div class="mc-pro-details fix">
                                                         <a href="#">This is Product Name</a>
                                                         <span>1x$25.00</span>
