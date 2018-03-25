@@ -16,3 +16,6 @@ shop_produit:
 cart_produit:
     path:     /cart
     defaults: { _controller: ProduitBundle:Default:cart  }
+wishlist:
+    path:     /wishlist
+    defaults: { _controller: ProduitBundle:Default:wishlist  }

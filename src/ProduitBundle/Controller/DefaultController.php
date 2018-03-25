@@ -24,5 +24,10 @@ class DefaultController extends Controller
     {
         return $this->render('ProduitBundle:Produit:cart.html.twig');
     }
+
+    public function wishlistAction()
+    {
+        return $this->render('ProduitBundle:Produit:wishlist.html.twig');
+    }
 }
 
