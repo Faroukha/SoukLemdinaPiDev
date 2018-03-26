@@ -22,3 +22,4 @@ wishlist:
 Ajouter_Produit:
     path:     /produit
     defaults: { _controller: ProduitBundle:Produit:AjouterProduit  }
+

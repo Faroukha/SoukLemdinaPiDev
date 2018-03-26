@@ -10,6 +10,7 @@ namespace ProduitBundle\Controller;
 use MainBundle\Entity\Produit;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class ProduitController extends Controller
 {
@@ -34,6 +35,14 @@ class ProduitController extends Controller
         return $this->render('ProduitBundle:Produit:ajouter.html.twig', array());
 
     }
+
+//    public function AfficheAction(){
+//        $em=$this->getDoctrine()->getRepository(Produit::class);
+//        $produits=$em->findAll();
+//
+//        return $this->render('MainBundle:Default:index.html.twig',
+//            array('produits'=>$produits,'user'=>null));
+//    }
 
 
 }

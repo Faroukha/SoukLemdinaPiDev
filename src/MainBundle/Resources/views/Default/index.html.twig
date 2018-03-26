@@ -65,4 +65,37 @@
             </div>
         </div>
     </section>
+
+
+    <div class="product_item">
+        <div class="row">
+             {% for produit in produits %}
+            <div class="col-lg-3 col-md-4 col-sm-6 mix sale">
+                <div class="single_product">
+                    <div class="product_image">
+                        <img src="{{ asset(produit.image) }}" alt=""/>
+                        <div class="new_badge">New</div>
+                        <div class="box-content">
+
+                            <a href="#"><i class="fa fa-cart-plus"></i></a>
+                            <a href="#"><i class="fa fa-search"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="product_btm_text">
+                        <h4><a href="#">{{ produit.titre}}</a></h4>
+                        <div class="p_rating">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                        </div>
+                        <span class="price">{{ produit.prix}}</span>
+
+                    </div>
+                </div>
+            </div>
+            </div>
+    {% endfor %}
 {% endblock %}
