@@ -20,15 +20,15 @@
 
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
     {#<div class="preloader">#}
-        {#<div class="status-mes">#}
-            {#<div class="bigSqr">#}
-                {#<div class="square first"></div>#}
-                {#<div class="square second"></div>#}
-                {#<div class="square third"></div>#}
-                {#<div class="square fourth"></div>#}
-            {#</div>#}
-            {#<div class="text_loading text-center">loading</div>#}
-        {#</div>#}
+    {#<div class="status-mes">#}
+    {#<div class="bigSqr">#}
+    {#<div class="square first"></div>#}
+    {#<div class="square second"></div>#}
+    {#<div class="square third"></div>#}
+    {#<div class="square fourth"></div>#}
+    {#</div>#}
+    {#<div class="text_loading text-center">loading</div>#}
+    {#</div>#}
     {#</div>#}
 
     <header id="header_area">
@@ -38,7 +38,8 @@
                     <div class="col-xs-12 col-sm-6">
                         <div class="hdr_tp_left">
                             <div class="call_area">
-                                <span class="single_con_add"><i class="fa fa-envelope"></i> {% block mailco %} {% endblock %}</span>
+                                <span class="single_con_add"><i
+                                            class="fa fa-envelope"></i> {% block mailco %} {% endblock %}</span>
                             </div>
                         </div>
                     </div>
@@ -47,129 +48,128 @@
                     <div class="col-xs-12 col-sm-6">
                         <ul class="hdr_tp_right text-right">
                             {% block loginbtn %}
-                            <li class="account_area"><a href="{{ path('fos_user_registration_register') }}"><i class="fa fa-lock"></i> Register</a></li>
-                            <li class="account_area"><a href="{{ path('fos_user_security_login') }}"><i class="fa fa-lock"></i> Se Connecter</a></li>
+                                <li class="account_area"><a href="{{ path('fos_user_registration_register') }}"><i
+                                                class="fa fa-lock"></i> Register</a></li>
+                                <li class="account_area"><a href="{{ path('fos_user_security_login') }}"><i
+                                                class="fa fa-lock"></i> Se Connecter</a></li>
                             {% endblock %}
                         </ul>
                     </div>
                 </div>
             </div>
         </div>
-    <div class="header_btm_area">
-        <div class="container">
-            <div class="row">
-                <div class="col-xs-12 col-sm-12 col-md-3">
-                    <a class="logo" href="{{ path('main_homepage') }}"> <img alt="" src="{{ asset('bundles/main/img/logo.png')}}"></a>
-                </div>
-                <!--  End Col -->
-
-                <div class="col-xs-12 col-sm-12 col-md-9 text-right">
-                    <div class="menu_wrap">
-                        <div class="main-menu">
-                            <nav>
-                                <ul>
-                                    <li><a href="{{path('main_homepage')}}">home</a>
-                                    </li>
-
-                                    <li><a href="{{path('shop_produit')}}">Shop <i class="fa fa-angle-down"></i></a>
-                                        <!-- Sub Menu -->
-                                        <ul class="sub-menu">
-                                            <li><a href="{{path('product_details')}}">Product Details</a></li>
-                                            <li><a href="{{path('cart_produit')}}">Cart</a></li>
-                                            <li><a href="{{path('wishlist')}}">Wishlist</a></li>
-                                        </ul>
-                                    </li>
-
-                                    </li>
-                                    <li><a href="#">Ajouter Produit <i class="fa fa-angle-down"></i></a>
-                                        <ul class="sub-menu">
-                                            <li><a href="{{ path('nouveau_produit') }}">Ajouter un nouveau  Produit</a></li>
-                                            <li><a href="{{ path('Ajouter_promotion') }}">Ajouter une Promotion</a></li>
-
-                                        </ul>
-                                    </li>
-                                    </li>
-                                    <li><a href="#">pages <i class="fa fa-angle-down"></i></a>
-                                        <!-- Sub Menu -->
-                                        <ul class="sub-menu">
-                                            <li><a href="{{ path('blog') }}">Blog</a></li>
-                                            <li><a href="{{ path('about') }}">About Us</a></li>
-
-                                            <li><a href="404.html">404 Page</a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a href="{{ path('contact') }}">contact</a></li>
-                                </ul>
-                            </nav>
-                        </div>
-                        <!--  End Main Menu -->
-
-
-
-                        <div class="right_menu">
-                            <ul class="nav justify-content-end">
-                                <li>
-                                    <div class="search_icon">
-                                        <i class="fa fa-search search_btn" aria-hidden="true"></i>
-                                        <div class="search-box">
-                                            <form action="#" method="get">
-                                                <div class="input-group">
-                                                    <input type="text" class="form-control"  placeholder="enter keyword"/>
-                                                    <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </li>
-
-                                <li>
-                                    <div class="cart_menu_area">
-                                        <div class="cart_icon">
-                                            <a href="#"><i class="fa fa-shopping-bag " aria-hidden="true"></i></a>
-                                            <span class="cart_number">2</span>
-                                        </div>
-
-
-                                        <!-- Mini Cart Wrapper -->
-                                        <div class="mini-cart-wrapper">
-                                            <!-- Product List -->
-                                            <div class="mc-pro-list fix">
-                                                <div class="mc-sin-pro fix">
-                                                    <a href="#" class="mc-pro-image float-left"><img src="{{ asset('bundles/main/img/mini-cart/1.jpg')}}" alt="" /></a>
-                                                    <div class="mc-pro-details fix">
-                                                        <a href="#">This is Product Name</a>
-                                                        <span>1x$25.00</span>
-                                                        <a class="pro-del" href="#"><i class="fa fa-times-circle"></i></a>
-                                                    </div>
-                                                </div>
-                                                <div class="mc-sin-pro fix">
-                                                    <a href="#" class="mc-pro-image float-left"><img src="{{ asset('bundles/main/img/mini-cart/2.jpg')}}" alt="" /></a>
-                                                    <div class="mc-pro-details fix">
-                                                        <a href="#">This is Product Name</a>
-                                                        <span>1x$25.00</span>
-                                                        <a class="pro-del" href="#"><i class="fa fa-times-circle"></i></a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- Sub Total -->
-                                            <div class="mc-subtotal fix">
-                                                <h4>Subtotal <span>$50.00</span></h4>
-                                            </div>
-                                            <!-- Cart Button -->
-                                            <div class="mc-button">
-                                                <a href="#" class="checkout_btn">checkout</a>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </li>
-                            </ul>
-                        </div>
+        <div class="header_btm_area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-3">
+                        <a class="logo" href="{{ path('main_homepage') }}"> <img alt=""
+                                                                                 src="{{ asset('bundles/main/img/logo.png') }}"></a>
                     </div>
-                </div><!--  End Col -->
+                    <!--  End Col -->
+
+                    <div class="col-xs-12 col-sm-12 col-md-9 text-right">
+                        <div class="menu_wrap">
+                            <div class="main-menu">
+                                <nav>
+                                    <ul>
+                                        <li><a href="{{ path('main_homepage') }}">home</a>
+                                        </li>
+
+                                        <li><a href="{{ path('shop_produit') }}">Shop <i
+                                                        class="fa fa-angle-down"></i></a>
+                                            <!-- Sub Menu -->
+                                            <ul class="sub-menu">
+                                                <li><a href="{{ path('product_details') }}">Product Details</a></li>
+                                                <li><a href="{{ path('cart_produit') }}">Cart</a></li>
+                                                <li><a href="{{ path('wishlist') }}">Wishlist</a></li>
+                                            </ul>
+                                        </li>
+
+                                        </li>
+
+                                        </li>
+                                        <li><a href="{{ path('blog') }}">Blog <i class="fa fa-angle-down"></i></a>
+
+                                        </li>
+                                        <li><a href="{{ path('contact') }}">contact</a></li>
+                                    </ul>
+                                </nav>
+                            </div>
+                            <!--  End Main Menu -->
+
+
+                            <div class="right_menu">
+                                <ul class="nav justify-content-end">
+                                    <li>
+                                        <div class="search_icon">
+                                            <i class="fa fa-search search_btn" aria-hidden="true"></i>
+                                            <div class="search-box">
+                                                <form action="#" method="get">
+                                                    <div class="input-group">
+                                                        <input type="text" class="form-control"
+                                                               placeholder="enter keyword"/>
+                                                        <button type="submit" class="btn btn-default"><i
+                                                                    class="fa fa-search"></i></button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </li>
+
+                                    <li>
+                                        <div class="cart_menu_area">
+                                            <div class="cart_icon">
+                                                <a href="#"><i class="fa fa-shopping-bag " aria-hidden="true"></i></a>
+                                                <span class="cart_number">2</span>
+                                            </div>
+
+
+                                            <!-- Mini Cart Wrapper -->
+                                            <div class="mini-cart-wrapper">
+                                                <!-- Product List -->
+                                                <div class="mc-pro-list fix">
+                                                    <div class="mc-sin-pro fix">
+                                                        <a href="#" class="mc-pro-image float-left"><img
+                                                                    src="{{ asset('bundles/main/img/mini-cart/1.jpg') }}"
+                                                                    alt=""/></a>
+                                                        <div class="mc-pro-details fix">
+                                                            <a href="#">This is Product Name</a>
+                                                            <span>1x$25.00</span>
+                                                            <a class="pro-del" href="#"><i
+                                                                        class="fa fa-times-circle"></i></a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="mc-sin-pro fix">
+                                                        <a href="#" class="mc-pro-image float-left"><img
+                                                                    src="{{ asset('bundles/main/img/mini-cart/2.jpg') }}"
+                                                                    alt=""/></a>
+                                                        <div class="mc-pro-details fix">
+                                                            <a href="#">This is Product Name</a>
+                                                            <span>1x$25.00</span>
+                                                            <a class="pro-del" href="#"><i
+                                                                        class="fa fa-times-circle"></i></a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- Sub Total -->
+                                                <div class="mc-subtotal fix">
+                                                    <h4>Subtotal <span>$50.00</span></h4>
+                                                </div>
+                                                <!-- Cart Button -->
+                                                <div class="mc-button">
+                                                    <a href="#" class="checkout_btn">checkout</a>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div><!--  End Col -->
+                </div>
             </div>
         </div>
-    </div>
     </header>
 </head>
 
@@ -239,7 +239,8 @@
                     <div class="newsletter_form">
                         <p>There are many variations of passages of Lorem Ipsum available, but the majority have </p>
                         <form method="post" class="form-inline">
-                            <input name="EMAIL" id="email" placeholder="Enter Your Email" class="form-control" type="email">
+                            <input name="EMAIL" id="email" placeholder="Enter Your Email" class="form-control"
+                                   type="email">
                             <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
                         </form>
                     </div>
