@@ -43,5 +43,86 @@ class Commentaire
     private $emailuser;
 
 
-}
 
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set text
+     *
+     * @param string $text
+     *
+     * @return Commentaire
+     */
+    public function setText($text)
+    {
+        $this->text = $text;
+
+        return $this;
+    }
+
+    /**
+     * Get text
+     *
+     * @return string
+     */
+    public function getText()
+    {
+        return $this->text;
+    }
+
+    /**
+     * Set idproduit
+     *
+     * @param integer $idproduit
+     *
+     * @return Commentaire
+     */
+    public function setIdproduit($idproduit)
+    {
+        $this->idproduit = $idproduit;
+
+        return $this;
+    }
+
+    /**
+     * Get idproduit
+     *
+     * @return integer
+     */
+    public function getIdproduit()
+    {
+        return $this->idproduit;
+    }
+
+    /**
+     * Set emailuser
+     *
+     * @param string $emailuser
+     *
+     * @return Commentaire
+     */
+    public function setEmailuser($emailuser)
+    {
+        $this->emailuser = $emailuser;
+
+        return $this;
+    }
+
+    /**
+     * Get emailuser
+     *
+     * @return string
+     */
+    public function getEmailuser()
+    {
+        return $this->emailuser;
+    }
+}

@@ -36,5 +36,62 @@ class Abonnement
     private $idartisan;
 
 
-}
 
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set idmembre
+     *
+     * @param integer $idmembre
+     *
+     * @return Abonnement
+     */
+    public function setIdmembre($idmembre)
+    {
+        $this->idmembre = $idmembre;
+
+        return $this;
+    }
+
+    /**
+     * Get idmembre
+     *
+     * @return integer
+     */
+    public function getIdmembre()
+    {
+        return $this->idmembre;
+    }
+
+    /**
+     * Set idartisan
+     *
+     * @param integer $idartisan
+     *
+     * @return Abonnement
+     */
+    public function setIdartisan($idartisan)
+    {
+        $this->idartisan = $idartisan;
+
+        return $this;
+    }
+
+    /**
+     * Get idartisan
+     *
+     * @return integer
+     */
+    public function getIdartisan()
+    {
+        return $this->idartisan;
+    }
+}

@@ -36,5 +36,62 @@ class Panier
     private $prixtotal;
 
 
-}
 
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set iduser
+     *
+     * @param integer $iduser
+     *
+     * @return Panier
+     */
+    public function setIduser($iduser)
+    {
+        $this->iduser = $iduser;
+
+        return $this;
+    }
+
+    /**
+     * Get iduser
+     *
+     * @return integer
+     */
+    public function getIduser()
+    {
+        return $this->iduser;
+    }
+
+    /**
+     * Set prixtotal
+     *
+     * @param float $prixtotal
+     *
+     * @return Panier
+     */
+    public function setPrixtotal($prixtotal)
+    {
+        $this->prixtotal = $prixtotal;
+
+        return $this;
+    }
+
+    /**
+     * Get prixtotal
+     *
+     * @return float
+     */
+    public function getPrixtotal()
+    {
+        return $this->prixtotal;
+    }
+}

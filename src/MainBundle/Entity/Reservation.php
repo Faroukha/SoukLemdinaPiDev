@@ -43,5 +43,86 @@ class Reservation
     private $nbplaceRes;
 
 
-}
 
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set idUser
+     *
+     * @param integer $idUser
+     *
+     * @return Reservation
+     */
+    public function setIdUser($idUser)
+    {
+        $this->idUser = $idUser;
+
+        return $this;
+    }
+
+    /**
+     * Get idUser
+     *
+     * @return integer
+     */
+    public function getIdUser()
+    {
+        return $this->idUser;
+    }
+
+    /**
+     * Set idEvenement
+     *
+     * @param integer $idEvenement
+     *
+     * @return Reservation
+     */
+    public function setIdEvenement($idEvenement)
+    {
+        $this->idEvenement = $idEvenement;
+
+        return $this;
+    }
+
+    /**
+     * Get idEvenement
+     *
+     * @return integer
+     */
+    public function getIdEvenement()
+    {
+        return $this->idEvenement;
+    }
+
+    /**
+     * Set nbplaceRes
+     *
+     * @param integer $nbplaceRes
+     *
+     * @return Reservation
+     */
+    public function setNbplaceRes($nbplaceRes)
+    {
+        $this->nbplaceRes = $nbplaceRes;
+
+        return $this;
+    }
+
+    /**
+     * Get nbplaceRes
+     *
+     * @return integer
+     */
+    public function getNbplaceRes()
+    {
+        return $this->nbplaceRes;
+    }
+}

@@ -50,5 +50,110 @@ class Produitspanier
     private $quantite;
 
 
-}
 
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set idpanier
+     *
+     * @param integer $idpanier
+     *
+     * @return Produitspanier
+     */
+    public function setIdpanier($idpanier)
+    {
+        $this->idpanier = $idpanier;
+
+        return $this;
+    }
+
+    /**
+     * Get idpanier
+     *
+     * @return integer
+     */
+    public function getIdpanier()
+    {
+        return $this->idpanier;
+    }
+
+    /**
+     * Set idproduit
+     *
+     * @param integer $idproduit
+     *
+     * @return Produitspanier
+     */
+    public function setIdproduit($idproduit)
+    {
+        $this->idproduit = $idproduit;
+
+        return $this;
+    }
+
+    /**
+     * Get idproduit
+     *
+     * @return integer
+     */
+    public function getIdproduit()
+    {
+        return $this->idproduit;
+    }
+
+    /**
+     * Set nomproduit
+     *
+     * @param string $nomproduit
+     *
+     * @return Produitspanier
+     */
+    public function setNomproduit($nomproduit)
+    {
+        $this->nomproduit = $nomproduit;
+
+        return $this;
+    }
+
+    /**
+     * Get nomproduit
+     *
+     * @return string
+     */
+    public function getNomproduit()
+    {
+        return $this->nomproduit;
+    }
+
+    /**
+     * Set quantite
+     *
+     * @param integer $quantite
+     *
+     * @return Produitspanier
+     */
+    public function setQuantite($quantite)
+    {
+        $this->quantite = $quantite;
+
+        return $this;
+    }
+
+    /**
+     * Get quantite
+     *
+     * @return integer
+     */
+    public function getQuantite()
+    {
+        return $this->quantite;
+    }
+}

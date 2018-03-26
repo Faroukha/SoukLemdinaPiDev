@@ -50,5 +50,110 @@ class Commande
     private $etat;
 
 
-}
 
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set iduser
+     *
+     * @param integer $iduser
+     *
+     * @return Commande
+     */
+    public function setIduser($iduser)
+    {
+        $this->iduser = $iduser;
+
+        return $this;
+    }
+
+    /**
+     * Get iduser
+     *
+     * @return integer
+     */
+    public function getIduser()
+    {
+        return $this->iduser;
+    }
+
+    /**
+     * Set idpanier
+     *
+     * @param integer $idpanier
+     *
+     * @return Commande
+     */
+    public function setIdpanier($idpanier)
+    {
+        $this->idpanier = $idpanier;
+
+        return $this;
+    }
+
+    /**
+     * Get idpanier
+     *
+     * @return integer
+     */
+    public function getIdpanier()
+    {
+        return $this->idpanier;
+    }
+
+    /**
+     * Set date
+     *
+     * @param \DateTime $date
+     *
+     * @return Commande
+     */
+    public function setDate($date)
+    {
+        $this->date = $date;
+
+        return $this;
+    }
+
+    /**
+     * Get date
+     *
+     * @return \DateTime
+     */
+    public function getDate()
+    {
+        return $this->date;
+    }
+
+    /**
+     * Set etat
+     *
+     * @param boolean $etat
+     *
+     * @return Commande
+     */
+    public function setEtat($etat)
+    {
+        $this->etat = $etat;
+
+        return $this;
+    }
+
+    /**
+     * Get etat
+     *
+     * @return boolean
+     */
+    public function getEtat()
+    {
+        return $this->etat;
+    }
+}

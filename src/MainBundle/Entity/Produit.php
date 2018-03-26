@@ -193,5 +193,14 @@ class Produit
     {
         $this->idartisan = $idartisan;
     }
-}
 
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+}

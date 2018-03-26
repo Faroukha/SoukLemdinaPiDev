@@ -43,5 +43,86 @@ class Reclamation
     private $specification;
 
 
-}
 
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set iduser
+     *
+     * @param integer $iduser
+     *
+     * @return Reclamation
+     */
+    public function setIduser($iduser)
+    {
+        $this->iduser = $iduser;
+
+        return $this;
+    }
+
+    /**
+     * Get iduser
+     *
+     * @return integer
+     */
+    public function getIduser()
+    {
+        return $this->iduser;
+    }
+
+    /**
+     * Set problem
+     *
+     * @param string $problem
+     *
+     * @return Reclamation
+     */
+    public function setProblem($problem)
+    {
+        $this->problem = $problem;
+
+        return $this;
+    }
+
+    /**
+     * Get problem
+     *
+     * @return string
+     */
+    public function getProblem()
+    {
+        return $this->problem;
+    }
+
+    /**
+     * Set specification
+     *
+     * @param string $specification
+     *
+     * @return Reclamation
+     */
+    public function setSpecification($specification)
+    {
+        $this->specification = $specification;
+
+        return $this;
+    }
+
+    /**
+     * Get specification
+     *
+     * @return string
+     */
+    public function getSpecification()
+    {
+        return $this->specification;
+    }
+}

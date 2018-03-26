@@ -36,5 +36,62 @@ class Promotion
     private $taux;
 
 
-}
 
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set idproduit
+     *
+     * @param integer $idproduit
+     *
+     * @return Promotion
+     */
+    public function setIdproduit($idproduit)
+    {
+        $this->idproduit = $idproduit;
+
+        return $this;
+    }
+
+    /**
+     * Get idproduit
+     *
+     * @return integer
+     */
+    public function getIdproduit()
+    {
+        return $this->idproduit;
+    }
+
+    /**
+     * Set taux
+     *
+     * @param integer $taux
+     *
+     * @return Promotion
+     */
+    public function setTaux($taux)
+    {
+        $this->taux = $taux;
+
+        return $this;
+    }
+
+    /**
+     * Get taux
+     *
+     * @return integer
+     */
+    public function getTaux()
+    {
+        return $this->taux;
+    }
+}
