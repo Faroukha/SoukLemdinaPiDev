@@ -19,3 +19,6 @@ cart_produit:
 wishlist:
     path:     /wishlist
     defaults: { _controller: ProduitBundle:Default:wishlist  }
+Ajouter_Produit:
+    path:     /produit
+    defaults: { _controller: ProduitBundle:Produit:AjouterProduit  }

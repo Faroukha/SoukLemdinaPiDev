@@ -37,5 +37,10 @@ class DefaultController extends Controller
     {
         return $this->render('ProduitBundle:Produit:wishlist.html.twig');
     }
+
+
+
+
+
 }
 
