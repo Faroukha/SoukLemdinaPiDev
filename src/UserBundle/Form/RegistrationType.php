@@ -4,6 +4,8 @@
 namespace UserBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -18,12 +20,12 @@ class RegistrationType extends AbstractType
             ->add('nom')
             ->add('prenom')
             ->add('birthdate', DateType::class, array(
-                'widget' => 'choice',
+                'widget' => 'single_text',
             ))
             ->add('adresse')
             ->add('phone')
-            ->add('roles')
-        ;
+            ->add('roles');
+
 
     }
     public function getParent()

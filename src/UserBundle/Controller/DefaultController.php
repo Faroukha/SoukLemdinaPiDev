@@ -4,6 +4,7 @@ namespace UserBundle\Controller;
 
 use MainBundle\Entity\Produit;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\BrowserKit\Response;
 
 class DefaultController extends Controller
 {

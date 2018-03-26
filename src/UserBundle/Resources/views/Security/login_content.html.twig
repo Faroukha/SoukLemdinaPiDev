@@ -1,8 +1,6 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
-{% if error %}
-    <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-{% endif %}
+
 <div class="login_page_area">
     <div class="container">
         <div class="row">
@@ -29,9 +27,18 @@
                             <p class="forgot_password">
                                 <a href="#" title="Recover your forgotten password" rel="">Forgot your password?</a>
                             </p>
-                            <button type="submit" id="_submit" name="_submit" class="btn btn-default acc_btn">
-                                <span> <i class="fa fa-lock btn_icon"></i> Sign in </span>
-                            </button>
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <button type="submit" id="_submit" name="_submit" class="btn btn-default acc_btn">
+                                        <span> <i class="fa fa-lock btn_icon"></i> Sign in </span>
+                                    </button>
+                                </div>
+                                <div style="top: 18px; position: relative; color:red">
+                                {% if error %}
+                                    E-mail ou Mot de passe  invalide !
+                                {% endif %}
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
