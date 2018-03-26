@@ -28,4 +28,24 @@ class DefaultController extends Controller
 
         return $this->render('MainBundle:Default:index.html.twig', [ 'produits' => $produits,'user' => null]);
     }
+    public function ishowAction()
+    {
+        $user = $this->getUser();
+
+        if ($user) {
+
+
+            if ($user->hasRole("ROLE_ARTISAN")){
+                $em=$this->getDoctrine()->getRepository(Produit::class);
+                $produits=$em->findByIdartisan($user->getId());
+                return $this->render('@FOSUser/Profile/show.html.twig', [ 'produits' => $produits,'user' => $user]);
+            }else{
+                return $this->render('@FOSUser/Profile/show.html.twig', [ 'produits' => null,'user' => $user]);
+            }
+
+
+            //return $this->render('@User/layout.html.twig', ['user' => $user]);
+        }
+
+        return $this->redirectToRoute('fos_user_security_login');    }
 }

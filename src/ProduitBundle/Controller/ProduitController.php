@@ -32,17 +32,10 @@ class ProduitController extends Controller
             $em->persist($produit);
             $em->flush();
         }
-        return $this->redirectToRoute('fos_user_profile_show');
+        return $this->redirectToRoute('ff');
 
     }
 
-//    public function AfficheAction(){
-//        $em=$this->getDoctrine()->getRepository(Produit::class);
-//        $produits=$em->findAll();
-//
-//        return $this->render('MainBundle:Default:index.html.twig',
-//            array('produits'=>$produits,'user'=>null));
-//    }
 
 
 }

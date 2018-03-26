@@ -53,7 +53,7 @@
                     <!-- Product Action -->
                     {% if is_granted('ROLE_ARTISAN') %}
                     <div class="pd_btn fix">
-                        <a class="btn btn-default acc_btn" href="{{ path('Ajouter_Produit') }}">Ajouter Produit</a>
+                        <a class="btn btn-default acc_btn" href="{{ path('nouveau_produit') }}">Ajouter Produit</a>
                     </div>
                     {% endif %}
                 </div>
@@ -69,78 +69,38 @@
             <!-- Section Title -->
             <div class="rp_title text-center"><h3>Related products</h3></div>
 
-            <div class="row">
-                <div class="col-lg-3 col-md-4 col-sm-6">
-                    <div class="single_product">
-                        <div class="product_image">
-                            <img src="{{ asset('img/product/1.jpg') }}" alt=""/>
-                            <div class="box-content">
-                                <a href="#"><i class="fa fa-heart-o"></i></a>
-                                <a href="#"><i class="fa fa-cart-plus"></i></a>
-                                <a href="#"><i class="fa fa-search"></i></a>
+            <div class="product_item">
+
+                {% for produit in produits %}
+                    <div class="col-lg-3 col-md-4 col-sm-6 mix sale">
+                        <div class="single_product">
+                            <div class="product_image">
+                                <img src="{{ asset(produit.image) }}" alt=""/>
+                                <div class="new_badge">New</div>
+                                <div class="box-content">
+
+                                    <a href="#"><i class="fa fa-cart-plus"></i></a>
+                                    <a href="#"><i class="fa fa-search"></i></a>
+                                </div>
+                            </div>
+
+                            <div class="product_btm_text">
+                                <h4><a href="#">{{ produit.titre}}</a></h4>
+                                <div class="p_rating">
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                </div>
+                                <span class="price">{{ produit.prix}}</span>
+
                             </div>
                         </div>
-
-                        <div class="product_btm_text">
-                            <h4><a href="#">Product Title</a></h4>
-                            <span class="price">$123.00</span>
-                        </div>
                     </div>
-                </div> <!-- End Col -->
 
-                <div class="col-lg-3 col-md-4 col-sm-6">
-                    <div class="single_product">
-                        <div class="product_image">
-                            <img src="{{ asset('img/product/2.jpg') }}" alt=""/>
-                            <div class="box-content">
-                                <a href="#"><i class="fa fa-heart-o"></i></a>
-                                <a href="#"><i class="fa fa-cart-plus"></i></a>
-                                <a href="#"><i class="fa fa-search"></i></a>
-                            </div>
-                        </div>
 
-                        <div class="product_btm_text">
-                            <h4><a href="#">Product Title</a></h4>
-                            <span class="price">$123.00</span>
-                        </div>
-                    </div>
-                </div> <!-- End Col -->
-
-                <div class="col-lg-3 col-md-4 col-sm-6">
-                    <div class="single_product">
-                        <div class="product_image">
-                            <img src="{{ asset('img/product/3.jpg') }}" alt=""/>
-                            <div class="box-content">
-                                <a href="#"><i class="fa fa-heart-o"></i></a>
-                                <a href="#"><i class="fa fa-cart-plus"></i></a>
-                                <a href="#"><i class="fa fa-search"></i></a>
-                            </div>
-                        </div>
-
-                        <div class="product_btm_text">
-                            <h4><a href="#">Product Title</a></h4>
-                            <span class="price">$123.00</span>
-                        </div>
-                    </div>
-                </div> <!-- End Col -->
-
-                <div class="col-lg-3 col-md-4 col-sm-6">
-                    <div class="single_product">
-                        <div class="product_image">
-                            <img src="{{ asset('img/product/4.jpg') }}" alt=""/>
-                            <div class="box-content">
-                                <a href="#"><i class="fa fa-heart-o"></i></a>
-                                <a href="#"><i class="fa fa-cart-plus"></i></a>
-                                <a href="#"><i class="fa fa-search"></i></a>
-                            </div>
-                        </div>
-
-                        <div class="product_btm_text">
-                            <h4><a href="#">Product Title</a></h4>
-                            <span class="price">$123.00</span>
-                        </div>
-                    </div>
-                </div> <!-- End Col -->
+                {% endfor %}
             </div>
         </div>
     </div>
