@@ -1,5 +1,7 @@
-{% extends "@FOSUser/layout.html.twig" %}
-
+{% extends "layout/layout.html.twig" %}
+{% block loginbtn %}
+    <li class="account_area"><a href="{{ path('fos_user_security_logout') }}"><i class="fa fa-lock"></i> Se Déconnecter</a></li>
+{% endblock %}
 {% block fos_user_content %}
 {% include "@FOSUser/Profile/show_content.html.twig" %}
 {% endblock fos_user_content %}

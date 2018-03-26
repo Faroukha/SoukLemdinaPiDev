@@ -20,7 +20,7 @@ class ProduitController extends Controller
 
         $produit = new Produit();
         if ($request->isMethod('POST')) {
-            $produit->setIdartisan('4');
+            $produit->setIdartisan($request-> get('idArtisan'));
             $produit->setCategorie($request->get('categorie')) ;
             $produit->setTitre($request->get('titre'));
             $produit->setDescription($request->get('description'));
@@ -31,7 +31,7 @@ class ProduitController extends Controller
             $em->persist($produit);
             $em->flush();
         }
-        return $this->render('ProduitBundle:Produit:ajouter.html.twig', array());
+        return $this->redirectToRoute('fos_user_profile_show');
 
     }
 
