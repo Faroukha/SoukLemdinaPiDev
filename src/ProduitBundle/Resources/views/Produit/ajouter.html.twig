@@ -2,8 +2,8 @@
 {% block body %}
 
     <div class="col-md-12 col-sm-6 col-xs-12">
+        <form action="{{ path("Ajouter_Produit") }}" method="POST">
 
-        <form role="form" method="POST" action="{{ path('Ajouter_Produit') }} >
 
             <div class="col-md-5">
 
@@ -23,14 +23,15 @@
                     <label>Prix</label>
                     <input  id="prix" name="prix" type="text"  class="form-control">
                 </div>
-                <div class="form-group">
-                    <label>Quantite</label>
-                    <input  id="quantite" name="quantite" type="text"  class="form-control">
-                </div>
+
                 <div class="form-group">
                     <label>Image</label>
                   <input type="file" name="image">
 
+                </div>
+                <div class="form-group">
+                    <label>Quantite</label>
+                    <input  id="quantite" name="quantite" type="text"  class="form-control">
                 </div>
             </div>
                  <input type="submit" name="Submit">

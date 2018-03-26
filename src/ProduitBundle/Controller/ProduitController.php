@@ -20,13 +20,13 @@ class ProduitController extends Controller
 
         $produit = new Produit();
         if ($request->isMethod('POST')) {
-
+            $produit->setIdartisan('4');
             $produit->setCategorie($request->get('categorie')) ;
             $produit->setTitre($request->get('titre'));
             $produit->setDescription($request->get('description'));
             $produit->setPrix($request->get('prix'));
-            $produit->setQuantite($request->get('quantite'));
             $produit->setImage($request->get('image'));
+            $produit->setQuantite($request->get('quantite'));
             $em = $this->getDoctrine()->getManager();
             $em->persist($produit);
             $em->flush();
