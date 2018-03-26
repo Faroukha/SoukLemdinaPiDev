@@ -5,9 +5,9 @@ user_homepage:
 for_user_security:
     resource: "@FOSUserBundle/Resources/config/routing/security.xml"
 
-fos_user_profile:
-    resource: "@FOSUserBundle/Resources/config/routing/profile.xml"
-    prefix: /profile
+ff:
+    path: /profil
+    defaults: {_controller: UserBundle:Default:ishow }
 
 fos_user_register:
     resource: "@FOSUserBundle/Resources/config/routing/registration.xml"
