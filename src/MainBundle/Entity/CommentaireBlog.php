@@ -14,6 +14,13 @@ class CommentaireBlog
 {
 
     /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="dateCom", type="date")
+     */
+    private $dateCom;
+
+    /**
      * @ORM\ManyToOne(targetEntity="MainBundle\Entity\Blog")
      * @ORM\JoinColumn(name="idBlog", referencedColumnName="id")
      */
@@ -122,5 +129,33 @@ class CommentaireBlog
     public function getIdUser()
     {
         return $this->idUser;
+    }
+    public function __construct()
+    {
+        $this->dateCom = new \DateTime();
+    }
+
+    /**
+     * Set dateCom
+     *
+     * @param \DateTime $dateCom
+     *
+     * @return CommentaireBlog
+     */
+    public function setDateCom($dateCom)
+    {
+        $this->dateCom = $dateCom;
+
+        return $this;
+    }
+
+    /**
+     * Get dateCom
+     *
+     * @return \DateTime
+     */
+    public function getDateCom()
+    {
+        return $this->dateCom;
     }
 }

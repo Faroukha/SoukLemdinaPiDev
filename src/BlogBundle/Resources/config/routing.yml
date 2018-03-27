@@ -10,3 +10,7 @@ ajouter_blog:
 ajouter_blog_bds:
     path:     /add
     defaults: { _controller: BlogBundle:Default:ajouterBlog }
+addCom:
+    path:     /addCom
+    defaults: { _controller: BlogBundle:Default:addCom }
+
