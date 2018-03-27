@@ -16,10 +16,7 @@ class DefaultController extends Controller
     {
         return $this->render('ProduitBundle:Produit:ajouter.html.twig');
     }
-    public function promotionAction()
-    {
-        return $this->render('ProduitBundle:Produit:promotion.html.twig');
-    }
+
 
     public function detailsAction(Request $request)
     {

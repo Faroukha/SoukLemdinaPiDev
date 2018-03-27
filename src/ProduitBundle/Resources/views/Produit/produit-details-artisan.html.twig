@@ -5,7 +5,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-6 text-left">
-                    <h3>{{ produit.titre }} Details</h3>
+                    <h3>{{ produit.titre }}</h3>
                 </div>
 
 
@@ -53,8 +53,13 @@
                         </div>
                         <!-- Product Action -->
                         <div class="pd_btn fix">
-                            <a class="btn btn-default acc_btn">ajouter une promotion</a>
 
+                            <form action="{{ path('Ajouter_promotion') }}">
+                                <input type="hidden"  value="{{ produit.id }}" name="idproduit" >
+                            <button class="btn btn-default acc_btn" >ajouter une promotion</button>
+
+                            <input  id="taux" name="taux" type="text"  >
+                            </form>
                         </div>
 
                     </div>
@@ -64,4 +69,5 @@
 
         </div>
     </div>
+
 {% endblock %}
