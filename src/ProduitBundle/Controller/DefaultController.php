@@ -2,7 +2,9 @@
 
 namespace ProduitBundle\Controller;
 
+use MainBundle\Entity\Produit;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 
 class DefaultController extends Controller
 {
@@ -14,15 +16,22 @@ class DefaultController extends Controller
     {
         return $this->render('ProduitBundle:Produit:ajouter.html.twig');
     }
-    public function promotionAction()
-    {
-        return $this->render('ProduitBundle:Produit:promotion.html.twig');
-    }
 
-    public function detailsAction()
-{
-    return $this->render('ProduitBundle:Produit:product-details.html.twig');
-}
+
+    public function detailsAction(Request $request)
+    {
+        $em=$this->getDoctrine()->getRepository(Produit::class);
+        $produit=$em->find($request->get('id'));
+
+        return $this->render('ProduitBundle:Produit:product-details.html.twig',['produit'=>$produit]);
+    }
+    public function detailsartisanAction(Request $request)
+    {
+        $em=$this->getDoctrine()->getRepository(Produit::class);
+        $produit=$em->find($request->get('id'));
+
+        return $this->render('ProduitBundle:Produit:produit-details-artisan.html.twig',['produit'=>$produit]);
+    }
     public function shopAction()
     {
         return $this->render('ProduitBundle:Produit:shop.html.twig');
