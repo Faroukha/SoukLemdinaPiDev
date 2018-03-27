@@ -61,16 +61,12 @@
         </div>
     </div>
     </div>
-
-
     <!-- Related Product Area -->
     <div class="related_prdct_area text-center">
         <div class="container">
             <!-- Section Title -->
             <div class="rp_title text-center"><h3>Related products</h3></div>
-
             <div class="product_item">
-
                 {% for produit in produits %}
                     <div class="col-lg-3 col-md-4 col-sm-6 mix sale">
                         <div class="single_product">
@@ -83,7 +79,6 @@
                                     <a href="#"><i class="fa fa-search"></i></a>
                                 </div>
                             </div>
-
                             <div class="product_btm_text">
                                 <h4><a href="#">{{ produit.titre}}</a></h4>
                                 <div class="p_rating">
@@ -94,28 +89,11 @@
                                     <i class="fa fa-star"></i>
                                 </div>
                                 <span class="price">{{ produit.prix}}</span>
-
                             </div>
                         </div>
                     </div>
-
-
                 {% endfor %}
             </div>
         </div>
     </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 {% endblock %}
