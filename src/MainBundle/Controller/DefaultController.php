@@ -2,7 +2,9 @@
 
 namespace MainBundle\Controller;
 
+use MainBundle\Entity\Produit;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 
 class DefaultController extends Controller
 {
@@ -18,4 +20,7 @@ class DefaultController extends Controller
     {
         return $this->render('MainBundle:Default:about.html.twig');
     }
+
+
+
 }
