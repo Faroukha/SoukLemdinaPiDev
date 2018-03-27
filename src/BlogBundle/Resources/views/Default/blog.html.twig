@@ -1,5 +1,22 @@
 {% extends 'layout/layout.html.twig' %}
+{% block mailco %}
+    {% if app.user is not null %}
+        {{ app.user.email }}
+    {% endif %}
+{% endblock %}
+{% block loginbtn %}
+    {% if app.user is not null %}
+        <li class="account_area"><a href="{{ path('fos_user_security_logout') }}"><i class="fa fa-lock"></i> Se
+                Déconnecter</a></li>
+    {% else %}
+        <li class="account_area"><a href="{{ path('fos_user_registration_register') }}"><i class="fa fa-lock"></i>
+                Register</a></li>
+        <li class="account_area"><a href="{{ path('fos_user_security_login') }}"><i class="fa fa-lock"></i> Se Connecter</a>
+        </li>
 
+    {% endif %}
+
+{% endblock %}
 {% block body %}
     <div id="page_item_area">
         <div class="container">
@@ -7,171 +24,90 @@
                 <div class="col-sm-6 text-left">
                     <h3>Blog</h3>
                 </div>
-
-                <div class="col-sm-6 text-right">
-                    <ul class="p_items">
-                        <li><a href="#">home</a></li>
-                        <li><a href="#">category</a></li>
-                        <li><span>Blog</span></li>
-                    </ul>
-                </div>
             </div>
         </div>
     </div>
 
     <!-- Blog Page -->
     <div id="blog_page_area">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-8 col-xs-12">
-                    <!-- Single blog -->
-                    <div class="single_blog">
-                        <div class="single_blog_img">
-                            <img src="{{ asset('img/blog/1-full.jpg') }}" alt="">
-                            <div class="blog_date text-center">
-                                <div class="bd_day"> 25</div>
-                                <div class="bd_month">Aug</div>
-                            </div>
-                        </div>
+    <div class="container">
+    <div class="row">
+    <div class="col-md-8 col-xs-12">
+    {% if app.user is not null %}
+        <div class="pd_btn fix">
+            <a class="btn btn-default acc_btn" href="{{ path('ajouter_blog') }}">Ajouter Blog</a>
+        </div>
+    {% endif %}
+    {% for Blog in Blogs %}
+        <div class="single_blog">
+            <div class="single_blog_img">
+                <img src="{{ asset('img/blog/1-full.jpg') }}" alt="">
+                <div class="blog_date text-center">
+                    <div class="bd_month">{{ Blog.dateBlog |date("m/d/Y") }}</div>
+                </div>
+            </div>
 
-                        <div class="blog_content">
-                            <h4 class="post_title"><a href="{{ path('blog_detail') }}">Integer euismod dui non auctor</a> </h4>
-                            <ul class="post-bar">
-                                <li><i class="fa fa-user"></i> Admin</li>
-                                <li><i class="fa fa-comments-o"></i> <a href="#">2 comments</a></li>
-                                <li><i class="fa fa-heart-o"></i> <a href="#">4 like</a></li>
-                            </ul>
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing
-                                elit. Praesent vel elit et lectus pulvinar dignissim.
-                                Fusce mattis scelerisque elit, sed vulputate lectus suscipit sed.
-                                Cras viverra nisi nec nisi volutpat, nec suscipit elit euismod.
-                                Mauris convallis auctor tristique.
-                                Maecenas sit amet pulvinar turpis....
+            <div class="blog_content">
+                <h4 class="post_title"><a href="{{ path('blog_detail', {'id':Blog.id}) }}">{{ Blog.titre }}</a></h4>
+                <ul class="post-bar">
+                    <li><i class="fa fa-user"></i>{{ Blog.idUser.nom }}</li>
+                    <li><i class="fa fa-comments-o"></i> <a href="#">2 comments</a></li>
+                    <li><i class="fa fa-heart-o"></i> <a href="#">{{ Blog.nbrLike }}</a></li>
+                </ul>
+                <p>{{ Blog.description }}</p>
+            </div>
+        </div>
+        {% endfor %}
 
-                            </p>
-                        </div>
-                    </div>
-                    <!-- End Single blog -->
 
-                    <!-- Single blog -->
-                    <div class="single_blog">
-                        <div class="single_blog_img">
-                            <img src=" {{ asset('img/blog/2-full.jpg') }}" alt="">
-                            <div class="blog_date text-center">
-                                <div class="bd_day"> 25</div>
-                                <div class="bd_month">Aug</div>
-                            </div>
-                        </div>
+        </div>
 
-                        <div class="blog_content">
-                            <h4 class="post_title"><a href="{{ path('blog_detail') }}">Integer euismod dui non auctor</a> </h4>
-                            <ul class="post-bar">
-                                <li><i class="fa fa-user"></i> Admin</li>
-                                <li><i class="fa fa-comments-o"></i> <a href="#">2 comments</a></li>
-                                <li><i class="fa fa-heart-o"></i> <a href="#">4 like</a></li>
-                            </ul>
+        <!-- Blog Sidebar -->
+        <div class="col-md-4 col-xs-12">
+            <div class="single_sidebar search_widget">
+                <h3 class="sdbr_title">Search</h3>
+                <div class="sdbr_inner">
+                    <form class="search_form" method="post" action="#">
+                        <input type="text" class="form-control search_input" name="s" id="s"
+                               placeholder="Search Here ...">
+                        <button type="submit" class="search_button"><i class="fa fa-search"></i></button>
+                    </form>
+                </div>
+            </div>
 
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing
-                                elit. Praesent vel elit et lectus pulvinar dignissim.
-                                Fusce mattis scelerisque elit, sed vulputate lectus suscipit sed.
-                                Cras viverra nisi nec nisi volutpat, nec suscipit elit euismod.
-                                Mauris convallis auctor tristique.
-                                Maecenas sit amet pulvinar turpis....
 
-                            </p>
+            <div class="single_sidebar popular_post">
+                <h3 class="sdbr_title">popular post</h3>
+                <div class="sdbr_inner">
+                    <div class="single_popular_post fix">
+                        <a href="#" class="spp_img"><img src="{{ asset('img/sidebar/1.jpg') }}" alt=""/></a>
+                        <div class="spp_text fix">
+                            <a href="#">Lorem Ipsum is simply 2018.</a>
+                            <p>Posted By John Doe</p>
                         </div>
                     </div>
-                    <!-- End Single blog -->
-
-                    <div class="blog_pagination pgntn_mrgntp fix">
-                        <div class="pagination text-center">
-                            <ul>
-                                <li><a href="#"><i class="fa fa-angle-left"></i></a></li>
-                                <li><a href="#">1</a></li>
-                                <li><a href="#">2</a></li>
-                                <li><a href="#" class="active">3</a></li>
-                                <li><a href="#">4</a></li>
-                                <li><a href="#">5</a></li>
-                                <li><a href="#"><i class="fa fa-angle-right"></i></a></li>
-                            </ul>
+                    <div class="single_popular_post fix">
+                        <a href="#" class="spp_img"><img src="{{ asset('img/sidebar/2.jpg') }}" alt=""/></a>
+                        <div class="spp_text fix">
+                            <a href="#">Lorem Ipsum is simply 2018.</a>
+                            <p>Posted By John Doe</p>
+                        </div>
+                    </div>
+                    <div class="single_popular_post fix">
+                        <a href="#" class="spp_img"><img src="{{ asset('img/sidebar/3.jpg') }}" alt=""/></a>
+                        <div class="spp_text fix">
+                            <a href="#">Lorem Ipsum is simply 2018.</a>
+                            <p>Posted By John Doe</p>
                         </div>
                     </div>
                 </div>
-
-                <!-- Blog Sidebar -->
-                <div class="col-md-4 col-xs-12">
-                    <div class="single_sidebar search_widget">
-                        <h3 class="sdbr_title">Search</h3>
-                        <div class="sdbr_inner">
-                            <form class="search_form" method="post" action="#">
-                                <input type="text" class="form-control search_input" name="s" id="s" placeholder="Search Here ...">
-                                <button type="submit" class="search_button"><i class="fa fa-search"></i></button>
-                            </form>
-                        </div>
-                    </div>
-
-                    <div class="single_sidebar category">
-                        <h3 class="sdbr_title">categories</h3>
-                        <div class="sdbr_inner">
-                            <!-- treeview start -->
-                            <ul>
-                                <li><a href="#">Women</a></li>
-                                <li><a href="#">Men</a></li>
-                                <li><a href="#">Kids</a></li>
-                                <li><a href="#">Jewelry</a></li>
-                                <li><a href="#">Accessories</a></li>
-                                <li><a href="#">Trends</a></li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="single_sidebar popular_post">
-                        <h3 class="sdbr_title">popular post</h3>
-                        <div class="sdbr_inner">
-                            <div class="single_popular_post fix">
-                                <a href="#" class="spp_img"><img src="{{ asset('img/sidebar/1.jpg') }}" alt="" /></a>
-                                <div class="spp_text fix">
-                                    <a href="#">Lorem Ipsum is simply 2018.</a>
-                                    <p>Posted By John Doe</p>
-                                </div>
-                            </div>
-                            <div class="single_popular_post fix">
-                                <a href="#" class="spp_img"><img src="{{ asset('img/sidebar/2.jpg') }}" alt="" /></a>
-                                <div class="spp_text fix">
-                                    <a href="#">Lorem Ipsum is simply 2018.</a>
-                                    <p>Posted By John Doe</p>
-                                </div>
-                            </div>
-                            <div class="single_popular_post fix">
-                                <a href="#" class="spp_img"><img src="{{ asset('img/sidebar/3.jpg') }}" alt="" /></a>
-                                <div class="spp_text fix">
-                                    <a href="#">Lorem Ipsum is simply 2018.</a>
-                                    <p>Posted By John Doe</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="single_sidebar tags fix">
-                        <h3 class="sdbr_title">tags</h3>
-                        <div class="sdbr_inner">
-                            <a href="#">App</a>
-                            <a href="#">Fashiondary</a>
-                            <a href="#">Fashion Tag</a>
-                            <a href="#">Logo Designer</a>
-                            <a href="#">Populat Tees</a>
-                            <a href="#">Designer</a>
-                            <a href="#">Most Recent</a>
-                        </div>
-                    </div>
-                </div><!-- End Blog Sidebar -->
-
             </div>
+        </div><!-- End Blog Sidebar -->
+
         </div>
-    </div>
+        </div>
+        </div>
 
 
 
-{% endblock %}
+        {% endblock %}

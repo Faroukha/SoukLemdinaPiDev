@@ -4,3 +4,13 @@ blog:
 blog_detail:
     path:     /blogdetail
     defaults: { _controller: BlogBundle:Default:blogDetail }
+ajouter_blog:
+    path:     /addblog
+    defaults: { _controller: BlogBundle:Default:ishowBlog }
+ajouter_blog_bds:
+    path:     /add
+    defaults: { _controller: BlogBundle:Default:ajouterBlog }
+addCom:
+    path:     /addCom
+    defaults: { _controller: BlogBundle:Default:addCom }
+
