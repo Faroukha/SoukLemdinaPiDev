@@ -28,6 +28,13 @@ class DefaultController extends Controller
 
         return $this->render('ProduitBundle:Produit:product-details.html.twig',['produit'=>$produit]);
     }
+    public function detailsartisanAction(Request $request)
+    {
+        $em=$this->getDoctrine()->getRepository(Produit::class);
+        $produit=$em->find($request->get('id'));
+
+        return $this->render('ProduitBundle:Produit:produit-details-artisan.html.twig',['produit'=>$produit]);
+    }
     public function shopAction()
     {
         return $this->render('ProduitBundle:Produit:shop.html.twig');

@@ -22,4 +22,8 @@ wishlist:
 Ajouter_Produit:
     path:     /produit
     defaults: { _controller: ProduitBundle:Produit:AjouterProduit  }
+produit_artisan_details:
+    path:     /artisandetails
+    defaults: { _controller: ProduitBundle:Default:detailsartisan  }
+
 
