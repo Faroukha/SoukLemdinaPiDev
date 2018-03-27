@@ -248,4 +248,9 @@ class Blog
     {
         return $this->idUser;
     }
+
+    public function __construct()
+    {
+        $this->dateBlog = new \DateTime();
+    }
 }
