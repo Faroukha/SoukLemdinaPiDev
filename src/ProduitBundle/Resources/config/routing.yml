@@ -28,6 +28,12 @@ produit_artisan_details:
 detailspromotion:
     path:     /detailerpromotion
     defaults: { _controller: ProduitBundle:Default:detailspromotion  }
+addCommentaire:
+    path:     /addcommc
+    defaults: { _controller: ProduitBundle:Commentaire:addCommentaire  }
+Supprimer_produit:
+    path:     /supprimer
+    defaults: { _controller: ProduitBundle:Produit:supprimerProduit }
 
 
 
