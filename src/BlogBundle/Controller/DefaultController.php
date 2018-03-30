@@ -69,4 +69,19 @@ class DefaultController extends Controller
         $Coms = $em->getRepository(CommentaireBlog::class)->findAll();
         return $this->render('BlogBundle:Default:blogDetail.html.twig', ['Blog' => $Blog ,'Com' => $Coms]);
     }
+
+    public function delComAction(Request $request)
+    {
+        $em=$this->getDoctrine()->getManager();
+        $Com=$em->getRepository(CommentaireBlog::class)->find($request->get("idCom"));;
+        $em->remove($Com);
+        $em->flush();
+
+
+        $em = $this->getDoctrine()->getManager();
+        $Blogs = $em->getRepository(Blog::class)->find($request->get('id'));
+        $Coms = $em->getRepository(CommentaireBlog::class)->findByidBlog($request->get('id'));
+        return $this->render('BlogBundle:Default:blogDetail.html.twig', ['Blog' => $Blogs ,'Com' => $Coms]);
+    }
 }
+
