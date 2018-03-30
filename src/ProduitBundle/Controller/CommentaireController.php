@@ -26,12 +26,12 @@ class CommentaireController extends Controller
         $produit = $em->getRepository(Produit::class)->find($request->get('id'));
 
         $commentaire->setEmailuser($user);
-        $commentaire->setIdproduit($produit);
+        $commentaire->setIdproduit($request->get('id'));
 
         $em->persist($commentaire);
         $em->flush();
         $Coms = $em->getRepository(Commentaire::class)->findAll();
-        return $this->render('ProduitBundle:Produit:product-details.html.twig', ['commentaire' => $Coms]);
+        return $this->render('ProduitBundle:Produit:product-details.html.twig', ['commentaire' => $Coms,'produit'=>$produit]);
     }
 
 }
