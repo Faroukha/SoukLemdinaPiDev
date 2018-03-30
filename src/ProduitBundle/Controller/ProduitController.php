@@ -36,6 +36,17 @@ class ProduitController extends Controller
 
     }
 
+    public function supprimerProduitAction(Request $request )
+    {
+
+        $em=$this->getDoctrine()->getManager();
+        $produit=$em->getRepository(Produit::class)->find($request->get("id"));;
+        $em->remove($produit);
+        $em->flush();
+        return $this->redirectToRoute("main_homepage");
+
+    }
+
 
 
 }

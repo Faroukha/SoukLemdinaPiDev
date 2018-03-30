@@ -46,7 +46,13 @@ class DefaultController extends Controller
     {
         return $this->render('ProduitBundle:Produit:wishlist.html.twig');
     }
+    public function detailspromotionAction(Request $request)
+    {
+        $em=$this->getDoctrine()->getRepository(Produit::class);
+        $produit=$em->find($request->get('id'));
 
+        return $this->render('ProduitBundle:Produit:promotion-detailler.html.twig',['produit'=>$produit]);
+    }
 
 
 
