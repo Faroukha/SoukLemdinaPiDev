@@ -13,4 +13,7 @@ ajouter_blog_bds:
 addCom:
     path:     /addCom
     defaults: { _controller: BlogBundle:Default:addCom }
+delCom:
+    path:     /delCom
+    defaults: { _controller: BlogBundle:Default:delCom }
 
