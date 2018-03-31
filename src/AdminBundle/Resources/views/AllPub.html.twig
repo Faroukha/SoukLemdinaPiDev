@@ -1,0 +1,27 @@
+{% extends 'layout/layout.html.twig' %}
+{% block loginbtn %}
+    {% if app.user is not null %}
+        <li class="account_area"><a href="{{ path('fos_user_security_logout') }}"><i class="fa fa-lock"></i> Se Déconnecter</a></li>
+    {% else %}
+        <li class="account_area"><a href="{{ path('fos_user_registration_register') }}"><i class="fa fa-lock"></i> Register</a></li>
+        <li class="account_area"><a href="{{ path('fos_user_security_login') }}"><i class="fa fa-lock"></i> Se Connecter</a></li>
+
+    {% endif %}
+{% endblock %}
+
+{% block admin %}
+    {% if is_granted('ROLE_ADMIN') %}
+        <li><a href="{{ path('ajouterPub') }}">Publicite</a></li>
+
+    {% else %}
+        <li><a href="{{ path('contact') }}">contact</a></li>
+    {% endif %}
+{% endblock %}
+
+
+
+{% block body %}
+
+
+
+{% endblock %}

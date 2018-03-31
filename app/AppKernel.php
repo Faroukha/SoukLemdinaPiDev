@@ -24,6 +24,7 @@ class AppKernel extends Kernel
             new EvenementBundle\EvenementBundle(),
             new FOS\UserBundle\FOSUserBundle(),
             new UserBundle\UserBundle(),
+            new AdminBundle\AdminBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

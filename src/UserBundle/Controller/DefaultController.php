@@ -21,7 +21,7 @@ class DefaultController extends Controller
 
 
             if ($user->hasRole("ROLE_ADMIN")){
-                //return $this->render('UserBundle::admin.html.twig');
+                return $this->render('AdminBundle::admin.html.twig');
             }else{
                 return $this->render('MainBundle:Default:index.html.twig', [ 'produits' => $produit,'user' => $user,'produitp'=> $promotion]);
             }
