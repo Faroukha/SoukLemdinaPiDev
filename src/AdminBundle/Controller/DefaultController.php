@@ -12,6 +12,10 @@ class DefaultController extends Controller
     {
         return $this->render('AdminBundle::admin.html.twig');
     }
+    public function allPubAction()
+    {
+        return $this->render('AdminBundle::AllPub.html.twig');
+    }
     public function ajouterPubAction()
     {
         return $this->render('AdminBundle::ajouterPub.html.twig');

@@ -11,7 +11,7 @@
 
 {% block admin %}
     {% if is_granted('ROLE_ADMIN') %}
-         <li><a href="{{ path('ajouterPub') }}">Publicite</a></li>
+         <li><a href="{{ path('allPub') }}">Publicite</a></li>
 
     {% else %}
         <li><a href="{{ path('contact') }}">contact</a></li>
