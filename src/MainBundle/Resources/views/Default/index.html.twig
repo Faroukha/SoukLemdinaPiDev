@@ -49,6 +49,7 @@
     <div class="product_item">
 
              {% for produit in produits %}
+
             <div class="col-lg-3 col-md-4 col-sm-6 mix sale">
                 <div class="single_product">
                     <div class="product_image">
@@ -63,6 +64,13 @@
 
                     <div class="product_btm_text">
                         <h4><a href="#">{{ produit.titre}}</a></h4>
+                 {% set i = 0 %}
+                 {% for x in users %}
+                     {% if x.id == produit.idartisan and i == 0 %}
+                         {% set i = 1 %}
+                        <h4><a href="{{ path('ff',{'id':x.id}) }}">{{ x.nom }}</a></h4>
+                     {% endif %}
+                 {% endfor %}
                         <div class="p_rating">
                             <i class="fa fa-star"></i>
                             <i class="fa fa-star"></i>
@@ -76,7 +84,6 @@
                 </div>
             </div>
 
-
-    {% endfor %}
+             {% endfor %}
     </div>
 {% endblock %}
