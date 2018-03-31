@@ -14,7 +14,9 @@ class DefaultController extends Controller
     }
     public function allPubAction()
     {
-        return $this->render('AdminBundle::AllPub.html.twig');
+        $em = $this->getDoctrine()->getManager();
+        $Pubs = $em->getRepository(Pubg::class)->findAll();
+        return $this->render('AdminBundle::AllPub.html.twig', ['pubs' => $Pubs]);
     }
     public function ajouterPubAction()
     {
@@ -31,7 +33,7 @@ class DefaultController extends Controller
             $em->persist($pub);
             $em->flush();
         }
-        return $this->redirectToRoute('admin_homepage');
+        return $this->redirectToRoute('allPub');
 
     }
 }

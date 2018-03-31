@@ -1,10 +1,13 @@
 {% extends 'layout/layout.html.twig' %}
 {% block loginbtn %}
     {% if app.user is not null %}
-        <li class="account_area"><a href="{{ path('fos_user_security_logout') }}"><i class="fa fa-lock"></i> Se Déconnecter</a></li>
+        <li class="account_area"><a href="{{ path('fos_user_security_logout') }}"><i class="fa fa-lock"></i> Se
+                Déconnecter</a></li>
     {% else %}
-        <li class="account_area"><a href="{{ path('fos_user_registration_register') }}"><i class="fa fa-lock"></i> Register</a></li>
-        <li class="account_area"><a href="{{ path('fos_user_security_login') }}"><i class="fa fa-lock"></i> Se Connecter</a></li>
+        <li class="account_area"><a href="{{ path('fos_user_registration_register') }}"><i class="fa fa-lock"></i>
+                Register</a></li>
+        <li class="account_area"><a href="{{ path('fos_user_security_login') }}"><i class="fa fa-lock"></i> Se Connecter</a>
+        </li>
 
     {% endif %}
 {% endblock %}
@@ -26,36 +29,20 @@
             <a class="btn btn-default acc_btn" href="{{ path('ajouterPub') }}">Ajouter Publicite</a>
         </div>
 
-        {#{% for pub in pubss %}#}
-            {#<div class="col-lg-3 col-md-4 col-sm-6 mix sale">#}
-                {#<div class="single_product">#}
-                    {#<div class="product_image">#}
-                        {#<img src="{{ asset(produit.image) }}" alt=""/>#}
-                        {#<div class="new_badge">New</div>#}
-                        {#<div class="box-content">#}
+        {% for pub in pubs %}
+            <div class="single_blog" >
+                <div class="single_blog_img">
+                    <img src="{{ asset('img/blog/1-full.jpg') }}" alt="">
+                    <div class="blog_date text-center">
+                        <div class="bd_month">Debut : {{ pub.datedeb |date("m/d/Y") }}</div>
+                        <div class="bd_month">Fin :   {{ pub.datefin |date("m/d/Y") }}</div>
+                    </div>
+                    <div class="blog_date text-center">
 
-                            {#<a href="#"><i class="fa fa-cart-plus"></i></a>#}
-                            {#<a href="{{ path('product_details',{'id':produit.id}) }}"><i class="fa fa-search"></i></a>#}
-                        {#</div>#}
-                    {#</div>#}
-
-                    {#<div class="product_btm_text">#}
-                        {#<h4><a href="#">{{ produit.titre}}</a></h4>#}
-                        {#<div class="p_rating">#}
-                            {#<i class="fa fa-star"></i>#}
-                            {#<i class="fa fa-star"></i>#}
-                            {#<i class="fa fa-star"></i>#}
-                            {#<i class="fa fa-star"></i>#}
-                            {#<i class="fa fa-star"></i>#}
-                        {#</div>#}
-                        {#<span class="price">{{ produit.prix}}</span>#}
-
-                    {#</div>#}
-                {#</div>#}
-            {#</div>#}
-
-
-        {#{% endfor %}#}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
     </div>
 
 
