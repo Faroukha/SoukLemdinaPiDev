@@ -72,10 +72,12 @@
                             <div class="main-menu">
                                 <nav>
                                     <ul>
-                                        <li><a href="{{ path('main_homepage') }}">home</a>
+                                        <li>
+                                            <a href="{{ path('main_homepage') }}">home</a>
                                         </li>
 
-                                        <li><a href="{{ path('shop_produit') }}">Shop <i
+                                        <li>
+                                            <a href="{{ path('shop_produit') }}">Shop <i
                                                         class="fa fa-angle-down"></i></a>
                                             <!-- Sub Menu -->
                                             <ul class="sub-menu">
@@ -84,15 +86,16 @@
                                                 <li><a href="{{ path('wishlist') }}">Wishlist</a></li>
                                             </ul>
                                         </li>
+                                        <li>
+                                            <a href="{{ path('blog') }}">Blog <i class="fa fa-angle-down"></i></a>
 
                                         </li>
+                                        {% block admin %}
+                                        <li>
+                                            <a href="{{ path('contact') }}">contact</a>
+                                        </li>
+                                        {% endblock %}
 
-                                        </li>
-                                        <li><a href="{{ path('blog') }}">Blog <i class="fa fa-angle-down"></i></a>
-
-                                        </li>
-                                        <li><a href="{{ path('contact') }}">contact</a></li>
-                                        </li>
                                         <li><a href="{{ path('ff') }}">Profil</a></li>
                                     </ul>
                                 </nav>

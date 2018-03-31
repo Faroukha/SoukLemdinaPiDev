@@ -1,0 +1,9 @@
+admin_homepage:
+    path:     /admin
+    defaults: { _controller: AdminBundle:Default:index }
+addPub:
+    path:     /addPub
+    defaults: { _controller: AdminBundle:Default:addPub }
+ajouterPub:
+    path:     /puub
+    defaults: { _controller: AdminBundle:Default:ajouterPub }
