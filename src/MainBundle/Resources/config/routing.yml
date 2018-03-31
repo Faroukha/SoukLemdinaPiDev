@@ -8,3 +8,6 @@ about:
     path:     /about
     defaults: { _controller: MainBundle:Default:about }
 
+add_contact:
+    path:     /add
+    defaults: { _controller: MainBundle:Contact:add }
