@@ -22,6 +22,7 @@ class DefaultController extends Controller
     public function blogDetailAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
+
         $Blogs = $em->getRepository(Blog::class)->find($request->get('id'));
         $Coms = $em->getRepository(CommentaireBlog::class)->findByidBlog($request->get('id'));
         return $this->render('BlogBundle:Default:blogDetail.html.twig', ['Blog' => $Blogs ,'Com' => $Coms]);
