@@ -4,6 +4,7 @@ namespace UserBundle\Controller;
 
 use MainBundle\Entity\Produit;
 use MainBundle\Entity\Promotion;
+use MainBundle\Entity\Pubg;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\BrowserKit\Response;
 
@@ -15,22 +16,24 @@ class DefaultController extends Controller
         $user = $this->getUser();
         $em = $this->getDoctrine()->getManager();
         $produit= $em->getRepository(Produit::class)->findAll();
-
         $promotion=$this->getDoctrine()->getRepository(Promotion::class)->findAll();
+        $Pubs = $em->getRepository(Pubg::class)->findAll();
+
         if ($user) {
 
 
             if ($user->hasRole("ROLE_ADMIN")){
                 return $this->render('AdminBundle::admin.html.twig');
             }else{
-                return $this->render('MainBundle:Default:index.html.twig', [ 'produits' => $produit,'user' => $user,'produitp'=> $promotion]);
+                return $this->render('MainBundle:Default:index.html.twig', [ 'produits' => $produit,'user' => $user,'produitp'=> $promotion ,'Pubs' => $Pubs]);
             }
 
 
             //return $this->render('@User/layout.html.twig', ['user' => $user]);
         }
 
-        return $this->render('MainBundle:Default:index.html.twig', [ 'produits' => $produit,'user' => null,'produitp'=> $promotion]);
+
+        return $this->render('MainBundle:Default:index.html.twig', [ 'produits' => $produit,'user' => null,'produitp'=> $promotion,'Pubs' => $Pubs]);
     }
     public function ishowAction()
     {
