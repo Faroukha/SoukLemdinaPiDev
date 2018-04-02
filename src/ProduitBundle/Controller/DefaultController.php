@@ -25,6 +25,13 @@ class DefaultController extends Controller
 
         return $this->render('ProduitBundle:Produit:product-details.html.twig',['produit'=>$produit]);
     }
+    public function detailscomAction(Request $request)
+    {
+        $em=$this->getDoctrine()->getRepository(Commentaire::class);
+        $commentaire=$em->find($request->get('id'));
+
+        return $this->render('ProduitBundle:Produit:product-details.html.twig',['commentaire'=>$commentaire]);
+    }
     public function detailsartisanAction(Request $request)
     {
         $em=$this->getDoctrine()->getRepository(Produit::class);

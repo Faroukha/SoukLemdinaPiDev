@@ -1,6 +1,7 @@
 <?php
 
 namespace MainBundle\Entity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -58,7 +59,7 @@ class Produit
 
     /**
      * @var string
-     *
+     * @Assert\File(mimeTypes={ "image/jpeg" })
      * @ORM\Column(name="image", type="string", length=800, nullable=true)
      */
     private $image;

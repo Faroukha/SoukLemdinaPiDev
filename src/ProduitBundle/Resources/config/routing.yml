@@ -34,6 +34,9 @@ addCommentaire:
 Supprimer_produit:
     path:     /supprimer
     defaults: { _controller: ProduitBundle:Produit:supprimerProduit }
+detailscom:
+    path:     /comm
+    defaults: { _controller: ProduitBundle:Default:detailscom }
 
 
 
