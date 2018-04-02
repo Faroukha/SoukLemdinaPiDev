@@ -34,6 +34,7 @@
             <div class="row">
                 <div class="col-md-8 col-xs-12">
                     {% if app.user is not null %}
+
                         <div class="pd_btn fix">
                             <a class="btn btn-default acc_btn" href="{{ path('ajouter_blog') }}">Ajouter Blog</a>
                         </div>
@@ -55,6 +56,7 @@
                                 </div>
                             </div>
 
+
                             <div class="blog_content">
                                 <h4 class="post_title"><a
                                             href="{{ path('blog_detail', {'id':Blog.id}) }}">{{ Blog.titre }}</a></h4>
@@ -69,7 +71,6 @@
                     {% endfor %}
 
 
-                </div>
 
                 <!-- Blog Sidebar -->
                 <div class="col-md-4 col-xs-12">
