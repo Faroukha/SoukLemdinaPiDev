@@ -86,6 +86,21 @@
 
 
                                 <div class="col-md-6 rcf_pdnglft">
+                                    {% for c in commentaire %}
+                                        {% if c.idproduit==produit.id %}
+                                            <div class="single_blog">
+
+
+                                                <div class="blog_content">
+                                                    <h4 class="post_title">{{ c.emailUser }}:</h4>
+
+                                                    <h4 class="post_title">{{ c.text }}</h4>
+                                                </div>
+                                            </div>
+                                        {% endif %}
+                                    {% endfor %}
+
+
                                     <div class="rtng_cmnt_form_area fix">
                                         <div class="rtng_form">
                                             <form action="{{ path("addCommentaire") }}">
