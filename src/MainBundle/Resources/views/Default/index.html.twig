@@ -45,15 +45,34 @@
         </div>
     </section>
 
+<div class="row">
+    <div class="col-md-3">
+        {% for Pub in Pubs  %}
+            {% if Pub.datedeb|date("m/d/Y")  <= "now"|date("m/d/Y")  %}
+                {% if "now"|date("m/d/Y") <= Pub.datefin|date("m/d/Y")   %}
+                    <div class="single_blog" >
+                        <div class="single_blog_img">
+                            <img src="{{ asset('img/blog/1-full.jpg') }}" alt="">
+                            <div class="blog_date text-center">
+                                <div class="bd_month">{{ Pub.datedeb |date("m/d/Y") }}</div>
+                                <div class="bd_month">{{ Pub.datefin |date("m/d/Y") }}</div>
+                            </div>
+                        </div>
+                    </div>
+            {% endif %}
+            {% endif %}
 
-    <div class="product_item">
+        {% endfor %}
+    </div>
+
+    <div class="col-md-8" >
+    <div class="product_item" style="width: 1268px">
 
              {% for produit in produits %}
-
             <div class="col-lg-3 col-md-4 col-sm-6 mix sale">
                 <div class="single_product">
                     <div class="product_image">
-                        <img src="{{ asset(produit.image) }}" alt=""/>
+                        <img src="{{ asset ('img/product/1.jpg') }}" alt=""/>
                         <div class="new_badge">New</div>
                         <div class="box-content">
 
@@ -64,13 +83,15 @@
 
                     <div class="product_btm_text">
                         <h4><a href="#">{{ produit.titre}}</a></h4>
+
                  {% set i = 0 %}
                  {% for x in users %}
                      {% if x.id == produit.idartisan and i == 0 %}
                          {% set i = 1 %}
-                        <h4><a href="{{ path('ff',{'id':x.id}) }}">{{ x.nom }}</a></h4>
+                        <h4><a href="{{ path('others_profil',{'id':x.id}) }}">{{ x.nom }}</a></h4>
                      {% endif %}
                  {% endfor %}
+
                         <div class="p_rating">
                             <i class="fa fa-star"></i>
                             <i class="fa fa-star"></i>
@@ -84,6 +105,32 @@
                 </div>
             </div>
 
-             {% endfor %}
+
+    {% endfor %}
     </div>
+    </div>
+</div>
+    <section id="slider_area" class="text-center">
+        <div class="slider_active owl-carousel">
+            {% for Pub in Pubs %}
+                {% if Pub.datedeb|date("m/d/Y")  <= "now"|date("m/d/Y")  %}
+                    {% if "now"|date("m/d/Y") <= Pub.datefin|date("m/d/Y")   %}
+                        <div class="single_slide" style="background-image: url({{ asset('img/blog/1-full.jpg') }}); background-size: cover;height: 150px;background-position: center ;">
+                            <div class="container">
+                                <div class="single-slide-item-table">
+                                    <div class="single-slide-item-tablecell">
+                                        <div class="slider_content text-center slider-animated-2">
+                                            <div class="bd_month">{{ Pub.datedeb |date("m/d/Y") }}</div>
+                                            <div class="bd_month">{{ Pub.datefin |date("m/d/Y") }}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+        </div>
+    </section>
+
 {% endblock %}

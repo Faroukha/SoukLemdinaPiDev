@@ -1,8 +1,10 @@
 {% extends 'layout/layout.html.twig' %}
 {% block loginbtn %}
-    <li class="account_area"><a href="{{ path('fos_user_security_logout') }}"><i class="fa fa-lock"></i> Se Déconnecter</a></li>
+    <li class="account_area"><a href="{{ path('fos_user_security_logout') }}"><i class="fa fa-lock"></i> Se Déconnecter</a>
+    </li>
 {% endblock %}
 {% block body %}
+
     {#<div class="login_page_area">#}
         {#<div class="container">#}
             {#<div class="row">#}
@@ -57,8 +59,10 @@
                             {#</div>#}
                         {#</div>#}
 
+
                     {#</form>#}
                 {#</div>#}
+
 
             {#</div>#}
         {#</div>#}
@@ -66,4 +70,5 @@
     {{ form_start(form) }}
     {{ form_row(form.image) }}
     {{ form_end(form) }}
+
 {% endblock %}
