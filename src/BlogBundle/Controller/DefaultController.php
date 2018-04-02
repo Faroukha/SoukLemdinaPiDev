@@ -84,5 +84,13 @@ class DefaultController extends Controller
         $Coms = $em->getRepository(CommentaireBlog::class)->findByidBlog($request->get('id'));
         return $this->render('BlogBundle:Default:blogDetail.html.twig', ['Blog' => $Blogs ,'Com' => $Coms]);
     }
+
+    public function deleteBlogAction(Request $request){
+        $em=$this->getDoctrine()->getManager();
+        $blog=$em->getRepository(Blog::class)->find($request->get("id"));;
+        $em->remove($blog);
+        $em->flush();
+        return $this->redirectToRoute("blog");
+    }
 }
 

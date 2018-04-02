@@ -34,18 +34,28 @@
             <div class="row">
                 <div class="col-md-8 col-xs-12">
                     {% if app.user is not null %}
-                            <div class="pd_btn fix">
-                                <a class="btn btn-default acc_btn" href="{{ path('ajouter_blog') }}">Ajouter Blog</a>
-                            </div>
-                     {% endif %}
-                       {% for Blog in Blogs %}
-                                 <div class="single_blog">
+
+                        <div class="pd_btn fix">
+                            <a class="btn btn-default acc_btn" href="{{ path('ajouter_blog') }}">Ajouter Blog</a>
+                        </div>
+                    {% endif %}
+                    {% for Blog in Blogs %}
+                        <div class="single_blog">
                             <div class="single_blog_img">
                                 <img src="{{ asset('img/blog/1-full.jpg') }}" alt="">
+                                {% if app.user is not null %}
+                                    {% if Blog.idUser.id == app.user.id %}
+                                    <form action="{{ path('Supprimer_blog') }}">
+                                        <input type="hidden" value="{{ Blog.id }}" name="id">
+                                        <button class="btn btn-default acc_btn">Supprimer</button>
+
+                                        </form>{% endif %}
+                                {% endif %}
                                 <div class="blog_date text-center">
                                     <div class="bd_month">{{ Blog.dateBlog |date("m/d/Y") }}</div>
                                 </div>
                             </div>
+
 
                             <div class="blog_content">
                                 <h4 class="post_title"><a
@@ -59,8 +69,6 @@
                             </div>
                         </div>
                     {% endfor %}
-                </div>
-
 
 
 

@@ -21,6 +21,10 @@ class DefaultController extends Controller
         return $this->render('MainBundle:Default:about.html.twig');
     }
 
+    public function SendMessageContactAction()
+    {
+
+    }
 
 
 }

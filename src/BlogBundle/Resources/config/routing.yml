@@ -17,3 +17,6 @@ delCom:
     path:     /delCom
     defaults: { _controller: BlogBundle:Default:delCom }
 
+Supprimer_blog:
+    path:     /deleteBlog
+    defaults: { _controller: BlogBundle:Default:deleteBlog }
