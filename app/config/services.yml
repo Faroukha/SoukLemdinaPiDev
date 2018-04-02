@@ -3,3 +3,12 @@ services :
         class: UserBundle\Form\RegistrationType
         tags:
             - { name: form.type, alias: app_user_registration }
+    resto.image_uploader:
+        class: ProduitBundle\ImageUpload
+        arguments: ['%images_directory%']
+    resto.doctrine_image_listener:
+        class: ProduitBundle\ImageUploadListener
+        arguments: ['@resto.image_uploader']
+        tags:
+            - { name: doctrine.event_listener, event: prePersist }
+            - { name: doctrine.event_listener, event: preUpdate }
