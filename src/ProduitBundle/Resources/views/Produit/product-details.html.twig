@@ -1,4 +1,15 @@
 {% extends 'layout/layout.html.twig' %}
+
+{% block loginbtn %}
+    {% if app.user is not null %}
+        <li class="account_area"><a href="{{ path('fos_user_security_logout') }}"><i class="fa fa-lock"></i> Se Déconnecter</a></li>
+    {% else %}
+        <li class="account_area"><a href="{{ path('fos_user_registration_register') }}"><i class="fa fa-lock"></i> Register</a></li>
+        <li class="account_area"><a href="{{ path('fos_user_security_login') }}"><i class="fa fa-lock"></i> Se Connecter</a></li>
+
+    {% endif %}
+
+{% endblock %}
 {% block body %}
 
     <div id="page_item_area">
@@ -7,8 +18,6 @@
                 <div class="col-sm-6 text-left">
                     <h3>{{ produit.titre }} Details</h3>
                 </div>
-
-
 
 
             </div>
@@ -72,52 +81,42 @@
             <div class="row">
                 <div class="col-xs-12">
                     <div class="pd_tab_area fix">
-                        <ul class="pd_tab_btn nav nav-tabs" role="tablist">
-
+                        <ul class="pd_tab_btn nav nav-tabs" >
                             <li>
                                 <a href="#reviews" role="tab" data-toggle="tab">Commentaire</a>
                             </li>
                         </ul>
+                        <div class="col-md-6 rcf_pdnglft">
+                            {% for c in commentaire %}
+                                {% if c.idproduit==produit.id %}
+                                    <div class="single_blog">
+                                        <div class="blog_content">
+                                            <h4 class="post_title">{{ c.emailUser }}:</h4>
 
-
-
-
-                            <div role="tabpanel" class="tab-pane fade" id="reviews">
-
-
-                                <div class="col-md-6 rcf_pdnglft">
-                                    {% for c in commentaire %}
-                                        {% if c.idproduit==produit.id %}
-                                            <div class="single_blog">
-
-
-                                                <div class="blog_content">
-                                                    <h4 class="post_title">{{ c.emailUser }}:</h4>
-
-                                                    <h4 class="post_title">{{ c.text }}</h4>
-                                                </div>
-                                            </div>
-                                        {% endif %}
-                                    {% endfor %}
-
-
-                                    <div class="rtng_cmnt_form_area fix">
-                                        <div class="rtng_form">
-                                            <form action="{{ path("addCommentaire") }}">
-                                                <input type="hidden" value="{{ app.user.id }}" name="idUser">
-                                                <input type="hidden" value="{{ produit.id }}" name="id">
-                                                <div class="input-area"><textarea name="text" placeholder="Write a review"></textarea></div>
-                                                <input class="btn border-btn" type="submit" value="Add Review" />
-                                            </form>
+                                            <h4 class="post_title">{{ c.text }}</h4>
                                         </div>
                                     </div>
+                                {% endif %}
+                            {% endfor %}
+                            {% if app.user is not null %}
+                                <div class="rtng_cmnt_form_area fix">
+                                    <div class="rtng_form">
+                                        <form action="{{ path("addCommentaire") }}">
+                                            <input type="hidden" value="{{ app.user.id }}" name="idUser">
+                                            <input type="hidden" value="{{ produit.id }}" name="id">
+                                            <div class="input-area"><textarea name="text"
+                                                                              placeholder="Write a review"></textarea>
+                                            </div>
+                                            <input class="btn border-btn" type="submit" value="Add Review"/>
+                                        </form>
+                                    </div>
                                 </div>
-                            </div>
-
+                            {% endif %}
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
     </div>
 {% endblock %}
