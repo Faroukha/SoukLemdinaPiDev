@@ -78,7 +78,8 @@
                                                         </div>
                                                     </div>
                                                     {% if app.user is not null %}
-                                                    {% if Coms.idUser.id == app.user.id %}
+                                                    {% if Coms.idUser.id == app.user.id or is_granted('ROLE_ADMIN') %}
+
 
                                                     <form action="{{ path('delCom') }}" method="POST">
                                                         <input type="hidden" value="{{ Coms.id }}" name="idCom">

@@ -86,17 +86,19 @@
                                                 <li><a href="{{ path('wishlist') }}">Wishlist</a></li>
                                             </ul>
                                         </li>
-                                        <li>
-                                            <a href="{{ path('blog') }}">Blog <i class="fa fa-angle-down"></i></a>
 
-                                        </li>
                                         {% block admin %}
                                         <li>
                                             <a href="{{ path('contact') }}">contact</a>
                                         </li>
+                                            <li>
+                                                <a href="{{ path('blog') }}">Blog <i class="fa fa-angle-down"></i></a>
+
+                                            </li>
+
+                                            <li><a href="{{ path('ff') }}">Profil</a></li>
                                         {% endblock %}
 
-                                        <li><a href="{{ path('ff') }}">Profil</a></li>
                                     </ul>
                                 </nav>
                             </div>

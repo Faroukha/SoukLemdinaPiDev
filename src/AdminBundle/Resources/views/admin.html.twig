@@ -12,10 +12,62 @@
 {% block admin %}
     {% if is_granted('ROLE_ADMIN') %}
          <li><a href="{{ path('allPub') }}">Publicite</a></li>
+        <li>
+            <a href="{{ path('blog') }}">Blog <i class="fa fa-angle-down"></i></a>
+
+        </li>
+
+        <li><a href="{{ path('ff') }}">Profil admin</a></li>
 
     {% else %}
         <li><a href="{{ path('contact') }}">contact</a></li>
+        <li>
+            <a href="{{ path('blog') }}">Blog <i class="fa fa-angle-down"></i></a>
+
+        </li>
+
+        <li><a href="{{ path('ff') }}">Profil</a></li>
     {% endif %}
      {% endblock %}
 {% block body %}
+    <div class="row">
+<div class="col-md-3">
+</div>
+    <div class="col-md-8" >
+        <div class="product_item" style="width: 1268px">
+
+            {% for produit in produits %}
+                <div class="col-lg-3 col-md-4 col-sm-6 mix sale">
+                    <div class="single_product">
+                        <div class="product_image">
+                            <img src="{{ asset ('img/product/1.jpg') }}" alt=""/>
+                            <div class="new_badge">New</div>
+                            <div class="box-content">
+
+                                <a href="#"><i class="fa fa-cart-plus"></i></a>
+                                <a href="{{ path('product_details',{'id':produit.id}) }}"><i class="fa fa-search"></i></a>
+                            </div>
+                        </div>
+
+                        <div class="product_btm_text">
+                            <h4><a href="#">{{ produit.titre}}</a></h4>
+                            <div class="p_rating">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                            </div>
+                            <span class="price">{{ produit.prix}}</span>
+
+                        </div>
+                    </div>
+                </div>
+
+
+            {% endfor %}
+        </div>
+    </div>
+
+    </div>
 {% endblock %}
