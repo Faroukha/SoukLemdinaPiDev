@@ -24,3 +24,15 @@ fos_user_change_password:
 ajouter_blog:
     path: /addblog
     defaults: {_controller: UserBundle:Default:ishow }
+
+others_profil:
+    path: /profill
+    defaults: {_controller: UserBundle:Default:showOtherProfil }
+
+abonnementdemerde:
+    path: /profilll
+    defaults: {_controller: UserBundle:Default:abo }
+
+desabo:
+    path: /profillll
+    defaults: {_controller: UserBundle:Default:desabo }

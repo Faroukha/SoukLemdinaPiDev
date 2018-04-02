@@ -52,9 +52,26 @@
                     </div>
                     <!-- Product Action -->
                     {% if is_granted('ROLE_ARTISAN') %}
+                    {% if app.user == user %}
                     <div class="pd_btn fix">
                         <a class="btn btn-default acc_btn" href="{{ path('Ajouter_Produit') }}">Ajouter Produit</a>
                     </div>
+                    {% endif %}
+                    {% endif %}
+                    {% if app.user != user %}
+                    {% if is_granted('ROLE_MEMBER') %}
+                        {% if bool == false %}
+                        <div class="pd_btn fix">
+                            <a class="btn btn-default acc_btn" href="{{ path('abonnementdemerde', {'idA':user.id, 'idM':app.user.id}) }}">S'abonner</a>
+                        </div>
+                        {% endif %}
+                        {% if bool == true %}
+                            <div class="pd_btn fix">
+                                <a class="btn btn-default acc_btn" href="{{ path('desabo', {'idA':user.id, 'idM':app.user.id}) }}">Desabo</a>
+                            </div>
+                        {% endif %}
+
+                    {% endif %}
                     {% endif %}
                 </div>
             </div>
