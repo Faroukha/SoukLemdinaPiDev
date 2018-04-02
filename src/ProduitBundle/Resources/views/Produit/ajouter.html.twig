@@ -1,8 +1,10 @@
 {% extends 'layout/layout.html.twig' %}
 {% block loginbtn %}
-    <li class="account_area"><a href="{{ path('fos_user_security_logout') }}"><i class="fa fa-lock"></i> Se Déconnecter</a></li>
+    <li class="account_area"><a href="{{ path('fos_user_security_logout') }}"><i class="fa fa-lock"></i> Se Déconnecter</a>
+    </li>
 {% endblock %}
 {% block body %}
+
     <div class="login_page_area">
         <div class="container">
             <div class="row">
@@ -29,19 +31,19 @@
                                     <div class="">
                                         <label>Description</label>
                                         <div class="input-area">
-                                            <input  id="description" name="description" type="text"  class="form-control">
+                                            <input id="description" name="description" type="text" class="form-control">
                                         </div>
                                     </div>
                                     <div class="">
                                         <label>prix</label>
                                         <div class="input-area">
-                                            <input  id="prix" name="prix" type="text"  class="form-control">
+                                            <input id="prix" name="prix" type="text" class="form-control">
                                         </div>
                                     </div>
                                     <div class="">
                                         <label>Quantité</label>
                                         <div class="input-area">
-                                            <input  id="quantite" name="quantite" type="text"  class="form-control">
+                                            <input id="quantite" name="quantite" type="text" class="form-control">
                                         </div>
                                     </div>
                                     <div class="">
@@ -50,9 +52,13 @@
                                             <input type="file" name="image">
                                         </div>
                                     </div>
-                                    <button type="submit" id="_submit" name="_submit" class="btn btn-default acc_btn">
-                                        <span> <i class="fa fa-lock btn_icon"></i> Ajouter </span>
-                                    </button>
+
+
+                                        <button type="submit" id="_submit" name="_submit"
+                                                class="btn btn-default acc_btn">
+                                            <span> <i class="fa fa-lock btn_icon"></i> Ajouter </span>
+                                        </button>
+
                                 </div>
                             </div>
                         </div>
@@ -63,4 +69,5 @@
             </div>
         </div>
     </div>
+
 {% endblock %}
