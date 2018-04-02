@@ -187,7 +187,11 @@ class Produit
     }
 
     /**
-     * @param int $idartisan
+     * Set idartisan
+     *
+     * @param integer $idartisan
+     *
+     * @return User
      */
     public function setIdartisan($idartisan)
     {
