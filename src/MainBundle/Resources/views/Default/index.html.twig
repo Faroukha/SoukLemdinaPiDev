@@ -48,17 +48,21 @@
 <div class="row">
     <div class="col-md-3">
         {% for Pub in Pubs  %}
-            {% if Pub.datedeb|date("m/d/Y")  < "now"|date("m/d/Y") < Pub.datefin|date("m/d/Y") %}
-                <div class="single_blog" >
-                    <div class="single_blog_img">
-                        <img src="{{ asset('img/blog/1-full.jpg') }}" alt="">
+            {% if Pub.datedeb|date("m/d/Y")  <= "now"|date("m/d/Y")  %}
+                {% if "now"|date("m/d/Y") <= Pub.datefin|date("m/d/Y")   %}
+                    <div class="single_blog" >
+                        <div class="single_blog_img">
+                            <img src="{{ asset('img/blog/1-full.jpg') }}" alt="">
+                            <div class="blog_date text-center">
+                                <div class="bd_month">{{ Pub.datedeb |date("m/d/Y") }}</div>
+                                <div class="bd_month">{{ Pub.datefin |date("m/d/Y") }}</div>
+                            </div>
+                        </div>
                     </div>
-                </div>
+            {% endif %}
+            {% endif %}
 
-                {% endif %}
-
-            {% endfor %}
-
+        {% endfor %}
     </div>
 
     <div class="col-md-8" >
@@ -97,5 +101,27 @@
     </div>
     </div>
 </div>
+    <section id="slider_area" class="text-center">
+        <div class="slider_active owl-carousel">
+            {% for Pub in Pubs %}
+                {% if Pub.datedeb|date("m/d/Y")  <= "now"|date("m/d/Y")  %}
+                    {% if "now"|date("m/d/Y") <= Pub.datefin|date("m/d/Y")   %}
+                        <div class="single_slide" style="background-image: url({{ asset('img/blog/1-full.jpg') }}); background-size: cover;height: 300px;background-position: center ;">
+                            <div class="container">
+                                <div class="single-slide-item-table">
+                                    <div class="single-slide-item-tablecell">
+                                        <div class="slider_content text-center slider-animated-2">
+                                            <div class="bd_month">{{ Pub.datedeb |date("m/d/Y") }}</div>
+                                            <div class="bd_month">{{ Pub.datefin |date("m/d/Y") }}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+        </div>
+    </section>
 
 {% endblock %}

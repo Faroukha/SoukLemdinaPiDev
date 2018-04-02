@@ -31,6 +31,7 @@ class DefaultController extends Controller
         $pub = new Pubg();
         if ($request->isMethod('POST')) {
             if (($request->get("datedeb")) > $request->get("datefin")) {
+//                    && ($request->get("datedeb") < "now"|date("m/d/Y")
                 return $this->redirectToRoute('ajouterPub');
             } else {
                 $pub->setDatedeb(new \DateTime($request->get("datedeb")));

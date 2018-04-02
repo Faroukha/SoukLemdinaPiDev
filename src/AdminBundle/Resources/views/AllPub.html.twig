@@ -28,7 +28,9 @@
         <div class="pd_btn fix">
             <a class="btn btn-default acc_btn" href="{{ path('ajouterPub') }}">Ajouter Publicite</a>
         </div>
-
+<div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
         {% for pub in pubs %}
             <div class="single_blog" >
                 <div class="single_blog_img">
@@ -44,6 +46,9 @@
             </div>
         {% endfor %}
     </div>
+    </div>*
+    </div>
+
 
 
 {% endblock %}
