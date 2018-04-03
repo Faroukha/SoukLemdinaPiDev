@@ -24,7 +24,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-6 text-left">
-                    <h3>Contact</h3>
+                    <h3>Reclamation</h3>
                 </div>
 
             </div>
@@ -36,85 +36,30 @@
         <div class="container">
             <div class="row">
                 <div class="contact_frm_area text-left col-lg-6 col-md-12 col-xs-12">
-                    <h3>Get in Touch</h3>
+                    <h3>Ajouter une reclamation</h3>
                     <form action="{{ path('add_contact') }}" method="post">
                         <div class="form-row">
-                            <div class="form-group col-sm-6"><input type="text" class="form-control" name="name" placeholder="Name*" /></div>
-                            <div class="form-group col-sm-6"><input type="text" class="form-control" name="email" placeholder="Email*" /></div>
+                            <div class="form-group col-sm-6"><input type="text" class="form-control" name="name" placeholder="Name*" required /></div>
+                            <div class="form-group col-sm-6"><input type="email" class="form-control" name="email"placeholder="Email*" required pattern="[a-z0-9._%+-]+@[gmail\esprit\live\yahoo\outlook]+\.[tn\org\com\fr]{2,4}$" /></div>
                         </div>
 
                         <div class="form-group">
-                            <input type="text" class="form-control" name="subject" placeholder="Subject" />
+                            <input type="text" class="form-control" name="subject" placeholder="Subject" required/>
                         </div>
 
                         <div class="form-group">
-                            <textarea name="message" class="form-control" placeholder="Message"></textarea>
+                            <textarea name="message" class="form-control" placeholder="Message" required></textarea>
                         </div>
 
-                        <div class="input-area submit-area"><button class="btn border-btn" type="submit" >Send Message</button></div>
-
+                        <div class="input-area submit-area">
+                            <button class="btn border-btn" type="submit">Envoyer</button>
+                        </div>
                     </form>
                 </div>
 
-                <div class="contact_info col-lg-6 col-md-12 col-xs-12">
-                    <h3>Contact Info</h3>
-                    <p class="subtitle">
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                        Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
-                    </p>
-                    <div class="single_info">
-                        <div class="con_icon"><i class="fa fa-map-marker"></i></div>
-                        <p>1660 Travis Street <br />Miramar, FL 33025 </p>
-                    </div>
-                    <div class="single_info">
-                        <div class="con_icon"><i class="fa fa-phone"></i></div>
-                        <p>Phone : +772-607-0042</p>
-                        <p>Fax : +772-607-0042</p>
-                    </div>
-                    <div class="single_info">
-                        <div class="con_icon"><i class="fa fa-envelope"></i></div>
-                        <a href="#">RachelSOntiveros@rhyta.com </a> <br />
-                        <a href="#">RachelSOntiveros@rhyta.com </a>
-                    </div>
-
-                </div>
             </div>
         </div>
-
-
-        <div class="fix">
-            <div id="contact_map_area"></div>
-        </div>
-
     </div>
-
-
-    <!-- Google Map APi
-    ============================================ -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDwIQh7LGryQdDDi-A603lR8NqiF3R_ycA"></script>
-    <script>
-
-        function initialize() {
-            var mapOptions = {
-                zoom: 15,
-
-                scrollwheel: false,
-                center: new google.maps.LatLng(36.8983963, 10.1875433),
-
-            };
-            var map = new google.maps.Map(document.getElementById('contact_map_area'),
-                mapOptions);
-            var marker = new google.maps.Marker({
-                position: map.getCenter(),
-                icon: 'img/map_pin.png',
-                map: map,
-
-            });
-
-        }
-        google.maps.event.addDomListener(window, 'load', initialize);
-    </script>
-
 {% endblock %}
 
 
