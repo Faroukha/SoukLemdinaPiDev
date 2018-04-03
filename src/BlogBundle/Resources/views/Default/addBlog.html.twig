@@ -3,46 +3,49 @@
     <li class="account_area"><a href="{{ path('fos_user_security_logout') }}"><i class="fa fa-lock"></i> Se Déconnecter</a></li>
 {% endblock %}
 {% block body %}
-    <div class="login_page_area">
-        <div class="container">
-            <div class="row">
+    {#<div class="login_page_area">#}
+        {#<div class="container">#}
+            {#<div class="row">#}
 
-                <div class="col-md-12 col-sm-6 col-xs-12">
-                    <form action="{{ path("ajouter_blog_bds") }}" method="POST">
-                        <input type="hidden" value="{{ app.user.id }}" name="idUser">
-                        <div class="create_account_area">
-                            <h2 class="caa_heading">Ajouter un blog</h2>
-                            <div class="caa_form_area">
-                                <div class="caa_form_group">
-                                    <div class="login_email">
-                                        <label>Titre</label>
-                                        <div class="input-area">
-                                            <input id="categorie" name="titre" type="text" class="form-control">
-                                        </div>
-                                    </div>
-                                    <div class="">
-                                        <label>Description</label>
-                                        <div class="input-area">
-                                            <input  id="description" name="description" type="text"  class="form-control">
-                                        </div>
-                                    </div>
-                                    <div class="">
-                                        <label>Image</label>
-                                        <div class="input-area">
-                                            <input type="file" name="image">
-                                        </div>
-                                    </div>
-                                    <button type="submit" id="_submit" name="_submit" class="btn btn-default acc_btn">
-                                        <span> <i class="fa fa-lock btn_icon"></i> Ajouter </span>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
+                {#<div class="col-md-12 col-sm-6 col-xs-12">#}
+                    {#<form action="{{ path("ajouter_blog_bds") }}" method="POST">#}
+                        {#<input type="hidden" value="{{ app.user.id }}" name="idUser">#}
+                        {#<div class="create_account_area">#}
+                            {#<h2 class="caa_heading">Ajouter un blog</h2>#}
+                            {#<div class="caa_form_area">#}
+                                {#<div class="caa_form_group">#}
+                                    {#<div class="login_email">#}
+                                        {#<label>Titre</label>#}
+                                        {#<div class="input-area">#}
+                                            {#<input id="categorie" name="titre" type="text" class="form-control">#}
+                                        {#</div>#}
+                                    {#</div>#}
+                                    {#<div class="">#}
+                                        {#<label>Description</label>#}
+                                        {#<div class="input-area">#}
+                                            {#<input  id="description" name="description" type="text"  class="form-control">#}
+                                        {#</div>#}
+                                    {#</div>#}
+                                    {#<div class="">#}
+                                        {#<label>Image</label>#}
+                                        {#<div class="input-area">#}
+                                            {#<input type="file" name="image">#}
+                                        {#</div>#}
+                                    {#</div>#}
+                                    {#<button type="submit" id="_submit" name="_submit" class="btn btn-default acc_btn">#}
+                                        {#<span> <i class="fa fa-lock btn_icon"></i> Ajouter </span>#}
+                                    {#</button>#}
+                                {#</div>#}
+                            {#</div>#}
+                        {#</div>#}
 
-                    </form>
-                </div>
+                    {#</form>#}
+                {#</div>#}
 
-            </div>
-        </div>
-    </div>
+            {#</div>#}
+        {#</div>#}
+    {#</div>#}
+    {{ form_start(form) }}
+    {{ form_row(form.image) }}
+    {{ form_end(form) }}
 {% endblock %}
