@@ -14,16 +14,23 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class DefaultController extends Controller
 {
-    public function indexAction()
+    public function indexAction(Request $request)
     {
 
         $user = $this->getUser();
-
         $em = $this->getDoctrine()->getManager();
         $produit = $em->getRepository(Produit::class)->findAll();
         $users = $em->getRepository(User::class)->findAll();
         $promotion = $this->getDoctrine()->getRepository(Promotion::class)->findAll();
         $Pubs = $em->getRepository(Pubg::class)->findAll();
+
+        $paginator = $this->get('knp_paginator');
+        $produit = $paginator->paginate(
+            $produit,
+            $request->query->getInt('page', 1)/*page number*/,
+            $request->query->getInt('limit', 9)/*limit per page*/
+        );
+
 
         if ($user) {
 
@@ -68,9 +75,7 @@ class DefaultController extends Controller
     {
         $userr = $this->getUser();
         $user = $this->getDoctrine()->getRepository(User::class)->find($request->get('id'));
-
-                     $bool=$this->isAboAction($userr->getId(),$request->get('id'));
-
+        $bool=$this->isAboAction($userr->getId(),$request->get('id'));
         //return new Response($request->get('id'));
             if ($user->hasRole("ROLE_ARTISAN")) {
                 $em = $this->getDoctrine()->getRepository(Produit::class);
@@ -124,10 +129,37 @@ class DefaultController extends Controller
         }
 
 
+
     }
 
-    public function desaboAction()
+    public function desaboAction(Request $request)
     {
+        $userr = $this->getUser();
+        $abonnement = $this->getDoctrine()->getRepository(Abonnement::class)->findAll();
+        foreach ($abonnement as $abo) {
+
+
+            if (($abo->getIdmembre() == $userr->getId()) && ($abo->getIdartisan() == $request->get('idA'))) {
+                $a = $this->getDoctrine()->getRepository(Abonnement::class)->find($abo->getId());
+                $abonnement -> remove($a);
+                $abonnement -> flush();
+            }
+        }
+
+        $userr = $this->getUser();
+        $user = $this->getDoctrine()->getRepository(User::class)->find($request->get('idA'));
+        $bool=$this->isAboAction($userr->getId(),$request->get('idA'));
+        //return new Response($request->get('id'));
+        if ($user->hasRole("ROLE_ARTISAN")) {
+            $em = $this->getDoctrine()->getRepository(Produit::class);
+            $produits = $em->findByIdartisan($user->getId());
+
+
+            return $this->render('@FOSUser/Profile/show.html.twig', ['produits' => $produits, 'user' => $user, 'bool'=> $bool] );
+        } else {
+            return $this->render('@FOSUser/Profile/show.html.twig', ['produits' => null, 'user' => $user, 'bool'=> $bool]);
+        }
+
 
     }
 
