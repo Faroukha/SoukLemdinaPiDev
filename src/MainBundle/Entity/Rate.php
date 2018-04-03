@@ -43,7 +43,12 @@ class Rate
     private $value;
 
 
-
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="avis", type="integer", nullable=false)
+     */
+    private $avis=0;
     /**
      * Get id
      *
@@ -124,5 +129,20 @@ class Rate
     public function getValue()
     {
         return $this->value;
+    }
+    /**
+     * @return int
+     */
+    public function getAvis()
+    {
+        return $this->avis;
+    }
+
+    /**
+     * @param int $avis
+     */
+    public function setAvis($avis)
+    {
+        $this->avis = $avis;
     }
 }
