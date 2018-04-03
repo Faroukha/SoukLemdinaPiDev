@@ -66,6 +66,7 @@ class DefaultController extends Controller
     public function ajouterBlogAction(Request $request )
     {
         $Blog = new Blog();
+
         $form = $this->createFormBuilder($Blog)
 
             ->add('titre', TextType::class)
@@ -78,6 +79,7 @@ class DefaultController extends Controller
         if ($form->isValid()) {
             $user = $this->getUser();
             $Blog->setIdUser($user->getId());
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($Blog);
             $em->flush();
