@@ -13,11 +13,25 @@ class DefaultController extends Controller
         return $this->render('AdminBundle::admin.html.twig');
     }
 
-    public function allPubAction()
+    public function allPubAction(Request $request)
     {
+
         $em = $this->getDoctrine()->getManager();
-        $Pubs = $em->getRepository(Pubg::class)->findAll();
-        return $this->render('AdminBundle::AllPub.html.twig', ['pubs' => $Pubs]);
+
+        $Pubss = $em->getRepository(Pubg::class)->findAll();
+
+        $paginator = $this->get('knp_paginator');
+
+        $Pubs = $paginator->paginate(
+            $Pubss,
+            $request->query->getInt('page', 1)/*page number*/,
+            $request->query->getInt('limit', 5)/*limit per page*/
+        );
+
+        return $this->render('AdminBundle::AllPub.html.twig', [
+            'pubs' => $Pubs,
+        ]);
+
     }
 
     public function ajouterPubAction()

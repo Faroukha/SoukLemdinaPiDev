@@ -12,10 +12,21 @@ use UserBundle\Entity\User;
 
 class DefaultController extends Controller
 {
-    public function blogAction()
+    public function blogAction(Request $request)
     {
+
         $em = $this->getDoctrine()->getManager();
         $Blogs = $em->getRepository(Blog::class)->findAll();
+
+        $paginator = $this->get('knp_paginator');
+
+        $Blogs = $paginator->paginate(
+            $Blogs,
+            $request->query->getInt('page', 1)/*page number*/,
+            $request->query->getInt('limit', 2)/*limit per page*/
+        );
+
+
         return $this->render('BlogBundle:Default:blog.html.twig', ['Blogs' => $Blogs]);
     }
 

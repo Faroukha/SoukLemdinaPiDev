@@ -110,6 +110,9 @@
     </div>
     </div>
 </div>
+    <div class="blog_pagination text-center" aria-label="Page navigation example">
+        {{ knp_pagination_render(produits) }}
+    </div>
     <section id="slider_area" class="text-center">
         <div class="slider_active owl-carousel">
             {% for Pub in Pubs %}
