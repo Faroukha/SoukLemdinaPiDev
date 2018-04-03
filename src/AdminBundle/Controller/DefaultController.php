@@ -2,6 +2,7 @@
 
 namespace AdminBundle\Controller;
 
+use MainBundle\Entity\Contact;
 use MainBundle\Entity\Pubg;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -58,6 +59,26 @@ class DefaultController extends Controller
             $em->flush();
         }
         return $this->redirectToRoute('allPub');
+
+    }
+    public function allreclamAction(Request $request)
+    {
+
+        $em = $this->getDoctrine()->getManager();
+
+        $rec = $em->getRepository(Contact::class)->findAll();
+
+        $paginator = $this->get('knp_paginator');
+
+        $Reclamation = $paginator->paginate(
+            $rec,
+            $request->query->getInt('page', 1)/*page number*/,
+            $request->query->getInt('limit', 5)/*limit per page*/
+        );
+
+        return $this->render('AdminBundle::allreclamation.html.twig', [
+            'recs' => $Reclamation,
+        ]);
 
     }
 }

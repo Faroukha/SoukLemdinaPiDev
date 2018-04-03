@@ -43,11 +43,12 @@ class DefaultController extends Controller
     {
         $Blog = new Blog();
         if ($request->isMethod('POST')) {
+
             $Blog->setTitre($request->get('titre'));
-//            $Blog->setDateBlog($request->get('dateBlog')) ;
             $Blog->setDescription($request->get('description'));
             $Blog->setImage($request->get('image'));
             $Blog->setNbrLike(0);
+
             $em = $this->getDoctrine()->getManager();
             $user = $em->getRepository(User::class)->find($request->get('idUser'));
             $Blog->setIdUser($user);
