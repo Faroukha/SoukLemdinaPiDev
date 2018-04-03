@@ -62,7 +62,7 @@
                                             href="{{ path('blog_detail', {'id':Blog.id}) }}">{{ Blog.titre }}</a></h4>
                                 <ul class="post-bar">
                                     <li><i class="fa fa-user"></i>{{ Blog.idUser.nom }}</li>
-                                    <li><i class="fa fa-comments-o"></i> <a href="#">2 comments</a></li>
+                                    <li><i class="fa fa-comments-o"></i> <a href="{{ path('blog_detail', {'id':Blog.id}) }}">Comments</a></li>
                                     <li><i class="fa fa-heart-o"></i> <a href="#">{{ Blog.nbrLike }}</a></li>
                                 </ul>
                                 <p>{{ Blog.description }}</p>
