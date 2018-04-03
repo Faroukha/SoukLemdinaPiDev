@@ -30,7 +30,7 @@
             </div>
         </div>
     </div>
-
+{% if app.user is not null %}
     <!-- Contact Page -->
     <div class="contact_page_area fix">
         <div class="container">
@@ -60,6 +60,12 @@
             </div>
         </div>
     </div>
+    {% else %}
+        
+    You have to connect <a href="{{ path('fos_user_security_login') }}">click here </a> !
+
+    <div class="col-md-3"></div>
+{% endif %}
 {% endblock %}
 
 
