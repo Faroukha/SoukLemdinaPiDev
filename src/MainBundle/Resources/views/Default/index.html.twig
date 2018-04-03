@@ -24,7 +24,7 @@
         {% for x in produitp %}
             {% if x.idProduit == p.id and i == 0 %}
                 {% set i = 1 %}
-            <div class="single_slide" style="background-image: url({{ asset(p.image) }}); background-size: cover; background-position: center ;">
+            <div class="single_slide" style="background-image: url({{ asset("Uploads/images/") ~ p.image }}); background-size: cover; background-position: center ;">
                 <div class="container">
                     <div class="single-slide-item-table">
                         <div class="single-slide-item-tablecell">
