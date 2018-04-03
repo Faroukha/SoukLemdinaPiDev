@@ -2,6 +2,7 @@
 
 namespace AdminBundle\Controller;
 
+use MainBundle\Entity\Contact;
 use MainBundle\Entity\Pubg;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
@@ -85,6 +86,27 @@ class DefaultController extends Controller
         }
         return $this->render('AdminBundle:Pub:ajouterPub.html.twig',
             ['form' => $form->createView()]);
+    }
+
+    public function allreclamAction(Request $request)
+    {
+
+        $em = $this->getDoctrine()->getManager();
+
+        $rec = $em->getRepository(Contact::class)->findAll();
+
+        $paginator = $this->get('knp_paginator');
+
+        $Reclamation = $paginator->paginate(
+            $rec,
+            $request->query->getInt('page', 1)/*page number*/,
+            $request->query->getInt('limit', 5)/*limit per page*/
+        );
+
+        return $this->render('AdminBundle::allreclamation.html.twig', [
+            'recs' => $Reclamation,
+        ]);
+
     }
 
 }
