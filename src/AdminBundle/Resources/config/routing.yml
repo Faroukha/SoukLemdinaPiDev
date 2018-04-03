@@ -4,7 +4,7 @@ admin_homepage:
 
 addPub:
     path:     /addPub
-    defaults: { _controller: AdminBundle:Default:addPub }
+    defaults: { _controller: AdminBundle:Default:addpub }
 
 allPub:
     path:     /allpub
