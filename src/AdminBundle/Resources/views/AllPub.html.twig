@@ -44,7 +44,7 @@
         {% for pub in pubs %}
             <div class="single_blog" >
                 <div class="single_blog_img">
-                    <img src="{{ asset('img/blog/1-full.jpg') }}" alt="">
+                    <img src="{{ asset("Uploads/images/") ~ pub.image }}" alt="">
                     <div class="blog_date text-center">
                         <div class="bd_month">{{ pub.datedeb |date("m/d/Y") }}</div>
                         <div class="bd_month">{{ pub.datefin |date("m/d/Y") }}</div>
