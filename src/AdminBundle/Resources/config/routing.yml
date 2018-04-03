@@ -12,7 +12,7 @@ allPub:
 
 ajouterPub:
     path:     /puub
-    defaults: { _controller: AdminBundle:Default:ajouterPub }
+    defaults: { _controller: AdminBundle:Default:addPub }
 allreclam:
     path:     /all
     defaults: { _controller: AdminBundle:Default:allreclam }

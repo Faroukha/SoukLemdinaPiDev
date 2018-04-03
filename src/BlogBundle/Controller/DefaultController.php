@@ -72,7 +72,7 @@ class DefaultController extends Controller
             ->add('titre', TextType::class)
             ->add('description', TextType::class)
             ->add('image', FileType::class, array('label' => 'Image(JPG)'))
-            ->add('save', SubmitType::class, array())
+            ->add('Submit', SubmitType::class, array())
             ->getForm();
 
         $form->handleRequest($request);
