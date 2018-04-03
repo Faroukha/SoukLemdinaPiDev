@@ -11,9 +11,9 @@ use MainBundle\Entity\Pubg;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use Doctrine\ORM\Event\PreUpdateEventArgs;
-use ProduitBundle\ImageUpload;
+use AdminBundle\ImageUpload;
 
-class ImageUploadListener
+class ImageUploadListenerpub
 { private $uploader;
 
     public function __construct(ImageUpload $uploader)
