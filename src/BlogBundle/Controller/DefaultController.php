@@ -9,6 +9,10 @@ use MainBundle\Entity\CommentaireBlog;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use UserBundle\Entity\User;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+
 
 class DefaultController extends Controller
 {
@@ -39,25 +43,47 @@ class DefaultController extends Controller
         return $this->render('BlogBundle:Default:blogDetail.html.twig', ['Blog' => $Blogs ,'Com' => $Coms]);
     }
 
-    public function ajouterBlogAction(Request $request)
+//    public function ajouterBlogAction(Request $request)
+//    {
+//        $Blog = new Blog();
+//        if ($request->isMethod('POST')) {
+//            $Blog->setTitre($request->get('titre'));
+//
+//            $Blog->setDescription($request->get('description'));
+//            $Blog->setImage($request->get('image'));
+//            $Blog->setNbrLike(0);
+//            $em = $this->getDoctrine()->getManager();
+//            $user = $em->getRepository(User::class)->find($request->get('idUser'));
+//            $Blog->setIdUser($user);
+//
+//
+//            $em->persist($Blog);
+//            $em->flush();
+//        }
+//        return $this->redirectToRoute('blog');
+//
+//    }
+    public function ajouterBlogAction(Request $request )
     {
         $Blog = new Blog();
-        if ($request->isMethod('POST')) {
-            $Blog->setTitre($request->get('titre'));
-//            $Blog->setDateBlog($request->get('dateBlog')) ;
-            $Blog->setDescription($request->get('description'));
-            $Blog->setImage($request->get('image'));
-            $Blog->setNbrLike(0);
+        $form = $this->createFormBuilder($Blog)
+
+            ->add('titre', TextType::class)
+            ->add('description', TextType::class)
+            ->add('image', FileType::class, array('label' => 'Image(JPG)'))
+            ->add('save', SubmitType::class, array())
+            ->getForm();
+
+        $form->handleRequest($request);
+        if ($form->isValid()) {
+            $user = $this->getUser();
+            $Blog->setIdUser($user->getId());
             $em = $this->getDoctrine()->getManager();
-            $user = $em->getRepository(User::class)->find($request->get('idUser'));
-            $Blog->setIdUser($user);
-
-
             $em->persist($Blog);
             $em->flush();
         }
-        return $this->redirectToRoute('blog');
-
+        return $this->render('BlogBundle:Default:addBlog.html.twig',
+            ['form' => $form->createView()]);
     }
 
     public function ishowBlogAction()
