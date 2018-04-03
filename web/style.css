@@ -547,6 +547,34 @@ input:focus, textarea:focus {
 .currency_area .csub-menu li a:hover{
 	color: #33d286;
 }
+
+
+.lan_area .cnotif-menu,
+.currency_area .cnotif-menu{
+    background: #fff;
+    width: 92px;
+    text-align: left;
+    padding: 5px 10px;
+    position: absolute;
+    left: 8px;
+    top: 26px;
+    box-shadow: 0 0 5px #f1f1f1;
+    z-index: 100;
+    display: none;
+}
+.lan_area .cnotif-menu li a,
+.currency_area .cnotif-menu li a{
+    padding: 7px 0;
+    display: block;
+    font-weight: 700;
+    transition: .5s;
+}
+.lan_area .cnotif-menu li a:hover,
+.currency_area .cnotif-menu li a:hover{
+    color: #33d286;
+}
+
+
 .menu_wrap {
 	margin-top: 15px;
 }
@@ -641,6 +669,16 @@ input:focus, textarea:focus {
 	transition:.5s;
 	margin-right: 10px;
 	
+}
+.fa_bell_style{
+    position: relative;
+    display: inline-block;
+    transition:.5s;
+    margin-right: 10px;
+    background-color: #33d286;
+    color: #33d286;
+    background: #33d286;
+    border: 1px solid #33d286;
 }
 .cart_icon {
 	display: inline-block;
@@ -783,11 +821,32 @@ input:focus, textarea:focus {
 	z-index: -999;
 	transition: .5s;
 }
+
+.notif-menu{
+    background: #fff none repeat scroll 0 0;
+    box-shadow: 0 0px 7px rgba(0,0,0,0.05);
+    border: 1px solid rgba(0,0,0,0.04);
+    opacity: 0;
+    padding: 12px 11px;
+    position: absolute;
+    text-align: left;
+    top: 120px;
+    visibility: hidden;
+    width: 200px;
+    z-index: -999;
+    transition: .5s;
+}
 .main-menu nav > ul > li:hover .sub-menu {
   opacity: 1;
   top: 100%;
   visibility: visible;
   z-index: 999;
+}
+.main-menu nav > ul > li:hover .notif-menu {
+    opacity: 1;
+    top: 100%;
+    visibility: visible;
+    z-index: 999;
 }
 .sub-menu li{}
 .sub-menu li a {
@@ -801,6 +860,19 @@ input:focus, textarea:focus {
 }
 .sub-menu li a:hover {
   padding-left: 18px;
+}
+.notif-menu li{}
+.notif-menu li a {
+    color: #606060;
+    display: block;
+    line-height: 31px;
+    font-size: 12px;
+    text-transform: uppercase;
+    padding: 0 10px;
+    font-weight: 400;
+}
+.notif-menu li a:hover {
+    padding-left: 18px;
 }
 /* Mega Menu */
 .mega-menu {

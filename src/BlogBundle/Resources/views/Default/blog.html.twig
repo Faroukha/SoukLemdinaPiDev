@@ -33,12 +33,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-8 col-xs-12">
-                    {% if app.user is not null %}
 
-                        <div class="pd_btn fix">
-                            <a class="btn btn-default acc_btn" href="{{ path('ajouter_blog') }}">Ajouter Blog</a>
-                        </div>
-                    {% endif %}
                     {% for Blog in Blogs %}
                         <div class="single_blog">
                             <div class="single_blog_img">
