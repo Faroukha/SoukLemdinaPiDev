@@ -1,124 +1,146 @@
 {% extends 'layout/layout.html.twig' %}
 {% block mailco %}
     {% if user is not null %}
-             {{ user.email }}
-        {% endif %}
+        {{ user.email }}
+    {% endif %}
 {% endblock %}
 {% block loginbtn %}
     {% if user is not null %}
-        <li class="account_area"><a href="{{ path('fos_user_security_logout') }}"><i class="fa fa-lock"></i> Se Déconnecter</a></li>
+        <li class="account_area"><a href="{{ path('fos_user_security_logout') }}"><i class="fa fa-lock"></i> Se
+                Déconnecter</a></li>
     {% else %}
-        <li class="account_area"><a href="{{ path('fos_user_registration_register') }}"><i class="fa fa-lock"></i> Register</a></li>
-        <li class="account_area"><a href="{{ path('fos_user_security_login') }}"><i class="fa fa-lock"></i> Se Connecter</a></li>
+        <li class="account_area"><a href="{{ path('fos_user_registration_register') }}"><i class="fa fa-lock"></i>
+                Register</a></li>
+        <li class="account_area"><a href="{{ path('fos_user_security_login') }}"><i class="fa fa-lock"></i> Se Connecter</a>
+        </li>
 
     {% endif %}
 
+{% endblock %}
+{% block notificationBlock %}
+    {% for notif in notifs %}
+    <div class="mc-sin-pro fix">
+        <a href="#" class="mc-pro-image float-left"><img
+                    src="{{ asset('bundles/main/img/mini-cart/2.jpg') }}"
+                    alt=""/></a>
+        <div class="mc-pro-details fix">
+            <a href="#">{{ notif.message }}</a>
+            <span>Artisan Name</span>
+            <a class="pro-del" href="#"><i
+                        class="fa fa-times-circle"></i></a>
+        </div>
+    </div>
+        {% endfor %}
 {% endblock %}
 {% block body %}
     <section id="slider_area" class="text-center">
         <div class="slider_active owl-carousel">
 
 
-    {% for p in produits %}
-        {% set i = 0 %}
-        {% for x in produitp %}
-            {% if x.idProduit == p.id and i == 0 %}
-                {% set i = 1 %}
-            <div class="single_slide" style="background-image: url({{ asset("Uploads/images/") ~ p.image }}); background-size: cover; background-position: center ;">
-                <div class="container">
-                    <div class="single-slide-item-table">
-                        <div class="single-slide-item-tablecell">
-                            <div class="slider_content text-center slider-animated-2">
-                                <p class="animated">{{ p.categorie }}</p>
-                                <h1 class="animated">{{ p.titre }}</h1>
-                                <h1 class="animated">{{ x.taux }}%</h1>
+            {% for p in produits %}
+                {% set i = 0 %}
+                {% for x in produitp %}
+                    {% if x.idProduit == p.id and i == 0 %}
+                        {% set i = 1 %}
+                        <div class="single_slide"
+                             style="background-image: url({{ asset("Uploads/images/") ~ p.image }}); background-size: cover; background-position: center ;">
+                            <div class="container">
+                                <div class="single-slide-item-table">
+                                    <div class="single-slide-item-tablecell">
+                                        <div class="slider_content text-center slider-animated-2">
+                                            <p class="animated">{{ p.categorie }}</p>
+                                            <h1 class="animated">{{ p.titre }}</h1>
+                                            <h1 class="animated">{{ x.taux }}%</h1>
 
-                                <a href="{{ path('detailspromotion',{'id':p.id}) }}" class="btn main_btn animated">Details</a>
+                                            <a href="{{ path('detailspromotion',{'id':p.id}) }}"
+                                               class="btn main_btn animated">Details</a>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </div>
-            {% endif %}
-        {% endfor %}
-    {% endfor %}
+                    {% endif %}
+                {% endfor %}
+            {% endfor %}
         </div>
     </section>
 
-<div class="row">
-    <div class="col-md-3">
-        {% for Pub in Pubs  %}
-            {% if Pub.datedeb|date("m/d/Y")  <= "now"|date("m/d/Y")  %}
-                {% if "now"|date("m/d/Y") <= Pub.datefin|date("m/d/Y")   %}
-                    <div class="single_blog" >
-                        <div class="single_blog_img">
-                            <img src="{{ asset('img/blog/1-full.jpg') }}" alt="">
-                            <div class="blog_date text-center">
-                                <div class="bd_month">{{ Pub.datedeb |date("m/d/Y") }}</div>
-                                <div class="bd_month">{{ Pub.datefin |date("m/d/Y") }}</div>
+    <div class="row">
+        <div class="col-md-3">
+            {% for Pub in Pubs %}
+                {% if Pub.datedeb|date("m/d/Y")  <= "now"|date("m/d/Y") %}
+                    {% if "now"|date("m/d/Y") <= Pub.datefin|date("m/d/Y") %}
+                        <div class="single_blog">
+                            <div class="single_blog_img">
+                                <img src="{{ asset('img/blog/1-full.jpg') }}" alt="">
+                                <div class="blog_date text-center">
+                                    <div class="bd_month">{{ Pub.datedeb |date("m/d/Y") }}</div>
+                                    <div class="bd_month">{{ Pub.datefin |date("m/d/Y") }}</div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endif %}
+
+            {% endfor %}
+        </div>
+
+        <div class="col-md-8">
+            <div class="product_item" style="width: 1268px">
+
+                {% for produit in produits %}
+                    <div class="col-lg-3 col-md-4 col-sm-6 mix sale">
+                        <div class="single_product">
+                            <div class="product_image">
+                                <img src="{{ asset("Uploads/images/") ~ produit.image }}" alt=""/>
+                                <div class="new_badge">New</div>
+                                <div class="box-content">
+
+                                    <a href="#"><i class="fa fa-cart-plus"></i></a>
+                                    <a href="{{ path('product_details',{'id':produit.id}) }}"><i
+                                                class="fa fa-search"></i></a>
+                                </div>
+                            </div>
+
+                            <div class="product_btm_text">
+                                <h4><a href="#">{{ produit.titre }}</a></h4>
+
+                                {% set i = 0 %}
+                                {% for x in users %}
+                                    {% if x.id == produit.idartisan and i == 0 %}
+                                        {% set i = 1 %}
+                                        <h4><a href="{{ path('others_profil',{'id':x.id}) }}">{{ x.nom }}</a></h4>
+                                    {% endif %}
+                                {% endfor %}
+
+                                <div class="p_rating">
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                </div>
+                                <span class="price">{{ produit.prix }}</span>
+
                             </div>
                         </div>
                     </div>
-            {% endif %}
-            {% endif %}
 
-        {% endfor %}
-    </div>
 
-    <div class="col-md-8" >
-    <div class="product_item" style="width: 1268px">
-
-             {% for produit in produits %}
-            <div class="col-lg-3 col-md-4 col-sm-6 mix sale">
-                <div class="single_product">
-                    <div class="product_image">
-                        <img src="{{ asset("Uploads/images/") ~ produit.image }}" alt=""/>
-                        <div class="new_badge">New</div>
-                        <div class="box-content">
-
-                            <a href="#"><i class="fa fa-cart-plus"></i></a>
-                            <a href="{{ path('product_details',{'id':produit.id}) }}"><i class="fa fa-search"></i></a>
-                        </div>
-                    </div>
-
-                    <div class="product_btm_text">
-                        <h4><a href="#">{{ produit.titre}}</a></h4>
-
-                 {% set i = 0 %}
-                 {% for x in users %}
-                     {% if x.id == produit.idartisan and i == 0 %}
-                         {% set i = 1 %}
-                        <h4><a href="{{ path('others_profil',{'id':x.id}) }}">{{ x.nom }}</a></h4>
-                     {% endif %}
-                 {% endfor %}
-
-                        <div class="p_rating">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                        </div>
-                        <span class="price">{{ produit.prix}}</span>
-
-                    </div>
-                </div>
+                {% endfor %}
             </div>
-
-
-    {% endfor %}
+        </div>
     </div>
-    </div>
-</div>
     <div class="blog_pagination text-center" aria-label="Page navigation example">
         {{ knp_pagination_render(produits) }}
     </div>
     <section id="slider_area" class="text-center">
         <div class="slider_active owl-carousel">
             {% for Pub in Pubs %}
-                {% if Pub.datedeb|date("m/d/Y")  <= "now"|date("m/d/Y")  %}
-                    {% if "now"|date("m/d/Y") <= Pub.datefin|date("m/d/Y")   %}
-                        <div class="single_slide" style="background-image: url({{ asset('img/blog/1-full.jpg') }}); background-size: cover;height: 150px;background-position: center ;">
+                {% if Pub.datedeb|date("m/d/Y")  <= "now"|date("m/d/Y") %}
+                    {% if "now"|date("m/d/Y") <= Pub.datefin|date("m/d/Y") %}
+                        <div class="single_slide"
+                             style="background-image: url({{ asset('img/blog/1-full.jpg') }}); background-size: cover;height: 150px;background-position: center ;">
                             <div class="container">
                                 <div class="single-slide-item-table">
                                     <div class="single-slide-item-tablecell">

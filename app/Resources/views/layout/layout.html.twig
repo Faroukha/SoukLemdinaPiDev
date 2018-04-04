@@ -88,30 +88,55 @@
                                         </li>
 
                                         {% block admin %}
-                                        <li>
-                                            <a href="{{ path('contact') }}">contact</a>
-                                        </li>
+                                            <li>
+                                                <a href="{{ path('contact') }}">contact</a>
+                                            </li>
                                             <li>
                                                 <a href="{{ path('blog') }}">Blog <i class="fa fa-angle-down"></i></a>
                                                 <ul class="sub-menu">
                                                     <li><a href="{{ path('blog') }}">Tous les articles</a></li>
                                                     {% if app.user is not null %}
-                                                    <li><a href="{{ path('ajouter_blog') }}">Ajouter un blog</a></li>
+                                                        <li><a href="{{ path('ajouter_blog') }}">Ajouter un blog</a>
+                                                        </li>
                                                     {% endif %}
                                                 </ul>
                                             </li>
 
                                             <li><a href="{{ path('ff') }}">Profil</a></li>
                                         {% endblock %}
-                                        <li><div>
-                                                <div class="fa_bell_style">
-                                                    <a href="#"><i class="fa fa-bell" style="color: #33d286" ></i></a>
-                                                    <ul class="sub-menu">
+                                        <li>
+                                            <div class="cart_menu_area">
+                                                <div class="cart_icon">
+                                                    <a href="#"><i class="fa fa-bell" style="color: #33d286"
+                                                                   aria-hidden="true"></i></a>
+                                                </div>
+                                                <!-- Mini Cart Wrapper -->
+                                                <div class="mini-cart-wrapper">
+                                                    <!-- Product List -->
+                                                    <div class="mc-pro-list fix">
+                                                        {% block notificationBlock %}
+                                                            <div class="mc-sin-pro fix">
+                                                                <a href="#" class="mc-pro-image float-left"><img
+                                                                            src="{{ asset('bundles/main/img/mini-cart/2.jpg') }}"
+                                                                            alt=""/></a>
+                                                                <div class="mc-pro-details fix">
+                                                                    <a href="#">This is product name</a>
+                                                                    <span>Artisan Name</span>
+                                                                    <a class="pro-del" href="#"><i
+                                                                                class="fa fa-times-circle"></i></a>
+                                                                </div>
+                                                            </div>
+                                                        {% endblock %}
 
-                                                        <li><a href="#">Cart</a></li>
-                                                        <li><a href="#">Wishlist</a></li>
-                                                    </ul>
-                                                </div></div></li>
+                                                    </div>
+
+                                                    <!-- Cart Button -->
+                                                    <div class="mc-button">
+                                                        <a href="#" class="checkout_btn">Voir plus</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
 
                                     </ul>
                                 </nav>

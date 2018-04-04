@@ -3,6 +3,7 @@
 namespace UserBundle\Controller;
 
 use MainBundle\Entity\Abonnement;
+use MainBundle\Entity\Notification;
 use MainBundle\Entity\Produit;
 use MainBundle\Entity\Pubg;
 use Symfony\Component\HttpFoundation\Request;
@@ -19,6 +20,7 @@ class DefaultController extends Controller
 
         $user = $this->getUser();
         $em = $this->getDoctrine()->getManager();
+        $notif = $em->getRepository(Notification::class)->findAll();
         $produit = $em->getRepository(Produit::class)->findAll();
         $users = $em->getRepository(User::class)->findAll();
         $promotion = $this->getDoctrine()->getRepository(Promotion::class)->findAll();
@@ -38,14 +40,14 @@ class DefaultController extends Controller
             if ($user->hasRole("ROLE_ADMIN")){
                 return $this->render('AdminBundle::admin.html.twig', [ 'produits' => $produit]);
             }else{
-                return $this->render('MainBundle:Default:index.html.twig', [ 'produits' => $produit,'user' => $user,'produitp'=> $promotion ,'Pubs' => $Pubs, 'users' => $users]);
+                return $this->render('MainBundle:Default:index.html.twig', [ 'produits' => $produit,'user' => $user,'produitp'=> $promotion ,'Pubs' => $Pubs, 'users' => $users, 'notifs'=>$notif]);
             }
 
 
             //return $this->render('@User/layout.html.twig', ['user' => $user]);
         }
 
-        return $this->render('MainBundle:Default:index.html.twig', ['produits' => $produit, 'user' => null, 'produitp' => $promotion, 'users' => $users,'Pubs' => $Pubs]);
+        return $this->render('MainBundle:Default:index.html.twig', ['produits' => $produit, 'user' => null, 'produitp' => $promotion, 'users' => $users,'Pubs' => $Pubs, 'notifs'=>null]);
     }
 
     public function ishowAction()

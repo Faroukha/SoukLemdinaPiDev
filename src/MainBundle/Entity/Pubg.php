@@ -125,4 +125,3 @@ class Pubg
         return $this->image;
     }
 }
-

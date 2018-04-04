@@ -49,6 +49,7 @@
                             <span class="pd_title"
                                   style="font-size: 14px; display: contents;">Adresse  :</span> {{ user.adresse }}
                         </div>
+                        <a href="{{ path('fos_user_change_password') }}">Change Password</a>
                     </div>
                     <!-- Product Action -->
                     {% if is_granted('ROLE_ARTISAN') %}
