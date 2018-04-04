@@ -57,6 +57,11 @@ class Notification
      */
     private $seen;
     /**
+     * @ORM\ManyToOne(targetEntity="MainBundle\Entity\Produit")
+     * @ORM\JoinColumn(name="idProduit", referencedColumnName="id")
+     */
+    private $idProduit;
+    /**
      * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User")
      * @ORM\JoinColumn(name="idUser", referencedColumnName="id")
      */
@@ -214,5 +219,33 @@ class Notification
     public function getIdUser()
     {
         return $this->idUser;
+    }
+
+
+
+
+
+    /**
+     * Set idProduit
+     *
+     * @param \MainBundle\Entity\Produit $idProduit
+     *
+     * @return Notification
+     */
+    public function setIdProduit(\MainBundle\Entity\Produit $idProduit = null)
+    {
+        $this->idProduit = $idProduit;
+
+        return $this;
+    }
+
+    /**
+     * Get idProduit
+     *
+     * @return \MainBundle\Entity\Produit
+     */
+    public function getIdProduit()
+    {
+        return $this->idProduit;
     }
 }

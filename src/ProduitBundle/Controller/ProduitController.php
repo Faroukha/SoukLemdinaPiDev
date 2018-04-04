@@ -62,19 +62,23 @@ class ProduitController extends Controller
         if ($form->isValid()) {
 
             $user = $this->getUser();
+            $po->setIdartisan($user->getId());
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($po);
+            $em->flush();
+
             $n=new Notification();
             $n->setIdUser($user);
             $n->setMessage($user->getNom()." had added a new product");
             $n->setSubject("subjectccc");
             $n->setSeen(0);
             $n->setLink("hhh");
+            $n->setIdProduit($po);
             $em1= $this->getDoctrine()->getManager();
             $em1->persist($n);
             $em1->flush();
-            $po->setIdartisan($user->getId());
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($po);
-            $em->flush();
+
+
         }
         return $this->render('ProduitBundle:Produit:ajouter.html.twig',
             ['form' => $form->createView()]);

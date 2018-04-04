@@ -18,6 +18,8 @@
 
 {% endblock %}
 {% block notificationBlock %}
+    {% if app.user is not null %}
+    {% if app.user.id != user.id %}
     {% for notif in notifs %}
     <div class="mc-sin-pro fix">
         <a href="#" class="mc-pro-image float-left"><img
@@ -25,12 +27,14 @@
                     alt=""/></a>
         <div class="mc-pro-details fix">
             <a href="#">{{ notif.message }}</a>
-            <span>Artisan Name</span>
+            <a href="{{ path('produit_artisan_details', {'id':notif.idProduit.id}) }}">{{ notif.idProduit.titre }}</a>
             <a class="pro-del" href="#"><i
                         class="fa fa-times-circle"></i></a>
         </div>
     </div>
         {% endfor %}
+        {% endif %}
+        {% endif %}
 {% endblock %}
 {% block body %}
     <section id="slider_area" class="text-center">
