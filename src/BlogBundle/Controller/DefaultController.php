@@ -21,7 +21,7 @@ class DefaultController extends Controller
 
         $em = $this->getDoctrine()->getManager();
         $Blogs = $em->getRepository(Blog::class)->findAll();
-
+        $user = $em->getRepository(User::class)->findAll();
         $paginator = $this->get('knp_paginator');
 
         $Blogs = $paginator->paginate(
@@ -31,7 +31,7 @@ class DefaultController extends Controller
         );
 
 
-        return $this->render('BlogBundle:Default:blog.html.twig', ['Blogs' => $Blogs]);
+        return $this->render('BlogBundle:Default:blog.html.twig', ['Blogs' => $Blogs,'users'=>$user]);
     }
 
     public function blogDetailAction(Request $request)
