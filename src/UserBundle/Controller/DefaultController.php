@@ -3,6 +3,7 @@
 namespace UserBundle\Controller;
 
 use MainBundle\Entity\Abonnement;
+use MainBundle\Entity\Panier;
 use MainBundle\Entity\Produit;
 use MainBundle\Entity\Pubg;
 use Symfony\Component\HttpFoundation\Request;
@@ -18,6 +19,7 @@ class DefaultController extends Controller
     {
 
         $user = $this->getUser();
+
         $em = $this->getDoctrine()->getManager();
         $produit = $em->getRepository(Produit::class)->findAll();
         $users = $em->getRepository(User::class)->findAll();

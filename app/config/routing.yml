@@ -12,7 +12,7 @@ evenement:
 
 ecommerce:
     resource: "@EcommerceBundle/Resources/config/routing.yml"
-    prefix:   /commerce
+    prefix:   /panier
 
 produit:
     resource: "@ProduitBundle/Resources/config/routing.yml"
