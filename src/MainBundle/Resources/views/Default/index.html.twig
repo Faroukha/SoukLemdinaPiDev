@@ -77,18 +77,19 @@
         </div>
     </section>
 
-    <div class="row">
-        <div class="col-md-3">
-            {% for Pub in Pubs %}
-                {% if Pub.datedeb|date("m/d/Y")  <= "now"|date("m/d/Y") %}
-                    {% if "now"|date("m/d/Y") <= Pub.datefin|date("m/d/Y") %}
-                        <div class="single_blog">
-                            <div class="single_blog_img">
-                                <img src="{{ asset('img/blog/1-full.jpg') }}" alt="">
-                                <div class="blog_date text-center">
-                                    <div class="bd_month">{{ Pub.datedeb |date("m/d/Y") }}</div>
-                                    <div class="bd_month">{{ Pub.datefin |date("m/d/Y") }}</div>
-                                </div>
+
+<div class="row">
+    <div class="col-md-3">
+        {% for Pub in Pubs  %}
+            {% if Pub.datedeb|date("m/d/Y")  <= "now"|date("m/d/Y")  %}
+                {% if "now"|date("m/d/Y") <= Pub.datefin|date("m/d/Y")   %}
+                    <div class="single_blog" >
+                        <div class="single_blog_img">
+                            <img src="{{ asset("Uploads/images/") ~ Pub.image }}" alt="">
+                            <div class="blog_date text-center">
+                                <div class="bd_month">{{ Pub.datedeb |date("m/d/Y") }}</div>
+                                <div class="bd_month">{{ Pub.datefin |date("m/d/Y") }}</div>
+
                             </div>
                         </div>
                     {% endif %}
@@ -149,10 +150,11 @@
     <section id="slider_area" class="text-center">
         <div class="slider_active owl-carousel">
             {% for Pub in Pubs %}
-                {% if Pub.datedeb|date("m/d/Y")  <= "now"|date("m/d/Y") %}
-                    {% if "now"|date("m/d/Y") <= Pub.datefin|date("m/d/Y") %}
-                        <div class="single_slide"
-                             style="background-image: url({{ asset('img/blog/1-full.jpg') }}); background-size: cover;height: 150px;background-position: center ;">
+
+                {% if Pub.datedeb|date("m/d/Y")  <= "now"|date("m/d/Y")  %}
+                    {% if "now"|date("m/d/Y") <= Pub.datefin|date("m/d/Y")   %}
+                        <div class="single_slide" style="background-image: url({{ asset("Uploads/images/") ~ Pub.image }}); background-size: cover;height: 200px;background-position: center ;">
+
                             <div class="container">
                                 <div class="single-slide-item-table">
                                     <div class="single-slide-item-tablecell">
