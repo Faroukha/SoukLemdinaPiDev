@@ -54,14 +54,15 @@ class DefaultController extends Controller
          $session->replace(array('panier' => $panier." ".$id));*/
 
         // return $this->render('EcommerceBundle:Default:index.html.twig');
-        $user = $this->getUser();
         $panier=new Panier();
-        $panier->setIduser($user->getId());
-        $panier->setPrixtotal(0);
+        $user = $this->getUser();
+
+      /*  $panier->setIduser($user->getId());
+        $panier->setPrixtotal(0);*/
         $iduserConnected=$user->getId();
 
         $Produitpanier = new Produitspanier();
-        if ($request->isMethod('POST') && $iduserConnected== $panier->getIduser()) {
+        if ($request->isMethod('POST') ) {
             $Produitpanier->setIdpanier($panier->getId());
             $Produitpanier->setIdproduit($request->get('idproduit')) ;
             $Produitpanier->setNomproduit($request->get('titreproduit'));
