@@ -63,6 +63,7 @@ class ProduitController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($po);
             $em->flush();
+
         }
         return $this->render('ProduitBundle:Produit:ajouter.html.twig',
             ['form' => $form->createView()]);
