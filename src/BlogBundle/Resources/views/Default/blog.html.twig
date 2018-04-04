@@ -33,18 +33,18 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-8 col-xs-12">
-                    {% if app.user is not null %}
 
                         <div class="pd_btn fix">
                             <a class="btn btn-default acc_btn" href="{{ path('ajouter_blog_bds') }}">Ajouter Blog</a>
                         </div>
                     {% endif %}
+
                     {% for Blog in Blogs %}
                         <div class="single_blog">
                             <div class="single_blog_img">
-                                <img src="{{ asset('img/blog/1-full.jpg') }}" alt="">
+                                <img src="{{ asset("Uploads/images/") ~ Blog.image }}" alt="">
                                 {% if app.user is not null %}
-                                    {% if Blog.idUser.id == app.user.id %}
+                                    {% if Blog.idUser== app.user.id %}
                                     <form action="{{ path('Supprimer_blog') }}">
                                         <input type="hidden" value="{{ Blog.id }}" name="id">
                                         <button class="btn btn-default acc_btn">Supprimer</button>
@@ -61,7 +61,11 @@
                                 <h4 class="post_title"><a
                                             href="{{ path('blog_detail', {'id':Blog.id}) }}">{{ Blog.titre }}</a></h4>
                                 <ul class="post-bar">
-                                    <li><i class="fa fa-user"></i>{{ Blog.idUser.nom }}</li>
+                                    {% for user in users %}
+                                        {% if user.id == Blog.idUser %}
+                                            <li><i class="fa fa-user"></i>{{ user.username }}</li>
+                                        {% endif %}
+                                    {% endfor %}
                                     <li><i class="fa fa-comments-o"></i> <a href="{{ path('blog_detail', {'id':Blog.id}) }}">Comments</a></li>
                                     <li><i class="fa fa-heart-o"></i> <a href="#">{{ Blog.nbrLike }}</a></li>
                                 </ul>
