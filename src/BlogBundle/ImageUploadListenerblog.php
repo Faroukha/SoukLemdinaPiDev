@@ -6,15 +6,15 @@
  * Time: 12:47
  */
 
-namespace AdminBundle;
+namespace BlogBundle;
 use MainBundle\Entity\Blog;
 use MainBundle\Entity\Pubg;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use Doctrine\ORM\Event\PreUpdateEventArgs;
-use ProduitBundle\ImageUpload;
+use BlogBundle\ImageUpload;
 
-class ImageUploadListener
+class ImageUploadListenerblog
 { private $uploader;
 
     public function __construct(ImageUpload $uploader)
