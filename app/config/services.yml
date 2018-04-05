@@ -12,3 +12,21 @@ services :
         tags:
             - { name: doctrine.event_listener, event: prePersist }
             - { name: doctrine.event_listener, event: preUpdate }
+    pub.image_uploader:
+            class: AdminBundle\ImageUpload
+            arguments: ['%images_directory%']
+    pub.doctrine_image_listenerpub:
+            class: AdminBundle\ImageUploadListenerpub
+            arguments: ['@pub.image_uploader']
+            tags:
+                - { name: doctrine.event_listener, event: prePersist }
+                - { name: doctrine.event_listener, event: preUpdate }
+    bloc.image_uploader:
+            class: BlogBundle\ImageUpload
+            arguments: ['%images_directory%']
+    bloc.doctrine_image_listenerpub:
+            class: BlogBundle\ImageUploadListenerblog
+            arguments: ['@bloc.image_uploader']
+            tags:
+                    - { name: doctrine.event_listener, event: prePersist }
+                    - { name: doctrine.event_listener, event: preUpdate }

@@ -6,16 +6,16 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Blog
- *
- * @ORM\Table(name="blog")
+ * @ORM\Table(name="blog", indexes={@ORM\Index(name="c_foreignkey", columns={"idUser"})})
  * @ORM\Entity(repositoryClass="MainBundle\Repository\BlogRepository")
  */
 class Blog
 {
 
     /**
-     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User")
-     * @ORM\JoinColumn(name="idUser", referencedColumnName="id")
+     * @var integer
+     *
+     * @ORM\Column(name="idUser", type="integer", nullable=false)
      */
     private $idUser;
 
@@ -56,12 +56,7 @@ class Blog
      */
     private $image;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="nbrLike", type="integer")
-     */
-    private $nbrLike;
+
 
     /**
      * @var string
@@ -177,29 +172,7 @@ class Blog
         return $this->image;
     }
 
-    /**
-     * Set nbrLike
-     *
-     * @param integer $nbrLike
-     *
-     * @return Blog
-     */
-    public function setNbrLike($nbrLike)
-    {
-        $this->nbrLike = $nbrLike;
 
-        return $this;
-    }
-
-    /**
-     * Get nbrLike
-     *
-     * @return int
-     */
-    public function getNbrLike()
-    {
-        return $this->nbrLike;
-    }
 
     /**
      * Set categorie
@@ -228,11 +201,11 @@ class Blog
     /**
      * Set idUser
      *
-     * @param \UserBundle\Entity\User $idUser
+     * @param integer $idUser
      *
-     * @return Blog
+     * @return User
      */
-    public function setIdUser(\UserBundle\Entity\User $idUser = null)
+    public function setIdUser($idUser)
     {
         $this->idUser = $idUser;
 
@@ -240,9 +213,7 @@ class Blog
     }
 
     /**
-     * Get idUser
-     *
-     * @return \UserBundle\Entity\User
+     * @return int
      */
     public function getIdUser()
     {

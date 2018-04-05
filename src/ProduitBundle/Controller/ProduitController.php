@@ -67,6 +67,7 @@ class ProduitController extends Controller
             $em->persist($po);
             $em->flush();
 
+
             $n=new Notification();
             $n->setIdUser($user);
             $n->setMessage($user->getPrenom()." added a new product");

@@ -1,3 +1,7 @@
+mail:
+    resource: "@MailBundle/Resources/config/routing.yml"
+    prefix:   /
+
 admin:
     resource: "@AdminBundle/Resources/config/routing.yml"
     prefix:   /
@@ -12,7 +16,7 @@ evenement:
 
 ecommerce:
     resource: "@EcommerceBundle/Resources/config/routing.yml"
-    prefix:   /commerce
+    prefix:   /panier
 
 produit:
     resource: "@ProduitBundle/Resources/config/routing.yml"

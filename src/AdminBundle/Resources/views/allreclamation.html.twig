@@ -33,34 +33,27 @@
         <li><a href="{{ path('ff') }}">Profil</a></li>
     {% endif %}
 {% endblock %}
+
+
 {% block body %}
     <div class="product_item">
-        <div class="pd_btn fix">
-            <a class="btn btn-default acc_btn" href="{{ path('ajouterPub') }}">Ajouter Publicite</a>
-        </div>
-<div class="row">
-    <div class="col-md-2"></div>
-    <div class="col-md-8">
-        {% for pub in pubs %}
-            <div class="single_blog" >
-                <div class="single_blog_img">
-                    <img src="{{ asset("Uploads/images/") ~ pub.image }}" alt="">
-                    <div class="blog_date text-center">
-                        <div class="bd_month">{{ pub.datedeb |date("m/d/Y") }}</div>
-                        <div class="bd_month">{{ pub.datefin |date("m/d/Y") }}</div>
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+                {% for rec in recs %}
+                    <div class="col-md-3">
+                                <div class="bd_month">{{ rec.Name }}</div>
+                                <div class="bd_month">{{ rec.Email }}</div>
+                                <div class="bd_month">{{ rec.Subject }}</div>
+                                <div class="bd_month">{{ rec.Message }}</div>
                     </div>
-                    <div class="blog_date text-center">
-
-                    </div>
-                </div>
+                {% endfor %}
             </div>
-        {% endfor %}
-    </div>
-    </div>
+        </div>
     </div>
 
     <div class="blog_pagination text-center" aria-label="Page navigation example">
-        {{ knp_pagination_render(pubs) }}
+        {{ knp_pagination_render(recs) }}
     </div>
 
 {% endblock %}

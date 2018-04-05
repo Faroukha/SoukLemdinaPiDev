@@ -31,7 +31,7 @@
                 <!-- Product Details Image -->
                 <div class="col-md-6 col-xs-12">
                     <div class="pd_img fix">
-                        <a class="venobox" href="img/product/3.jpg"><img src="img/product/3.jpg" alt=""/></a>
+                        <a class="venobox" href="img/product/3.jpg"><img src="{{ asset("Uploads/images/") ~ produit.image }}" alt=""/></a>
                     </div>
                 </div>
                 <!-- Product Details Content -->
@@ -59,20 +59,27 @@
                             <p>{{ produit.description }}</p>
                         </div>
 
-                        <div class="pd_clr_qntty_dtls fix">
+                        <form method="post" action="{{ path("AddToCart") }}">
 
-                            <div class="pd_qntty_area">
-                                <h4>quantity:</h4>
-                                <div class="pd_qty fix">
-                                    <input value="1" name="qttybutton" class="cart-plus-minus-box" type="number">
+                            <div class="pd_clr_qntty_dtls fix">
+
+                                <div class="pd_qntty_area">
+                                    <h4>quantity:</h4>
+
+                                    <div class="pd_qty fix">
+                                        <input name="quantite"class="cart-plus-minus-box" type="number">
+                                        <input name="titreproduit" type="hidden" value="{{ produit.titre }}">
+                                        <input name="idproduit" type="hidden" value="{{ produit.id }}">
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <!-- Product Action -->
-                        <div class="pd_btn fix">
-                            <a class="btn btn-default acc_btn">add to bag</a>
 
-                        </div>
+                            <div class="pd_btn fix">
+                                <button type="submit" class="btn btn-default acc_btn">add to cart</button>
+
+                            </div>
+
+                        </form>
 
                     </div>
                 </div>

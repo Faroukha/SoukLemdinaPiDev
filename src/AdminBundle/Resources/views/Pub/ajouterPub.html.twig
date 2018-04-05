@@ -25,42 +25,34 @@
 
     {% else %}
         <li><a href="{{ path('contact') }}">contact</a></li>
-
-        <li>
-            <a href="{{ path('contact') }}">Reclamation <i class="fa fa-angle-down"></i> </a>
-        </li>
         <li>
             <a href="{{ path('blog') }}">Blog <i class="fa fa-angle-down"></i></a>
+
         </li>
-
-
-
 
         <li><a href="{{ path('ff') }}">Profil</a></li>
     {% endif %}
-     {% endblock %}
+{% endblock %}
 {% block body %}
     {#<div class="login_page_area">#}
         {#<div class="container">#}
             {#<div class="row">#}
-
                 {#<div class="col-md-12 col-sm-6 col-xs-12">#}
-                    {#<form action="{{ path("ajouter_blog_bds") }}" method="POST">#}
-                        {#<input type="hidden" value="{{ app.user.id }}" name="idUser">#}
+                    {#<form action="{{ path("addPub") }}" method="POST">#}
                         {#<div class="create_account_area">#}
-                            {#<h2 class="caa_heading">Ajouter un blog</h2>#}
+                            {#<h2 class="caa_heading">Ajouter Publicité </h2>#}
                             {#<div class="caa_form_area">#}
                                 {#<div class="caa_form_group">#}
                                     {#<div class="login_email">#}
-                                        {#<label>Titre</label>#}
+                                        {#<label>Date Début</label>#}
                                         {#<div class="input-area">#}
-                                            {#<input id="categorie" name="titre" type="text" class="form-control">#}
+                                            {#<input id="datedeb" name="datedeb" type="date" class="form-control">#}
                                         {#</div>#}
                                     {#</div>#}
-                                    {#<div class="">#}
-                                        {#<label>Description</label>#}
+                                    {#<div class="login_email">#}
+                                        {#<label>Date Fin</label>#}
                                         {#<div class="input-area">#}
-                                            {#<input  id="description" name="description" type="text"  class="form-control">#}
+                                            {#<input id="datedfin" name="datefin" type="date" class="form-control">#}
                                         {#</div>#}
                                     {#</div>#}
                                     {#<div class="">#}
