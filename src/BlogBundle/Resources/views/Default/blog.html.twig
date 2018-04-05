@@ -4,6 +4,12 @@
         {{ app.user.email }}
     {% endif %}
 {% endblock %}
+{% block nameco %}
+    {% if app.user is not null %}
+        {{ app.user.username }}
+    {% endif %}
+{% endblock %}
+
 {% block loginbtn %}
     {% if app.user is not null %}
         <li class="account_area"><a href="{{ path('fos_user_security_logout') }}"><i class="fa fa-lock"></i> Se
@@ -37,7 +43,7 @@
                         <div class="pd_btn fix">
                             <a class="btn btn-default acc_btn" href="{{ path('ajouter_blog_bds') }}">Ajouter Blog</a>
                         </div>
-                    {% endif %}
+
 
                     {% for Blog in Blogs %}
                         <div class="single_blog">

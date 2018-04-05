@@ -1,4 +1,18 @@
 {% extends 'layout/layout.html.twig' %}
+{% block mailco %}
+    {% if user is not null %}
+        {{ user.email }}
+    {% endif %}
+{% endblock %}
+{% block nameco %}
+    {% if user is not null %}
+        {{ user.username }}
+    {% endif %}
+{% endblock %}
+{% if user is not null %}
+    {% block testuser %}
+    {% endblock %}
+{% endif %}
 {% block body %}
     <div id="page_item_area">
         <div class="container">
