@@ -70,20 +70,23 @@ class DefaultController extends Controller
     public function addpubAction(Request $request )
     {
         $pub = new Pubg();
-        $form = $this->createFormBuilder($pub)
 
-            ->add('datedeb', DateType::class)
-            ->add('datefin', DateType::class)
-            ->add('image', FileType::class, array('label' => 'Image(JPG)'))
-            ->add('save', SubmitType::class, array())
-            ->getForm();
 
-        $form->handleRequest($request);
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($pub);
-            $em->flush();
-        }
+            $form = $this->createFormBuilder($pub)
+                ->add('datedeb', DateType::class)
+                ->add('datefin', DateType::class)
+                ->add('image', FileType::class, array('label' => 'Image(JPG)'))
+                ->add('save', SubmitType::class, array())
+                ->getForm();
+
+            $form->handleRequest($request);
+            if ($form->isValid()) {
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($pub);
+                $em->flush();
+            }
+        
+
         return $this->render('AdminBundle:Pub:ajouterPub.html.twig',
             ['form' => $form->createView()]);
     }

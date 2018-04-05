@@ -56,12 +56,7 @@ class Blog
      */
     private $image;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="nbrLike", type="integer")
-     */
-    private $nbrLike;
+
 
     /**
      * @var string
@@ -177,29 +172,7 @@ class Blog
         return $this->image;
     }
 
-    /**
-     * Set nbrLike
-     *
-     * @param integer $nbrLike
-     *
-     * @return Blog
-     */
-    public function setNbrLike($nbrLike)
-    {
-        $this->nbrLike = $nbrLike;
 
-        return $this;
-    }
-
-    /**
-     * Get nbrLike
-     *
-     * @return int
-     */
-    public function getNbrLike()
-    {
-        return $this->nbrLike;
-    }
 
     /**
      * Set categorie
