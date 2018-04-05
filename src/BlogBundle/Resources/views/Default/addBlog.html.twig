@@ -25,10 +25,16 @@
 
     {% else %}
         <li><a href="{{ path('contact') }}">contact</a></li>
+
+        <li>
+            <a href="{{ path('contact') }}">Reclamation <i class="fa fa-angle-down"></i> </a>
+        </li>
         <li>
             <a href="{{ path('blog') }}">Blog <i class="fa fa-angle-down"></i></a>
-
         </li>
+
+
+
 
         <li><a href="{{ path('ff') }}">Profil</a></li>
     {% endif %}
