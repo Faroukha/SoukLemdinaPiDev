@@ -13,6 +13,7 @@ class ContactController extends Controller
 
     public function addAction(Request $request)
     {
+
         $contact = new Contact();
 
         $contact->setName($request->get('name'));
@@ -22,12 +23,12 @@ class ContactController extends Controller
 
         $em = $this->getDoctrine()->getManager();
 
-
+        $notif = $em->getRepository(Notification::class)->findAll();
 
         $em->persist($contact);
         $em->flush();
 
-        return $this->redirectToRoute('main_homepage');
+        return $this->redirectToRoute('main_homepage', ['notifs'=>$notif]);
     }
 
 }
