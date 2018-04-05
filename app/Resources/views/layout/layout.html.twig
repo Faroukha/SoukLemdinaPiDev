@@ -82,22 +82,49 @@
                                             <!-- Sub Menu -->
                                             <ul class="sub-menu">
 
-                                                <li><a href="{{ path('cart_produit') }}">Cart</a></li>
+                                                <li><a href="{{ path('ecommerce_homepage') }}">Cart</a></li>
                                                 <li><a href="{{ path('wishlist') }}">Wishlist</a></li>
                                             </ul>
                                         </li>
 
                                         {% block admin %}
+
                                         <li>
                                             <a href="{{ path('contact') }}">Reclamations</a>
                                         </li>
+
                                             <li>
                                                 <a href="{{ path('blog') }}">Blog <i class="fa fa-angle-down"></i></a>
-
+                                                <ul class="sub-menu">
+                                                    <li><a href="{{ path('blog') }}">Tous les articles</a></li>
+                                                    {% if app.user is not null %}
+                                                        <li><a href="{{ path('ajouter_blog') }}">Ajouter un blog</a>
+                                                        </li>
+                                                    {% endif %}
+                                                </ul>
                                             </li>
 
                                             <li><a href="{{ path('ff') }}">Profil</a></li>
                                         {% endblock %}
+                                        <li>
+                                            <div class="cart_menu_area">
+                                                <div class="cart_icon">
+                                                    <a href="#"><i class="fa fa-bell" style="color: #33d286"
+                                                                   aria-hidden="true"></i></a>
+                                                </div>
+                                                <!-- Mini Cart Wrapper -->
+                                                <div class="mini-cart-wrapper">
+                                                    <!-- Product List -->
+                                                    <div class="mc-pro-list fix">
+                                                        {% block notificationBlock %}
+                                                        {% endblock %}
+
+                                                    </div>
+
+
+                                                </div>
+                                            </div>
+                                        </li>
 
                                     </ul>
                                 </nav>

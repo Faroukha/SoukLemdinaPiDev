@@ -12,24 +12,24 @@
                         <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
                     {% endif %}
                 <div class="create_account_area">
-                    <h2 class="caa_heading">Already registered?</h2>
+                    <h2 class="caa_heading">Vous avez deja un compte ?</h2>
                     <div class="caa_form_area">
                         <div class="caa_form_group">
                             <div class="login_email">
-                                <label>Email address</label>
+                                <label>Email address ou votre Username</label>
                                 <div class="input-area"><input type="text" id="username" name="_username" value="{{ last_username }}" required="required" autocomplete="username" /></div>
                             </div>
                             <div class="login_password">
-                                <label>Password</label>
+                                <label>Mot de passe</label>
                                 <div class="input-area"><input type="password" id="password" name="_password" required="required" autocomplete="current-password" /></div>
                             </div>
                             <p class="forgot_password">
-                                <a href="#" title="Recover your forgotten password" rel="">Forgot your password?</a>
+                                <a href="#" title="Recover your forgotten password" rel="">Mot de passe oublié ?</a>
                             </p>
                             <div class="row">
                                 <div class="col-md-2">
                                     <button type="submit" id="_submit" name="_submit" class="btn btn-default acc_btn">
-                                        <span> <i class="fa fa-lock btn_icon"></i> Sign in </span>
+                                        <span> <i class="fa fa-lock btn_icon"></i> Se connecter </span>
                                     </button>
                                 </div>
                                 <div style="top: 18px; position: relative; color:red">

@@ -6,6 +6,7 @@ use MainBundle\Entity\Produit;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
+
 class DefaultController extends Controller
 {
     public function indexAction()
@@ -25,6 +26,7 @@ class DefaultController extends Controller
     {
 
     }
+
 
 
 }
