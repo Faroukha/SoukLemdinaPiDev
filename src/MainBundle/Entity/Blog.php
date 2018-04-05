@@ -27,6 +27,12 @@ class Blog
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="nbrLike", type="integer")
+     */
+    private $nbrLike =0;
 
     /**
      * @var string
@@ -223,5 +229,29 @@ class Blog
     public function __construct()
     {
         $this->dateBlog = new \DateTime();
+    }
+
+    /**
+     * Set nbrLike
+     *
+     * @param integer $nbrLike
+     *
+     * @return Blog
+     */
+    public function setNbrLike($nbrLike)
+    {
+        $this->nbrLike = $nbrLike;
+
+        return $this;
+    }
+
+    /**
+     * Get nbrLike
+     *
+     * @return integer
+     */
+    public function getNbrLike()
+    {
+        return $this->nbrLike;
     }
 }

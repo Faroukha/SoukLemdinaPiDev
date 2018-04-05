@@ -23,7 +23,7 @@
                 <!-- Product Details Image -->
                 <div class="col-md-4 col-xs-12">
                     <div class="pd_img fix">
-                        <img src="{{ asset(user.image) }}" alt=""/></a>
+                        <img src="{{ asset('img/icon/nobody_m.original.jpg') }}" alt=""/></a>
                     </div>
                 </div>
                 <!-- Product Details Content -->
@@ -54,7 +54,9 @@
                             <span class="pd_title"
                                   style="font-size: 14px; display: contents;">Adresse  :</span> {{ user.adresse }}
                         </div>
-                        <a href="{{ path('fos_user_change_password') }}">Change Password</a>
+                        <div class="pd_btn fix" >
+                        <a class="btn btn-default acc_btn" href="{{ path('fos_user_change_password') }}">Change Password</a>
+                        </div>
                     </div>
                     <!-- Product Action -->
                     {% if is_granted('ROLE_ARTISAN') %}
@@ -88,8 +90,10 @@
     <div class="related_prdct_area text-center">
         <div class="container">
             <!-- Section Title -->
+            {% if is_granted('ROLE_ARTISAN')  %}
             <div class="rp_title text-center"><h3>Related products</h3></div>
             <div class="product_item">
+                {% endif %}
 
                 {% if produits is defined  %}
                 {% for produit in produits %}
