@@ -37,7 +37,11 @@ Supprimer_produit:
 detailscome:
     path:     /comm
     defaults: { _controller: ProduitBundle:Default:detailscom }
-
-
+modifier_produit:
+    path:     /modifer/update
+    defaults: { _controller: ProduitBundle:Produit:update }
+modifier_temp:
+    path:     /modifer
+    defaults: { _controller: ProduitBundle:Produit:render }
 
 
