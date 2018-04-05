@@ -41,11 +41,25 @@
             <div class="col-md-2"></div>
             <div class="col-md-8">
                 {% for rec in recs %}
-                    <div class="col-md-3">
-                                <div class="bd_month">{{ rec.Name }}</div>
-                                <div class="bd_month">{{ rec.Email }}</div>
-                                <div class="bd_month">{{ rec.Subject }}</div>
-                                <div class="bd_month">{{ rec.Message }}</div>
+                    <div class="col-md-6 col-xs-12">
+                        <div class="prdct_dtls_content">
+                            <div class="pd_text">
+                            <span class="pd_title"
+                                  style="font-size: 14px; display: contents;">Nom  :</span> {{ rec.Name }}
+                            </div>
+                                <div class="pd_text">
+                            <span class="pd_title"
+                                  style="font-size: 14px; display: contents;">Email  :</span> {{ rec.Email }}
+                                </div>
+                                    <div class="pd_text">
+                            <span class="pd_title"
+                                  style="font-size: 14px; display: contents;">Sujbect :</span> {{ rec.Subject }}
+                                    </div>
+                                        <div class="pd_text">
+                            <span class="pd_title"
+                                  style="font-size: 14px; display: contents;">Message  :</span> {{ rec.Message }}
+                                        </div>
+                    </div>
                     </div>
                 {% endfor %}
             </div>
@@ -57,3 +71,35 @@
     </div>
 
 {% endblock %}
+
+
+
+        {#<span class="pd_title">{{ user.username }}</span>#}
+        {#<div class="pd_text">#}
+                            {#<span class="pd_title"#}
+                                  {#style="font-size: 14px; display: contents;">Nom  :</span> {{ user.nom }}#}
+        {#</div>#}
+        {#<div class="pd_text">#}
+                            {#<span class="pd_title"#}
+                                  {#style="font-size: 14px; display: contents;">Prenom  :</span> {{ user.prenom }}#}
+        {#</div>#}
+        {#<div class="pd_text">#}
+                            {#<span class="pd_title"#}
+                                  {#style="font-size: 14px; display: contents;">E-mail  :</span> {{ user.email }}#}
+        {#</div>#}
+        {#<div class="pd_text">#}
+                            {#<span class="pd_title"#}
+                                  {#style="font-size: 14px; display: contents;">Date de naissance  :</span> {{ user.birthdate|date("m/d/Y") }}#}
+        {#</div>#}
+        {#<div class="pd_text">#}
+                            {#<span class="pd_title"#}
+                                  {#style="font-size: 14px; display: contents;">Phone  :</span> {{ user.phone }}#}
+        {#</div>#}
+        {#<div class="pd_text">#}
+                            {#<span class="pd_title"#}
+                                  {#style="font-size: 14px; display: contents;">Adresse  :</span> {{ user.adresse }}#}
+        {#</div>#}
+        {#<div class="pd_btn fix" >#}
+            {#<a class="btn btn-default acc_btn" href="{{ path('fos_user_change_password') }}">Change Password</a>#}
+        {#</div>#}
+    {#</div>#}
