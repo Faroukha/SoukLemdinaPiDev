@@ -1,6 +1,11 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
 {% block body %}
+    {% if produits is not defined  %}
+        <script>
+            window.location = '{{ path('main_homepage') }}';
+        </script>
+    {% endif %}
     <div id="page_item_area">
         <div class="container">
             <div class="row">
@@ -85,6 +90,8 @@
             <!-- Section Title -->
             <div class="rp_title text-center"><h3>Related products</h3></div>
             <div class="product_item">
+
+                {% if produits is defined  %}
                 {% for produit in produits %}
                     <div class="col-lg-3 col-md-4 col-sm-6 mix sale">
                         <div class="single_product">
@@ -111,6 +118,7 @@
                         </div>
                     </div>
                 {% endfor %}
+                {% endif %}
             </div>
         </div>
     </div>
