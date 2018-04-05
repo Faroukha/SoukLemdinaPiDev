@@ -69,10 +69,10 @@ class ProduitController extends Controller
 
             $n=new Notification();
             $n->setIdUser($user);
-            $n->setMessage($user->getPrenom()."added a new product");
-            $n->setSubject("subjectccc");
+            $n->setMessage($user->getPrenom()." added a new product");
+            $n->setSubject("");
             $n->setSeen(0);
-            $n->setLink("hhh");
+            $n->setLink("");
             $n->setIdProduit($po);
             $em1= $this->getDoctrine()->getManager();
             $em1->persist($n);
