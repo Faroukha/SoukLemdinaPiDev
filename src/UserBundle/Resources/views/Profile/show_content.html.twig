@@ -189,6 +189,7 @@
 
         <div class="row">
         <div class="col-lg-3 col-md-3 col-sm-6">
+            <div></div>
             <div class="our-team">
                 <div class="pic">
                     <img src="{{ asset("Uploads/images/") ~ user.image }}" alt="">
@@ -197,9 +198,28 @@
                 <h3 class="title">{{ user.prenom }} {{ user.nom }}</h3>
                 <span class="post">{{ user.username }}</span>
 
+                {% if is_granted('ROLE_MEMBER') %}
+
+                    {% if bool == false %}
+                        <div class="pd_btn fix">
+                            <a class="btn btn-default follow_btn" href="{{ path('abonnementdemerde', {'idartisan':user.id, 'idmembre':app.user.id}) }}">S'abonner
+                                </a>
+                        </div>
+
+                    {% endif %}
+                    {% if bool == true %}
+                        <div class="pd_btn fix">
+                            <a class="btn btn-default unfollow_btn" href="{{ path('desabo', {'idartisan':user.id, 'idmembre':app.user.id}) }}">Désabonner
+                            </a>
+                        </div>
+                    {% endif %}
+
+                {% endif %}
+
 
 
             </div>
+
         </div>
 
         <div class="col-md-4 col-xs-7">
@@ -223,49 +243,40 @@
         </div>
 
             <div class="col-xs-8 col-md-5 col-lg-3">
-                <h2 class="title">Liste des abonnés</h2>
+                <ul class="post-bar">
+                    <li><h2 class="title" style="font-family: 'Lato'">Liste des abonnés</h2></li>
+                    <li><i class="fa fa-heart-o" style="color: #ff0000"></i> <a href="#">50</a></li>
+
+                </ul>
                <br><br>
-                <span class="post">Informations de contact</span><br><br>
-                <div class="single_info">
-                    <div class="con_icon"><i class="fa fa-map-marker"></i></div>
-                    <p>{{ user.adresse }}</p>
-                </div><br>
-                <div class="single_info">
-                    <div class="con_icon"><i class="fa fa-phone"></i></div>
-                    <p>Phone : {{ user.phone }}</p>
 
-                </div><br>
-                <div class="single_info">
-                    <div class="con_icon"><i class="fa fa-envelope"></i></div>
-                    <a href="#">{{ user.email }} </a> <br/>
+<!--Single abooned person-->
+                {% for abo in abos %}
+                <div class="single_blog">
+                    <div class="single_blog_img">
+                        <img src="" alt="">
+                    </div>
 
+
+                    <div class="blog_content" style="width: 200px">
+                        <ul class="post-bar">
+                            <li><img src=""></li>
+                            <li><h5 class="post_title" style="font-family: 'Lato'"> {{ abo.idMembre.username }}</h5></li>
+                            <li><i class="fa fa-envelope-square" style="color: #0000F0; width: 15px" ></i> <a href="#">{{ abo.idMembre.email }}</a></li>
+                        </ul>
+                    </div>
                 </div>
-                <div class="single_info">
-                    <div class="con_icon"><i class="fa fa-envelope"></i></div>
-                    <a href="#">{{ user.email }} </a> <br/>
+                {% endfor %}
 
-                </div>
-                <div class="single_info">
-                    <div class="con_icon"><i class="fa fa-envelope"></i></div>
-                    <a href="#">{{ user.email }} </a> <br/>
 
-                </div>
-                <div class="single_info">
-                    <div class="con_icon"><i class="fa fa-envelope"></i></div>
-                    <a href="#">{{ user.email }} </a> <br/>
 
-                </div>
-                <div class="single_info">
-                    <div class="con_icon"><i class="fa fa-envelope"></i></div>
-                    <a href="#">{{ user.email }} </a> <br/>
-
-                </div>
             </div>
 
         </div>
 
 
 
+{% endif %}
 
 
 
@@ -289,23 +300,5 @@
 
 
 
-        {% if is_granted('ROLE_MEMBER') %}
-
-            {% if bool == false %}
-                <div class="pd_btn fix">
-                    <a class="follow_btn"
-                       href="{{ path('abonnementdemerde', {'idA':user.id, 'idM':app.user.id}) }}"
-                       id="follow1">S'abonner</a>
-                </div>
-            {% endif %}
-            {% if bool == true %}
-                <div class="pd_btn fix">
-                    <a class="follow_btn" id="unfollow"> Desabo</a>
-
-                </div>
-            {% endif %}
-
-        {% endif %}
-    {% endif %}
 
 {% endblock %}

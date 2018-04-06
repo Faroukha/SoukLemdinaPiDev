@@ -48,8 +48,7 @@ class ProduitController extends Controller
 
     public function AjouterProduitAction(Request $request )
     {
-        $em=$this->getDoctrine()->getManager();
-        $notif = $em->getRepository(Notification::class)->findAll();
+
         $po = new Produit();
         $form = $this->createFormBuilder($po)
 
@@ -58,7 +57,7 @@ class ProduitController extends Controller
             ->add('description', TextType::class)
             ->add('prix', TextType::class)
             ->add('image', FileType::class, array('label' => 'Image(JPG)'))
-            ->add('quantite', TextType::class)
+            ->add('quant2222222ite', TextType::class)
             ->add('save', SubmitType::class, array())
             ->getForm();
 
@@ -68,6 +67,7 @@ class ProduitController extends Controller
             $user = $this->getUser();
             $po->setIdartisan($user->getId());
             $em = $this->getDoctrine()->getManager();
+            $notif = $em->getRepository(Notification::class)->findAll();
             $em->persist($po);
             $em->flush();
 
