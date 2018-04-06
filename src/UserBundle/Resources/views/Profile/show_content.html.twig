@@ -93,8 +93,16 @@
                         </div>
                     </div>
                     <div class="product_item">
+                        <div class="product_filter">
+                            <ul>
+                                <li class=" active filter" data-filter="all">ALL</li>
+                                <li class="filter" data-filter=".sale">Promo</li>
+
+
+                            </ul>
+                        </div>
                         {% for produit in produits %}
-                            <div class="col-lg-3 col-md-4 col-sm-6 mix sale">
+                            <div class="col-lg-3 col-md-4 col-sm-6 mix">
                                 <div class="single_product">
                                     <div class="product_image">
                                         <img src="{{ asset("Uploads/images/") ~ produit.image }}" alt=""/>
@@ -120,6 +128,43 @@
                                 </div>
                             </div>
                         {% endfor %}
+                        <!--Karim zid l condition d'affichage de produit en promo mta3 l 'artisan-->
+                        <div class="col-lg-3 col-md-4 col-sm-6 mix sale">
+                            <div class="single_product">
+                                <div class="product_image">
+                                    <img src="" alt=""/>
+                                    <div class="new_badge"></div>
+                                    <div class="box-content">
+                                        <a href="#"><i class="fa fa-heart-o"></i></a>
+                                        <a href="#"><i class="fa fa-cart-plus"></i></a>
+                                        <a href="#"><i class="fa fa-search"></i></a>
+                                    </div>
+                                </div>
+                                <div class="product_btm_text">
+                                    <h4><a href="#">Titre</a></h4>
+
+                                                <h6 style="font-size: small; color: #1b1e21">
+                                                    <a href="#">Par: </a>
+                                                </h6>
+
+                                    <div class="p_rating">
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                    </div>
+                                    <span class="price">75.000</span>
+                                </div>
+
+
+                            </div>
+
+                        </div>
+                        <!-- Hne zid l endfor  -->
+
+
+
                     </div>
                 </div>
             </div>
