@@ -29,6 +29,12 @@ class Contact
     private $name;
 
     /**
+     * @var notification
+     * @ORM\Column(name="Etat", type="boolean", nullable=true, options={"default":false})
+     */
+    protected $etat;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="Email", type="string", length=255)
@@ -154,5 +160,29 @@ class Contact
     public function getMessage()
     {
         return $this->message;
+    }
+
+    /**
+     * Set etat
+     *
+     * @param boolean $etat
+     *
+     * @return Contact
+     */
+    public function setEtat($etat)
+    {
+        $this->etat = $etat;
+
+        return $this;
+    }
+
+    /**
+     * Get etat
+     *
+     * @return boolean
+     */
+    public function getEtat()
+    {
+        return $this->etat;
     }
 }

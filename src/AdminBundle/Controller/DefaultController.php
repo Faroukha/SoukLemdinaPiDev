@@ -2,6 +2,7 @@
 
 namespace AdminBundle\Controller;
 
+use AdminBundle\AdminBundle;
 use MainBundle\Entity\Contact;
 use MainBundle\Entity\Pubg;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -76,7 +77,7 @@ class DefaultController extends Controller
             ->add('datedeb', DateType::class)
             ->add('datefin', DateType::class)
             ->add('image', FileType::class, array('label' => 'Image(JPG)'))
-            ->add('save', SubmitType::class, array())
+            ->add('Ajouter', SubmitType::class, array())
             ->getForm();
 
         $form->handleRequest($request);
@@ -95,31 +96,39 @@ class DefaultController extends Controller
             ['form' => $form->createView()]);
     }
 
-//    public function updatePubAction(Request $request)
-//    {
-//        $pub = new Pubg();
-//        $form = $this->createFormBuilder($pub)
-//            ->add('datedeb', DateType::class)
-//            ->add('datefin', DateType::class)
-//            ->add('image', FileType::class, array('label' => 'Image(JPG)'))
-//            ->add('Modifier', SubmitType::class, array())
-//            ->getForm();
-//
-//        $form->handleRequest($request);
-//
-//        if ($pub->getDatedeb() <= $pub->getDatefin()) {
-//            $em = $this->getDoctrine()->getManager();
-//            $em->persist($pub);
-//            $em->flush();
-//        }
-//        return $this->render('AdminBundle:Pub:SuccessPub.html.twig');
-//    }
+    public function updatePubAction(Request $request)
+    {
+        $id = $request->query->get('id');
+        $em = $this->getDoctrine()->getManager();
+        $pub = $em->getRepository("MainBundle:Pubg")->find($id);
+
+        $data = [
+            'datedeb' => $request->get('datedeb'),
+            'datefin' => $request->get('datefin'),
+        ];
+        if ($pub->getDatedeb() <= $pub->getDatefin()) {
+            $pub->setDatedeb($data['datedeb']);
+            $pub->setDatefin($data['datefin']);
+
+            $em->persist($pub);
+            $em->flush();
+        }
+        return $this->redirectToRoute('allPub');
+    }
+
+
+    public function updatePubViewAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $id = $em->getRepository(Pubg::class)->find($request->get("id"));
+        return $this->render('AdminBundle:Pub:updatePub.html.twig', ['id' => $id]);
+    }
 
     public function deletePubAction(Request $request)
     {
 
         $em = $this->getDoctrine()->getManager();
-        $pub = $em->getRepository(Pubg::class)->find($request->get("id"));;
+        $pub = $em->getRepository(Pubg::class)->find($request->get("id"));
         $em->remove($pub);
         $em->flush();
         return $this->redirectToRoute("allPub");
