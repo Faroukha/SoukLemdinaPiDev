@@ -48,6 +48,8 @@ class ProduitController extends Controller
 
     public function AjouterProduitAction(Request $request )
     {
+        $em=$this->getDoctrine()->getManager();
+        $notif = $em->getRepository(Notification::class)->findAll();
         $po = new Produit();
         $form = $this->createFormBuilder($po)
 
@@ -72,10 +74,10 @@ class ProduitController extends Controller
 
             $n=new Notification();
             $n->setIdUser($user);
-            $n->setMessage($user->getPrenom()."added a new product");
-            $n->setSubject("subjectccc");
+            $n->setMessage($user->getPrenom()." added a new product");
+            $n->setSubject("");
             $n->setSeen(0);
-            $n->setLink("hhh");
+            $n->setLink("");
             $n->setIdProduit($po);
             $em1= $this->getDoctrine()->getManager();
             $em1->persist($n);
@@ -84,7 +86,7 @@ class ProduitController extends Controller
 
         }
         return $this->render('ProduitBundle:Produit:ajouter.html.twig',
-            ['form' => $form->createView()]);
+            ['form' => $form->createView(), 'notifs'=>$notif]);
         }
 
     /**

@@ -9,121 +9,303 @@
     <div id="page_item_area">
         <div class="container">
             <div class="row">
-                <div class="col-sm-6 text-left">
+                <div class="col-sm-4 text-left">
                     <h3>Profile</h3>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Product Details Area  -->
-    <div class="prdct_dtls_page_area">
-        <div class="container">
-            <div class="row">
-                <!-- Product Details Image -->
-                <div class="col-md-4 col-xs-12">
-                    <div class="pd_img fix">
-                        <img src="{{ asset('img/icon/nobody_m.original.jpg') }}" alt=""/></a>
+
+    <!-- Profil user  -->
+    {% if app.user.id == user.id %}
+        <div class="prdct_dtls_page_area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3 col-md-3 col-sm-6">
+                        <div class="our-team">
+                            <div class="pic">
+                                <img src="{{ asset("Uploads/images/") ~ user.image }}" alt="">
+                            </div>
+                            <div class="team-content">
+                                <h3 class="title">{{ user.prenom }} {{ user.nom }}</h3>
+                                <span class="post">{{ user.username }}</span>
+                                <ul class="social">
+                                    <li><a href="#"><i class="fa fa-cogs"></i></a></li>
+
+                                </ul>
+                            </div>
+                        </div>
+
                     </div>
-                </div>
-                <!-- Product Details Content -->
-                <div class="col-md-6 col-xs-12">
-                    <div class="prdct_dtls_content">
-                        <span class="pd_title">{{ user.username }}</span>
-                        <div class="pd_text">
+
+
+                    <!-- Product Details Content -->
+                    <div class="col-md-6 col-xs-12">
+                        <div class="prdct_dtls_content">
+                            <span class="pd_title">{{ user.username }}</span>
+                            <div class="pd_text">
                             <span class="pd_title"
                                   style="font-size: 14px; display: contents;">Nom  :</span> {{ user.nom }}
-                        </div>
-                        <div class="pd_text">
+                            </div>
+                            <div class="pd_text">
                             <span class="pd_title"
                                   style="font-size: 14px; display: contents;">Prenom  :</span> {{ user.prenom }}
-                        </div>
-                        <div class="pd_text">
+                            </div>
+                            <div class="pd_text">
                             <span class="pd_title"
                                   style="font-size: 14px; display: contents;">E-mail  :</span> {{ user.email }}
-                        </div>
-                        <div class="pd_text">
+                            </div>
+                            <div class="pd_text">
                             <span class="pd_title"
                                   style="font-size: 14px; display: contents;">Date de naissance  :</span> {{ user.birthdate|date("m/d/Y") }}
-                        </div>
-                        <div class="pd_text">
+                            </div>
+                            <div class="pd_text">
                             <span class="pd_title"
                                   style="font-size: 14px; display: contents;">Phone  :</span> {{ user.phone }}
-                        </div>
-                        <div class="pd_text">
+                            </div>
+                            <div class="pd_text">
                             <span class="pd_title"
                                   style="font-size: 14px; display: contents;">Adresse  :</span> {{ user.adresse }}
-                        </div>
-                        <div class="pd_btn fix" >
-                        <a class="btn btn-default acc_btn" href="{{ path('fos_user_change_password') }}">Change Password</a>
-                        </div>
-                    </div>
-                    <!-- Product Action -->
-                    {% if is_granted('ROLE_ARTISAN') %}
-                    {% if app.user == user %}
-                    <div class="pd_btn fix">
-                        <a class="btn btn-default acc_btn" href="{{ path('Ajouter_Produit') }}">Ajouter Produit</a>
-                    </div>
-                    {% endif %}
-                    {% endif %}
-                    {% if app.user != user %}
-                    {% if is_granted('ROLE_MEMBER') %}
-                        {% if bool == false %}
-                        <div class="pd_btn fix">
-                            <a class="btn btn-default acc_btn" href="{{ path('abonnementdemerde', {'idA':user.id, 'idM':app.user.id}) }}">S'abonner</a>
-                        </div>
-                        {% endif %}
-                        {% if bool == true %}
-                            <div class="pd_btn fix">
-                                <a class="btn btn-default acc_btn" href="{{ path('desabo', {'idA':user.id, 'idM':app.user.id}) }}">Desabo</a>
+
                             </div>
+
+                            <a href="{{ path('fos_user_change_password') }}">Change Password</a>
+
+                        </div>
+
+                        <!-- Product Action -->
+                        {% if is_granted('ROLE_ARTISAN') %}
+                            {% if app.user == user %}
+                                <div class="pd_btn fix">
+                                    <a class="btn btn-default acc_btn" href="{{ path('Ajouter_Produit') }}">Ajouter
+                                        Produit</a>
+                                </div>
+                            {% endif %}
                         {% endif %}
 
-                    {% endif %}
-                    {% endif %}
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    </div>
-    <!-- Related Product Area -->
-    <div class="related_prdct_area text-center">
-        <div class="container">
-            <!-- Section Title -->
-            {% if is_granted('ROLE_ARTISAN')  %}
-            <div class="rp_title text-center"><h3>Related products</h3></div>
-            <div class="product_item">
-                {% endif %}
-
-                {% if produits is defined  %}
-                {% for produit in produits %}
-                    <div class="col-lg-3 col-md-4 col-sm-6 mix sale">
-                        <div class="single_product">
-                            <div class="product_image">
-                                <img src="{{ asset("Uploads/images/") ~ produit.image }}" alt=""/>
-                                <div class="new_badge">New</div>
-                                <div class="box-content">
-
-                                    <a href="#"><i class="fa fa-cart-plus"></i></a>
-                                    <a href="{{ path('produit_artisan_details',{'id':produit.id}) }}"><i class="fa fa-search"></i></a>
-                                </div>
-                            </div>
-                            <div class="product_btm_text">
-                                <h4><a href="#">{{ produit.titre}}</a></h4>
-                                <div class="p_rating">
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                </div>
-                                <span class="price">{{ produit.prix}}</span>
-                            </div>
+        </div>
+        <!-- Related Product Area -->
+        {% if is_granted('ROLE_ARTISAN') %}
+            <div class="related_prdct_area text-center">
+                <div class="container">
+                    <!-- Section Title -->
+                    <div class="col-md-12 text-center">
+                        <div class="section_title">
+                            <h2>Vos <span>Produits</span></h2>
+                            <div class="divider"></div>
                         </div>
                     </div>
-                {% endfor %}
-                {% endif %}
+                    <div class="product_item">
+                        <div class="product_filter">
+                            <ul>
+                                <li class=" active filter" data-filter="all">ALL</li>
+                                <li class="filter" data-filter=".sale">Promo</li>
+
+
+                            </ul>
+                        </div>
+                        {% for produit in produits %}
+                            <div class="col-lg-3 col-md-4 col-sm-6 mix">
+                                <div class="single_product">
+                                    <div class="product_image">
+                                        <img src="{{ asset("Uploads/images/") ~ produit.image }}" alt=""/>
+                                        <div class="new_badge">New</div>
+                                        <div class="box-content">
+
+                                            <a href="#"><i class="fa fa-cart-plus"></i></a>
+                                            <a href="{{ path('produit_artisan_details',{'id':produit.id}) }}"><i
+                                                        class="fa fa-search"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="product_btm_text">
+                                        <h4><a href="#">{{ produit.titre }}</a></h4>
+                                        <div class="p_rating">
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                        </div>
+                                        <span class="price">{{ produit.prix }}</span>
+                                    </div>
+
+                                </div>
+                            </div>
+                        {% endfor %}
+                        <!--Karim zid l condition d'affichage de produit en promo mta3 l 'artisan-->
+                        <div class="col-lg-3 col-md-4 col-sm-6 mix sale">
+                            <div class="single_product">
+                                <div class="product_image">
+                                    <img src="" alt=""/>
+                                    <div class="new_badge"></div>
+                                    <div class="box-content">
+                                        <a href="#"><i class="fa fa-heart-o"></i></a>
+                                        <a href="#"><i class="fa fa-cart-plus"></i></a>
+                                        <a href="#"><i class="fa fa-search"></i></a>
+                                    </div>
+                                </div>
+                                <div class="product_btm_text">
+                                    <h4><a href="#">Titre</a></h4>
+
+                                                <h6 style="font-size: small; color: #1b1e21">
+                                                    <a href="#">Par: </a>
+                                                </h6>
+
+                                    <div class="p_rating">
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                    </div>
+                                    <span class="price">75.000</span>
+                                </div>
+
+
+                            </div>
+
+                        </div>
+                        <!-- Hne zid l endfor  -->
+
+
+
+                    </div>
+
+                </div>
+            </div>
+        {% endif %}
+    {% endif %}
+
+
+
+
+    {% if app.user != user %}
+        <script src="{{ asset('bundles/jquery-3.2.1.min.js') }}"></script>
+
+        <div class="row">
+        <div class="col-lg-3 col-md-3 col-sm-6">
+            <div class="our-team">
+                <div class="pic">
+                    <img src="{{ asset("Uploads/images/") ~ user.image }}" alt="">
+                </div>
+
+                <h3 class="title">{{ user.prenom }} {{ user.nom }}</h3>
+                <span class="post">{{ user.username }}</span>
+
+
+
             </div>
         </div>
-    </div>
+
+        <div class="col-md-4 col-xs-7">
+            <h2 class="title">{{ user.prenom }} {{ user.nom }}</h2><h6>Artisan</h6>
+            <div class="line-separator" style="width: 300px"></div><br><br>
+            <span class="post">Informations de contact</span><br><br>
+            <div class="single_info">
+                <div class="con_icon"><i class="fa fa-map-marker"></i></div>
+                <p>{{ user.adresse }}</p>
+            </div><br>
+            <div class="single_info">
+                <div class="con_icon"><i class="fa fa-phone"></i></div>
+                <p>Phone : {{ user.phone }}</p>
+
+            </div><br>
+            <div class="single_info">
+                <div class="con_icon"><i class="fa fa-envelope"></i></div>
+                <a href="#">{{ user.email }} </a>
+
+            </div>
+        </div>
+
+            <div class="col-xs-8 col-md-5 col-lg-3">
+                <h2 class="title">Liste des abonnés</h2>
+               <br><br>
+                <span class="post">Informations de contact</span><br><br>
+                <div class="single_info">
+                    <div class="con_icon"><i class="fa fa-map-marker"></i></div>
+                    <p>{{ user.adresse }}</p>
+                </div><br>
+                <div class="single_info">
+                    <div class="con_icon"><i class="fa fa-phone"></i></div>
+                    <p>Phone : {{ user.phone }}</p>
+
+                </div><br>
+                <div class="single_info">
+                    <div class="con_icon"><i class="fa fa-envelope"></i></div>
+                    <a href="#">{{ user.email }} </a> <br/>
+
+                </div>
+                <div class="single_info">
+                    <div class="con_icon"><i class="fa fa-envelope"></i></div>
+                    <a href="#">{{ user.email }} </a> <br/>
+
+                </div>
+                <div class="single_info">
+                    <div class="con_icon"><i class="fa fa-envelope"></i></div>
+                    <a href="#">{{ user.email }} </a> <br/>
+
+                </div>
+                <div class="single_info">
+                    <div class="con_icon"><i class="fa fa-envelope"></i></div>
+                    <a href="#">{{ user.email }} </a> <br/>
+
+                </div>
+                <div class="single_info">
+                    <div class="con_icon"><i class="fa fa-envelope"></i></div>
+                    <a href="#">{{ user.email }} </a> <br/>
+
+                </div>
+            </div>
+
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        {% if is_granted('ROLE_MEMBER') %}
+
+            {% if bool == false %}
+                <div class="pd_btn fix">
+                    <a class="follow_btn"
+                       href="{{ path('abonnementdemerde', {'idA':user.id, 'idM':app.user.id}) }}"
+                       id="follow1">S'abonner</a>
+                </div>
+            {% endif %}
+            {% if bool == true %}
+                <div class="pd_btn fix">
+                    <a class="follow_btn" id="unfollow"> Desabo</a>
+
+                </div>
+            {% endif %}
+
+        {% endif %}
+    {% endif %}
+
 {% endblock %}

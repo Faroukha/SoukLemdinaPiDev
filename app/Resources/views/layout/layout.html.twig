@@ -37,10 +37,13 @@
                 <div class="row">
                     <div class="col-xs-12 col-sm-6">
                         <div class="hdr_tp_left">
+                            {% block testuser %}
                             <div class="call_area">
+                                <span class="single_con_add"><i class="fa fa-user"></i> {% block nameco %}{% endblock %}</span>
                                 <span class="single_con_add"><i
                                             class="fa fa-envelope"></i> {% block mailco %} {% endblock %}</span>
                             </div>
+                            {% endblock %}
                         </div>
                     </div>
 
@@ -88,15 +91,15 @@
                                         </li>
 
                                         {% block admin %}
-                                        {% if app.user is not null %}
-                                        <li>
-                                            <a href="{{ path('contact') }}">Reclamations</a>
-                                        </li>
-                                        {% else %}
-                                            <li>
-                                            <a href="{{ path('fos_user_security_login') }}">Reclamations</a>
-                                            </li>
-                                        {% endif %}
+                                            {% if app.user is not null %}
+                                                <li>
+                                                    <a href="{{ path('contact') }}">Reclamations</a>
+                                                </li>
+                                            {% else %}
+                                                <li>
+                                                    <a href="{{ path('fos_user_security_login') }}">Reclamations</a>
+                                                </li>
+                                            {% endif %}
 
                                             <li>
                                                 <a href="{{ path('blog') }}">Blog <i class="fa fa-angle-down"></i></a>
@@ -108,29 +111,34 @@
                                                     {% endif %}
                                                 </ul>
                                             </li>
-
-                                            <li><a href="{{ path('ff') }}">Profil</a></li>
+                                            {% if app.user is not null %}
+                                                <li><a href="{{ path('ff') }}">Profil</a></li>
+                                            {% endif %}
                                         {% endblock %}
-                                        <li>
-                                            <div class="cart_menu_area">
-                                                <div class="cart_icon">
-                                                    <a href="#"><i class="fa fa-bell" style="color: #33d286"
-                                                                   aria-hidden="true"></i></a>
-                                                </div>
-                                                <!-- Mini Cart Wrapper -->
-                                                <div class="mini-cart-wrapper">
-                                                    <!-- Product List -->
-                                                    <div class="mc-pro-list fix">
-                                                        {% block notificationBlock %}
-                                                        {% endblock %}
+                                        <li><a href="#">Evenement</a></li>
+                                        {% if app.user is not null %}
+                                            <li>
+
+                                                <div class="cart_menu_area">
+                                                    <div class="cart_icon">
+                                                        <a href="#"><i class="fa fa-bell" style="color: #33d286"
+                                                                       aria-hidden="true"></i></a>
+                                                    </div>
+                                                    <!-- Mini Cart Wrapper -->
+                                                    <div class="mini-cart-wrapper">
+                                                        <!-- Product List -->
+                                                        <div class="mc-pro-list fix">
+                                                            {% block notificationBlock %}
+                                                            {% endblock %}
+
+                                                        </div>
+
 
                                                     </div>
-
-
                                                 </div>
-                                            </div>
-                                        </li>
 
+                                            </li>
+                                        {% endif %}
                                     </ul>
                                 </nav>
                             </div>
@@ -154,11 +162,12 @@
                                             </div>
                                         </div>
                                     </li>
-
+                                    {% if app.user is not null %}
                                     <li>
                                         <div class="cart_menu_area">
                                             <div class="cart_icon">
-                                                <a href="#"><i class="fa fa-shopping-bag " aria-hidden="true"></i></a>
+                                                <a href="#"><i class="fa fa-shopping-bag "
+                                                               aria-hidden="true"></i></a>
                                                 <span class="cart_number">2</span>
                                             </div>
 
@@ -202,12 +211,35 @@
                                         </div>
 
                                     </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div><!--  End Col -->
+                                    {% else %}
+                                    <li>
+                                        <div class="cart_menu_area">
+                                            <div class="cart_icon">
+                                                <a href="#"><i class="fa fa-shopping-bag "
+                                                               aria-hidden="true"></i></a>
+                                                <span class="cart_number"></span>
+                                            </div>
+                                            <div class="mini-cart-wrapper">
+                                                <!-- Product List -->
+                                                <div class="mc-pro-list fix">
+                                                    <div class="mc-sin-pro fix">
+                                                             <ul><li class="account_area"><a href="{{ path('fos_user_registration_register') }}">
+                                                             <i class="fa fa-lock"></i> Register</a></li>
+                                                             <li class="account_area"><a href="{{ path('fos_user_security_login') }}">
+                                                             <i class="fa fa-lock"></i> Se Connecter</a></li>
+                                                             </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                         </div>
+                                     </li>
+                    {% endif %}
+                    </ul>
                 </div>
             </div>
+        </div><!--  End Col -->
+        </div>
+        </div>
         </div>
     </header>
 </head>
