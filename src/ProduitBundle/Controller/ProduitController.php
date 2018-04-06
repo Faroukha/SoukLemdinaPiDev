@@ -55,11 +55,11 @@ class ProduitController extends Controller
 
             ->add('categorie', TextType::class)
             ->add('titre', TextType::class)
-            ->add('description', TextType::class)
+            ->add('description', TextareaType::class)
             ->add('prix', TextType::class)
             ->add('image', FileType::class, array('label' => 'Image(JPG)'))
             ->add('quantite', TextType::class)
-            ->add('save', SubmitType::class, array())
+            ->add('Ajouter', SubmitType::class, array())
             ->getForm();
 
         $form->handleRequest($request);

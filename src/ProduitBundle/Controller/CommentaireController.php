@@ -9,6 +9,7 @@
 namespace ProduitBundle\Controller;
 
 use MainBundle\Entity\Commentaire;
+use MainBundle\Entity\Notification;
 use MainBundle\Entity\Produit;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use UserBundle\Entity\User;
@@ -24,6 +25,7 @@ class CommentaireController extends Controller
         $em = $this->getDoctrine()->getManager();
         $user = $em->getRepository(User::class)->find($request->get('idUser'));
         $produit = $em->getRepository(Produit::class)->find($request->get('id'));
+        $notif = $em->getRepository(Notification::class)->findAll();
 
         $commentaire->setEmailuser($user);
         $commentaire->setIdproduit($request->get('id'));
@@ -31,7 +33,7 @@ class CommentaireController extends Controller
         $em->persist($commentaire);
         $em->flush();
         $Coms = $em->getRepository(Commentaire::class)->findAll();
-        return $this->render('ProduitBundle:Produit:product-details.html.twig', ['commentaire' => $Coms,'produit'=>$produit]);
+        return $this->render('ProduitBundle:Produit:product-details.html.twig', ['commentaire' => $Coms,'produit'=>$produit,'notifs'=>$notif]);
     }
 
 }
