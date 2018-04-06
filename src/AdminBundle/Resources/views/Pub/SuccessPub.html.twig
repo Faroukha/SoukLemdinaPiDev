@@ -25,29 +25,14 @@
 
     {% else %}
         <li><a href="{{ path('contact') }}">contact</a></li>
-
-        <li>
-            <a href="{{ path('contact') }}">Reclamation <i class="fa fa-angle-down"></i> </a>
-        </li>
         <li>
             <a href="{{ path('blog') }}">Blog <i class="fa fa-angle-down"></i></a>
+
         </li>
-
-
-
 
         <li><a href="{{ path('ff') }}">Profil</a></li>
     {% endif %}
 {% endblock %}
 {% block body %}
-
-
-
-{{ form_start(form, { 'action': path('fos_user_change_password'), 'attr': { 'class': 'fos_user_change_password' } }) }}
-    {{ form_widget(form) }}
-<div>
-    <input type="submit" value="{{ 'Valider'|trans }}" />
-</div>
-{{ form_end(form) }}
-
+    Success
 {% endblock %}

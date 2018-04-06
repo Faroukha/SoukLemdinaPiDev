@@ -51,11 +51,25 @@
             <div class="col-md-2"></div>
             <div class="col-md-8">
                 {% for rec in recs %}
-                    <div class="col-md-3">
-                                <div class="bd_month">{{ rec.Name }}</div>
-                                <div class="bd_month">{{ rec.Email }}</div>
-                                <div class="bd_month">{{ rec.Subject }}</div>
-                                <div class="bd_month">{{ rec.Message }}</div>
+                    <div class="col-md-6 col-xs-12">
+                        <div class="prdct_dtls_content">
+                            <div class="pd_text">
+                            <span class="pd_title"
+                                  style="font-size: 14px; display: contents;">Nom  :</span> {{ rec.Name }}
+                            </div>
+                                <div class="pd_text">
+                            <span class="pd_title"
+                                  style="font-size: 14px; display: contents;">Email  :</span> {{ rec.Email }}
+                                </div>
+                                    <div class="pd_text">
+                            <span class="pd_title"
+                                  style="font-size: 14px; display: contents;">Sujbect :</span> {{ rec.Subject }}
+                                    </div>
+                                        <div class="pd_text">
+                            <span class="pd_title"
+                                  style="font-size: 14px; display: contents;">Message  :</span> {{ rec.Message }}
+                                        </div>
+                    </div>
                     </div>
                 {% endfor %}
             </div>
@@ -67,3 +81,6 @@
     </div>
 
 {% endblock %}
+
+
+

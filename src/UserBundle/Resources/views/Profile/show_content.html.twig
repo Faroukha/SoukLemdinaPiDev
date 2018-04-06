@@ -1,6 +1,11 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
 {% block body %}
+    {% if produits is not defined  %}
+        <script>
+            window.location = '{{ path('main_homepage') }}';
+        </script>
+    {% endif %}
     <div id="page_item_area">
         <div class="container">
             <div class="row">
@@ -10,6 +15,7 @@
             </div>
         </div>
     </div>
+
 
     <!-- Profil user  -->
     {% if app.user.id == user.id %}
@@ -30,6 +36,7 @@
                                 </ul>
                             </div>
                         </div>
+
                     </div>
 
 
@@ -60,6 +67,7 @@
                             <div class="pd_text">
                             <span class="pd_title"
                                   style="font-size: 14px; display: contents;">Adresse  :</span> {{ user.adresse }}
+
                             </div>
 
                             <a href="{{ path('fos_user_change_password') }}">Change Password</a>
@@ -125,6 +133,7 @@
                                         </div>
                                         <span class="price">{{ produit.prix }}</span>
                                     </div>
+
                                 </div>
                             </div>
                         {% endfor %}
@@ -166,6 +175,7 @@
 
 
                     </div>
+
                 </div>
             </div>
         {% endif %}
@@ -186,6 +196,7 @@
 
                 <h3 class="title">{{ user.prenom }} {{ user.nom }}</h3>
                 <span class="post">{{ user.username }}</span>
+
 
 
             </div>

@@ -16,3 +16,9 @@ ajouterPub:
 allreclam:
     path:     /all
     defaults: { _controller: AdminBundle:Default:allreclam }
+deletePub:
+    path:     /delPub
+    defaults: { _controller: AdminBundle:Default:deletePub }
+#updatePub:
+#    path:     /updatePub
+#    defaults: { _controller: AdminBundle:Default:updatePub }
