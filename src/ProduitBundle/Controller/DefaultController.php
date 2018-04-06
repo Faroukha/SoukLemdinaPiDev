@@ -22,21 +22,25 @@ class DefaultController extends Controller
 
     public function detailsAction(Request $request)
     {
+        $em=$this->getDoctrine()->getManager();
+        $notif = $em->getRepository(Notification::class)->findAll();
         $em=$this->getDoctrine()->getRepository(Produit::class);
         $es=$this->getDoctrine()->getRepository(Commentaire::class);
         $commentaire=$es->findAll();
 
         $produit=$em->find($request->get('id'));
 
-        return $this->render('ProduitBundle:Produit:product-details.html.twig',['produit'=>$produit,'commentaire'=>$commentaire]);
+        return $this->render('ProduitBundle:Produit:product-details.html.twig',['produit'=>$produit,'commentaire'=>$commentaire, 'notifs'=>$notif]);
     }
 
     public function detailsartisanAction(Request $request)
     {
+        $em=$this->getDoctrine()->getManager();
+        $notif = $em->getRepository(Notification::class)->findAll();
         $em=$this->getDoctrine()->getRepository(Produit::class);
         $produit=$em->find($request->get('id'));
 
-        return $this->render('ProduitBundle:Produit:produit-details-artisan.html.twig',['produit'=>$produit]);
+        return $this->render('ProduitBundle:Produit:produit-details-artisan.html.twig',['produit'=>$produit, 'notifs'=>$notif]);
     }
     public function shopAction()
     {
