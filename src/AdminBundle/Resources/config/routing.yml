@@ -25,3 +25,6 @@ updatePub:
 updatePubView:
     path:     /updatePub
     defaults: { _controller: AdminBundle:Default:updatePubView }
+reclamer:
+    path:     /reclamer
+    defaults: { _controller: AdminBundle:Default:reclamer }

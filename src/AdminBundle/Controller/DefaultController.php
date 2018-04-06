@@ -156,4 +156,17 @@ class DefaultController extends Controller
 
     }
 
+    public  function reclamerAction (Request $request){
+        $em = $this->getDoctrine()->getManager();
+        $rec = $em->getRepository(Contact::class)->find($request->get("id"));
+
+        if($rec->getEtat()==false) {
+            $rec ->setEtat(true) ;
+            $em->persist($rec);
+            $em->flush();
+        }
+
+        return $this->redirectToRoute('allreclam');
+    }
+
 }
