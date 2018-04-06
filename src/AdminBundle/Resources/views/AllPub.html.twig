@@ -49,9 +49,15 @@
                         <div class="bd_month">{{ pub.datedeb |date("m/d/Y") }}</div>
                         <div class="bd_month">{{ pub.datefin |date("m/d/Y") }}</div>
                     </div>
-                    <div class="blog_date text-center">
-
-                    </div>
+                    <form action="{{ path('deletePub') }}">
+                    <input type="hidden" value="{{ pub.id }}" name="id">
+                    <button class="btn btn-danger">Supprimer</button>
+                    </form>
+                    {#<form action="{{ path('updatePub') }}">#}
+                        {#<input type="hidden" value="{{ pub.id }}" name="id">#}
+                        {#<button class="btn btn-default acc_btn">Modifier</button>#}
+                    {#</form>#}
+                    {##}
                 </div>
             </div>
         {% endfor %}

@@ -67,28 +67,63 @@ class DefaultController extends Controller
 //
 //    }
 
-    public function addpubAction(Request $request )
+    public function addpubAction(Request $request)
     {
         $pub = new Pubg();
 
 
-            $form = $this->createFormBuilder($pub)
-                ->add('datedeb', DateType::class)
-                ->add('datefin', DateType::class)
-                ->add('image', FileType::class, array('label' => 'Image(JPG)'))
-                ->add('save', SubmitType::class, array())
-                ->getForm();
+        $form = $this->createFormBuilder($pub)
+            ->add('datedeb', DateType::class)
+            ->add('datefin', DateType::class)
+            ->add('image', FileType::class, array('label' => 'Image(JPG)'))
+            ->add('save', SubmitType::class, array())
+            ->getForm();
 
-            $form->handleRequest($request);
-            if ($form->isValid()) {
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            if ($pub->getDatedeb() <= $pub->getDatefin()) {
+
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($pub);
                 $em->flush();
             }
-        
+        }
+
 
         return $this->render('AdminBundle:Pub:ajouterPub.html.twig',
             ['form' => $form->createView()]);
+    }
+
+//    public function updatePubAction(Request $request)
+//    {
+//        $pub = new Pubg();
+//        $form = $this->createFormBuilder($pub)
+//            ->add('datedeb', DateType::class)
+//            ->add('datefin', DateType::class)
+//            ->add('image', FileType::class, array('label' => 'Image(JPG)'))
+//            ->add('Modifier', SubmitType::class, array())
+//            ->getForm();
+//
+//        $form->handleRequest($request);
+//
+//        if ($pub->getDatedeb() <= $pub->getDatefin()) {
+//            $em = $this->getDoctrine()->getManager();
+//            $em->persist($pub);
+//            $em->flush();
+//        }
+//        return $this->render('AdminBundle:Pub:SuccessPub.html.twig');
+//    }
+
+    public function deletePubAction(Request $request)
+    {
+
+        $em = $this->getDoctrine()->getManager();
+        $pub = $em->getRepository(Pubg::class)->find($request->get("id"));;
+        $em->remove($pub);
+        $em->flush();
+        return $this->redirectToRoute("allPub");
+
     }
 
     public function allreclamAction(Request $request)
