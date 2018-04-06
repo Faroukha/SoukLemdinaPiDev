@@ -214,7 +214,7 @@ input:focus, textarea:focus {
     border-color: #33d286;
 }
 .section_padding{
-    padding:60px 0;
+    padding:40px 0;
 }
 
 
@@ -1345,6 +1345,8 @@ input:focus, textarea:focus {
     padding-bottom: 20px;
     background: #fff;
     transition: .5s;
+    max-height: 360px;
+    min-height: 360px;
 }
 .single_product:hover{
     box-shadow: 5px 5px 25px rgba(0,0,0,0.03);
@@ -1354,8 +1356,10 @@ input:focus, textarea:focus {
     position: relative;
 }
 .product_image img{
-    width: 100%;
-    height: auto;
+
+    max-height: 200px;
+    min-height: 200px;
+
     transition: all 1.5s ease 0s;
 
 }
@@ -1879,7 +1883,7 @@ input:focus, textarea:focus {
 /* -------- Page item css -------- */
 
 #page_item_area {
-    padding: 45px 0;
+    padding: 20px 0;
     margin-bottom: 40px;
     background: linear-gradient(45deg, #43cea2 0%, #33d286 100%);
 }
@@ -2284,6 +2288,18 @@ input:focus, textarea:focus {
     transform: .5s;
     box-shadow: 0 5px 10px rgba(0,0,0,0.05);
 }
+
+.single_info .con_iconn {
+    display: inline-block;
+    width: 40pxpx;
+    height: 40px;
+    text-align: center;
+    font-size: 22px;
+    color: #33d286;
+
+}
+
+
 .single_info .con_icon:hover{
     background: #33d286;
     color: #fff;
@@ -2412,11 +2428,26 @@ input:focus, textarea:focus {
     text-transform: capitalize;
 
 }
+.follow_btn{
+    color: #3399FF;
+    font-family: "Helvetica";
+    font-size: 10pt;
+    background-color: #ffffff;
+    border: 1px solid;
+    border-color: #3399FF;
+    border-radius: 3px;
+    width: 85px;
+    height: 30px;
+    position: absolute;
+    cursor: hand;
+}
 .acc_btn:hover {
     background: #000;
     border: 1px solid transparent;
     color: #fff;
 }
+
+
 .btn_icon {
     margin-right: 10px;
 
@@ -2509,7 +2540,9 @@ input:focus, textarea:focus {
 }
 .our-team .pic img{
     width: 100%;
-    height: auto;
+
+    max-height: 300px;
+    min-height: 300px;
 }
 .our-team .team-content{
     background: #333;
@@ -2817,6 +2850,15 @@ input:focus, textarea:focus {
     font-weight: 600;
 }
 
+.line-separator{
+
+    height:1px;
+
+    background:#717171;
+
+    border-bottom:1px solid #313030;
+
+}
 /* -------- Product Details Page Css -------- */
 
 .pd_title {

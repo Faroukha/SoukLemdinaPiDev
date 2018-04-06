@@ -3,6 +3,7 @@
 namespace ProduitBundle\Controller;
 
 use MainBundle\Entity\Commentaire;
+use MainBundle\Entity\Notification;
 use MainBundle\Entity\Produit;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -39,24 +40,32 @@ class DefaultController extends Controller
     }
     public function shopAction()
     {
-        return $this->render('ProduitBundle:Produit:shop.html.twig');
+        $em=$this->getDoctrine()->getManager();
+        $notif = $em->getRepository(Notification::class)->findAll();
+        return $this->render('ProduitBundle:Produit:shop.html.twig',['notifs'=>$notif]);
     }
 
     public function cartAction()
     {
-        return $this->render('ProduitBundle:Produit:cart.html.twig');
+        $em=$this->getDoctrine()->getManager();
+        $notif = $em->getRepository(Notification::class)->findAll();
+        return $this->render('ProduitBundle:Produit:cart.html.twig',['notifs'=>$notif]);
     }
 
     public function wishlistAction()
     {
-        return $this->render('ProduitBundle:Produit:wishlist.html.twig');
+        $em=$this->getDoctrine()->getManager();
+        $notif = $em->getRepository(Notification::class)->findAll();
+        return $this->render('ProduitBundle:Produit:wishlist.html.twig',['notifs'=>$notif]);
     }
     public function detailspromotionAction(Request $request)
     {
+        $em=$this->getDoctrine()->getManager();
+        $notif = $em->getRepository(Notification::class)->findAll();
         $em=$this->getDoctrine()->getRepository(Produit::class);
         $produit=$em->find($request->get('id'));
 
-        return $this->render('ProduitBundle:Produit:promotion-detailler.html.twig',['produit'=>$produit]);
+        return $this->render('ProduitBundle:Produit:promotion-detailler.html.twig',['produit'=>$produit, 'notifs'=>$notif]);
     }
 
 

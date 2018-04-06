@@ -1,15 +1,15 @@
 {% extends 'layout/layout.html.twig' %}
 {% block mailco %}
-    {% if user is not null %}
-        {{ user.email }}
+    {% if app.user is not null %}
+        {{ app.user.email }}
     {% endif %}
 {% endblock %}
 {% block nameco %}
-    {% if user is not null %}
-        {{ user.username }}
+    {% if app.user is not null %}
+        {{ app.user.username }}
     {% endif %}
 {% endblock %}
-{% if user is not null %}
+{% if app.user is not null %}
     {% block testuser %}
     {% endblock %}
 {% endif %}

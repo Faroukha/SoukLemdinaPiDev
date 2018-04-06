@@ -6,6 +6,7 @@ use http\Env\Response;
 use MainBundle\Entity\Blog;
 use MainBundle\Entity\Commentaire;
 use MainBundle\Entity\CommentaireBlog;
+use MainBundle\Entity\Notification;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use UserBundle\Entity\User;
@@ -20,6 +21,8 @@ class DefaultController extends Controller
     {
 
         $em = $this->getDoctrine()->getManager();
+
+        $notif = $em->getRepository(Notification::class)->findAll();
         $Blogs = $em->getRepository(Blog::class)->findAll();
         $user = $em->getRepository(User::class)->findAll();
         $paginator = $this->get('knp_paginator');
@@ -31,7 +34,7 @@ class DefaultController extends Controller
         );
 
 
-        return $this->render('BlogBundle:Default:blog.html.twig', ['Blogs' => $Blogs,'users'=>$user]);
+        return $this->render('BlogBundle:Default:blog.html.twig', ['Blogs' => $Blogs,'users'=>$user, 'notifs'=>$notif]);
     }
 
     public function blogDetailAction(Request $request)
