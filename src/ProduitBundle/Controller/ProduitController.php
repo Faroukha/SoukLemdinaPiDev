@@ -17,6 +17,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use UserBundle\Entity\User;
+use ProduitBundle\Form\ProduitType;
+
 
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
@@ -85,6 +87,10 @@ class ProduitController extends Controller
             ['form' => $form->createView()]);
         }
 
+    /**
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
     public function supprimerProduitAction(Request $request )
     {
         $em=$this->getDoctrine()->getManager();
@@ -96,5 +102,43 @@ class ProduitController extends Controller
     }
 
 
+    /**
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
+     */
+    public function renderAction(Request $request)
+    {
+        return $this->render('ProduitBundle:Produit:update.html.twig' , [
+            'id' => $request->query->get('id')
+        ]);
+    }
 
+    /**
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
+     */
+    public function updateAction(Request $request)
+    {
+        $id = $request->query->get('id');
+        $em = $this->getDoctrine()->getManager();
+        $prod = $em->getRepository("MainBundle:Produit")->find($id);
+
+            $data = [
+                'titre' => $request->get('titre'),
+                'prix' => $request->get('prix'),
+                'quantite' => $request->get('quantite'),
+                'description' => $request->get('description'),
+                'categorie' => $request->get('categorie'),
+            ];
+            $prod->setTitre($data['titre']);
+            $prod->setPrix($data['prix']);
+            $prod->setQuantite($data['quantite']);
+            $prod->setDescription($data['description']);
+            $prod->setCategorie($data['categorie']);
+
+            $em->persist($prod);
+            $em->flush();
+
+        return $this->redirectToRoute('ff');
+    }
 }
