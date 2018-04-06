@@ -71,6 +71,10 @@ class DefaultController extends Controller
     public function ajouterBlogAction(Request $request )
     {
         $Blog = new Blog();
+        $em=$this->getDoctrine()->getManager();
+
+        $notif = $em->getRepository(Notification::class)->findAll();
+
 
         $form = $this->createFormBuilder($Blog)
 
@@ -86,17 +90,20 @@ class DefaultController extends Controller
             $Blog->setIdUser($user->getId());
 
             $em = $this->getDoctrine()->getManager();
+
             $em->persist($Blog);
             $em->flush();
         }
         return $this->render('BlogBundle:Default:addBlog.html.twig',
-            ['form' => $form->createView()]);
+            ['form' => $form->createView() , 'notifs'=>$notif]);
     }
 
     public function ishowBlogAction()
-    {
+    {            $em = $this->getDoctrine()->getManager();
 
-        return $this->render('BlogBundle:Default:addBlog.html.twig');
+        $notif = $em->getRepository(Notification::class)->findAll();
+
+        return $this->render('BlogBundle:Default:addBlog.html.twig', [ 'notifs'=>$notif]);
     }
 
     public function addComAction(Request $request)
