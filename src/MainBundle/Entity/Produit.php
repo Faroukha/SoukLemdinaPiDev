@@ -32,12 +32,24 @@ class Produit
     /**
      * @var string
      *
+     * * @Assert\Regex(
+     *     pattern="/\d/",
+     *     match=false,
+     *     message="Your categorie cannot contain a number"
+     * )
+     *
      * @ORM\Column(name="categorie", type="string", length=255, nullable=false)
      */
     private $categorie;
 
     /**
      * @var string
+     *
+     * @Assert\Regex(
+     *     pattern="/\d/",
+     *     match=false,
+     *     message="Your titre cannot contain a number"
+     * )
      *
      * @ORM\Column(name="titre", type="string", length=255, nullable=false)
      */
@@ -46,12 +58,23 @@ class Produit
     /**
      * @var string
      *
+     * * @Assert\Regex(
+     *     pattern="/\d/",
+     *     match=false,
+     *     message="Your description cannot contain a number"
+     * )
+     *
      * @ORM\Column(name="description", type="string", length=255, nullable=false)
      */
     private $description;
 
     /**
      * @var float
+     *
+     * * @Assert\Regex("/[0-9]/")
+     *     match=false,
+     *     message="Your prix cannot contain a string"
+     * )
      *
      * @ORM\Column(name="prix", type="float", precision=10, scale=0, nullable=false)
      */
@@ -67,6 +90,10 @@ class Produit
     /**
      * @var integer
      *
+     ** @Assert\Regex("/[0-9]/")
+     *     match=false,
+     *     message="Your prix cannot contain a string"
+     * )
      * @ORM\Column(name="quantite", type="integer", nullable=true)
      */
     private $quantite;
