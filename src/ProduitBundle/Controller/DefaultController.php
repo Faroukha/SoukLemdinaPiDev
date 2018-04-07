@@ -68,8 +68,10 @@ class DefaultController extends Controller
         $notif = $em->getRepository(Notification::class)->findAll();
         $em=$this->getDoctrine()->getRepository(Produit::class);
         $produit=$em->find($request->get('id'));
+        $commentaire=$this->getDoctrine()->getRepository(Commentaire::class);
 
-        return $this->render('ProduitBundle:Produit:promotion-detailler.html.twig',['produit'=>$produit, 'notifs'=>$notif]);
+
+        return $this->render('ProduitBundle:Produit:promotion-detailler.html.twig',['produit'=>$produit,'commentaire'=>$commentaire, 'notifs'=>$notif]);
     }
 
 
