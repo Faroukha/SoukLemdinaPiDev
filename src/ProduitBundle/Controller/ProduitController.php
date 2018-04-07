@@ -10,6 +10,7 @@ namespace ProduitBundle\Controller;
 use FOS\UserBundle\Model\UserInterface;
 use MainBundle\Entity\Notification;
 use MainBundle\Entity\Produit;
+use MainBundle\Entity\Promotion;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
@@ -48,17 +49,18 @@ class ProduitController extends Controller
 
     public function AjouterProduitAction(Request $request )
     {
-
+        $em=$this->getDoctrine()->getManager();
+        $notif = $em->getRepository(Notification::class)->findAll();
         $po = new Produit();
         $form = $this->createFormBuilder($po)
 
             ->add('categorie', TextType::class)
             ->add('titre', TextType::class)
-            ->add('description', TextType::class)
+            ->add('description', TextareaType::class)
             ->add('prix', TextType::class)
             ->add('image', FileType::class, array('label' => 'Image(JPG)'))
-            ->add('quant2222222ite', TextType::class)
-            ->add('save', SubmitType::class, array())
+            ->add('quantite', TextType::class)
+            ->add('Ajouter', SubmitType::class, array())
             ->getForm();
 
         $form->handleRequest($request);
@@ -67,7 +69,6 @@ class ProduitController extends Controller
             $user = $this->getUser();
             $po->setIdartisan($user->getId());
             $em = $this->getDoctrine()->getManager();
-            $notif = $em->getRepository(Notification::class)->findAll();
             $em->persist($po);
             $em->flush();
 
@@ -142,5 +143,28 @@ class ProduitController extends Controller
             $em->flush();
 
         return $this->redirectToRoute('ff');
+    }
+
+
+    /**
+     * @param Request $request
+     * @return Response
+     */
+    public function RechercheAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $titre = $request->get('text');
+        $conn=$this->getDoctrine()->getConnection() ;
+        $query = "SELECT * FROM produit WHERE titre LIKE '%" . $titre . "%' ;";
+        $stmt = $conn->prepare($query);
+        $stmt->execute([]);
+
+        $user = $em->getRepository(User::class)->findAll();
+        $notif = $em->getRepository(Notification::class)->findAll();
+        $promotion = $this->getDoctrine()->getRepository(Promotion::class)->findAll();
+        $users = $em->getRepository(User::class)->findAll();
+        $produits=$stmt->fetchAll();;
+
+        return $this->render("ProduitBundle:Produit:recherche.html.twig",['produits'=>$produits,'users' => $users,'user' => $user, 'notifs'=>$notif,'produitp'=> $promotion]);
     }
 }

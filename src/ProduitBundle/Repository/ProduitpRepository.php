@@ -16,5 +16,14 @@ namespace ProduitBundle\Repository;
  */
 class ProduitpRepository extends \Doctrine\ORM\EntityRepository
 {
+    /**
+     * @param string $titre
+     * @return \Doctrine\ORM\QueryBuilder
+     */
+    public function findByName(string  $titre){
+       return $qb = $this->createQueryBuilder('n')
+            ->select('p')
+            ->where('p.titre LIKE %' . $titre . '%');
+    }
 
 }
