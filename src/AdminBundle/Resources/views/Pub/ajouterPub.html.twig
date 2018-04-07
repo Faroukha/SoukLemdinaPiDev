@@ -83,11 +83,50 @@
             </div>
         </div>
     </div>
-    {{ form_start(form) }}
-    {{ form_row(form.image) }}
-    {{ form_end(form) }}
 
-    <script>
+    <div class="login_page_area">
+        <div class="container">
+            <div class="row">
 
-    </script>
+                <div class="col-md-12 col-sm-6 col-xs-12">
+
+                    <div class="create_account_area">
+
+                        {{ form_start(form) }}
+
+                        <div class="caa_form_area">
+                            <div class="caa_form_group">
+                                <div class="login_email">
+                                    <div class="">
+                                        <label>Image</label>
+                                        <div class="input-area">
+                                            {{ form_widget(form.image) }}
+                                        </div>
+                                    </div>
+
+                                    <label>Date Début</label>
+                                    {{  form_widget(form.datedeb ,{'attr':{'id':'datedeb'}    }) }}
+
+                                    <div class="login_email">
+                                        <label>Date Fin</label>
+
+                                        {{ form_widget(form.datefin ,{'attr':{'id':'datefin'}    }) }}
+                                    </div>
+                                    <br>
+                                <span> {{ form_widget(form.Ajouter) }} </span>
+                            </div>
+                        </div>
+                    </div>
+                    {{ form_end(form) }}
+
+
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+
 {% endblock %}

@@ -45,71 +45,111 @@
 {% block body %}
 
 
-    {#<div class="login_page_area">#}
-        {#<div class="container">#}
-            {#<div class="row">#}
+    <div class="login_page_area">
+        <div class="container">
+            <div class="row">
 
-                {#<div class="col-md-12 col-sm-6 col-xs-12">#}
-                    {#<form action="{{ path("Ajouter_Produit") }}" method="POST">#}
-                        {#<input type="hidden" value="{{ app.user.id }}" name="idArtisan">#}
-                        {#<div class="create_account_area">#}
-                            {#<h2 class="caa_heading">Information sur le produit </h2>#}
-                            {#<div class="caa_form_area">#}
-                                {#<div class="caa_form_group">#}
-                                    {#<div class="login_email">#}
-                                        {#<label>Categorie</label>#}
-                                        {#<div class="input-area">#}
-                                            {#<input id="categorie" name="categorie" type="text" class="form-control">#}
-                                        {#</div>#}
-                                    {#</div>#}
-                                    {#<div class="login_email">#}
-                                        {#<label>Titre</label>#}
-                                        {#<div class="input-area">#}
-                                            {#<input id="titre" name="titre" type="text" class="form-control">#}
-                                        {#</div>#}
-                                    {#</div>#}
-                                    {#<div class="">#}
-                                        {#<label>Description</label>#}
-                                        {#<div class="input-area">#}
-                                            {#<input  id="description" name="description" type="text"  class="form-control">#}
-                                        {#</div>#}
-                                    {#</div>#}
-                                    {#<div class="">#}
-                                        {#<label>prix</label>#}
-                                        {#<div class="input-area">#}
-                                            {#<input  id="prix" name="prix" type="text"  class="form-control">#}
-                                        {#</div>#}
-                                    {#</div>#}
-                                    {#<div class="">#}
-                                        {#<label>Quantité</label>#}
-                                        {#<div class="input-area">#}
-                                            {#<input  id="quantite" name="quantite" type="text"  class="form-control">#}
-                                        {#</div>#}
-                                    {#</div>#}
-                                    {#<div class="">#}
-                                        {#<label>Image</label>#}
-                                        {#<div class="input-area">#}
-                                            {#<input type="file" name="image">#}
-                                        {#</div>#}
-                                    {#</div>#}
-                                    {#<button type="submit" id="_submit" name="_submit" class="btn btn-default acc_btn">#}
-                                        {#<span> <i class="fa fa-lock btn_icon"></i> Ajouter </span>#}
-                                    {#</button>#}
-                                {#</div>#}
-                            {#</div>#}
-                        {#</div>#}
+                <div class="col-md-12 col-sm-6 col-xs-12">
+
+                        <div class="create_account_area">
+                            <h2 class="caa_heading">Ajouter produit </h2>
+                            {{ form_start(form) }}
+
+                            <div class="caa_form_area">
+                                <div class="caa_form_group">
+                                    <div class="login_email">
+                                        <label>Categorie</label>
+                                        {{  form_widget(form.categorie ,{'attr':{'id':'categorie','placeholder':'Ajouter categorie'}    }) }}
+
+                                        <div class="input-area">
+
+                                        </div>
+                                    </div>
+                                    <div class="login_email">
+                                        <label>Titre</label>
+                                        <div class="input-area">
+                                            {{ form_widget(form.titre ,{'attr':{'id':'titre','placeholder':'Ajouter titre'}    }) }}
+                                        </div>
+                                    </div>
+                                    <div class="">
+                                        <label>Description</label>
+                                        <div class="input-area">
+                                            {{ form_widget(form.description ,{'attr':{'id':'titre','placeholder':'Ajouter description'}    }) }}
+
+                                        </div>
+                                    </div>
+                                    <div class="">
+                                        <label>prix</label>
+                                        <div class="input-area">
+                                            {{  form_widget(form.prix ,{'attr':{'id':'titre','placeholder':'Ajouter prix'}    }) }}
+                                        </div>
+                                    </div>
+                                    <div class="">
+                                        <label>Quantité</label>
+                                        <div class="input-area">
+                                            {{  form_widget(form.quantite ,{'attr':{'id':'titre','placeholder':'Ajouter quantité'}    }) }}
+                                        </div>
+                                    </div>
+                                    <div class="">
+                                        <label>Image</label>
+                                        <div class="input-area">
+                                            {{ form_widget(form.image) }}
+                                        </div>
+                                    </div>
+
+                                         {{ form_widget(form.Ajouter) }}
+
+                                </div>
+                            </div>
+                        </div>
+                    {{ form_end(form) }}
 
 
-                    {#</form>#}
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+
+    {#<div class="col-lg-offset-3 col-md-6 ">#}
+        {#<div class="comment-form">#}
+            {#{{ form_start(form) }}#}
+            {#<div class="row clearfix">#}
+
+                {#<div class="col-md-6 col-sm-12 col-xs-12 form-group">#}
+                    {#{{ form_widget(form.titre ,{'attr':{'id':'titre','placeholder':'Ajouter titre'}    }) }}#}
                 {#</div>#}
-
-
+                {#<div class="col-md-12 col-sm-12 col-xs-12 form-group">#}
+                    {#{{  form_widget(form.categorie ,{'attr':{'id':'categorie','placeholder':'Ajouter categorie'}    }) }}#}
+                {#</div>#}
+                {#<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">#}
+                    {#{{ form_widget(form.description ,{'attr':{'id':'titre','placeholder':'Ajouter description'}    }) }}#}
+                {#</div>#}
+                {#<div class="col-md-12 col-sm-12 col-xs-12 form-group">#}
+                    {#{{  form_widget(form.prix ,{'attr':{'id':'titre','placeholder':'Ajouter prix'}    }) }}#}
+                {#</div>#}
+                {#<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">#}
+                    {#{{  form_widget(form.quantite ,{'attr':{'id':'titre','placeholder':'Ajouter quantité'}    }) }}#}
+                {#</div>#}
             {#</div>#}
-        {#</div>#}
-    {#</div>#}
 
-    {{ form_start(form) }}
-    {{ form_row(form.image) }}
-    {{ form_end(form) }}
+            {#<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">#}
+                {#{{ form_widget(form.image) }}#}
+            {#</div>#}
+            {#<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">#}
+                {#{{ form_widget(form.Ajouter) }}#}
+            {#</div>#}
+
+        {#</div>#}
+        {#{{ form_end(form) }}#}
+
+
+    {#</div>#}
+    {#{{ form_start(form) }}#}
+    {#{{ form_row(form.image) }}#}
+    {#{{ form_end(form) }}#}
 
 {% endblock %}

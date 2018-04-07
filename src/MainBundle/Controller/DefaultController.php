@@ -12,7 +12,9 @@ class DefaultController extends Controller
 {
     public function indexAction()
     {
-        return $this->render('MainBundle:Default:index.html.twig');
+        $em=$this->getDoctrine()->getManager();
+        $notif = $em->getRepository(Notification::class)->findAll();
+        return $this->render('MainBundle:Default:index.html.twig',['notifs'=>$notif]);
     }
     public function contactAction()
     {

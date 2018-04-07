@@ -43,5 +43,7 @@ modifier_produit:
 modifier_temp:
     path:     /modifer
     defaults: { _controller: ProduitBundle:Produit:render }
-
+rechercher_produit:
+     path:     /rechercher
+     defaults: { _controller: ProduitBundle:Produit:Recherche }
 

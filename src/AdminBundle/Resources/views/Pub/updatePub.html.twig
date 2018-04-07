@@ -1,54 +1,60 @@
-{#{% extends 'layout/layout.html.twig' %}#}
-{#{% block loginbtn %}#}
-    {#{% if app.user is not null %}#}
-        {#<li class="account_area"><a href="{{ path('fos_user_security_logout') }}"><i class="fa fa-lock"></i> Se Déconnecter</a></li>#}
-    {#{% else %}#}
-        {#<li class="account_area"><a href="{{ path('fos_user_registration_register') }}"><i class="fa fa-lock"></i> Register</a></li>#}
-        {#<li class="account_area"><a href="{{ path('fos_user_security_login') }}"><i class="fa fa-lock"></i> Se Connecter</a></li>#}
+{% extends 'layout/layout.html.twig' %}
+{% block loginbtn %}
+    {% if app.user is not null %}
+        <li class="account_area"><a href="{{ path('fos_user_security_logout') }}"><i class="fa fa-lock"></i> Se Déconnecter</a></li>
+    {% else %}
+        <li class="account_area"><a href="{{ path('fos_user_registration_register') }}"><i class="fa fa-lock"></i> Register</a></li>
+        <li class="account_area"><a href="{{ path('fos_user_security_login') }}"><i class="fa fa-lock"></i> Se Connecter</a></li>
 
-    {#{% endif %}#}
-{#{% endblock %}#}
+    {% endif %}
+{% endblock %}
 
-{#{% block admin %}#}
-    {#{% if is_granted('ROLE_ADMIN') %}#}
-        {#<li><a href="{{ path('allPub') }}">Publicite</a></li>#}
-        {#<li>#}
-            {#<a href="{{ path('blog') }}">Blog <i class="fa fa-angle-down"></i></a>#}
+{% block admin %}
+    {% if is_granted('ROLE_ADMIN') %}
+        <li><a href="{{ path('allPub') }}">Publicite</a></li>
+        <li>
+            <a href="{{ path('blog') }}">Blog <i class="fa fa-angle-down"></i></a>
 
-        {#</li>#}
-        {#<li>#}
-            {#<a href="{{ path('allreclam') }}">Reclamation <i class="fa fa-angle-down"></i> </a>#}
-        {#</li>#}
+        </li>
+        <li>
+            <a href="{{ path('allreclam') }}">Reclamation <i class="fa fa-angle-down"></i> </a>
+        </li>
 
-        {#<li><a href="{{ path('ff') }}">Profil admin</a></li>#}
+        <li><a href="{{ path('ff') }}">Profil admin</a></li>
 
 
-    {#{% else %}#}
-        {#<li><a href="{{ path('contact') }}">contact</a></li>#}
-        {#<li>#}
-            {#<a href="{{ path('blog') }}">Blog <i class="fa fa-angle-down"></i></a>#}
+    {% else %}
+        <li><a href="{{ path('contact') }}">contact</a></li>
+        <li>
+            <a href="{{ path('blog') }}">Blog <i class="fa fa-angle-down"></i></a>
 
-        {#</li>#}
+        </li>
 
-        {#<li><a href="{{ path('ff') }}">Profil</a></li>#}
-    {#{% endif %}#}
-{#{% endblock %}#}
-{#{% block body %}#}
+        <li><a href="{{ path('ff') }}">Profil</a></li>
+    {% endif %}
+{% endblock %}
+{% block body %}
 
-    {#<div id="page_item_area">#}
-        {#<div class="container">#}
-            {#<div class="row">#}
-                {#<div class="col-sm-6 text-left">#}
-                    {#<h3>Modifier Publicite</h3>#}
-                {#</div>#}
-            {#</div>#}
-        {#</div>#}
-    {#</div>#}
-    {#{{ form_start(form) }}#}
-    {#{{ form_row(form.image) }}#}
-    {#{{ form_end(form) }}#}
+    <div id="page_item_area">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6 text-left">
+                    <h3>Modifier Publicite</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-offset-3 col-md-6 ">
+        <div class="comment-form">
+            <form action="{{ path('updatePub', {'id' : id}) }}" method="POST">
+                <input type="hidden" value="{{ pub.id }}" name="id">
+                <input type="date" name="datedeb">
+                <input type="date" name="datefin">
+                <button type="submit">Save</button>
+            </form>
+        </div>
+    </div>
+    <script>
 
-    {#<script>#}
-
-    {#</script>#}
-{#{% endblock %}#}
+    </script>
+{% endblock %}
