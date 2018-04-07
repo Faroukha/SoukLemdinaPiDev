@@ -59,8 +59,10 @@ class ProduitController extends Controller
             ->add('description', TextareaType::class)
             ->add('prix', TextType::class)
             ->add('image', FileType::class, array('label' => 'Image(JPG)'))
+
             ->add('quantite', TextType::class)
             ->add('Ajouter', SubmitType::class, array())
+
             ->getForm();
 
         $form->handleRequest($request);
@@ -69,6 +71,7 @@ class ProduitController extends Controller
             $user = $this->getUser();
             $po->setIdartisan($user->getId());
             $em = $this->getDoctrine()->getManager();
+            $notif = $em->getRepository(Notification::class)->findAll();
             $em->persist($po);
             $em->flush();
 
