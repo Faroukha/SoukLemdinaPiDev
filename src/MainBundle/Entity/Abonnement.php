@@ -21,17 +21,16 @@ class Abonnement
      */
     private $id;
 
+
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="idMembre", type="integer", nullable=false)
+     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User")
+     * @ORM\JoinColumn(name="idmembre", referencedColumnName="id")
      */
     private $idmembre;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="idArtisan", type="integer", nullable=false)
+     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User")
+     * @ORM\JoinColumn(name="idartisan", referencedColumnName="id")
      */
     private $idartisan;
 
@@ -47,14 +46,16 @@ class Abonnement
         return $this->id;
     }
 
+
+
     /**
      * Set idmembre
      *
-     * @param integer $idmembre
+     * @param \UserBundle\Entity\User $idmembre
      *
      * @return Abonnement
      */
-    public function setIdmembre($idmembre)
+    public function setIdmembre(\UserBundle\Entity\User $idmembre = null)
     {
         $this->idmembre = $idmembre;
 
@@ -64,7 +65,7 @@ class Abonnement
     /**
      * Get idmembre
      *
-     * @return integer
+     * @return \UserBundle\Entity\User
      */
     public function getIdmembre()
     {
@@ -74,11 +75,11 @@ class Abonnement
     /**
      * Set idartisan
      *
-     * @param integer $idartisan
+     * @param \UserBundle\Entity\User $idartisan
      *
      * @return Abonnement
      */
-    public function setIdartisan($idartisan)
+    public function setIdartisan(\UserBundle\Entity\User $idartisan = null)
     {
         $this->idartisan = $idartisan;
 
@@ -88,7 +89,7 @@ class Abonnement
     /**
      * Get idartisan
      *
-     * @return integer
+     * @return \UserBundle\Entity\User
      */
     public function getIdartisan()
     {

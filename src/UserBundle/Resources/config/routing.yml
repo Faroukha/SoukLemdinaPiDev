@@ -30,7 +30,7 @@ others_profil:
     defaults: {_controller: UserBundle:Default:showOtherProfil }
 
 abonnementdemerde:
-    path: /profilll
+    path: /profilll/{idartisan,idmembre}
     defaults: {_controller: UserBundle:Default:abo }
 
 desabo:

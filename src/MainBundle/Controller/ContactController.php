@@ -3,6 +3,7 @@
 namespace MainBundle\Controller;
 
 use MainBundle\Entity\Contact;
+use MainBundle\Entity\Notification;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
@@ -16,6 +17,7 @@ class ContactController extends Controller
 
         $contact = new Contact();
 
+        $contact->setEtat(0);
         $contact->setName($request->get('name'));
         $contact->setEmail($request->get('email'));
         $contact->setSubject($request->get('subject'));

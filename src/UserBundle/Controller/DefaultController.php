@@ -23,6 +23,7 @@ class DefaultController extends Controller
 
         $em = $this->getDoctrine()->getManager();
         $notif = $em->getRepository(Notification::class)->findAll();
+        $abonnement = $em->getRepository(Abonnement::class)->findAll();
         $produit = $em->getRepository(Produit::class)->findAll();
         $users = $em->getRepository(User::class)->findAll();
         $promotion = $this->getDoctrine()->getRepository(Promotion::class)->findAll();
@@ -39,32 +40,33 @@ class DefaultController extends Controller
         if ($user) {
 
 
-            if ($user->hasRole("ROLE_ADMIN")){
-                return $this->render('AdminBundle::admin.html.twig', [ 'produits' => $produit]);
-            }else{
-                return $this->render('MainBundle:Default:index.html.twig', [ 'produits' => $produit,'user' => $user,'produitp'=> $promotion ,'Pubs' => $Pubs, 'users' => $users, 'notifs'=>$notif]);
+            if ($user->hasRole("ROLE_ADMIN")) {
+                return $this->render('AdminBundle::admin.html.twig', ['produits' => $produit]);
+            } else {
+                return $this->render('MainBundle:Default:index.html.twig', ['produits' => $produit, 'user' => $user, 'produitp' => $promotion, 'Pubs' => $Pubs, 'users' => $users, 'notifs' => $notif, 'abos', $abonnement]);
             }
 
 
             //return $this->render('@User/layout.html.twig', ['user' => $user]);
         }
 
-        return $this->render('MainBundle:Default:index.html.twig', ['produits' => $produit, 'user' => null, 'produitp' => $promotion, 'users' => $users,'Pubs' => $Pubs, 'notifs'=>null]);
+        return $this->render('MainBundle:Default:index.html.twig', ['produits' => $produit, 'user' => null, 'produitp' => $promotion, 'users' => $users, 'Pubs' => $Pubs, 'notifs' => null]);
     }
 
     public function ishowAction()
     {
         $user = $this->getUser();
-
+        $em=$this->getDoctrine()->getManager();
+        $abonnement = $em->getRepository(Abonnement::class)->findAll();
         if ($user) {
 
 
-            if ($user->hasRole("ROLE_ARTISAN")){
-                $em=$this->getDoctrine()->getRepository(Produit::class);
-                $produits=$em->findByIdartisan($user->getId());
-                return $this->render('@FOSUser/Profile/show.html.twig', [ 'produits' => $produits,'user' => $user]);
-            }else{
-                return $this->render('@FOSUser/Profile/show.html.twig', [ 'produits' => null,'user' => $user]);
+            if ($user->hasRole("ROLE_ARTISAN")) {
+                $em = $this->getDoctrine()->getRepository(Produit::class);
+                $produits = $em->findByIdartisan($user->getId());
+                return $this->render('@FOSUser/Profile/show.html.twig', ['produits' => $produits, 'user' => $user, 'abos'=>$abonnement]);
+            } else {
+                return $this->render('@FOSUser/Profile/show.html.twig', ['produits' => null, 'user' => $user,'abos'=>$abonnement]);
             }
 
 
@@ -77,21 +79,63 @@ class DefaultController extends Controller
 
     public function showOtherProfilAction(Request $request)
     {
+        $em = $this->getDoctrine()->getManager();
+        $abonnement = $em->getRepository(Abonnement::class)->findAll();
         $userr = $this->getUser();
         $user = $this->getDoctrine()->getRepository(User::class)->find($request->get('id'));
-        $bool=$this->isAboAction($userr->getId(),$request->get('id'));
+        $bool = $this->isAboAction($userr->getId(), $request->get('id'));
         //return new Response($request->get('id'));
-            if ($user->hasRole("ROLE_ARTISAN")) {
-                $em = $this->getDoctrine()->getRepository(Produit::class);
-                $produits = $em->findByIdartisan($user->getId());
+        if ($user->hasRole("ROLE_ARTISAN")) {
+            $em = $this->getDoctrine()->getRepository(Produit::class);
+            $produits = $em->findByIdartisan($user->getId());
 
 
-                return $this->render('@FOSUser/Profile/show.html.twig', ['produits' => $produits, 'user' => $user, 'bool'=> $bool] );
-            } else {
-                return $this->render('@FOSUser/Profile/show.html.twig', ['produits' => null, 'user' => $user, 'bool'=> $bool]);
-            }
+            return $this->render('@FOSUser/Profile/show.html.twig', ['produits' => $produits, 'user' => $user, 'bool' => $bool, 'abos' => $abonnement]);
+        } else {
+            return $this->render('@FOSUser/Profile/show.html.twig', ['produits' => null, 'user' => $user, 'bool' => $bool, 'abos' => $abonnement]);
+        }
     }
 
+
+
+    public function aboAction(Request $request)
+
+    {
+
+        $str = $request->get('idartisan');
+        $abon = new Abonnement();
+        $user1 = $this->getDoctrine()->getRepository(User::class)->find($str);
+
+        $abon->setIdartisan($user1);
+
+        $str1=$request->get('idmembre');
+        $user2 = $this->getDoctrine()->getRepository(User::class)->find($str1);
+        $abon->setIdmembre($user2);
+
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($abon);
+        $em->flush();
+
+        $userr = $this->getUser();
+        $user = $this->getDoctrine()->getRepository(User::class)->find($request->get('idartisan'));
+        $bool = $this->isAboAction($userr->getId(), $request->get('id'));
+        //return new Response($request->get('id'));
+        if ($user->hasRole("ROLE_ARTISAN")) {
+            $em = $this->getDoctrine()->getRepository(Produit::class);
+            $produits = $em->findByIdartisan($user->getId());
+            $em3=$this->getDoctrine()->getManager();
+            $abonnement = $em3->getRepository(Abonnement::class)->findAll();
+
+            return $this->redirectToRoute('main_homepage');
+//            return $this->render('@FOSUser/Profile/show.html.twig', ['produits' => $produits, 'user' => $user, 'bool' => $bool, 'abos'=>$abonnement]);
+        } else {
+            $em3=$this->getDoctrine()->getManager();
+            $abonnement = $em3->getRepository(Abonnement::class)->findAll();
+            return $this->render('@FOSUser/Profile/show.html.twig', ['produits' => null, 'user' => $user, 'bool' => $bool , 'abos'=>$abonnement]);
+        }
+
+
+    }
     public function isAboAction($idM, $idA)
     {
 
@@ -99,73 +143,52 @@ class DefaultController extends Controller
         foreach ($abonnement as $abo) {
 
 
-            if (($abo->getIdmembre() == $idM) && ($abo->getIdartisan() == $idA)) {
+            if (($abo->getIdmembre()->getId() == $idM) && ($abo->getIdartisan()->getId() == $idA)) {
                 return true;
             }
         }
         return false;
     }
-
-    public function aboAction(Request $request)
-
-    {
-
-
-            $abon = new Abonnement();
-            $abon->setIdartisan($request->get('idA'));
-            $abon->setIdmembre($request->get('idM'));
-            $em=$this->getDoctrine()->getManager();
-            $em->persist($abon);
-            $em->flush();
-
-        $userr = $this->getUser();
-        $user = $this->getDoctrine()->getRepository(User::class)->find($request->get('idA'));
-        $bool=$this->isAboAction($userr->getId(),$request->get('id'));
-        //return new Response($request->get('id'));
-        if ($user->hasRole("ROLE_ARTISAN")) {
-            $em = $this->getDoctrine()->getRepository(Produit::class);
-            $produits = $em->findByIdartisan($user->getId());
-
-
-            return $this->render('@FOSUser/Profile/show.html.twig', ['produits' => $produits, 'user' => $user, 'bool'=> $bool] );
-        } else {
-            return $this->render('@FOSUser/Profile/show.html.twig', ['produits' => null, 'user' => $user, 'bool'=> $bool]);
-        }
-
-
-
-    }
-
     public function desaboAction(Request $request)
     {
-        $userr = $this->getUser();
+        $str = $request->get('idartisan');
+        $user1 = $this->getDoctrine()->getRepository(User::class)->find($str);
+
+        $str1=$request->get('idmembre');
+        $user2 = $this->getDoctrine()->getRepository(User::class)->find($str1);
+
+
         $abonnement = $this->getDoctrine()->getRepository(Abonnement::class)->findAll();
         foreach ($abonnement as $abo) {
 
 
-            if (($abo->getIdmembre() == $userr->getId()) && ($abo->getIdartisan() == $request->get('idA'))) {
+            if (($abo->getIdmembre() == $user2) && ($abo->getIdartisan() == $user1)) {
+
+                $a = new Abonnement();
                 $a = $this->getDoctrine()->getRepository(Abonnement::class)->find($abo->getId());
-                $abonnement -> remove($a);
-                $abonnement -> flush();
+                var_dump($a);
+                $abonnement->remove();
+                $abonnement->flush();
             }
         }
 
         $userr = $this->getUser();
-        $user = $this->getDoctrine()->getRepository(User::class)->find($request->get('idA'));
-        $bool=$this->isAboAction($userr->getId(),$request->get('idA'));
+        $user = $this->getDoctrine()->getRepository(User::class)->find($request->get('idartisan'));
+        $bool = $this->isAboAction($userr->getId(), $request->get('idartisan'));
         //return new Response($request->get('id'));
         if ($user->hasRole("ROLE_ARTISAN")) {
             $em = $this->getDoctrine()->getRepository(Produit::class);
             $produits = $em->findByIdartisan($user->getId());
 
 
-            return $this->render('@FOSUser/Profile/show.html.twig', ['produits' => $produits, 'user' => $user, 'bool'=> $bool] );
+            return $this->render('@FOSUser/Profile/show.html.twig', ['produits' => $produits, 'user' => $user, 'bool' => $bool]);
         } else {
-            return $this->render('@FOSUser/Profile/show.html.twig', ['produits' => null, 'user' => $user, 'bool'=> $bool]);
+            return $this->render('@FOSUser/Profile/show.html.twig', ['produits' => null, 'user' => $user, 'bool' => $bool]);
         }
 
-
     }
+
+}
 
 //    public function AffichierPromotionAction()
 //    {
@@ -183,4 +206,4 @@ class DefaultController extends Controller
 //        return $this->render('ProduitBundle:Produit:index.html.twig',['produit' => $statement]);
 //
 //    }
-}
+
