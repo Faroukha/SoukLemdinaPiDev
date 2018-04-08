@@ -65,8 +65,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-3">
-                        <a class="logo" href="{{ path('main_homepage') }}"> <img alt=""
-                                                                                 src="{{ asset('bundles/main/img/logo.png') }}"></a>
+                        <a class="logo" href="{{ path('main_homepage') }}"> <img alt=""src="{{ asset('bundles/main/img/logo.png') }}"></a>
                     </div>
                     <!--  End Col -->
 
@@ -94,7 +93,7 @@
                                             {% if app.user is not null %}
 
                                                 <li>
-                                                    <a href="{{ path('contact') }}">Reclamations</a>
+                                                    <a href="{{ path('contact') }}">Reclamations<i class="fa fa-angle-down"></i></a>
                                                     {% if app.user is not null %}
                                                     <ul class="sub-menu">
                                                         <li>
@@ -106,20 +105,6 @@
                                                     </ul>
                                                     {% endif %}
                                                 </li>
-
-                                                {#<li>#}
-                                                    {#<a href="{{ path('blog') }}">Blog <i class="fa fa-angle-down"></i></a>#}
-                                                    {#<ul class="sub-menu">#}
-                                                        {#<li>#}
-                                                            {#<a href="{{ path('blog') }}">Tous les articles</a>#}
-                                                        {#</li>#}
-                                                        {##}
-                                                            {#<li>#}
-                                                                {#<a href="{{ path('ajouter_blog_bds') }}">Ajouter un blog</a>#}
-                                                            {#</li>#}
-                                                        {#{% endif %}#}
-                                                    {#</ul>#}
-                                                {#</li>#}
                                             {% else %}
                                                 <li>
                                                     <a href="{{ path('fos_user_security_login') }}">Reclamations</a>
