@@ -22,7 +22,7 @@
         <div class="prdct_dtls_page_area">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-3 col-md-3 col-sm-6">
+                    <div class="col-lg-3 col-md-5 col-sm-6">
                         <div class="our-team">
                             <div class="pic">
                                 <img src="{{ asset("Uploads/images/") ~ user.image }}" alt="">
@@ -32,6 +32,7 @@
                                 <span class="post">{{ user.username }}</span>
                                 <ul class="social">
                                     <li><a href="#"><i class="fa fa-cogs"></i></a></li>
+                                    <li><a href="{{ path('fos_user_change_password') }}"><i class="fa fa-unlock-alt"></i></a></li>
 
                                 </ul>
                             </div>
@@ -41,36 +42,80 @@
 
 
                     <!-- Product Details Content -->
-                    <div class="col-md-6 col-xs-12">
-                        <div class="prdct_dtls_content">
-                            <span class="pd_title">{{ user.username }}</span>
-                            <div class="pd_text">
-                            <span class="pd_title"
-                                  style="font-size: 14px; display: contents;">Nom  :</span> {{ user.nom }}
-                            </div>
-                            <div class="pd_text">
-                            <span class="pd_title"
-                                  style="font-size: 14px; display: contents;">Prenom  :</span> {{ user.prenom }}
-                            </div>
-                            <div class="pd_text">
-                            <span class="pd_title"
-                                  style="font-size: 14px; display: contents;">E-mail  :</span> {{ user.email }}
-                            </div>
-                            <div class="pd_text">
-                            <span class="pd_title"
-                                  style="font-size: 14px; display: contents;">Date de naissance  :</span> {{ user.birthdate|date("m/d/Y") }}
-                            </div>
-                            <div class="pd_text">
-                            <span class="pd_title"
-                                  style="font-size: 14px; display: contents;">Phone  :</span> {{ user.phone }}
-                            </div>
-                            <div class="pd_text">
-                            <span class="pd_title"
-                                  style="font-size: 14px; display: contents;">Adresse  :</span> {{ user.adresse }}
+                    <div class="col-md-8 col-xs-12">
+                        <table border="0" width="0">
+                            <tr>
+                                <td><br></td>
+                            </tr>
+                            <tr><br></tr>
+                            <tr> <ul class="post-bar">
+                                    <li><h2 class="title" style="font-family: 'Lato'">Informations générales</h2></li>
+                                    <li><i class="fa fa-credit-card" style="color: #ff0000; height: 40px" ></i></li>
 
-                            </div>
+                                </ul></tr>
+                            <tr>
+                                <td><div class="single_info">
+                                        <div class="con_icon"><i class="fa fa-user"></i></div>
+                                    </div><br></td>
+                                <td>{{ user.prenom }} {{ user.nom }}</td>
+                            </tr>
+                            <tr>
+                                <td><div class="single_info">
+                                        <div class="con_icon"><i class="fa fa-envelope"></i></div>
+                                    </div><br></td>
+                                <td>{{ user.email }}</td>
+                            </tr>
+                            <tr>
+                                <td><div class="single_info">
+                                        <div class="con_icon"><i class="fa fa-birthday-cake"></i></div>
+                                    </div><br></td>
+                                <td>{{ user.birthdate|date("m/d/Y") }}</td>
+                            </tr>
+                            <tr>
+                                <td><div class="single_info">
+                                        <div class="con_icon"><i class="fa fa-phone-square"></i></div>
+                                    </div><br></td>
+                                <td>{{ user.phone }}</td>
+                            </tr>
+                            <tr>
+                                <td><div class="single_info">
+                                        <div class="con_icon"><i class="fa fa-map-pin"></i></div>
+                                    </div><br></td>
+                                <td>{{ user.adresse }}</td>
+                            </tr>
+                        </table>
 
-                            <a href="{{ path('fos_user_change_password') }}">Change Password</a>
+                        {##}
+                        {#<div class="prdct_dtls_content">#}
+                            {##}
+                            {#<span class="pd_title">{{ user.username }}</span>#}
+                            {#<div class="pd_text">#}
+                            {#<span class="pd_title"#}
+                                  {#style="font-size: 14px; display: contents;">Nom  :</span> {{ user.nom }}#}
+                            {#</div>#}
+                            {#<div class="pd_text">#}
+                            {#<span class="pd_title"#}
+                                  {#style="font-size: 14px; display: contents;">Prenom  :</span> {{ user.prenom }}#}
+                            {#</div>#}
+                            {#<div class="pd_text">#}
+                            {#<span class="pd_title"#}
+                                  {#style="font-size: 14px; display: contents;">E-mail  :</span> {{ user.email }}#}
+                            {#</div>#}
+                            {#<div class="pd_text">#}
+                            {#<span class="pd_title"#}
+                                  {#style="font-size: 14px; display: contents;">Date de naissance  :</span> {{ user.birthdate|date("m/d/Y") }}#}
+                            {#</div>#}
+                            {#<div class="pd_text">#}
+                            {#<span class="pd_title"#}
+                                  {#style="font-size: 14px; display: contents;">Phone  :</span> {{ user.phone }}#}
+                            {#</div>#}
+                            {#<div class="pd_text">#}
+                            {#<span class="pd_title"#}
+                                  {#style="font-size: 14px; display: contents;">Adresse  :</span> {{ user.adresse }}#}
+
+                            {#</div>#}
+
+
 
                         </div>
 
