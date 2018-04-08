@@ -11,3 +11,6 @@ about:
 add_contact:
     path:     /add
     defaults: { _controller: MainBundle:Contact:add }
+allreclamationUser:
+    path:     /userreclam
+    defaults: { _controller: MainBundle:Default:allreclamationUser }

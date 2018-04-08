@@ -92,21 +92,50 @@
 
                                         {% block admin %}
                                             {% if app.user is not null %}
+
                                                 <li>
                                                     <a href="{{ path('contact') }}">Reclamations</a>
+                                                    {% if app.user is not null %}
+                                                    <ul class="sub-menu">
+                                                        <li>
+                                                            <a href="{{ path('allreclamationUser', {'idUser':app.user.id}) }}">Mes Reclamations</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="{{ path('contact') }}">Ajouter Reclamation</a>
+                                                        </li>
+                                                    </ul>
+                                                    {% endif %}
                                                 </li>
+
+                                                {#<li>#}
+                                                    {#<a href="{{ path('blog') }}">Blog <i class="fa fa-angle-down"></i></a>#}
+                                                    {#<ul class="sub-menu">#}
+                                                        {#<li>#}
+                                                            {#<a href="{{ path('blog') }}">Tous les articles</a>#}
+                                                        {#</li>#}
+                                                        {##}
+                                                            {#<li>#}
+                                                                {#<a href="{{ path('ajouter_blog_bds') }}">Ajouter un blog</a>#}
+                                                            {#</li>#}
+                                                        {#{% endif %}#}
+                                                    {#</ul>#}
+                                                {#</li>#}
                                             {% else %}
                                                 <li>
                                                     <a href="{{ path('fos_user_security_login') }}">Reclamations</a>
                                                 </li>
+
                                             {% endif %}
 
                                             <li>
                                                 <a href="{{ path('blog') }}">Blog <i class="fa fa-angle-down"></i></a>
                                                 <ul class="sub-menu">
-                                                    <li><a href="{{ path('blog') }}">Tous les articles</a></li>
+                                                    <li>
+                                                        <a href="{{ path('blog') }}">Tous les articles</a>
+                                                    </li>
                                                     {% if app.user is not null %}
-                                                        <li><a href="{{ path('ajouter_blog_bds') }}">Ajouter un blog</a>
+                                                        <li>
+                                                            <a href="{{ path('ajouter_blog_bds') }}">Ajouter un blog</a>
                                                         </li>
                                                     {% endif %}
                                                 </ul>
