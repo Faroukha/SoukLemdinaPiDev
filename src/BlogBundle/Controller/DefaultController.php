@@ -45,9 +45,12 @@ class DefaultController extends Controller
         $notif = $em->getRepository(Notification::class)->findAll();
         $Blogs = $em->getRepository(Blog::class)->find($request->get('id'));
         $Coms = $em->getRepository(CommentaireBlog::class)->findByidBlog($request->get('id'));
+
         $notif = $em->getRepository(Notification::class)->findAll();
 
+
         return $this->render('BlogBundle:Default:blogDetail.html.twig', ['Blog' => $Blogs, 'Com' => $Coms, 'notifs' => $notif]);
+
     }
 
 //    public function ajouterBlogAction(Request $request)

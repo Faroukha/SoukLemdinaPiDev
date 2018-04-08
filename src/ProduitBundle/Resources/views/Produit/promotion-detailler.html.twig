@@ -122,8 +122,12 @@
                             </li>
                         </ul>
                         <div class="col-md-6 rcf_pdnglft">
+                            {% set i=0 %}
+
                             {% for c in commentaire %}
                                 {% if c.idproduit==produit.id %}
+                                    {% set i=i+1 %}
+
                                     <div class="single_blog">
                                         <div class="blog_content">
                                             <h4 class="post_title">{{ c.emailUser }}:</h4>
@@ -133,6 +137,8 @@
                                     </div>
                                 {% endif %}
                             {% endfor %}
+                            <h6 class="post_title">{{ i }} Commentaires  </h6>
+
                             {% if app.user is not null %}
                                 <div class="rtng_cmnt_form_area fix">
                                     <div class="rtng_form">

@@ -49,13 +49,16 @@
     <div class="product_item">
         <div class="row">
             <div class="col-md-2"></div>
+
             <div class="col-md-6">
                 {% for recs in recs %}
                     {% if recs.idUser.id == app.user.id  %}
+
                     <div class="col-md-6 col-xs-12">
                         <div class="prdct_dtls_content">
                             <div class="pd_text">
                             <span class="pd_title"
+
                                   style="font-size: 14px; display: contents;">Nom  :</span> {{ recs.Name }}
                             </div>
                             <div class="pd_text">
@@ -108,6 +111,7 @@
             {#</div>#}
         </div>
     </div>
+
 
 
 {% endblock %}

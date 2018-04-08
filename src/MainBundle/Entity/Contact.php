@@ -193,6 +193,7 @@ class Contact
         return $this->etat;
     }
 
+
     /**
      * Set idUser
      *
@@ -216,4 +217,5 @@ class Contact
     {
         return $this->idUser;
     }
+
 }
