@@ -75,27 +75,22 @@
                 <!-- Product Details Content -->
                 <div class="col-md-6 col-xs-12">
                     <div class="prdct_dtls_content">
-                        <a class="pd_title" href="#">{{ produit.titre }}</a>
+
+                        <a class="pd_title" href="#">Titre:</a>
+                        <h4>{{ produit.titre}}</h4>
+                        <div class="prdct_dtls_content">
+
+                            <a class="pd_title" href="#">Categorie;</a>
+                            <h4>{{ produit.categorie }}</h4>
                         <div class="pd_price_dtls fix">
                             <!-- Product Price -->
-                            <div class="pd_price">
-                                <span class="new">{{ produit.prix }}</span>
-                            </div>
-                            <!-- Product Ratting -->
-                            <div class="pd_ratng">
-                                <div class="rtngs">
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star-half-o"></i>
-                                </div>
-                            </div>
+
+                            <a class="pd_title" href="#">Prix:</a>
+                            <h4>{{ produit.prix }}</h4>
+
                         </div>
-                        <div class="pd_text">
-                            <h4>Description</h4>
-                            <p>{{ produit.description }}</p>
-                        </div>
+                            <a class="pd_title" href="#">Description;</a>
+                            <h4>{{ produit.description }}</h4>
 
                         <form method="post" action="{{ path("AddToCart") }}">
 
@@ -152,7 +147,7 @@
                                             <div class="input-area"><textarea name="text"
                                                                               placeholder="Write a review"></textarea>
                                             </div>
-                                            <input class="btn border-btn" type="submit" value="Add Review"/>
+                                            <input class="btn border-btn" type="submit" value="ajouter commentaire"/>
                                         </form>
                                     </div>
                                 </div>

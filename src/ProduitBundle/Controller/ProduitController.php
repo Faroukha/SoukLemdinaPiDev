@@ -49,7 +49,8 @@ class ProduitController extends Controller
 
     public function AjouterProduitAction(Request $request )
     {
-
+        $em=$this->getDoctrine()->getManager();
+        $notif = $em->getRepository(Notification::class)->findAll();
         $po = new Produit();
         $form = $this->createFormBuilder($po)
 
@@ -128,26 +129,24 @@ class ProduitController extends Controller
         $em = $this->getDoctrine()->getManager();
         $prod = $em->getRepository("MainBundle:Produit")->find($id);
 
-            $data = [
-                'titre' => $request->get('titre'),
-                'prix' => $request->get('prix'),
-                'quantite' => $request->get('quantite'),
-                'description' => $request->get('description'),
-                'categorie' => $request->get('categorie'),
-            ];
-            $prod->setTitre($data['titre']);
-            $prod->setPrix($data['prix']);
-            $prod->setQuantite($data['quantite']);
-            $prod->setDescription($data['description']);
-            $prod->setCategorie($data['categorie']);
+        $data = [
+            'titre' => $request->get('titre'),
+            'prix' => $request->get('prix'),
+            'quantite' => $request->get('quantite'),
+            'description' => $request->get('description'),
+            'categorie' => $request->get('categorie'),
+        ];
+        $prod->setTitre($data['titre']);
+        $prod->setPrix($data['prix']);
+        $prod->setQuantite($data['quantite']);
+        $prod->setDescription($data['description']);
+        $prod->setCategorie($data['categorie']);
 
-            $em->persist($prod);
-            $em->flush();
+        $em->persist($prod);
+        $em->flush();
 
         return $this->redirectToRoute('ff');
     }
-
-
     /**
      * @param Request $request
      * @return Response
@@ -155,7 +154,7 @@ class ProduitController extends Controller
     public function RechercheAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-        $titre = $request->get('text');
+        $titre = trim(strtolower($request->get('text')));
         $conn=$this->getDoctrine()->getConnection() ;
         $query = "SELECT * FROM produit WHERE titre LIKE '%" . $titre . "%' ;";
         $stmt = $conn->prepare($query);

@@ -126,11 +126,12 @@ class DefaultController extends Controller
             $em3=$this->getDoctrine()->getManager();
             $abonnement = $em3->getRepository(Abonnement::class)->findAll();
 
-            return $this->redirectToRoute('main_homepage');
-//            return $this->render('@FOSUser/Profile/show.html.twig', ['produits' => $produits, 'user' => $user, 'bool' => $bool, 'abos'=>$abonnement]);
+           //return $this->redirectToRoute('main_homepage');
+           return $this->render('@FOSUser/Profile/show.html.twig', ['produits' => $produits, 'user' => $user, 'bool' => true, 'abos'=>$abonnement]);
         } else {
             $em3=$this->getDoctrine()->getManager();
             $abonnement = $em3->getRepository(Abonnement::class)->findAll();
+           // return $this->redirectToRoute('main_homepage');
             return $this->render('@FOSUser/Profile/show.html.twig', ['produits' => null, 'user' => $user, 'bool' => $bool , 'abos'=>$abonnement]);
         }
 
@@ -165,10 +166,11 @@ class DefaultController extends Controller
             if (($abo->getIdmembre() == $user2) && ($abo->getIdartisan() == $user1)) {
 
                 $a = new Abonnement();
-                $a = $this->getDoctrine()->getRepository(Abonnement::class)->find($abo->getId());
-                var_dump($a);
-                $abonnement->remove();
-                $abonnement->flush();
+                $em=$this->getDoctrine()->getManager();
+                $a= $em->getRepository(Abonnement::class)->find($abo->getId());
+               // var_dump($a);
+                $em->remove($a);
+                $em->flush();
             }
         }
 
@@ -179,11 +181,12 @@ class DefaultController extends Controller
         if ($user->hasRole("ROLE_ARTISAN")) {
             $em = $this->getDoctrine()->getRepository(Produit::class);
             $produits = $em->findByIdartisan($user->getId());
+            $em1= $this->getDoctrine()->getManager();
+            $abonnement=$em1->getRepository(Abonnement::class)->findAll();
 
-
-            return $this->render('@FOSUser/Profile/show.html.twig', ['produits' => $produits, 'user' => $user, 'bool' => $bool]);
+            return $this->render('@FOSUser/Profile/show.html.twig', ['produits' => $produits, 'user' => $user, 'bool' => $bool, 'abos'=>$abonnement]);
         } else {
-            return $this->render('@FOSUser/Profile/show.html.twig', ['produits' => null, 'user' => $user, 'bool' => $bool]);
+            return $this->render('@FOSUser/Profile/show.html.twig', ['produits' => null, 'user' => $user, 'bool' => $bool, 'abos'=>$abonnement]);
         }
 
     }
