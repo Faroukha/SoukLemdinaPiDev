@@ -28,6 +28,8 @@ class AppKernel extends Kernel
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
             new Nomaya\SocialBundle\NomayaSocialBundle(),
             new MailBundle\MailBundle(),
+            new Http\HttplugBundle\HttplugBundle(),
+            new HWI\Bundle\OAuthBundle\HWIOAuthBundle(),
 
         ];
 

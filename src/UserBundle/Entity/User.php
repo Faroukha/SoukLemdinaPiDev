@@ -37,7 +37,18 @@ class User extends BaseUser
     private $prenom;
 
 
-
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="facebookID", type="string", length=180, nullable=true)
+     */
+    private $facebookID;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="googleID", type="string", length=180, nullable=true)
+     */
+    private $googleID;
 
 
 
@@ -253,5 +264,53 @@ class User extends BaseUser
     public function getImageb()
     {
         return $this->imageb;
+    }
+
+    /**
+     * Set facebookID
+     *
+     * @param string $facebookID
+     *
+     * @return User
+     */
+    public function setFacebookID($facebookID)
+    {
+        $this->facebookID = $facebookID;
+
+        return $this;
+    }
+
+    /**
+     * Get facebookID
+     *
+     * @return string
+     */
+    public function getFacebookID()
+    {
+        return $this->facebookID;
+    }
+
+    /**
+     * Set googleID
+     *
+     * @param string $googleID
+     *
+     * @return User
+     */
+    public function setGoogleID($googleID)
+    {
+        $this->googleID = $googleID;
+
+        return $this;
+    }
+
+    /**
+     * Get googleID
+     *
+     * @return string
+     */
+    public function getGoogleID()
+    {
+        return $this->googleID;
     }
 }
