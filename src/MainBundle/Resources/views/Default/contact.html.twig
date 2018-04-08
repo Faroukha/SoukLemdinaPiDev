@@ -72,7 +72,9 @@
                 <div class="row">
                     <div class="contact_frm_area text-left col-lg-6 col-md-12 col-xs-12">
                         <h3>Ajouter une reclamation</h3>
-                        <form action="{{ path('add_contact') }}" method="post">
+                        <form action="{{ path('add_contact') }}" method="POST">
+
+                            <input type="hidden" value="{{ app.user.id }}" name="idUser">
                             <div class="form-row">
                                 <div class="form-group col-sm-6"><input type="text" class="form-control" name="name"
                                                                         placeholder="Name*" required/></div>
