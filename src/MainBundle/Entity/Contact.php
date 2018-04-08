@@ -21,6 +21,13 @@ class Contact
      */
     private $id;
 
+
+    /**
+     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User")
+     * @ORM\JoinColumn(name="idUser", referencedColumnName="id")
+     */
+    private $idUser;
+
     /**
      * @var string
      *
@@ -185,4 +192,30 @@ class Contact
     {
         return $this->etat;
     }
+
+
+    /**
+     * Set idUser
+     *
+     * @param \UserBundle\Entity\User $idUser
+     *
+     * @return Contact
+     */
+    public function setIdUser(\UserBundle\Entity\User $idUser = null)
+    {
+        $this->idUser = $idUser;
+
+        return $this;
+    }
+
+    /**
+     * Get idUser
+     *
+     * @return \UserBundle\Entity\User
+     */
+    public function getIdUser()
+    {
+        return $this->idUser;
+    }
+
 }

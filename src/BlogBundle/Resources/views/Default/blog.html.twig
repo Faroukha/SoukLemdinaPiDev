@@ -69,10 +69,6 @@
             <div class="row">
                 <div class="col-md-8 col-xs-12">
 
-                        <div class="pd_btn fix">
-                            <a class="btn btn-default acc_btn" href="{{ path('ajouter_blog_bds') }}">Ajouter Blog</a>
-                        </div>
-
 
                     {% for Blog in Blogs %}
                         <div class="single_blog">
@@ -114,9 +110,11 @@
                     <div class="single_sidebar search_widget">
                         <h3 class="sdbr_title">Search</h3>
                         <div class="sdbr_inner">
-                            <form class="search_form" method="post" action="#">
-                                <input type="text" class="form-control search_input" name="s" id="s"
+                            <form class="search_form" method="GET" action="{{ path('Rech_blog') }}">
+
+                                <input type="text" class="form-control search_input" name="text" id="text"
                                        placeholder="Search Here ...">
+
                                 <button type="submit" class="search_button"><i class="fa fa-search"></i></button>
                             </form>
                         </div>
@@ -152,7 +150,7 @@
                 </div><!-- End Blog Sidebar -->
         </div>
     </div>
-    <div class="blog_pagination text-center" aria-label="Page navigation example">
-        {{ knp_pagination_render(Blogs) }}
-    </div>
+    {#<div class="blog_pagination text-center" aria-label="Page navigation example">#}
+        {#{{ knp_pagination_render(Blogs) }}#}
+    {#</div>#}
 {% endblock %}
