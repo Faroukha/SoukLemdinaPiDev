@@ -8,6 +8,7 @@
 
 namespace ProduitBundle\Controller;
 
+use MainBundle\Entity\Notification;
 use MainBundle\Entity\Produit;
 use MainBundle\Entity\Promotion;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
