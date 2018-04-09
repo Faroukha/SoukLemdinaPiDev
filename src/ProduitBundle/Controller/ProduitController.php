@@ -101,7 +101,7 @@ class ProduitController extends Controller
     public function supprimerProduitAction(Request $request )
     {
         $em=$this->getDoctrine()->getManager();
-        $produit=$em->getRepository(Produit::class)->find($request->get("id"));;
+        $produit=$em->getRepository(Produit::class)->find($request->get("id"));
         $em->remove($produit);
         $em->flush();
         return $this->redirectToRoute("main_homepage");
@@ -135,14 +135,11 @@ class ProduitController extends Controller
             'prix' => $request->get('prix'),
             'quantite' => $request->get('quantite'),
             'description' => $request->get('description'),
-            'categorie' => $request->get('categorie'),
         ];
         $prod->setTitre($data['titre']);
         $prod->setPrix($data['prix']);
         $prod->setQuantite($data['quantite']);
         $prod->setDescription($data['description']);
-        $prod->setCategorie($data['categorie']);
-
         $em->persist($prod);
         $em->flush();
 
