@@ -6,7 +6,7 @@ parameters:
     database_user: root
     database_password: null
     mailer_transport: gmail
-    mailer_host: 127.0.0.1
+    mailer_host: smtp.gmail.com
     mailer_user: espritplus2017@gmail.com
     mailer_password: Azerty2017
     secret: a820bc7f28317f7ecf00fcaccd8b737e696e442fs
