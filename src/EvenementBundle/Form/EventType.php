@@ -34,12 +34,7 @@ class EventType extends AbstractType
             ))
 
             ->add('lieu',TextType::class)
-            ->add('longitude',NumberType::class,array(
-                'scale'=>15
-            ))
-            ->add('latitude',NumberType::class,array(
-                'scale'=>15
-            ))
+
             ->add('photo', FileType::class, array('attr' => array('class' => 'form-control file'),'data_class' => null,'label'=>'Photo'))
             ->add('nbMax',NumberType::class)
 
