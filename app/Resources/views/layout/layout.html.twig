@@ -129,7 +129,18 @@
                                                 <li><a href="{{ path('ff') }}">Profil</a></li>
                                             {% endif %}
                                         {% endblock %}
-                                        <li><a href="#">Evenement</a></li>
+                                        <li><a href="{{ path('all_events') }}">Evenement <i class="fa fa-angle-down"></i> </a>
+
+                                            <ul class="sub-menu">
+                                                <li><a href="{{ path('all_events') }}">Tous les evenements</a></li>
+                                                {% if app.user is not null %}
+                                                    <li><a href="{{ path('add_event') }}">Ajouter un evenement</a>
+                                                    </li>
+                                                {% endif %}
+                                            </ul>
+
+
+                                        </li>
                                         {% if app.user is not null %}
                                             <li>
 

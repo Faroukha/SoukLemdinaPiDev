@@ -49,8 +49,7 @@ class ProduitController extends Controller
 
     public function AjouterProduitAction(Request $request )
     {
-        $em=$this->getDoctrine()->getManager();
-        $notif = $em->getRepository(Notification::class)->findAll();
+
         $po = new Produit();
         $form = $this->createFormBuilder($po)
 

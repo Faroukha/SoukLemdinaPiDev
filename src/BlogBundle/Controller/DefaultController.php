@@ -34,7 +34,7 @@ class DefaultController extends Controller
         );
 
 
-        return $this->render('BlogBundle:Default:blog.html.twig', ['Blogs' => $Blogs,'users'=>$user, 'notifs'=>$notif]);
+        return $this->render('BlogBundle:Default:blog.html.twig', ['Blogs' => $Blogs, 'users' => $user, 'notifs' => $notif]);
     }
 
     public function blogDetailAction(Request $request)
@@ -45,21 +45,45 @@ class DefaultController extends Controller
         $notif = $em->getRepository(Notification::class)->findAll();
         $Blogs = $em->getRepository(Blog::class)->find($request->get('id'));
         $Coms = $em->getRepository(CommentaireBlog::class)->findByidBlog($request->get('id'));
+
         $notif = $em->getRepository(Notification::class)->findAll();
 
-        return $this->render('BlogBundle:Default:blogDetail.html.twig', ['Blog' => $Blogs ,'Com' => $Coms, 'notifs'=>$notif]);
+
+        return $this->render('BlogBundle:Default:blogDetail.html.twig', ['Blog' => $Blogs, 'Com' => $Coms, 'notifs' => $notif]);
+
     }
 
-    public function ajouterBlogAction(Request $request )
+
+//    public function ajouterBlogAction(Request $request)
+//    {
+//        $Blog = new Blog();
+//        if ($request->isMethod('POST')) {
+//            $Blog->setTitre($request->get('titre'));
+//
+//            $Blog->setDescription($request->get('description'));
+//            $Blog->setImage($request->get('image'));
+//            $Blog->setNbrLike(0);
+//            $em = $this->getDoctrine()->getManager();
+//            $user = $em->getRepository(User::class)->find($request->get('idUser'));
+//            $Blog->setIdUser($user);
+//
+//
+//            $em->persist($Blog);
+//            $em->flush();
+//        }
+//        return $this->redirectToRoute('blog');
+//
+//    }
+    public function ajouterBlogAction(Request $request)
+
     {
         $Blog = new Blog();
-        $em=$this->getDoctrine()->getManager();
+        $em = $this->getDoctrine()->getManager();
 
         $notif = $em->getRepository(Notification::class)->findAll();
 
 
         $form = $this->createFormBuilder($Blog)
-
             ->add('titre', TextType::class)
             ->add('description', TextType::class)
             ->add('image', FileType::class, array('label' => 'Image(JPG)'))
@@ -77,39 +101,40 @@ class DefaultController extends Controller
             $em->flush();
         }
         return $this->render('BlogBundle:Default:addBlog.html.twig',
-            ['form' => $form->createView() , 'notifs'=>$notif]);
+            ['form' => $form->createView(), 'notifs' => $notif]);
     }
 
     public function ishowBlogAction()
-    {            $em = $this->getDoctrine()->getManager();
+    {
+        $em = $this->getDoctrine()->getManager();
 
         $notif = $em->getRepository(Notification::class)->findAll();
 
-        return $this->render('BlogBundle:Default:addBlog.html.twig', [ 'notifs'=>$notif]);
+        return $this->render('BlogBundle:Default:addBlog.html.twig', ['notifs' => $notif]);
     }
 
     public function addComAction(Request $request)
     {
         $Com = new CommentaireBlog();
 
-            $Com->setDescription($request->get('description'));
-            $em = $this->getDoctrine()->getManager();
-            $user = $em->getRepository(User::class)->find($request->get('idUser'));
-            $Blog = $em->getRepository(Blog::class)->find($request->get('idBlog'));
+        $Com->setDescription($request->get('description'));
+        $em = $this->getDoctrine()->getManager();
+        $user = $em->getRepository(User::class)->find($request->get('idUser'));
+        $Blog = $em->getRepository(Blog::class)->find($request->get('idBlog'));
         $notif = $em->getRepository(Notification::class)->findAll();
 
         $Com->setIdUser($user);
-            $Com->setIdBlog($Blog);
-            $em->persist($Com);
-            $em->flush();
+        $Com->setIdBlog($Blog);
+        $em->persist($Com);
+        $em->flush();
         $Coms = $em->getRepository(CommentaireBlog::class)->findAll();
-        return $this->render('BlogBundle:Default:blogDetail.html.twig', ['Blog' => $Blog ,'Com' => $Coms, 'notifs'=>$notif]);
+        return $this->render('BlogBundle:Default:blogDetail.html.twig', ['Blog' => $Blog, 'Com' => $Coms, 'notifs' => $notif]);
     }
 
     public function delComAction(Request $request)
     {
-        $em=$this->getDoctrine()->getManager();
-        $Com=$em->getRepository(CommentaireBlog::class)->find($request->get("idCom"));;
+        $em = $this->getDoctrine()->getManager();
+        $Com = $em->getRepository(CommentaireBlog::class)->find($request->get("idCom"));;
         $em->remove($Com);
         $em->flush();
 
@@ -119,15 +144,32 @@ class DefaultController extends Controller
 
         $Blogs = $em->getRepository(Blog::class)->find($request->get('id'));
         $Coms = $em->getRepository(CommentaireBlog::class)->findByidBlog($request->get('id'));
-        return $this->render('BlogBundle:Default:blogDetail.html.twig', ['Blog' => $Blogs ,'Com' => $Coms,'notifs'=>$notif]);
+        return $this->render('BlogBundle:Default:blogDetail.html.twig', ['Blog' => $Blogs, 'Com' => $Coms, 'notifs' => $notif]);
     }
 
-    public function deleteBlogAction(Request $request){
-        $em=$this->getDoctrine()->getManager();
-        $blog=$em->getRepository(Blog::class)->find($request->get("id"));;
+    public function deleteBlogAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $blog = $em->getRepository(Blog::class)->find($request->get("id"));;
         $em->remove($blog);
         $em->flush();
         return $this->redirectToRoute("blog");
+    }
+
+    public function SearchAction(Request $request){
+        $em = $this->getDoctrine()->getManager();
+        $titre = trim(strtolower($request->get('text')));
+        $conn=$this->getDoctrine()->getConnection() ;
+        $query = "SELECT * FROM blog WHERE titre LIKE '%" . $titre . "%' ;";
+        $stmt = $conn->prepare($query);
+        $stmt->execute([]);
+
+        $notif = $em->getRepository(Notification::class)->findAll();
+        $blog=  $stmt->fetchAll();
+        $user = $em->getRepository(User::class)->findAll();
+        $users = $em->getRepository(User::class)->findAll();
+        return $this->render("BlogBundle:Default:blog.html.twig",['notifs'=>$notif, 'Blogs'=>$blog, 'users'=>$users, 'user'=>$user]);
+
     }
 }
 
