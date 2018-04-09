@@ -46,4 +46,6 @@ modifier_temp:
 rechercher_produit:
      path:     /rechercher
      defaults: { _controller: ProduitBundle:Produit:Recherche }
-
+addRate:
+    path:     /rate
+    defaults: { _controller: ProduitBundle:Rate:add }
