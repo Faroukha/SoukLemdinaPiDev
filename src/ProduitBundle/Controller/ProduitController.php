@@ -88,8 +88,10 @@ class ProduitController extends Controller
 
 
         }
+        $em = $this->getDoctrine()->getManager();
+        $notif = $em->getRepository(Notification::class)->findAll();
         return $this->render('ProduitBundle:Produit:ajouter.html.twig',
-            ['form' => $form->createView(), 'notifs'=>$notif]);
+            ['form' => $form->createView(),'notifs'=>$notif]);
         }
 
     /**
