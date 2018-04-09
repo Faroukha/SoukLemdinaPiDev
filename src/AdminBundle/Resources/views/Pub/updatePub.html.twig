@@ -46,8 +46,8 @@
     </div>
     <div class="col-lg-offset-3 col-md-6 ">
         <div class="comment-form">
-            <form action="{{ path('updatePub', {'id' : id}) }}" method="POST">
-                <input type="hidden" value="{{ pub.id }}" name="id">
+            <form action="{{ path('updatePub',{'id' :id}) }}" method="POST">
+
                 <input type="date" name="datedeb">
                 <input type="date" name="datefin">
                 <button type="submit">Save</button>

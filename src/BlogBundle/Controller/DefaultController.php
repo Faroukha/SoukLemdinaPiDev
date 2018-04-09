@@ -50,26 +50,6 @@ class DefaultController extends Controller
         return $this->render('BlogBundle:Default:blogDetail.html.twig', ['Blog' => $Blogs ,'Com' => $Coms, 'notifs'=>$notif]);
     }
 
-//    public function ajouterBlogAction(Request $request)
-//    {
-//        $Blog = new Blog();
-//        if ($request->isMethod('POST')) {
-//            $Blog->setTitre($request->get('titre'));
-//
-//            $Blog->setDescription($request->get('description'));
-//            $Blog->setImage($request->get('image'));
-//            $Blog->setNbrLike(0);
-//            $em = $this->getDoctrine()->getManager();
-//            $user = $em->getRepository(User::class)->find($request->get('idUser'));
-//            $Blog->setIdUser($user);
-//
-//
-//            $em->persist($Blog);
-//            $em->flush();
-//        }
-//        return $this->redirectToRoute('blog');
-//
-//    }
     public function ajouterBlogAction(Request $request )
     {
         $Blog = new Blog();

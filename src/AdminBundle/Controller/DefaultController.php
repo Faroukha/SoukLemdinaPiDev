@@ -5,6 +5,8 @@ namespace AdminBundle\Controller;
 use AdminBundle\AdminBundle;
 use MainBundle\Entity\Contact;
 use MainBundle\Entity\Pubg;
+use Symfony\Component\HttpFoundation\Response;
+
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
@@ -96,7 +98,8 @@ class DefaultController extends Controller
             ['form' => $form->createView()]);
     }
 
-    public function updatePubAction(Request $request)
+
+        public function updatePubAction(Request $request)
     {
         $id = $request->query->get('id');
         $em = $this->getDoctrine()->getManager();
@@ -121,7 +124,8 @@ class DefaultController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $id = $em->getRepository(Pubg::class)->find($request->get("id"));
-        return $this->render('AdminBundle:Pub:updatePub.html.twig', ['id' => $id]);
+        $pub = $em->getRepository(Pubg::class)->find($request->get("id"));
+        return $this->render('AdminBundle:Pub:updatePub.html.twig', ['id' => $id,'pubs'=>$pub]);
     }
 
     public function deletePubAction(Request $request)

@@ -39,6 +39,7 @@ class DefaultController extends Controller
 
         $rec = $em ->getRepository(Contact::class)->findAll();
 
+
         return $this->render('MainBundle:Default:allreclamationUser.html.twig',['users'=>$user,'recs'=>$rec,'notifs'=>$notif]);
 
     }
