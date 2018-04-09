@@ -35,9 +35,12 @@ class DefaultController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $user = $em->getRepository(User::class)->find($request->get('idUser'));
+        $notif = $em->getRepository(Notification::class)->findAll();
+
         $rec = $em ->getRepository(Contact::class)->findAll();
 
-        return $this->render('MainBundle:Default:allreclamationUser.html.twig',['users'=>$user,'recs'=>$rec]);
+
+        return $this->render('MainBundle:Default:allreclamationUser.html.twig',['users'=>$user,'recs'=>$rec,'notifs'=>$notif]);
 
     }
 

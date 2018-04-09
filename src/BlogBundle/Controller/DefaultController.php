@@ -53,6 +53,7 @@ class DefaultController extends Controller
 
     }
 
+
 //    public function ajouterBlogAction(Request $request)
 //    {
 //        $Blog = new Blog();
@@ -74,6 +75,7 @@ class DefaultController extends Controller
 //
 //    }
     public function ajouterBlogAction(Request $request)
+
     {
         $Blog = new Blog();
         $em = $this->getDoctrine()->getManager();
