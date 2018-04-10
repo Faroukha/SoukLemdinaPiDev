@@ -28,3 +28,6 @@ updatePubView:
 reclamer:
     path:     /reclamer
     defaults: { _controller: AdminBundle:Default:reclamer }
+stat:
+    path:     /stats
+    defaults: { _controller: AdminBundle:Default:Statistique }

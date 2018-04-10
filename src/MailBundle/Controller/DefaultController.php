@@ -8,6 +8,7 @@ use MailBundle\Form\MailType;
 use Symfony\Component\HttpFoundation\Request;
 use Swift_Message;
 use Symfony\Component\HttpFoundation\Response;
+use UserBundle\Entity\User;
 
 class DefaultController extends Controller
 {
@@ -34,6 +35,8 @@ class DefaultController extends Controller
             $this->get('mailer')->send($message);
             return $this->redirect($this->generateUrl('my_app_mail_accuse'));
         }
+        $em = $this->getDoctrine()->getManager();
+        $user = $em->getRepository(User::class)->findAll();
         return $this->render('MailBundle:Default:index.html.twig',
             array('form' => $form->createView()));
     }
