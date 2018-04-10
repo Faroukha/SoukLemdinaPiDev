@@ -23,46 +23,46 @@
 
 {% endblock %}
 
-{% block notificationBlock %}
-    {% if app.user is not null %}
+{#{% block notificationBlock %}#}
+    {#{% if app.user is not null %}#}
 
-        {% for notif in notifs %}
-            {% if app.user.id != notif.idProduit.idArtisan %}
-                <div class="mc-sin-pro fix">
-                    <a href="#" class="mc-pro-image float-left"><img
-                                src="{{ asset('bundles/main/img/mini-cart/2.jpg') }}"
-                                alt=""/></a>
-                    <div class="mc-pro-details fix">
-                        <a href="#" style="font-size: 12px">{{ notif.message }}</a><br>
-                        <img style="width: 60px" src="{{ asset("Uploads/images/") ~ notif.idProduit.image }}" alt=""/>
-                        <a href="{{ path('produit_artisan_details', {'id':notif.idProduit.id}) }}">{{ notif.idProduit.titre }}</a>
+        {#{% for notif in notifs %}#}
+            {#{% if app.user.id != notif.idProduit.idArtisan %}#}
+                {#<div class="mc-sin-pro fix">#}
+                    {#<a href="#" class="mc-pro-image float-left"><img#}
+                                {#src="{{ asset('bundles/main/img/mini-cart/2.jpg') }}"#}
+                                {#alt=""/></a>#}
+                    {#<div class="mc-pro-details fix">#}
+                        {#<a href="#" style="font-size: 12px">{{ notif.message }}</a><br>#}
+                        {#<img style="width: 60px" src="{{ asset("Uploads/images/") ~ notif.idProduit.image }}" alt=""/>#}
+                        {#<a href="{{ path('produit_artisan_details', {'id':notif.idProduit.id}) }}">{{ notif.idProduit.titre }}</a>#}
 
-                        <a class="pro-del" href="#"><i
-                                    class="fa fa-times-circle"></i></a>
-                    </div>
+                        {#<a class="pro-del" href="#"><i#}
+                                    {#class="fa fa-times-circle"></i></a>#}
+                    {#</div>#}
 
-                </div>
-            {% endif %}
-        {% endfor %}
-        <!-- Cart Button -->
-        <div class="mc-button">
-            <a href="#" class="checkout_btn">Voir plus</a>
-        </div>
+                {#</div>#}
+            {#{% endif %}#}
+        {#{% endfor %}#}
+        {#<!-- Cart Button -->#}
+        {#<div class="mc-button">#}
+            {#<a href="#" class="checkout_btn">Voir plus</a>#}
+        {#</div>#}
 
-    {% endif %}
-{% endblock %}
+    {#{% endif %}#}
+{#{% endblock %}#}
 {% block body %}
 
 
-<div id="page_item_area">
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-6 text-left">
-                <h3>Evenement</h3>
+    <div id="page_item_area">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6 text-left">
+                    <h3>Evenement</h3>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
     <div id="blog_page_area">
     <div class="container">
@@ -70,16 +70,16 @@
             <div class="col-md-8 col-xs-12">
 
 
-                {% for event in events %}
+
 
                     <div class="single_blog">
                         <div class="single_blog_img">
                             <img src="{{ asset("Uploads/images/") ~ event.photo }}" alt="">
                             {% if app.user is not null %}
                                 {% if event.user== app.user %}
-                                <form action="">
+                                    <form action="">
 
-                                    <button class="btn btn-default acc_btn">Supprimer l'evenement</button>
+                                        <button class="btn btn-default acc_btn">Supprimer l'evenement</button>
 
                                     </form>{% endif %}
                             {% endif %}
@@ -88,7 +88,7 @@
 
                             </div>
                             {% if event.nbMax > 0 %}
-                            <a class="btn btn-default follow_btn" href="{{ path('participate_event',{'idEvent':event.id}) }}">Participer à l'évènement </a>
+                                <a class="btn btn-default follow_btn" href="{{ path('participate_event',{'idEvent':event.id}) }}">Participer à l'évènement </a>
                             {% else %}
                                 <a class="btn btn-default outofplaces_btn">Places finies</a>
                             {% endif %}
@@ -111,17 +111,13 @@
 
                                     {% endif %}
                                 {% endfor %}
-                                {% for rate in rating %}
-                                    {% if event.id == rate.idE %}
-                                        {{ rate.avgrating|rating }}
-                                    {% endif %}
-                                {% endfor %}
-                                <a href="{{ path('event_detail',{'id':event.id}) }}">Notez !</a>
+
+
                             </ul>
 
                         </div>
                     </div>
-                {% endfor %}
+
             </div>
             <!-- Blog Sidebar -->
             <div class="col-md-4 col-xs-12">
@@ -140,30 +136,30 @@
 
 
                 {#<div class="single_sidebar popular_post">#}
-                    {#<h3 class="sdbr_title">popular post</h3>#}
-                    {#<div class="sdbr_inner">#}
-                        {#<div class="single_popular_post fix">#}
-                            {#<a href="#" class="spp_img"><img src="{{ asset('img/sidebar/1.jpg') }}" alt=""/></a>#}
-                            {#<div class="spp_text fix">#}
-                                {#<a href="#">Lorem Ipsum is simply 2018.</a>#}
-                                {#<p>Posted By John Doe</p>#}
-                            {#</div>#}
-                        {#</div>#}
-                        {#<div class="single_popular_post fix">#}
-                            {#<a href="#" class="spp_img"><img src="{{ asset('img/sidebar/2.jpg') }}" alt=""/></a>#}
-                            {#<div class="spp_text fix">#}
-                                {#<a href="#">Lorem Ipsum is simply 2018.</a>#}
-                                {#<p>Posted By John Doe</p>#}
-                            {#</div>#}
-                        {#</div>#}
-                        {#<div class="single_popular_post fix">#}
-                            {#<a href="#" class="spp_img"><img src="{{ asset('img/sidebar/3.jpg') }}" alt=""/></a>#}
-                            {#<div class="spp_text fix">#}
-                                {#<a href="#">Lorem Ipsum is simply 2018.</a>#}
-                                {#<p>Posted By John Doe</p>#}
-                            {#</div>#}
-                        {#</div>#}
-                    {#</div>#}
+                {#<h3 class="sdbr_title">popular post</h3>#}
+                {#<div class="sdbr_inner">#}
+                {#<div class="single_popular_post fix">#}
+                {#<a href="#" class="spp_img"><img src="{{ asset('img/sidebar/1.jpg') }}" alt=""/></a>#}
+                {#<div class="spp_text fix">#}
+                {#<a href="#">Lorem Ipsum is simply 2018.</a>#}
+                {#<p>Posted By John Doe</p>#}
+                {#</div>#}
+                {#</div>#}
+                {#<div class="single_popular_post fix">#}
+                {#<a href="#" class="spp_img"><img src="{{ asset('img/sidebar/2.jpg') }}" alt=""/></a>#}
+                {#<div class="spp_text fix">#}
+                {#<a href="#">Lorem Ipsum is simply 2018.</a>#}
+                {#<p>Posted By John Doe</p>#}
+                {#</div>#}
+                {#</div>#}
+                {#<div class="single_popular_post fix">#}
+                {#<a href="#" class="spp_img"><img src="{{ asset('img/sidebar/3.jpg') }}" alt=""/></a>#}
+                {#<div class="spp_text fix">#}
+                {#<a href="#">Lorem Ipsum is simply 2018.</a>#}
+                {#<p>Posted By John Doe</p>#}
+                {#</div>#}
+                {#</div>#}
+                {#</div>#}
                 {#</div>#}
             </div><!-- End Blog Sidebar -->
         </div>

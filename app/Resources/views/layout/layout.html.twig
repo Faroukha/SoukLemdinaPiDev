@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="{{ asset('style.css') }}"/>
     <link rel="stylesheet" href="{{ asset('css/responsive.css') }}"/>
     <link rel="stylesheet" href="{{ asset('css/flipclock.css') }}"/>
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/starrating/css/rating.css') }}" />
     {% block stylesheets %}{% endblock %}
 
 
@@ -281,7 +282,8 @@
 {% endblock %}
 {% block javascripts %}{% endblock %}
 
-
+<script src="{{ asset('//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js') }}"></script>
+<script src="{{ asset('bundles/starrating/js/rating.js') }}"></script>
 <script src="{{ asset('js/vendor/jquery-1.12.4.min.js') }}"></script>
 <script src="{{ asset('js/bootstrap.min.js') }}"></script>
 <script src="{{ asset('js/jquery.meanmenu.min.js') }}"></script>
