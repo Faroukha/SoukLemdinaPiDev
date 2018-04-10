@@ -111,8 +111,12 @@
 
                                     {% endif %}
                                 {% endfor %}
-
-
+                                {% for rate in rating %}
+                                    {% if event.id == rate.idE %}
+                                        {{ rate.avgrating|rating }}
+                                    {% endif %}
+                                {% endfor %}
+                                <a href="{{ path('event_detail',{'id':event.id}) }}">Notez !</a>
                             </ul>
 
                         </div>

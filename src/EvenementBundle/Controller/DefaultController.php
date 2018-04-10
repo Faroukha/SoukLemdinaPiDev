@@ -2,9 +2,12 @@
 
 namespace EvenementBundle\Controller;
 
+use blackknight467\StarRatingBundle\Form\RatingType;
 use EvenementBundle\Entity\Event;
+use EvenementBundle\Entity\Rating;
 use MainBundle\Entity\Notification;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use UserBundle\Entity\User;
 
@@ -13,18 +16,56 @@ class DefaultController extends Controller
     public function indexAction()
     {
 
-        $em=$this->getDoctrine()->getManager();
+        $em = $this->getDoctrine()->getManager();
+        $rating = $em->getRepository(Rating::class)->avgrating();
         $notif = $em->getRepository(Notification::class)->findAll();
 
         $user = $em->getRepository(User::class)->findAll();
-        $event= $em->getRepository(Event::class)->findAll();
+        $event = $em->getRepository(Event::class)->findAll();
 
-        return $this->render('EvenementBundle:Default:events.html.twig', ['events'=> $event, 'users'=>$user, 'notifs'=>$notif]);
+        return $this->render('EvenementBundle:Default:events.html.twig', ['events' => $event, 'users' => $user, 'notifs' => $notif, 'rating'=>$rating]);
     }
 
-    public function addAction(Request $request){
+    public function infoAction($id,Request $request){
 
-        $user=$this->getUser();
+        $rating = new Rating();
+        $m = $this->getDoctrine()->getManager();
+        $mark = $m->getRepository(Event::class)->find($id);
+        $form = $this->createFormBuilder($rating)
+            ->add('rating', RatingType::class, [
+                'label' => 'Rating'
+            ])
+            ->add('valider', SubmitType::class, array(
+                'attr' => array(
+
+                    'class' => 'btn btn-xs btn-primary'
+                )))
+            ->getForm();
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $rating->setIdE($mark->getId());
+            $m->persist($rating);
+            $m->flush();
+        }
+
+        $data=array(
+            'm' => $mark,
+            'f' => $form->createView()
+        );
+
+        return $this->render('EvenementBundle:Default:info.html.twig',$data);
+
+
+
+
+
+    }
+
+
+    public function addAction(Request $request)
+    {
+
+        $user = $this->getUser();
         $event = new Event();
         $form = $this->createForm('EvenementBundle\Form\EventType', $event);
         $form->handleRequest($request);
@@ -33,8 +74,8 @@ class DefaultController extends Controller
 
             $file = $event->getPhoto();
 
-            $fileName = md5(uniqid('', true)).'.'.$file->guessExtension();
-            $path = "C:/wamp64/www/pidev" ;
+            $fileName = md5(uniqid('', true)) . '.' . $file->guessExtension();
+            $path = "C:/wamp64/www/pidev";
             $file->move(
                 $path,
                 $fileName
@@ -47,15 +88,19 @@ class DefaultController extends Controller
             $event->setPhoto($fileName);
             $em->persist($event);
             $em->flush();
-            return $this->render('EvenementBundle:Default:events.html.twig');
-           // return $this->redirectToRoute('e_show', array('id' => $event->getId()));
+            $em = $this->getDoctrine()->getManager();
+            $notif = $em->getRepository(Notification::class)->findAll();
+            $user = $em->getRepository(User::class)->findAll();
+            $event = $em->getRepository(Event::class)->findAll();
+            return $this->render('EvenementBundle:Default:events.html.twig', ['notifs' => $notif, 'users' => $user, 'events' => $event]);
+            // return $this->redirectToRoute('e_show', array('id' => $event->getId()));
         }
 
         return $this->render('EvenementBundle:Default:addevent.html.twig', array(
             'event' => $event,
             'form' => $form->createView(),
         ));
-       // return $this->render('EvenementBundle:Default:events.html.twig');
+        // return $this->render('EvenementBundle:Default:events.html.twig');
     }
 
     public function participerAction(Request $request)
@@ -69,15 +114,21 @@ class DefaultController extends Controller
             $eventss->setNbMax($eventss->getNbMax() - 1);
             $em->persist($eventss);
             $em->flush();
-            $str= "oui";
-            return $this->render("EvenementBundle:Default:events.html.twig", ['notifs' => $notif, 'events' => $event, 'users' => $user, 'strs'=>null]);
-        }else{
+            $str = "oui";
+            return $this->render("EvenementBundle:Default:events.html.twig", ['notifs' => $notif, 'events' => $event, 'users' => $user, 'strs' => null]);
+        } else {
             $em = $this->getDoctrine()->getManager();
             $notif = $em->getRepository(Notification::class)->findAll();
             $user = $em->getRepository(User::class)->findAll();
             $event = $em->getRepository(Event::class)->findAll();
             $str = "Désolé nombre de places insufissant";
-            return $this->render("EvenementBundle:Default:events.html.twig", ['notifs' => $notif, 'events' => $event, 'users' => $user, 'strs'=>$str]);
+            return $this->render("EvenementBundle:Default:events.html.twig", ['notifs' => $notif, 'events' => $event, 'users' => $user, 'strs' => $str]);
         }
     }
+
+
 }
+
+
+
+
