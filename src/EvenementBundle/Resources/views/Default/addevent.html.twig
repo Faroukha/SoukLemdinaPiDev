@@ -84,8 +84,10 @@
             font-weight: 300;
         }
     </style>
+    <div class="row">
+        <br><br><br>
     <div class="col-md-1"></div>
-    <div class="col-md-6">
+    <div class="col-md-5">
         <!-- creatin a new event form -->
         {{ form_start(form) }}
         {{ form_widget(form.titre,{'attr':{'class':'form-control','placeholder':"Nom de l'evenement"}}) }}
@@ -96,26 +98,27 @@
         {{ form_widget(form.nbMax,{'attr':{'class':'form-control ','placeholder':"Nombre de place"}}) }}
 
         {{ form_widget(form.lieu,{'attr':{'class':'form-control controls','placeholder':'Où vas se passer?'}}) }}
-        <div class="col-md-6">
-            {{ form_widget(form.longitude,{'attr':{'class':'form-control','placeholder':'longitude'}}) }}
-        </div>
-        <div class="col-md-6">
-            {{ form_widget(form.latitude,{'attr':{'class':'form-control','placeholder':'latitude'}}) }}
+        {#<div class="col-md-6" hidden id="long">#}
+            {#{{ form_widget(form.longitude,{'attr':{'class':'form-control','placeholder':'longitude'}}) }}#}
+        {#</div>#}
+        {#<div class="col-md-6" hidden id="lat">#}
+            {#{{ form_widget(form.latitude,{'attr':{'class':'form-control','placeholder':'latitude'}}) }}#}
 
-        </div>
+        {#</div>#}
         {{ form_widget(form.categorie,{'attr':{'class':'form-control ','placeholder':"Categorie de l'evenement"}}) }}
 
 
         {{ form_widget(form) }}
 
-        <input type="submit" value="Publier l'evenement" onclick="xy()" />
+        <input type="submit" value="Publier l'evenement" onclick="xy()" /><br><br><br>
         {{ form_end(form) }}
     </div>
 
     <div class="col-md-5" id="map">
-
+        <input type="hidden" id="latDepart" name="latDepart">
+        <input type="hidden" id="lngDepart" name="lngDepart">
     </div>
-
+    </div>
 
 
     <script>
@@ -191,7 +194,8 @@
                     map.setZoom(10);  // Why 17? Because it looks good.
 
                 }
-
+                $('#idDepart').val(this.originPlaceId);
+                $('#idDestination').val(this.destinationPlaceId);
 
                 ;
                 marker.setPosition(place.geometry.location);

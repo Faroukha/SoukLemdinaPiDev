@@ -23,35 +23,37 @@
 
 {% endblock %}
 
-{#{% block notificationBlock %}#}
-    {#{% if app.user is not null %}#}
+{% block notificationBlock %}
+    {% if app.user is not null %}
 
-        {#{% for notif in notifs %}#}
-            {#{% if app.user.id != notif.idProduit.idArtisan %}#}
-                {#<div class="mc-sin-pro fix">#}
-                    {#<a href="#" class="mc-pro-image float-left"><img#}
-                                {#src="{{ asset('bundles/main/img/mini-cart/2.jpg') }}"#}
-                                {#alt=""/></a>#}
-                    {#<div class="mc-pro-details fix">#}
-                        {#<a href="#" style="font-size: 12px">{{ notif.message }}</a><br>#}
-                        {#<img style="width: 60px" src="{{ asset("Uploads/images/") ~ notif.idProduit.image }}" alt=""/>#}
-                        {#<a href="{{ path('produit_artisan_details', {'id':notif.idProduit.id}) }}">{{ notif.idProduit.titre }}</a>#}
+        {% for notif in notifs %}
+            {% if app.user.id != notif.idProduit.idArtisan %}
+                <div class="mc-sin-pro fix">
+                    <a href="#" class="mc-pro-image float-left"><img
+                                src="{{ asset('bundles/main/img/mini-cart/2.jpg') }}"
+                                alt=""/></a>
+                    <div class="mc-pro-details fix">
+                        <a href="#" style="font-size: 12px">{{ notif.message }}</a><br>
+                        <img style="width: 60px" src="{{ asset("Uploads/images/") ~ notif.idProduit.image }}" alt=""/>
+                        <a href="{{ path('produit_artisan_details', {'id':notif.idProduit.id}) }}">{{ notif.idProduit.titre }}</a>
 
-                        {#<a class="pro-del" href="#"><i#}
-                                    {#class="fa fa-times-circle"></i></a>#}
-                    {#</div>#}
+                        <a class="pro-del" href="#"><i
+                                    class="fa fa-times-circle"></i></a>
+                    </div>
 
-                {#</div>#}
-            {#{% endif %}#}
-        {#{% endfor %}#}
-        {#<!-- Cart Button -->#}
-        {#<div class="mc-button">#}
-            {#<a href="#" class="checkout_btn">Voir plus</a>#}
-        {#</div>#}
+                </div>
+            {% endif %}
+        {% endfor %}
+        <!-- Cart Button -->
+        <div class="mc-button">
+            <a href="#" class="checkout_btn">Voir plus</a>
+        </div>
 
-    {#{% endif %}#}
-{#{% endblock %}#}
+    {% endif %}
+{% endblock %}
 {% block body %}
+
+
 <div id="page_item_area">
     <div class="container">
         <div class="row">
@@ -61,4 +63,109 @@
         </div>
     </div>
 </div>
+
+    <div id="blog_page_area">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-xs-12">
+
+
+                {% for event in events %}
+
+                    <div class="single_blog">
+                        <div class="single_blog_img">
+                            <img src="{{ asset("Uploads/images/") ~ event.photo }}" alt="">
+                            {% if app.user is not null %}
+                                {% if event.user== app.user %}
+                                <form action="">
+
+                                    <button class="btn btn-default acc_btn">Supprimer l'evenement</button>
+
+                                    </form>{% endif %}
+                            {% endif %}
+                            <div class="blog_date text-center">
+                                <div class="bd_month">{{ event.createdAt |date("m/d/Y") }}</div>
+
+                            </div>
+                            {% if event.nbMax > 0 %}
+                            <a class="btn btn-default follow_btn" href="{{ path('participate_event',{'idEvent':event.id}) }}">Participer à l'évènement </a>
+                            {% else %}
+                                <a class="btn btn-default outofplaces_btn">Places finies</a>
+                            {% endif %}
+                        </div>
+
+
+                        <div class="blog_content">
+                            <h4 class="post_title"><a
+                                        href="">{{ event.titre }}</a></h4>
+                            <ul class="post-bar">
+                                {% for user in users %}
+                                    {% if user == event.user %}
+                                        <li><i class="fa fa-user"></i><b style="color: #ff8b00"> Publié par:  </b>{{ user.username }}</li><br>
+                                        <li><i class="fa fa-calendar-plus-o"></i><b style="color: #ff8b00"> Places disponibles:  </b> {{ event.nbMax }}</li><br>
+                                        <li><i class="fa fa-calendar-plus-o"></i><b style="color: #ff8b00"> Date début:  </b> {{ event.dateDebut |date("m/d/Y")}}</li><br>
+                                        <li><i class="fa fa-calendar-plus-o"></i><b style="color: #ff8b00"> Date fin:  </b> {{ event.dateFin |date("m/d/Y")}}</li><br>
+                                        <li><i class="fa fa-calendar-plus-o"></i><b style="color: #ff8b00"> Description:  </b> {{ event.description }}</li><br>
+                                        <div class="clock" style="margin:2em;"></div>
+                                        <div class="message"></div>
+
+                                    {% endif %}
+                                {% endfor %}
+
+
+                            </ul>
+
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <!-- Blog Sidebar -->
+            <div class="col-md-4 col-xs-12">
+                <div class="single_sidebar search_widget">
+                    <h3 class="sdbr_title">Search</h3>
+                    <div class="sdbr_inner">
+                        <form class="search_form" method="GET" action="{{ path('Rech_blog') }}">
+
+                            <input type="text" class="form-control search_input" name="text" id="text"
+                                   placeholder="Search Here ...">
+
+                            <button type="submit" class="search_button"><i class="fa fa-search"></i></button>
+                        </form>
+                    </div>
+                </div>
+
+
+                {#<div class="single_sidebar popular_post">#}
+                    {#<h3 class="sdbr_title">popular post</h3>#}
+                    {#<div class="sdbr_inner">#}
+                        {#<div class="single_popular_post fix">#}
+                            {#<a href="#" class="spp_img"><img src="{{ asset('img/sidebar/1.jpg') }}" alt=""/></a>#}
+                            {#<div class="spp_text fix">#}
+                                {#<a href="#">Lorem Ipsum is simply 2018.</a>#}
+                                {#<p>Posted By John Doe</p>#}
+                            {#</div>#}
+                        {#</div>#}
+                        {#<div class="single_popular_post fix">#}
+                            {#<a href="#" class="spp_img"><img src="{{ asset('img/sidebar/2.jpg') }}" alt=""/></a>#}
+                            {#<div class="spp_text fix">#}
+                                {#<a href="#">Lorem Ipsum is simply 2018.</a>#}
+                                {#<p>Posted By John Doe</p>#}
+                            {#</div>#}
+                        {#</div>#}
+                        {#<div class="single_popular_post fix">#}
+                            {#<a href="#" class="spp_img"><img src="{{ asset('img/sidebar/3.jpg') }}" alt=""/></a>#}
+                            {#<div class="spp_text fix">#}
+                                {#<a href="#">Lorem Ipsum is simply 2018.</a>#}
+                                {#<p>Posted By John Doe</p>#}
+                            {#</div>#}
+                        {#</div>#}
+                    {#</div>#}
+                {#</div>#}
+            </div><!-- End Blog Sidebar -->
+        </div>
+    </div>
+
+
+
+
 {% endblock body %}
