@@ -193,39 +193,39 @@ class DefaultController extends Controller
 
 
 
-//    public function StatistiqueAction()
-//    {
-//        $pieChart = new PieChart();
-//        $em= $this->getDoctrine();
-//
-//        $test = $em->getRepository(Contact::class)->findAll();
-//
-//        $data= array();
-//        $stat=['contact', 'Etat'];
-//        $nb=0;
-//        array_push($data,$stat);
-//        foreach($test as $tests) {
-//            $stat=array();
-//
-//            array_push($stat,"haja", $tests->getEtat());
-//            $nb=($tests->getEtat());
-//            $stat=["haja",$nb];
-//            array_push($data,$stat);
-//        }
-//        $pieChart->getData()->setArrayToDataTable(
-//            $data
-//        );
-//        $pieChart->getOptions()->setTitle('Participants Number Of Our Contests');
-//        $pieChart->getOptions()->setHeight(500);
-//        $pieChart->getOptions()->setWidth(900);
-//        $pieChart->getOptions()->getTitleTextStyle()->setBold(true);
-//        $pieChart->getOptions()->getTitleTextStyle()->setColor('#009900');
-//        $pieChart->getOptions()->getTitleTextStyle()->setItalic(true);
-//        $pieChart->getOptions()->getTitleTextStyle()->setFontName('Arial');
-//        $pieChart->getOptions()->getTitleTextStyle()->setFontSize(20);
-//        return $this->render('AdminBundle::stat.html.twig', array('piechart' =>
-//            $pieChart));
-//    }
+    public function StatistiqueAction()
+    {
+        $pieChart = new PieChart();
+        $em= $this->getDoctrine();
+
+        $test = $em->getRepository(Etat::class)->findAll();
+
+        $data= array();
+        $stat=['etat', 'nbr'];
+        $nb=0;
+        array_push($data,$stat);
+        foreach($test as $tests) {
+            $stat=array();
+
+            array_push($stat,$tests->getInfo(), $tests->getNbr());
+            $nb=($tests->getNbr());
+            $stat=[$tests->getInfo(),$nb];
+            array_push($data,$stat);
+        }
+        $pieChart->getData()->setArrayToDataTable(
+            $data
+        );
+        $pieChart->getOptions()->setTitle('Statistique sur les reclamations');
+        $pieChart->getOptions()->setHeight(500);
+        $pieChart->getOptions()->setWidth(900);
+        $pieChart->getOptions()->getTitleTextStyle()->setBold(true);
+        $pieChart->getOptions()->getTitleTextStyle()->setColor('#009900');
+        $pieChart->getOptions()->getTitleTextStyle()->setItalic(true);
+        $pieChart->getOptions()->getTitleTextStyle()->setFontName('Arial');
+        $pieChart->getOptions()->getTitleTextStyle()->setFontSize(20);
+        return $this->render('AdminBundle::stat.html.twig', array('piechart' =>
+            $pieChart));
+    }
 
 
 }
