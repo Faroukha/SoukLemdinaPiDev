@@ -55,10 +55,10 @@ class DefaultController extends Controller
         $em = $this->getDoctrine()->getManager();
 
 
-        $user = $em->getRepository(User::class)->findAll();
+       // $user = $em->getRepository(User::class)->findAll();
 
 
-        return $this->render('EvenementBundle:Default:info.html.twig',$data,['users'=>$user, 'event'=>$mark]);
+        return $this->render('EvenementBundle:Default:info.html.twig',$data);
 
 
 

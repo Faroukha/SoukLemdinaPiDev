@@ -7,7 +7,7 @@ add_event:
     defaults: { _controller: EvenementBundle:Default:add }
 
 event_detail:
-    path:     /eventdetail
+    path:     /event_detail/{id}
     defaults: { _controller: EvenementBundle:Default:info }
 
 participate_event:

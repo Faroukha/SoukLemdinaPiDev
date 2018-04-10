@@ -74,9 +74,9 @@
 
                     <div class="single_blog">
                         <div class="single_blog_img">
-                            <img src="{{ asset("Uploads/images/") ~ event.photo }}" alt="">
+                            <img src="{{ asset("Uploads/images/") ~ m.photo }}" alt="">
                             {% if app.user is not null %}
-                                {% if event.user== app.user %}
+                                {% if m.user== app.user %}
                                     <form action="">
 
                                         <button class="btn btn-default acc_btn">Supprimer l'evenement</button>
@@ -84,33 +84,38 @@
                                     </form>{% endif %}
                             {% endif %}
                             <div class="blog_date text-center">
-                                <div class="bd_month">{{ event.createdAt |date("m/d/Y") }}</div>
+                                <div class="bd_month">{{ m.createdAt |date("m/d/Y") }}</div>
 
                             </div>
-                            {% if event.nbMax > 0 %}
-                                <a class="btn btn-default follow_btn" href="{{ path('participate_event',{'idEvent':event.id}) }}">Participer à l'évènement </a>
+                            {% if m.nbMax > 0 %}
+                                <a class="btn btn-default follow_btn" href="{{ path('participate_event',{'idEvent':m.id}) }}">Participer à l'évènement </a>
                             {% else %}
                                 <a class="btn btn-default outofplaces_btn">Places finies</a>
                             {% endif %}
+                            {{ form_start(f) }}
+                            <div class="row">{{ form_widget(f.rating ) }}
+                                {{ form_widget(f.valider) }}
+                            </div>
+                            {{ form_end(f) }}
                         </div>
 
 
                         <div class="blog_content">
                             <h4 class="post_title"><a
-                                        href="">{{ event.titre }}</a></h4>
+                                        href="">{{ m.titre }}</a></h4>
                             <ul class="post-bar">
-                                {% for user in users %}
-                                    {% if user == event.user %}
-                                        <li><i class="fa fa-user"></i><b style="color: #ff8b00"> Publié par:  </b>{{ user.username }}</li><br>
-                                        <li><i class="fa fa-calendar-plus-o"></i><b style="color: #ff8b00"> Places disponibles:  </b> {{ event.nbMax }}</li><br>
-                                        <li><i class="fa fa-calendar-plus-o"></i><b style="color: #ff8b00"> Date début:  </b> {{ event.dateDebut |date("m/d/Y")}}</li><br>
-                                        <li><i class="fa fa-calendar-plus-o"></i><b style="color: #ff8b00"> Date fin:  </b> {{ event.dateFin |date("m/d/Y")}}</li><br>
-                                        <li><i class="fa fa-calendar-plus-o"></i><b style="color: #ff8b00"> Description:  </b> {{ event.description }}</li><br>
-                                        <div class="clock" style="margin:2em;"></div>
-                                        <div class="message"></div>
+                                {#{% for user in users %}#}
+                                    {#{% if user == event.user %}#}
+                                        {#<li><i class="fa fa-user"></i><b style="color: #ff8b00"> Publié par:  </b>{{ user.username }}</li><br>#}
+                                        {#<li><i class="fa fa-calendar-plus-o"></i><b style="color: #ff8b00"> Places disponibles:  </b> {{ event.nbMax }}</li><br>#}
+                                        {#<li><i class="fa fa-calendar-plus-o"></i><b style="color: #ff8b00"> Date début:  </b> {{ event.dateDebut |date("m/d/Y")}}</li><br>#}
+                                        {#<li><i class="fa fa-calendar-plus-o"></i><b style="color: #ff8b00"> Date fin:  </b> {{ event.dateFin |date("m/d/Y")}}</li><br>#}
+                                        {#<li><i class="fa fa-calendar-plus-o"></i><b style="color: #ff8b00"> Description:  </b> {{ event.description }}</li><br>#}
+                                        {#<div class="clock" style="margin:2em;"></div>#}
+                                        {#<div class="message"></div>#}
 
-                                    {% endif %}
-                                {% endfor %}
+                                    {#{% endif %}#}
+                                {#{% endfor %}#}
 
 
                             </ul>
