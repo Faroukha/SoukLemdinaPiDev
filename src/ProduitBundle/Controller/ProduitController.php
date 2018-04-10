@@ -8,6 +8,8 @@
 
 namespace ProduitBundle\Controller;
 use FOS\UserBundle\Model\UserInterface;
+use MailBundle\Entity\Mail;
+use MailBundle\Form\MailType;
 use MainBundle\Entity\Notification;
 use MainBundle\Entity\Produit;
 use MainBundle\Entity\Promotion;
@@ -18,6 +20,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use UserBundle\Entity\User;
+use Swift_Message;
+
 use ProduitBundle\Form\ProduitType;
 
 
@@ -70,7 +74,7 @@ class ProduitController extends Controller
             $user = $this->getUser();
             $po->setIdartisan($user->getId());
             $em = $this->getDoctrine()->getManager();
-            $notif = $em->getRepository(Notification::class)->findAll();
+
             $em->persist($po);
             $em->flush();
 
@@ -87,7 +91,14 @@ class ProduitController extends Controller
             $em1->flush();
 
 
+
+
+
+
+
+
         }
+
         $em = $this->getDoctrine()->getManager();
         $notif = $em->getRepository(Notification::class)->findAll();
         return $this->render('ProduitBundle:Produit:ajouter.html.twig',
