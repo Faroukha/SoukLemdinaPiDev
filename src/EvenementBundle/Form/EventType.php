@@ -63,7 +63,7 @@ class EventType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'eventbundle_event';
+        return 'evenementtbundle_event';
     }
 
 

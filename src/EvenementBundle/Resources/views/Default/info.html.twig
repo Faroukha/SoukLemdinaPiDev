@@ -86,13 +86,14 @@
                             <div class="blog_date text-center">
                                 <div class="bd_month">{{ m.createdAt |date("m/d/Y") }}</div>
 
-                            </div>
+                            </div><br>
                             {% if m.nbMax > 0 %}
                                 <a class="btn btn-default follow_btn" href="{{ path('participate_event',{'idEvent':m.id}) }}">Participer à l'évènement </a>
                             {% else %}
                                 <a class="btn btn-default outofplaces_btn">Places finies</a>
-                            {% endif %}
+                            {% endif %}<br>
                             {{ form_start(f) }}
+                            <br><br>
                             <div class="row">{{ form_widget(f.rating ) }}
                                 {{ form_widget(f.valider) }}
                             </div>
@@ -104,18 +105,18 @@
                             <h4 class="post_title"><a
                                         href="">{{ m.titre }}</a></h4>
                             <ul class="post-bar">
-                                {#{% for user in users %}#}
-                                    {#{% if user == event.user %}#}
-                                        {#<li><i class="fa fa-user"></i><b style="color: #ff8b00"> Publié par:  </b>{{ user.username }}</li><br>#}
-                                        {#<li><i class="fa fa-calendar-plus-o"></i><b style="color: #ff8b00"> Places disponibles:  </b> {{ event.nbMax }}</li><br>#}
-                                        {#<li><i class="fa fa-calendar-plus-o"></i><b style="color: #ff8b00"> Date début:  </b> {{ event.dateDebut |date("m/d/Y")}}</li><br>#}
-                                        {#<li><i class="fa fa-calendar-plus-o"></i><b style="color: #ff8b00"> Date fin:  </b> {{ event.dateFin |date("m/d/Y")}}</li><br>#}
-                                        {#<li><i class="fa fa-calendar-plus-o"></i><b style="color: #ff8b00"> Description:  </b> {{ event.description }}</li><br>#}
-                                        {#<div class="clock" style="margin:2em;"></div>#}
-                                        {#<div class="message"></div>#}
 
-                                    {#{% endif %}#}
-                                {#{% endfor %}#}
+
+                                        <li><i class="fa fa-user"></i><b style="color: #ff8b00"> Publié par:  </b>{{ m.user.username }}</li><br>
+                                        <li><i class="fa fa-calendar-plus-o"></i><b style="color: #ff8b00"> Places disponibles:  </b> {{ m.nbMax }}</li><br>
+                                        <li><i class="fa fa-calendar-plus-o"></i><b style="color: #ff8b00"> Date début:  </b> {{ m.dateDebut |date("m/d/Y")}}</li><br>
+                                        <li><i class="fa fa-calendar-plus-o"></i><b style="color: #ff8b00"> Date fin:  </b> {{ m.dateFin |date("m/d/Y")}}</li><br>
+                                        <li><i class="fa fa-calendar-plus-o"></i><b style="color: #ff8b00"> Description:  </b> {{ m.description }}</li><br>
+                                        <div class="clock" style="margin:2em;"></div>
+                                        <div class="message"></div>
+
+
+
 
 
                             </ul>
@@ -126,18 +127,7 @@
             </div>
             <!-- Blog Sidebar -->
             <div class="col-md-4 col-xs-12">
-                <div class="single_sidebar search_widget">
-                    <h3 class="sdbr_title">Search</h3>
-                    <div class="sdbr_inner">
-                        <form class="search_form" method="GET" action="{{ path('Rech_blog') }}">
 
-                            <input type="text" class="form-control search_input" name="text" id="text"
-                                   placeholder="Search Here ...">
-
-                            <button type="submit" class="search_button"><i class="fa fa-search"></i></button>
-                        </form>
-                    </div>
-                </div>
 
 
                 {#<div class="single_sidebar popular_post">#}
