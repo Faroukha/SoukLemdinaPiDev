@@ -5,6 +5,7 @@ namespace MainBundle\Controller;
 use MainBundle\Entity\Contact;
 use MainBundle\Entity\Notification;
 use MainBundle\Entity\Produit;
+use MainBundle\Entity\Rate;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use UserBundle\Entity\User;
@@ -16,7 +17,8 @@ class DefaultController extends Controller
     {
         $em=$this->getDoctrine()->getManager();
         $notif = $em->getRepository(Notification::class)->findAll();
-        return $this->render('MainBundle:Default:index.html.twig',['notifs'=>$notif]);
+        $rates = $em->getRepository(Rate::class)->findAll();
+        return $this->render('MainBundle:Default:index.html.twig',['notifs'=>$notif ,'rates'=>$rates]);
     }
     public function contactAction()
     {
