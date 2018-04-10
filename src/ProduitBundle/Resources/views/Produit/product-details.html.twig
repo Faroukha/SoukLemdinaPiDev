@@ -115,9 +115,24 @@
 
                         </form>
 
+                            <div class="col-xs-12">
+                                <form action="{{ path("addRate") }}">
+                                    <input type="hidden" value="{{ app.user.id }}" name="idUser">
+                                    <input type="hidden" value="{{ produit.id }}" name="id">
+                                    <input name="value" type="number">
+
+                                    <input class="btn border-btn" type="submit" value="ajouter rate"/>
+                                </form>
+                            </div>
+                        </div>
                     </div>
                 </div>
+
+
             </div>
+
+
+                </div>
 
             <div class="row">
                 <div class="col-xs-12">

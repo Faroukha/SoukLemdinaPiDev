@@ -30,6 +30,8 @@ class AppKernel extends Kernel
             new MailBundle\MailBundle(),
             new Http\HttplugBundle\HttplugBundle(),
             new HWI\Bundle\OAuthBundle\HWIOAuthBundle(),
+            new blackknight467\StarRatingBundle\StarRatingBundle(),
+
 
         ];
 
