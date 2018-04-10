@@ -3,7 +3,9 @@
 namespace AdminBundle\Controller;
 
 use AdminBundle\AdminBundle;
+use CMEN\GoogleChartsBundle\GoogleCharts\Charts\PieChart;
 use MainBundle\Entity\Contact;
+use MainBundle\Entity\Etat;
 use MainBundle\Entity\Pubg;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -164,13 +166,66 @@ class DefaultController extends Controller
         $em = $this->getDoctrine()->getManager();
         $rec = $em->getRepository(Contact::class)->find($request->get("id"));
 
+        $em1 =$this->getDoctrine()->getManager();
+        $em2 =$this->getDoctrine()->getManager();
+
+        $etat = $em1->getRepository(Etat::class)->find(1);
+        $etat ->setNbr($etat ->getNbr() +1) ;
+
+        $etat2 =$em2->getRepository(Etat::class)->find(2);
+        $etat2 ->setNbr($etat2->getNbr()-1);
+
+
         if($rec->getEtat()==false) {
+
             $rec ->setEtat(true) ;
             $em->persist($rec);
             $em->flush();
+
+            $em1->persist($etat);
+            $em1->flush();
+            $em2->persist($etat2);
+            $em2->flush();
         }
 
         return $this->redirectToRoute('allreclam');
     }
+
+
+
+//    public function StatistiqueAction()
+//    {
+//        $pieChart = new PieChart();
+//        $em= $this->getDoctrine();
+//
+//        $test = $em->getRepository(Contact::class)->findAll();
+//
+//        $data= array();
+//        $stat=['contact', 'Etat'];
+//        $nb=0;
+//        array_push($data,$stat);
+//        foreach($test as $tests) {
+//            $stat=array();
+//
+//            array_push($stat,"haja", $tests->getEtat());
+//            $nb=($tests->getEtat());
+//            $stat=["haja",$nb];
+//            array_push($data,$stat);
+//        }
+//        $pieChart->getData()->setArrayToDataTable(
+//            $data
+//        );
+//        $pieChart->getOptions()->setTitle('Participants Number Of Our Contests');
+//        $pieChart->getOptions()->setHeight(500);
+//        $pieChart->getOptions()->setWidth(900);
+//        $pieChart->getOptions()->getTitleTextStyle()->setBold(true);
+//        $pieChart->getOptions()->getTitleTextStyle()->setColor('#009900');
+//        $pieChart->getOptions()->getTitleTextStyle()->setItalic(true);
+//        $pieChart->getOptions()->getTitleTextStyle()->setFontName('Arial');
+//        $pieChart->getOptions()->getTitleTextStyle()->setFontSize(20);
+//        return $this->render('AdminBundle::stat.html.twig', array('piechart' =>
+//            $pieChart));
+//    }
+
 
 }
