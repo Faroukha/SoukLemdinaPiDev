@@ -235,9 +235,11 @@
 
 {% block notificationBlock %}
     {% if app.user is not null %}
-
+        <div class="post" style="overflow-y: scroll;" >
         {% for notif in notifs %}
+
             {% if app.user.id != notif.idProduit.idArtisan %}
+
                 <div class="mc-sin-pro fix">
                     <a href="#" class="mc-pro-image float-left"><img
                                 src="{{ asset('bundles/main/img/mini-cart/2.jpg') }}"
@@ -252,8 +254,11 @@
                     </div>
 
                 </div>
+
             {% endif %}
+
         {% endfor %}
+        </div>
         <!-- Cart Button -->
         <div class="mc-button">
             <a href="#" class="checkout_btn">Voir plus</a>

@@ -151,6 +151,7 @@ class DefaultController extends Controller
 
             if (($abo->getIdmembre()->getId() == $idM) && ($abo->getIdartisan()->getId() == $idA)) {
                 return true;
+
             }
         }
         return false;

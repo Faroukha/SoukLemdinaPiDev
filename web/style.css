@@ -2430,6 +2430,26 @@ input:focus, textarea:focus {
     text-transform: capitalize;
 
 }
+.outofplaces_btn {
+    background: #1d2124;
+    border: 1px solid transparent;
+    border-radius: 2px;
+    color: #fff!important;
+    padding: 8px 20px;
+    transition:.5s;
+    margin-top:10px;
+    text-transform: capitalize;
+    height: 40px;
+    width: 200px;
+
+}
+
+.outofplaces_btn:hover {
+    background: #000000;
+    border: 1px solid transparent;
+    color: #fff;
+}
+
 .follow_btn {
     background: #ff6042;
     border: 1px solid transparent;

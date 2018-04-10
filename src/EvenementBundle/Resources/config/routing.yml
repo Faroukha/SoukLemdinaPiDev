@@ -5,3 +5,7 @@ all_events:
 add_event:
     path:     /addEvent
     defaults: { _controller: EvenementBundle:Default:add }
+
+participate_event:
+    path:     /participate
+    defaults: { _controller: EvenementBundle:Default:participer }

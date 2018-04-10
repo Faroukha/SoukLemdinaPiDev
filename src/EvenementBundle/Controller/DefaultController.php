@@ -57,4 +57,27 @@ class DefaultController extends Controller
         ));
        // return $this->render('EvenementBundle:Default:events.html.twig');
     }
+
+    public function participerAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $notif = $em->getRepository(Notification::class)->findAll();
+        $user = $em->getRepository(User::class)->findAll();
+        $event = $em->getRepository(Event::class)->findAll();
+        $eventss = $em->getRepository(Event::class)->find($request->get('idEvent'));
+        if ($eventss->getNbMax() > 0) {
+            $eventss->setNbMax($eventss->getNbMax() - 1);
+            $em->persist($eventss);
+            $em->flush();
+            $str= "oui";
+            return $this->render("EvenementBundle:Default:events.html.twig", ['notifs' => $notif, 'events' => $event, 'users' => $user, 'strs'=>null]);
+        }else{
+            $em = $this->getDoctrine()->getManager();
+            $notif = $em->getRepository(Notification::class)->findAll();
+            $user = $em->getRepository(User::class)->findAll();
+            $event = $em->getRepository(Event::class)->findAll();
+            $str = "Désolé nombre de places insufissant";
+            return $this->render("EvenementBundle:Default:events.html.twig", ['notifs' => $notif, 'events' => $event, 'users' => $user, 'strs'=>$str]);
+        }
+    }
 }
