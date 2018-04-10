@@ -49,3 +49,6 @@ rechercher_produit:
 addRate:
     path:     /rate
     defaults: { _controller: ProduitBundle:Rate:add }
+envoyer_mail:
+       path:     /maile
+       defaults: { _controller: MainBundle:Default:index }
