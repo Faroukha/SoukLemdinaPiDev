@@ -95,6 +95,7 @@ class DefaultController extends Controller
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($pub);
                 $em->flush();
+
             }
         }
 

@@ -22,8 +22,19 @@
     {% endif %}
 {% endblock %}
 {% block body %}
+
+
+    <div id="page_item_area" style="margin-left: 200px ; background: #524D4D">
+        <div class="container ">
+            <div class="row">
+                <div class="col-sm-9 ">
+                    <h3>Blogs</h3>
+                </div>
+            </div>
+        </div>
+    </div>
     <br><br><br><br><br><br><br><br>
-    <div class="row" style="margin-left: 200px">
+    <div class="row" style="margin-top: 0px ;margin-left: 180px">
         <style>
             table, td, th {
                 border: 1px solid #ddd;
@@ -46,7 +57,7 @@
             <tbody class="no-border-x">
             <tr>
                 <td class="onhovericon" style="font-size:20px; width: 30px;">
-                    <a href="">
+                    {#<a href="{{ path('Supprimer_blog') }}">#}
                     <span class="icon s7-close-circle onhovericon" data-toggle="tooltip" data-placement="top"
                           title="" data-original-title="close"></span>
                     </a>
