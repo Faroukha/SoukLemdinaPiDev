@@ -56,57 +56,115 @@
             </div>
         </div>
     </div>
-    <div class="product_item">
-        <div class="row">
-            <div class="col-md-2"></div>
-            <div class="col-md-8">
-                {% for rec in recs %}
+    {#<div class="product_item">#}
+        {#<div class="row">#}
+            {#<div class="col-md-2"></div>#}
+            {#<div class="col-md-8">#}
+                {#{% for rec in recs %}#}
 
-                    <div class="col-md-6 col-xs-12">
-                        <div class="prdct_dtls_content">
-                            {% if rec.etat == 1 %}
-                            <div class="pd_text">
-                            <span class="pd_title"
-                                  style="font-size: 14px; display: contents;">Etat  :</span> Traité
-                            </div>
-                            {% else %}
-                                <div class="pd_text">
-                            <span class="pd_title"
-                                  style="font-size: 14px; display: contents;">Etat  :</span> Non Traité
-                                </div>
-                            {% endif %}
-                            <div class="pd_text">
-                            <span class="pd_title"
-                                  style="font-size: 14px; display: contents;">Etat  :</span> {{ rec.etat }}
-                            </div>
-                            <div class="pd_text">
-                            <span class="pd_title"
-                                  style="font-size: 14px; display: contents;">Nom  :</span> {{ rec.Name }}
-                            </div>
-                                <div class="pd_text">
-                            <span class="pd_title"
-                                  style="font-size: 14px; display: contents;">Email  :</span> {{ rec.Email }}
-                                </div>
-                                    <div class="pd_text">
-                            <span class="pd_title"
-                                  style="font-size: 14px; display: contents;">Sujbect :</span> {{ rec.Subject }}
-                                    </div>
-                                        <div class="pd_text">
-                            <span class="pd_title"
-                                  style="font-size: 14px; display: contents;">Message  :</span> {{ rec.Message }}
-                                        </div>
-                            {% if rec.etat == false %}
-                            <form action="{{ path('reclamer') }}">
-                                <input type="hidden" value="{{ rec.id }}" name="id">
-                                <button class="btn btn-default acc_btn">Reclamer</button>
-                            </form>
-                            {% endif %}
-                    </div>
-                    </div>
-                {% endfor %}
+                    {#<div class="col-md-6 col-xs-12">#}
+                        {#<div class="prdct_dtls_content">#}
+                            {#{% if rec.etat == 1 %}#}
+                            {#<div class="pd_text">#}
+                            {#<span class="pd_title"#}
+                                  {#style="font-size: 14px; display: contents;">Etat  :</span> Traité#}
+                            {#</div>#}
+                            {#{% else %}#}
+                                {#<div class="pd_text">#}
+                            {#<span class="pd_title"#}
+                                  {#style="font-size: 14px; display: contents;">Etat  :</span> Non Traité#}
+                                {#</div>#}
+                            {#{% endif %}#}
+                            {#<div class="pd_text">#}
+                            {#<span class="pd_title"#}
+                                  {#style="font-size: 14px; display: contents;">Nom  :</span> {{ rec.Name }}#}
+                            {#</div>#}
+                                {#<div class="pd_text">#}
+                            {#<span class="pd_title"#}
+                                  {#style="font-size: 14px; display: contents;">Email  :</span> {{ rec.Email }}#}
+                                {#</div>#}
+                                    {#<div class="pd_text">#}
+                            {#<span class="pd_title"#}
+                                  {#style="font-size: 14px; display: contents;">Sujbect :</span> {{ rec.Subject }}#}
+                                    {#</div>#}
+                                        {#<div class="pd_text">#}
+                            {#<span class="pd_title"#}
+                                  {#style="font-size: 14px; display: contents;">Message  :</span> {{ rec.Message }}#}
+                                        {#</div>#}
+                            {#{% if rec.etat == false %}#}
+                            {#<form action="{{ path('reclamer') }}">#}
+                                {#<input type="hidden" value="{{ rec.id }}" name="id">#}
+                                {#<button class="btn btn-sucess acc_btn">Reclamer</button>#}
+                            {#</form>#}
+                            {#{% endif %}#}
+                    {#</div>#}
+                    {#</div>#}
+                {#{% endfor %}#}
+            {#</div>#}
+        {#</div>#}
+    {#</div>#}
+
+    <div class="row" style="margin-top: 0px ;margin-left: 50px">
+        <style>
+            table, td, th {
+                border: 1px solid #ddd;
+                text-align: left;
+            }
+
+            table {
+                border-collapse: collapse;
+                width: 100%;
+            }
+
+            th, td {
+                padding: 15px;
+            }
+        </style>
+
+        {% for r in recs %}
+
+            <div style="padding-bottom: 2px; margin-left: 190px">
+                <table class="table table-striped table-fw-widget table-hover" style="font-size: larger">
+                    <tbody class="no-border-x">
+                    <tr>
+
+                        {% if r.etat == 1 %}
+                        <td style="width: 140px;">
+                            <span class="labels"> Etat  : </span> Traité
+                        </td>
+                        {% else %}
+                        <td style="width: 140px;">
+                            <span class="labels"> Etat  : </span> Non Traité
+                        </td>
+                        {% endif %}
+
+                        <td style="width: 300px;"><span class="labels">Nom </span> {{ r.Name }}</td>
+                        <td style="width: 300px;"><span class="labels">Email : </span>{{ r.Email }}</td>
+                        <td style="width: 300px;"><span class="labels">Subject : </span>{{ r.Subject }}</td>
+                        <td style="width: 300px;"><span class="labels">Message : </span>{{ r.Message }}</td>
+                        <td style="width: 90px;">
+
+                        {% if r.etat == false %}
+                        <form action="{{ path('reclamer') }}">
+                        <input type="hidden" value="{{ r.id }}" name="id">
+                        <button class="btn btn-sucess acc_btn">Reclamer</button>
+                        </form>
+                        {% endif %}
+
+                        </td>
+
+
+
+
+                    </tr>
+                    </tbody>
+                </table>
+
             </div>
-        </div>
+        {% endfor %}
+
     </div>
+
 
     <div class="blog_pagination text-center" aria-label="Page navigation example">
         {{ knp_pagination_render(recs) }}

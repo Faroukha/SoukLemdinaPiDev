@@ -1,4 +1,4 @@
-{% extends 'layout/layout.html.twig' %}
+{% extends 'layout/adminlayout.html.twig' %}
 {% block loginbtn %}
 {% if app.user is not null %}
     <li class="account_area"><a href="{{ path('fos_user_security_logout') }}"><i class="fa fa-lock"></i> Se
@@ -45,7 +45,16 @@
 {% endblock %}
 
 {% block body %}
-    <div id="div_chart"></div>
+    <div id="page_item_area" style="margin-left: 200px ; background: #524D4D">
+        <div class="container ">
+            <div class="row">
+                <div class="col-sm-9 ">
+                    <h3>Statistique</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="div_chart" style="margin-left: 250px"></div>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
         {{ gc_draw(piechart, 'div_chart') }}

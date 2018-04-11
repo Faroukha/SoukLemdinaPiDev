@@ -18,6 +18,15 @@ allreclam:
 deletePub:
     path:     /delPub
     defaults: { _controller: AdminBundle:Default:deletePub }
+deleteProduit:
+    path:     /delProduit/{id}
+    defaults: { _controller: AdminBundle:Default:deleteProduit }
+deleteBlog:
+    path:     /delPub/{id}
+    defaults: { _controller: AdminBundle:Default:deleteBlog }
+deleteEvent:
+    path:     /delEvent/{id}
+    defaults: { _controller: AdminBundle:Default:deleteEvent }
 updatePub:
     path:     /update
     defaults: { _controller: AdminBundle:Default:updatePub }
