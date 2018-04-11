@@ -8,11 +8,14 @@ use Symfony\Component\BrowserKit\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use MainBundle\Entity\Produit;
 use MainBundle\Entity\Panier;
 use MainBundle\Entity\Commande;
 use MainBundle\Entity\Produitspanier;
-//use Knp\Bundle\SnappyBundle\Snappy\Response;
+
+use Knp\Bundle\SnappyBundle\Snappy;
+
 use UserBundle\Entity\User;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 class DefaultController extends Controller
@@ -99,7 +102,7 @@ else{
 
 
 
-    }elseif($p->getIduser()!=$userConnected->getId())
+    }elseif( $p->getIduser()!=$userConnected->getId() && $p->getIduser()==0 )
     {
 
         $Produitpanier = new Produitspanier();
@@ -227,9 +230,11 @@ public function removeItemAction(Request $request)
             $commande->setDate(new \DateTime('now'));
             $commande->setEtat(false);
             $entityManager->persist($commande);
+
         }
+
         $entityManager->flush();
-        return $this->redirectToRoute('PasserCommande');
+        return $this->redirectToRoute('redirecttohome');
 
     }
 
@@ -259,6 +264,27 @@ public function removeItemAction(Request $request)
         $panier = $entityManager->getRepository(Panier::class)->findByIduser($this->getUser()->getId());
         $commande = $entityManager->getRepository(Commande::class)->findByIduser($this->getUser()->getId());
 
+
+
+
+        $html = $this->renderView('EcommerceBundle:Default:ListeCommandes.html.twig', array(
+            'commande'  => $commande));
+
+        $filename = sprintf('test-%s.pdf', date('Y-m-d'));
+
+        return new Response(
+            $this->get('knp_snappy.pdf')->getOutputFromHtml($html),
+            200,
+            [
+                'Content-Type'        => 'application/pdf',
+                'Content-Disposition' => sprintf('attachment; filename="%s"', $filename),
+            ]
+        );
+
+
+
+
+
         //$lc= $this->renderView('EcommerceBundle:Default:ListeCommandes.html.twig',['commande'=>$commande]);
        // $snapper=$this->get('knp_snappy.pdf');
         //$filename="file";
@@ -273,14 +299,14 @@ public function removeItemAction(Request $request)
             ),
             '/path/to/the/file.pdf'
         );*/
-        $html = $this->renderView('EcommerceBundle:Default:ListeCommandes.html.twig', array(
+       /* $html = $this->renderView('EcommerceBundle:Default:ListeCommandes.html.twig', array(
             'Commande'  => $commande
         ));
 
         return new Response(
             $this->get('knp_snappy.pdf')->generateFromHtml($html),
             'file.pdf'
-        );
+        );*/
 
 
     }
