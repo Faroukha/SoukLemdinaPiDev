@@ -1,3 +1,15 @@
-evenement_homepage:
-    path:     /
+all_events:
+    path:     /event
     defaults: { _controller: EvenementBundle:Default:index }
+
+add_event:
+    path:     /addEvent
+    defaults: { _controller: EvenementBundle:Default:add }
+
+event_detail:
+    path:     /event_detail/{id}
+    defaults: { _controller: EvenementBundle:Default:info }
+
+participate_event:
+    path:     /participate
+    defaults: { _controller: EvenementBundle:Default:participer }

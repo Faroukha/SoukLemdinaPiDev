@@ -10,7 +10,7 @@ security:
 
     providers:
         fos_userbundle:
-            id: fos_user.user_provider.username
+            id: fos_user.user_provider.username_email
 
     firewalls:
         main:
@@ -19,6 +19,18 @@ security:
                 default_target_path: redirecttohome
                 provider: fos_userbundle
                 csrf_token_generator: security.csrf.token_manager
+            oauth:
+              resource_owners:
+                facebook: "/connect/check-facebook"
+                google:   "/connect/check_google"
+              login_path: /connect
+              failure_path: /connect
+
+              oauth_user_provider:
+                service: hwi_oauth.user.provider.fosub_bridge
+
+
+
             logout:
                 target: /
 

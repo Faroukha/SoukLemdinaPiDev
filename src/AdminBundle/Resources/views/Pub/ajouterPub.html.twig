@@ -1,4 +1,4 @@
-{% extends 'layout/layout.html.twig' %}
+{% extends 'layout/adminlayout.html.twig' %}
 {% block loginbtn %}
     {% if app.user is not null %}
         <li class="account_area"><a href="{{ path('fos_user_security_logout') }}"><i class="fa fa-lock"></i> Se Déconnecter</a></li>
@@ -74,7 +74,59 @@
             {#</div>#}
         {#</div>#}
     {#</div>#}
-    {{ form_start(form) }}
-    {{ form_row(form.image) }}
-    {{ form_end(form) }}
+    <div id="page_item_area" style="margin-left: 200px ; background: #524D4D">
+        <div class="container ">
+            <div class="row">
+                <div class="col-sm-9 ">
+                    <h3>Ajouter Publicité</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="login_page_area">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-md-12 col-sm-6 col-xs-12">
+
+                    <div class="create_account_area "style="margin-left: 180px">
+
+                        {{ form_start(form) }}
+
+                        <div class="caa_form_area">
+                            <div class="caa_form_group">
+                                <div class="login_email">
+                                    <div class="">
+                                        <label>Image</label>
+                                        <div class="input-area">
+                                            {{ form_widget(form.image) }}
+                                        </div>
+                                    </div>
+
+                                    <label>Date Début</label>
+                                    {{  form_widget(form.datedeb ,{'attr':{'id':'datedeb'}    }) }}
+
+                                    <div class="login_email">
+                                        <label>Date Fin</label>
+
+                                        {{ form_widget(form.datefin ,{'attr':{'id':'datefin'}    }) }}
+                                    </div>
+                                    <br>
+                                <span> {{ form_widget(form.Ajouter) }} </span>
+                            </div>
+                        </div>
+                    </div>
+                    {{ form_end(form) }}
+
+
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+
 {% endblock %}

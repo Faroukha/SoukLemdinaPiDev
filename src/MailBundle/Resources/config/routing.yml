@@ -1,0 +1,6 @@
+mail_homepage:
+    path:     /mail
+    defaults: { _controller: MailBundle:Default:index }
+my_app_mail_accuse:
+     path: /success
+     defaults: { _controller: MailBundle:Default:success }

@@ -10,6 +10,7 @@ imports:
     - { resource: "@EvenementBundle/Resources/config/services.yml" }
     - { resource: "@UserBundle/Resources/config/services.yml" }
     - { resource: "@AdminBundle/Resources/config/services.yml" }
+    - { resource: "@MailBundle/Resources/config/services.yml" }
 
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
@@ -27,7 +28,7 @@ framework:
     form: ~
     csrf_protection: ~
     validation: { enable_annotations: true }
-    #serializer: { enable_annotations: true }
+    serializer: { enable_annotations: true }
     templating:
         engines: ['twig']
     default_locale: '%locale%'
@@ -72,9 +73,9 @@ doctrine:
 # Swiftmailer Configuration
 swiftmailer:
     transport: '%mailer_transport%'
-    host: '%mailer_host%'
-    username: '%mailer_user%'
-    password: '%mailer_password%'
+    host:       '%mailer_host%'
+    username:   '%mailer_user%'
+    password:   '%mailer_password%'
     spool: { type: memory }
 
 fos_user:
@@ -134,9 +135,33 @@ nomaya_social:
         googleplus:         "https://plus.google.com/105931415830389032796"
     theme:                  'default' # optional
 
+
 #pdf
 knp_snappy:
     pdf:
        enabled:   true
        binary:     "\"C:\\Program Files\\wkhtmltopdf\\bin\\wkhtmltopdf.exe\""
        options:   []
+
+hwi_oauth:
+    # list of names of the firewalls in which this bundle is active, this setting MUST be set
+    connect:
+      confirmation: true
+      registration_form: fos_user.registration.form.factory
+    firewall_names: [main]
+    fosub:
+      username_iterations: 30
+      properties:
+        facebook: facebookID
+        google: googleID
+    resource_owners:
+      facebook:
+        type: facebook
+        client_id:  160006897984731
+        client_secret:  490b349f7387626f63ea4b4e2b3d2c2f
+        scope:  "email"
+      google:
+        type: google
+        client_id:  ?
+        client_secret:  ?
+        scope:  ?
