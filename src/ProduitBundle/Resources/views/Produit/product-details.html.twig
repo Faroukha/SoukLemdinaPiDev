@@ -72,6 +72,14 @@
                         <a class="venobox" href="img/product/3.jpg"><img src="{{ asset("Uploads/images/") ~ produit.image }}" alt=""/></a>
                     </div>
                 </div>
+
+                {{ form_start(f) }}
+                <br><br>
+                <div class="row">{{ form_widget(f.rating ) }}
+                    {{ form_widget(f.valider) }}
+                </div>
+                {{ form_end(f) }}
+
                 <!-- Product Details Content -->
                 <div class="col-md-6 col-xs-12">
                     <div class="prdct_dtls_content">
@@ -115,15 +123,7 @@
 
                         </form>
 
-                            <div class="col-xs-12">
-                                <form action="{{ path("addRate") }}">
-                                    <input type="hidden" value="{{ app.user.id }}" name="idUser">
-                                    <input type="hidden" value="{{ produit.id }}" name="id">
-                                    <input name="value" type="number">
 
-                                    <input class="btn border-btn" type="submit" value="ajouter rate"/>
-                                </form>
-                            </div>
                         </div>
                     </div>
                 </div>

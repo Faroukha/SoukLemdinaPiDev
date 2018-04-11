@@ -163,9 +163,8 @@
                                                 <div class="box-content">
                                                     <a href="#"><i class="fa fa-heart-o"></i></a>
                                                     <a href="#"><i class="fa fa-cart-plus"></i></a>
-                                                    <a href="{{ path('product_details',{'id':produit.id}) }}"><i
-                                                                class="fa fa-search"></i></a>
-                                                </div>
+                                                    <a href="{{ path('product_detailss',{'id':produit.id}) }}"><i
+                                                                class="fa fa-search"></i></a>                                                </div>
                                             </div>
 
                                             <div class="product_btm_text">
@@ -182,13 +181,13 @@
                                                     {% endfor %}
                                                 {% endif %}
                                                 <div class="p_rating">
-                                                    {% set i=0 %}
-                                                    {% for rate in rates %}
 
-                                                        {% if produit.id == rate.idProduit %}
-                                                            {{ rate.value }}
-                                                        {% endif %}
+                                                    {% for rate in rating %}
+                                                    {% if produit.id == rate.idE %}
+                                                    {{ rate.avgrating|rating }}
+                                                    {% endif %}
                                                     {% endfor %}
+
 
                                                 </div>
                                                 <span class="price">{{ produit.prix }}0</span>

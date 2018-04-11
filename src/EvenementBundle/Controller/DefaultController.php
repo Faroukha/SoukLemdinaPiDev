@@ -57,8 +57,6 @@ class DefaultController extends Controller
 
 
 
-
-
     }
 
 
@@ -75,7 +73,7 @@ class DefaultController extends Controller
             $file = $event->getPhoto();
 
             $fileName = md5(uniqid('', true)) . '.' . $file->guessExtension();
-            $path = "C:/wamp64/www/pidev";
+            $path = "C:/wamp64/www/SouklemdinaPiDev/web/Uploads/images";
             $file->move(
                 $path,
                 $fileName
@@ -92,7 +90,8 @@ class DefaultController extends Controller
             $notif = $em->getRepository(Notification::class)->findAll();
             $user = $em->getRepository(User::class)->findAll();
             $event = $em->getRepository(Event::class)->findAll();
-            return $this->render('EvenementBundle:Default:events.html.twig', ['notifs' => $notif, 'users' => $user, 'events' => $event]);
+            $rating = $em->getRepository(Rating::class)->find($request->get('id'));
+            return $this->render('EvenementBundle:Default:events.html.twig', ['rating'=>$rating, 'notifs' => $notif, 'users' => $user, 'events' => $event]);
             // return $this->redirectToRoute('e_show', array('id' => $event->getId()));
         }
 
