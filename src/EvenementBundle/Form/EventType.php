@@ -40,11 +40,9 @@ class EventType extends AbstractType
 
             ->add('categorie',ChoiceType::class,array(
                 'choices'=>array(
-                    'Randonnée'=>'Randonnée',
-                    'Workshop'=>'Workshop',
-                    'Camping'=>'Camping',
+                    'Foire'=>'Foire',
                     'Formation'=>'Formation',
-                    'Anniversaire Club'=>'Annivaisaire Club'
+                    'Conférence '=>'Conférence',
                 )
             ))
         ;
