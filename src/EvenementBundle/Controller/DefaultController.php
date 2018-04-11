@@ -13,7 +13,7 @@ use UserBundle\Entity\User;
 
 class DefaultController extends Controller
 {
-    public function indexAction()
+    public function indexAction(Request $request)
     {
 
         $em = $this->getDoctrine()->getManager();
@@ -22,6 +22,14 @@ class DefaultController extends Controller
 
         $user = $em->getRepository(User::class)->findAll();
         $event = $em->getRepository(Event::class)->findAll();
+
+        $paginator = $this->get('knp_paginator');
+
+        $event = $paginator->paginate(
+            $event,
+            $request->query->getInt('page', 1)/*page number*/,
+            $request->query->getInt('limit', 3)/*limit per page*/
+        );
 
         return $this->render('EvenementBundle:Default:events.html.twig', ['events' => $event, 'users' => $user, 'notifs' => $notif, 'rating'=>$rating]);
     }
@@ -89,7 +97,7 @@ class DefaultController extends Controller
             if ($event->getDateDebut() <= $event->getDatefin() ) {
                 $em->persist($event);
                 $em->flush();
-            }   
+            }
 
             $em = $this->getDoctrine()->getManager();
             $notif = $em->getRepository(Notification::class)->findAll();
