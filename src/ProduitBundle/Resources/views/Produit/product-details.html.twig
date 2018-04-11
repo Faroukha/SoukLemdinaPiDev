@@ -114,14 +114,15 @@
                                 <button type="submit" class="btn btn-default acc_btn">add to cart</button>
 
                             </div>
-                            {{ form_start(f) }}
-                            <br><br>
-                            <div class="row">{{ form_widget(f.rating ) }}
-                                {{ form_widget(f.valider) }}
-                            </div>
-                            {{ form_end(f) }}
+
                         </form>
 
+                        {{ form_start(f) }}
+                        <br><br>
+                        <div class="row">{{ form_widget(f.rating ) }}
+                            {{ form_widget(f.valider) }}
+                        </div>
+                        {{ form_end(f) }}
 
                         </div>
                     </div>
@@ -135,6 +136,7 @@
 
             <div class="row">
                 <div class="col-xs-12">
+
                     <div class="pd_tab_area fix">
                         <ul class="pd_tab_btn nav nav-tabs" >
                             <li>
