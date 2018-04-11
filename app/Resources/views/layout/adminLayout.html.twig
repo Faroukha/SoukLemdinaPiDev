@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>SoukLemdina - E-commerce Traditionnel </title>
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,500,600,700,800" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Handlee" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/animate.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('css/owl.theme.default.min.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('css/owl.carousel.min.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('css/meanmenu.min.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('css/venobox.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('css/font-awesome.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('style.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('css/responsive.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('css/flipclock.css') }}"/>
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/starrating/css/rating.css') }}"/>
+    <link rel="stylesheet" type="text/css" href="{{ asset('lib/stroke-7/style.css') }}"/>
+    <link rel="stylesheet" type="text/css" href="{{ asset('lib/theme-switcher/theme-switcher.min.css') }}"/>
+    <link rel="stylesheet" type="text/css" href="{{ asset('lib/summernote/summernote.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('lib/jquery.nanoscroller/css/nanoscroller.css') }}"/>
+    <link href="{{ asset('css/ffolders.min.css') }}" rel="stylesheet">
+    <link type="text/css" href="{{ asset('css/style.css') }}" rel="stylesheet">
+    <link type="text/css" href="{{ asset('css/style2.css') }}" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{{ asset('lib/bootstrap-slider/css/bootstrap-slider.css') }}"/>
+    <link rel="stylesheet" type="text/css" href="{{ asset('lib/dropzone/dist/dropzone.css') }}"/>
+    <link rel="stylesheet" type="text/css"
+          href="{{ asset('lib/datetimepicker/css/bootstrap-datetimepicker.min.css') }}"/>
+    <link rel="stylesheet" type="text/css" href="{{ asset('lib/jquery.gritter/css/jquery.gritter.css') }}"/>
+    {% block stylesheets %}{% endblock %}
+
+
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
+    {#<div class="preloader">#}
+    {#<div class="status-mes">#}
+    {#<div class="bigSqr">#}
+    {#<div class="square first"></div>#}
+    {#<div class="square second"></div>#}
+    {#<div class="square third"></div>#}
+    {#<div class="square fourth"></div>#}
+    {#</div>#}
+    {#<div class="text_loading text-center">loading</div>#}
+    {#</div>#}
+    {#</div>#}
+
+    <div class="panel panel-dark">
+        <div class="col-xs-12 ">
+            <ul class="hdr_tp_right text-right">
+                {% block loginbtn %}
+                    <li class="account_area"><a href="{{ path('fos_user_registration_register') }}"><i
+                                    class="fa fa-lock"></i> Register</a></li>
+                    <li class="account_area"><a href="{{ path('fos_user_security_login') }}"><i
+                                    class="fa fa-lock"></i> Se Connecter</a></li>
+                {% endblock %}
+            </ul>
+        </div>
+    </div>
+    </div>
+    </div>
+
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        .sidenav {
+            height: 100%;
+            width: 200px;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            background-color:#524D4D;
+            overflow-x: hidden;
+            padding-top: 20px;
+
+        }
+
+        /* Page content */
+        .main {
+            margin-left: 200px; /* Same as the width of the sidenav */
+        }
+
+        /* The navigation menu links */
+        .sidenav a {
+            padding: 8px 8px 8px 32px;
+            text-decoration: none;
+            font-size: 25px;
+            color: white;
+            display: block;
+            transition: 0.3s;
+        }
+
+        /* When you mouse over the navigation links, change their color */
+        .sidenav a:hover {
+            color: white;
+        }
+
+        /* Position and style the close button (top right corner) */
+        .sidenav .closebtn {
+            position: absolute;
+            top: 0;
+            right: 25px;
+            font-size: 36px;
+            margin-left: 50px;
+        }
+
+        /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
+        #main {
+            transition: margin-left .5s;
+            padding: 20px;
+            padding-left: 100%;
+        }
+
+        /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+        @media screen and (max-height: 450px) {
+            .sidenav {
+                padding-top: 15px;
+                padding-left: 100%
+            }
+
+            .sidenav a {
+                font-size: 18px;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+{% block leftsidebar %}
+    <div id="mySidenav" class="sidenav">
+
+        <br><br><br><br><br><br>
+
+        <a href="{{ path('all_produitss') }}">Produit</a>
+        <a href="{{ path('all_users') }}">Users</a>
+        <a href="{{ path('all_blogs') }}">Blogs</a>
+        <a href="{{ path('all_eventss') }}">Evenements</a>
+        <a href="{{ path('allreclam') }}">Réclamations</a>
+        <a href="{{ path('allPub') }}">Publicités</a>
+    </div>
+
+    <!-- Use any element to open the sidenav -->
+
+
+    <!-- Add all page content inside this div if you want the side nav to push page content to the right (not used if you only want the sidenav to sit on top of the page -->
+
+{% endblock %}
+{% block body %}
+
+    {% block fos_user_content %}
+    {% endblock %}
+{% endblock %}
+{% block javascripts %}{% endblock %}
+
+<script src="{{ asset('//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js') }}"></script>
+<script src="{{ asset('bundles/starrating/js/rating.js') }}"></script>
+<script src="{{ asset('js/vendor/jquery-1.12.4.min.js') }}"></script>
+<script src="{{ asset('js/bootstrap.min.js') }}"></script>
+<script src="{{ asset('js/jquery.meanmenu.min.js') }}"></script>
+<script src="{{ asset('js/jquery.mixitup.js') }}"></script>
+<script src="{{ asset('js/jquery.counterup.min.js') }}"></script>
+<script src="{{ asset('js/waypoints.min.js') }}"></script>
+<script src="{{ asset('js/wow.min.js') }}"></script>
+<script src="{{ asset('js/venobox.min.js') }}"></script>
+<script src="{{ asset('js/owl.carousel.min.js') }}"></script>
+<script src="{{ asset('js/simplePlayer.js') }}"></script>
+<script src="{{ asset('js/main.js') }}"></script>
+
+</body>
+</html>

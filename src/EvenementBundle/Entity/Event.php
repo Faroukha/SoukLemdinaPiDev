@@ -83,6 +83,12 @@ class Event
      * @ORM\Column(name="nbMax", type="integer", nullable=true)
      */
     private $nbMax;
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="seat", type="integer", nullable=true)
+     */
+    private $seat;
 
     /**
      * @var string
@@ -400,5 +406,29 @@ class Event
     public function getUser()
     {
         return $this->user;
+    }
+
+    /**
+     * Set seat
+     *
+     * @param integer $seat
+     *
+     * @return Event
+     */
+    public function setSeat($seat)
+    {
+        $this->seat = $seat;
+
+        return $this;
+    }
+
+    /**
+     * Get seat
+     *
+     * @return integer
+     */
+    public function getSeat()
+    {
+        return $this->seat;
     }
 }

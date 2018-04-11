@@ -3,9 +3,10 @@
 namespace AdminBundle\Controller;
 
 use AdminBundle\AdminBundle;
-use CMEN\GoogleChartsBundle\GoogleCharts\Charts\PieChart;
+use EvenementBundle\Entity\Event;
+use MainBundle\Entity\Blog;
 use MainBundle\Entity\Contact;
-use MainBundle\Entity\Etat;
+use MainBundle\Entity\Produit;
 use MainBundle\Entity\Pubg;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -16,6 +17,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Validator\Constraints\DateTime;
+use UserBundle\Entity\User;
 
 
 class DefaultController extends Controller
@@ -24,6 +26,7 @@ class DefaultController extends Controller
     {
         return $this->render('AdminBundle::admin.html.twig');
     }
+
 
     public function allPubAction(Request $request)
     {
@@ -92,6 +95,7 @@ class DefaultController extends Controller
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($pub);
                 $em->flush();
+
             }
         }
 
@@ -166,66 +170,36 @@ class DefaultController extends Controller
         $em = $this->getDoctrine()->getManager();
         $rec = $em->getRepository(Contact::class)->find($request->get("id"));
 
-        $em1 =$this->getDoctrine()->getManager();
-        $em2 =$this->getDoctrine()->getManager();
-
-        $etat = $em1->getRepository(Etat::class)->find(1);
-        $etat ->setNbr($etat ->getNbr() +1) ;
-
-        $etat2 =$em2->getRepository(Etat::class)->find(2);
-        $etat2 ->setNbr($etat2->getNbr()-1);
-
-
         if($rec->getEtat()==false) {
-
             $rec ->setEtat(true) ;
             $em->persist($rec);
             $em->flush();
-
-            $em1->persist($etat);
-            $em1->flush();
-            $em2->persist($etat2);
-            $em2->flush();
         }
 
         return $this->redirectToRoute('allreclam');
     }
 
-
-
-    public function StatistiqueAction()
-    {
-        $pieChart = new PieChart();
-        $em= $this->getDoctrine();
-
-        $test = $em->getRepository(Etat::class)->findAll();
-
-        $data= array();
-        $stat=['etat', 'nbr'];
-        $nb=0;
-        array_push($data,$stat);
-        foreach($test as $tests) {
-            $stat=array();
-
-            array_push($stat,$tests->getInfo(), $tests->getNbr());
-            $nb=($tests->getNbr());
-            $stat=[$tests->getInfo(),$nb];
-            array_push($data,$stat);
-        }
-        $pieChart->getData()->setArrayToDataTable(
-            $data
-        );
-        $pieChart->getOptions()->setTitle('Statistique sur les reclamations');
-        $pieChart->getOptions()->setHeight(500);
-        $pieChart->getOptions()->setWidth(900);
-        $pieChart->getOptions()->getTitleTextStyle()->setBold(true);
-        $pieChart->getOptions()->getTitleTextStyle()->setColor('#009900');
-        $pieChart->getOptions()->getTitleTextStyle()->setItalic(true);
-        $pieChart->getOptions()->getTitleTextStyle()->setFontName('Arial');
-        $pieChart->getOptions()->getTitleTextStyle()->setFontSize(20);
-        return $this->render('AdminBundle::stat.html.twig', array('piechart' =>
-            $pieChart));
+    public function blogsAction(){
+        $em = $this->getDoctrine()->getManager();
+        $blog = $em->getRepository(Blog::class)->findAll();
+        return $this->render('AdminBundle:Elements:blog.html.twig', ['blog'=>$blog]);
     }
 
+    public function eventsAction(){
+        $em = $this->getDoctrine()->getManager();
+        $event = $em->getRepository(Event::class)->findAll();
+        return $this->render('AdminBundle:Elements:events.html.twig', ['events'=>$event]);
+    }
 
+    public function usersAction(){
+        $em = $this->getDoctrine()->getManager();
+        $user = $em->getRepository(User::class)->findAll();
+        return $this->render('AdminBundle:Elements:users.html.twig', ['users'=>$user]);
+    }
+
+    public function produitsAction(){
+        $em = $this->getDoctrine()->getManager();
+        $produit = $em->getRepository(Produit::class)->findAll();
+        return $this->render('AdminBundle:Elements:produits.html.twig', ['produits'=>$produit]);
+    }
 }

@@ -1,4 +1,4 @@
-{% extends 'layout/layout.html.twig' %}
+{% extends 'layout/adminlayout.html.twig' %}
 {% block mailco %}
     {% if app.user is not null %}
         {{ app.user.email }}
@@ -46,6 +46,16 @@
 
 
 {% block body %}
+
+    <div id="page_item_area" style="margin-left: 200px ; background: #524D4D">
+        <div class="container ">
+            <div class="row">
+                <div class="col-sm-9 ">
+                    <h3>Reclamations</h3>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="product_item">
         <div class="row">
             <div class="col-md-2"></div>

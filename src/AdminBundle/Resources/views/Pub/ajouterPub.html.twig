@@ -1,4 +1,4 @@
-{% extends 'layout/layout.html.twig' %}
+{% extends 'layout/adminlayout.html.twig' %}
 {% block loginbtn %}
     {% if app.user is not null %}
         <li class="account_area"><a href="{{ path('fos_user_security_logout') }}"><i class="fa fa-lock"></i> Se Déconnecter</a></li>
@@ -74,11 +74,11 @@
             {#</div>#}
         {#</div>#}
     {#</div>#}
-    <div id="page_item_area">
-        <div class="container">
+    <div id="page_item_area" style="margin-left: 200px ; background: #524D4D">
+        <div class="container ">
             <div class="row">
-                <div class="col-sm-6 text-left">
-                    <h3>Ajouter Publicite</h3>
+                <div class="col-sm-9 ">
+                    <h3>Ajouter Publicité</h3>
                 </div>
             </div>
         </div>
@@ -90,7 +90,7 @@
 
                 <div class="col-md-12 col-sm-6 col-xs-12">
 
-                    <div class="create_account_area">
+                    <div class="create_account_area "style="margin-left: 180px">
 
                         {{ form_start(form) }}
 
