@@ -77,7 +77,7 @@
                             <img src="{{ asset("Uploads/images/") ~ event.photo }}" alt="">
                             {% if app.user is not null %}
                                 {% if event.user== app.user %}
-                                <form action="">
+                                <form action="{{ path('Supprimer_event', {'id':event.id}) }}">
 
                                     <button class="btn btn-default acc_btn">Supprimer l'evenement</button>
 

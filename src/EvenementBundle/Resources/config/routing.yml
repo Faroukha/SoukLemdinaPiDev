@@ -13,7 +13,7 @@ event_detail:
 participate_event:
     path:     /participate
     defaults: { _controller: EvenementBundle:Default:participer }
-Supprimer_evan:
-    path:     /suu
+Supprimer_event:
+    path:     /supp/{id}
     defaults: { _controller: EvenementBundle:Default:supprimer }
 
