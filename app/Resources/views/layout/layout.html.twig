@@ -6,6 +6,7 @@
     <title>SoukLemdina - E-commerce Traditionnel </title>
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,500,600,700,800" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Handlee" rel="stylesheet">
+
     <link rel="stylesheet" href="{{ asset('css/animate.css') }}"/>
     <link rel="stylesheet" href="{{ asset('css/owl.theme.default.min.css') }}"/>
     <link rel="stylesheet" href="{{ asset('css/owl.carousel.min.css') }}"/>
@@ -17,10 +18,11 @@
     <link rel="stylesheet" href="{{ asset('css/responsive.css') }}"/>
     <link rel="stylesheet" href="{{ asset('css/flipclock.css') }}"/>
     <link rel="stylesheet" type="text/css" href="{{ asset('bundles/starrating/css/rating.css') }}" />
+
     {% block stylesheets %}{% endblock %}
 
 
-    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
+    <link rel="icon" type="image/x-icon" href="{{ absolute_url(asset('favicon.ico')) }}"/>
     {#<div class="preloader">#}
     {#<div class="status-mes">#}
     {#<div class="bigSqr">#}
@@ -67,7 +69,10 @@
             <div class="container">
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-3">
-                        <a class="logo" href="{{ path('main_homepage') }}"> <img alt=""src="{{ asset('bundles/main/img/logo.png') }}"></a>
+
+                        <a class="logo" href="{{ path('main_homepage') }}"> <img alt=""
+                                                                                 src="{{ absolute_url(asset('bundles/main/img/logo.png')) }}"></a>
+
                     </div>
                     <!--  End Col -->
 
@@ -212,7 +217,7 @@
                                                 <div class="mc-pro-list fix">
                                                     <div class="mc-sin-pro fix">
                                                         <a href="#" class="mc-pro-image float-left"><img
-                                                                    src="{{ asset('bundles/main/img/mini-cart/1.jpg') }}"
+                                                                    src="{{ absolute_url(asset('bundles/main/img/mini-cart/1.jpg')) }}"
                                                                     alt=""/></a>
                                                         <div class="mc-pro-details fix">
                                                             <a href="#">This is Product Name</a>
@@ -223,7 +228,7 @@
                                                     </div>
                                                     <div class="mc-sin-pro fix">
                                                         <a href="#" class="mc-pro-image float-left"><img
-                                                                    src="{{ asset('bundles/main/img/mini-cart/2.jpg') }}"
+                                                                    src="{{ absolute_url(asset('bundles/main/img/mini-cart/2.jpg')) }}"
                                                                     alt=""/></a>
                                                         <div class="mc-pro-details fix">
                                                             <a href="#">This is Product Name</a>
@@ -287,6 +292,7 @@
 {% endblock %}
 {% block javascripts %}{% endblock %}
 
+
 <script src="{{ asset('//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js') }}"></script>
 <script src="{{ asset('bundles/starrating/js/rating.js') }}"></script>
 <script src="{{ asset('js/vendor/jquery-1.12.4.min.js') }}"></script>
@@ -300,6 +306,7 @@
 <script src="{{ asset('js/owl.carousel.min.js') }}"></script>
 <script src="{{ asset('js/simplePlayer.js') }}"></script>
 <script src="{{ asset('js/main.js') }}"></script>
+
 <footer class="footer_area">
     <div class="container">
         <div class="row">

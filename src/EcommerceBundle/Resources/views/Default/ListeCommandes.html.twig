@@ -1,4 +1,4 @@
-{% extends 'layout/layout.html.twig' %}
+
 
 
 {% block body %}
@@ -40,12 +40,13 @@
                             </tr>
                             </thead>
 
-
+{% for cm in commande %}
                             <tbody>
-                            <tr><td></td>
-                            <td></td>
-                                <td></td>
+                            <tr><td>{{ cm.etat }}</td>
+                            <td>{{ cm.date|date('m/d/y') }}</td>
+                                <td>{{ cm.idPanier }}</td>
                             </tr>
+                            {% endfor %}
                             </tbody>
 
 
