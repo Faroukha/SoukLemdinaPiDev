@@ -77,8 +77,8 @@
                             <img src="{{ asset("Uploads/images/") ~ m.photo }}" alt="">
                             {% if app.user is not null %}
                                 {% if m.user== app.user %}
-                                        <form action="{{ path('Supprimer_evan') }}">
-                                            <input type="hidden"  value="{{ evenement.id }}" name="id" >
+                                        <form action="{{ path('Supprimer_event', {'id':m.id}) }}">
+                                            <input type="hidden"  value="{{ m.id }}" name="id" >
 
                                         <button class="btn btn-default acc_btn">Supprimer l'evenement</button>
                                         </form>
@@ -88,11 +88,12 @@
                                 <div class="bd_month">{{ m.createdAt |date("m/d/Y") }}</div>
 
                             </div><br>
+                             {% if m.user!= app.user %}
                             {% if m.nbMax > 0 %}
                                 <a class="btn btn-default follow_btn" href="{{ path('participate_event',{'idEvent':m.id}) }}">Participer à l'évènement </a>
                             {% else %}
                                 <a class="btn btn-default outofplaces_btn">Places finies</a>
-                            {% endif %}<br>
+                            {% endif %}{% endif %}<br>
                             {{ form_start(f) }}
                             <br><br>
                             <div class="row">{{ form_widget(f.rating ) }}
@@ -126,38 +127,11 @@
                     </div>
 
             </div>
-            <!-- Blog Sidebar -->
+
             <div class="col-md-4 col-xs-12">
 
 
-
-                {#<div class="single_sidebar popular_post">#}
-                {#<h3 class="sdbr_title">popular post</h3>#}
-                {#<div class="sdbr_inner">#}
-                {#<div class="single_popular_post fix">#}
-                {#<a href="#" class="spp_img"><img src="{{ asset('img/sidebar/1.jpg') }}" alt=""/></a>#}
-                {#<div class="spp_text fix">#}
-                {#<a href="#">Lorem Ipsum is simply 2018.</a>#}
-                {#<p>Posted By John Doe</p>#}
-                {#</div>#}
-                {#</div>#}
-                {#<div class="single_popular_post fix">#}
-                {#<a href="#" class="spp_img"><img src="{{ asset('img/sidebar/2.jpg') }}" alt=""/></a>#}
-                {#<div class="spp_text fix">#}
-                {#<a href="#">Lorem Ipsum is simply 2018.</a>#}
-                {#<p>Posted By John Doe</p>#}
-                {#</div>#}
-                {#</div>#}
-                {#<div class="single_popular_post fix">#}
-                {#<a href="#" class="spp_img"><img src="{{ asset('img/sidebar/3.jpg') }}" alt=""/></a>#}
-                {#<div class="spp_text fix">#}
-                {#<a href="#">Lorem Ipsum is simply 2018.</a>#}
-                {#<p>Posted By John Doe</p>#}
-                {#</div>#}
-                {#</div>#}
-                {#</div>#}
-                {#</div>#}
-            </div><!-- End Blog Sidebar -->
+            </div>
         </div>
     </div>
 
