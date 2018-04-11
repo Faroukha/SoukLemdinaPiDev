@@ -49,7 +49,7 @@
                     <input type="hidden" value="{{ pub.id }}" name="id">
                     <button class="btn btn-danger">Supprimer</button>
                     </form>
-                    <form action="{{ path('updatePubView') }}">
+                    <form action="{{ path('updatePubView') }}" method="post">
                         <input type="hidden" value="{{ pub.id }}" name="id">
                         <button class="btn btn-info acc_btn">Modifier</button>
                     </form>

@@ -70,6 +70,7 @@ class DefaultController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
 
+
             $file = $event->getPhoto();
 
             $fileName = md5(uniqid('', true)) . '.' . $file->guessExtension();
@@ -85,8 +86,11 @@ class DefaultController extends Controller
             $event->setUser($user);
             $event->setPhoto($fileName);
             $event->setSeat($event->getNbMax());
-            $em->persist($event);
-            $em->flush();
+            if ($event->getDateDebut() <= $event->getDatefin() ) {
+                $em->persist($event);
+                $em->flush();
+            }   
+
             $em = $this->getDoctrine()->getManager();
             $notif = $em->getRepository(Notification::class)->findAll();
             $user = $em->getRepository(User::class)->findAll();
