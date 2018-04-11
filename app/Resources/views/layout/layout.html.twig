@@ -15,6 +15,8 @@
     <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}"/>
     <link rel="stylesheet" href="{{ asset('style.css') }}"/>
     <link rel="stylesheet" href="{{ asset('css/responsive.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('css/flipclock.css') }}"/>
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/starrating/css/rating.css') }}" />
     {% block stylesheets %}{% endblock %}
 
 
@@ -37,10 +39,13 @@
                 <div class="row">
                     <div class="col-xs-12 col-sm-6">
                         <div class="hdr_tp_left">
+                            {% block testuser %}
                             <div class="call_area">
+                                <span class="single_con_add"><i class="fa fa-user"></i> {% block nameco %}{% endblock %}</span>
                                 <span class="single_con_add"><i
                                             class="fa fa-envelope"></i> {% block mailco %} {% endblock %}</span>
                             </div>
+                            {% endblock %}
                         </div>
                     </div>
 
@@ -62,8 +67,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-3">
-                        <a class="logo" href="{{ path('main_homepage') }}"> <img alt=""
-                                                                                 src="{{ asset('bundles/main/img/logo.png') }}"></a>
+                        <a class="logo" href="{{ path('main_homepage') }}"> <img alt=""src="{{ asset('bundles/main/img/logo.png') }}"></a>
                     </div>
                     <!--  End Col -->
 
@@ -89,17 +93,81 @@
                                         </li>
 
                                         {% block admin %}
-                                        <li>
-                                            <a href="{{ path('contact') }}">Reclamations</a>
-                                        </li>
+                                            {% if app.user is not null %}
+
+                                                <li>
+                                                    <a href="{{ path('contact') }}">Reclamations<i class="fa fa-angle-down"></i></a>
+                                                    {% if app.user is not null %}
+                                                    <ul class="sub-menu">
+                                                        <li>
+                                                            <a href="{{ path('allreclamationUser', {'idUser':app.user.id}) }}">Mes Reclamations</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="{{ path('contact') }}">Ajouter Reclamation</a>
+                                                        </li>
+
+                                                    </ul>
+                                                    {% endif %}
+                                                </li>
+                                            {% else %}
+                                                <li>
+                                                    <a href="{{ path('fos_user_security_login') }}">Reclamations</a>
+                                                </li>
+
+                                            {% endif %}
+
                                             <li>
                                                 <a href="{{ path('blog') }}">Blog <i class="fa fa-angle-down"></i></a>
+                                                <ul class="sub-menu">
+                                                    <li>
+                                                        <a href="{{ path('blog') }}">Tous les articles</a>
+                                                    </li>
+                                                    {% if app.user is not null %}
+                                                        <li>
+                                                            <a href="{{ path('ajouter_blog_bds') }}">Ajouter un blog</a>
+                                                        </li>
+                                                    {% endif %}
+                                                </ul>
+                                            </li>
+                                            {% if app.user is not null %}
+                                                <li><a href="{{ path('ff') }}">Profil</a></li>
+                                            {% endif %}
+                                        {% endblock %}
+                                        <li><a href="{{ path('all_events') }}">Evenement <i class="fa fa-angle-down"></i> </a>
+
+                                            <ul class="sub-menu">
+                                                <li><a href="{{ path('all_events') }}">Tous les evenements</a></li>
+                                                {% if app.user is not null %}
+                                                    <li><a href="{{ path('add_event') }}">Ajouter un evenement</a>
+                                                    </li>
+                                                {% endif %}
+                                            </ul>
+
+
+                                        </li>
+                                        {% if app.user is not null %}
+                                            <li>
+
+                                                <div class="cart_menu_area">
+                                                    <div class="cart_icon">
+                                                        <a href="#"><i class="fa fa-bell" style="color: #33d286"
+                                                                       aria-hidden="true"></i></a>
+                                                    </div>
+                                                    <!-- Mini Cart Wrapper -->
+                                                    <div class="mini-cart-wrapper">
+                                                        <!-- Product List -->
+                                                        <div class="mc-pro-list fix">
+                                                            {% block notificationBlock %}
+                                                            {% endblock %}
+
+                                                        </div>
+
+
+                                                    </div>
+                                                </div>
 
                                             </li>
-
-                                            <li><a href="{{ path('ff') }}">Profil</a></li>
-                                        {% endblock %}
-
+                                        {% endif %}
                                     </ul>
                                 </nav>
                             </div>
@@ -112,22 +180,25 @@
                                         <div class="search_icon">
                                             <i class="fa fa-search search_btn" aria-hidden="true"></i>
                                             <div class="search-box">
-                                                <form action="#" method="get">
+
+                                                    <form action="{{ path('rechercher_produit') }}" method="GET">
+
                                                     <div class="input-group">
-                                                        <input type="text" class="form-control"
-                                                               placeholder="enter keyword"/>
+                                                        <input type="text" class="form-control"  placeholder="enter keyword" name="text"/>
                                                         <button type="submit" class="btn btn-default"><i
                                                                     class="fa fa-search"></i></button>
                                                     </div>
                                                 </form>
+
                                             </div>
                                         </div>
                                     </li>
-
+                                    {% if app.user is not null %}
                                     <li>
                                         <div class="cart_menu_area">
                                             <div class="cart_icon">
-                                                <a href="#"><i class="fa fa-shopping-bag " aria-hidden="true"></i></a>
+                                                <a href="#"><i class="fa fa-shopping-bag "
+                                                               aria-hidden="true"></i></a>
                                                 <span class="cart_number">2</span>
                                             </div>
 
@@ -171,12 +242,35 @@
                                         </div>
 
                                     </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div><!--  End Col -->
+                                    {% else %}
+                                    <li>
+                                        <div class="cart_menu_area">
+                                            <div class="cart_icon">
+                                                <a href="#"><i class="fa fa-shopping-bag "
+                                                               aria-hidden="true"></i></a>
+                                                <span class="cart_number"></span>
+                                            </div>
+                                            <div class="mini-cart-wrapper">
+                                                <!-- Product List -->
+                                                <div class="mc-pro-list fix">
+                                                    <div class="mc-sin-pro fix">
+                                                             <ul><li class="account_area"><a href="{{ path('fos_user_registration_register') }}">
+                                                             <i class="fa fa-lock"></i> Register</a></li>
+                                                             <li class="account_area"><a href="{{ path('fos_user_security_login') }}">
+                                                             <i class="fa fa-lock"></i> Se Connecter</a></li>
+                                                             </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                         </div>
+                                     </li>
+                    {% endif %}
+                    </ul>
                 </div>
             </div>
+        </div><!--  End Col -->
+        </div>
+        </div>
         </div>
     </header>
 </head>
@@ -190,6 +284,8 @@
 {% endblock %}
 {% block javascripts %}{% endblock %}
 
+<script src="{{ asset('//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js') }}"></script>
+<script src="{{ asset('bundles/starrating/js/rating.js') }}"></script>
 <script src="{{ asset('js/vendor/jquery-1.12.4.min.js') }}"></script>
 <script src="{{ asset('js/bootstrap.min.js') }}"></script>
 <script src="{{ asset('js/jquery.meanmenu.min.js') }}"></script>

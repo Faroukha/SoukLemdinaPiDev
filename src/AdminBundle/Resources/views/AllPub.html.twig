@@ -1,4 +1,14 @@
-{% extends 'layout/layout.html.twig' %}
+{% extends 'layout/adminLayout.html.twig' %}
+{% block mailco %}
+    {% if app.user is not null %}
+        {{ app.user.email }}
+    {% endif %}
+{% endblock %}
+{% block nameco %}
+    {% if app.user is not null %}
+        {{ app.user.username }}
+    {% endif %}
+{% endblock %}
 {% block loginbtn %}
     {% if app.user is not null %}
         <li class="account_area"><a href="{{ path('fos_user_security_logout') }}"><i class="fa fa-lock"></i> Se Déconnecter</a></li>
@@ -9,34 +19,20 @@
     {% endif %}
 {% endblock %}
 
-{% block admin %}
-    {% if is_granted('ROLE_ADMIN') %}
-        <li><a href="{{ path('allPub') }}">Publicite</a></li>
-        <li>
-            <a href="{{ path('blog') }}">Blog <i class="fa fa-angle-down"></i></a>
-
-        </li>
-        <li>
-            <a href="{{ path('allreclam') }}">Reclamation <i class="fa fa-angle-down"></i> </a>
-        </li>
-
-        <li><a href="{{ path('ff') }}">Profil admin</a></li>
-
-
-    {% else %}
-        <li><a href="{{ path('contact') }}">contact</a></li>
-        <li>
-            <a href="{{ path('blog') }}">Blog <i class="fa fa-angle-down"></i></a>
-
-        </li>
-
-        <li><a href="{{ path('ff') }}">Profil</a></li>
-    {% endif %}
-{% endblock %}
 {% block body %}
-    <div class="product_item">
+
+    <div id="page_item_area" style="margin-left: 200px ; background: #524D4D">
+        <div class="container ">
+            <div class="row">
+                <div class="col-sm-9 ">
+                    <h3>Publicités</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="product_item " style="margin-top: 80px ;margin-left: 210px">
         <div class="pd_btn fix">
-            <a class="btn btn-default acc_btn" href="{{ path('ajouterPub') }}">Ajouter Publicite</a>
+            <a class="btn btn-sucess acc_btn" href="{{ path('ajouterPub') }}">Ajouter Publicite</a>
         </div>
 <div class="row">
     <div class="col-md-2"></div>
@@ -49,9 +45,16 @@
                         <div class="bd_month">{{ pub.datedeb |date("m/d/Y") }}</div>
                         <div class="bd_month">{{ pub.datefin |date("m/d/Y") }}</div>
                     </div>
-                    <div class="blog_date text-center">
+                    <form action="{{ path('deletePub') }}">
+                    <input type="hidden" value="{{ pub.id }}" name="id">
+                    <button class="btn btn-danger">Supprimer</button>
+                    </form>
+                    <form action="{{ path('updatePubView') }}">
+                        <input type="hidden" value="{{ pub.id }}" name="id">
+                        <button class="btn btn-info acc_btn">Modifier</button>
+                    </form>
 
-                    </div>
+
                 </div>
             </div>
         {% endfor %}

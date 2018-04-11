@@ -4,6 +4,12 @@
         {{ app.user.email }}
     {% endif %}
 {% endblock %}
+{% block nameco %}
+    {% if app.user is not null %}
+        {{ app.user.username }}
+    {% endif %}
+{% endblock %}
+
 {% block loginbtn %}
     {% if app.user is not null %}
         <li class="account_area"><a href="{{ path('fos_user_security_logout') }}"><i class="fa fa-lock"></i> Se
@@ -16,6 +22,35 @@
 
     {% endif %}
 
+{% endblock %}
+
+{% block notificationBlock %}
+    {% if app.user is not null %}
+
+        {% for notif in notifs %}
+            {% if app.user.id != notif.idProduit.idArtisan %}
+                <div class="mc-sin-pro fix">
+                    <a href="#" class="mc-pro-image float-left"><img
+                                src="{{ asset('bundles/main/img/mini-cart/2.jpg') }}"
+                                alt=""/></a>
+                    <div class="mc-pro-details fix">
+                        <a href="#" style="font-size: 12px">{{ notif.message }}</a><br>
+                        <img style="width: 60px" src="{{ asset("Uploads/images/") ~ notif.idProduit.image }}" alt=""/>
+                        <a href="{{ path('produit_artisan_details', {'id':notif.idProduit.id}) }}">{{ notif.idProduit.titre }}</a>
+
+                        <a class="pro-del" href="#"><i
+                                    class="fa fa-times-circle"></i></a>
+                    </div>
+
+                </div>
+            {% endif %}
+        {% endfor %}
+        <!-- Cart Button -->
+        <div class="mc-button">
+            <a href="#" class="checkout_btn">Voir plus</a>
+        </div>
+
+    {% endif %}
 {% endblock %}
 {% block body %}
     <div id="page_item_area">
@@ -33,18 +68,14 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-8 col-xs-12">
-                    {% if app.user is not null %}
 
-                        <div class="pd_btn fix">
-                            <a class="btn btn-default acc_btn" href="{{ path('ajouter_blog_bds') }}">Ajouter Blog</a>
-                        </div>
-                    {% endif %}
+
                     {% for Blog in Blogs %}
                         <div class="single_blog">
                             <div class="single_blog_img">
-                                <img src="{{ asset('img/blog/1-full.jpg') }}" alt="">
+                                <img src="{{ asset("Uploads/images/") ~ Blog.image }}" alt="">
                                 {% if app.user is not null %}
-                                    {% if Blog.idUser.id == app.user.id %}
+                                    {% if Blog.idUser== app.user.id %}
                                     <form action="{{ path('Supprimer_blog') }}">
                                         <input type="hidden" value="{{ Blog.id }}" name="id">
                                         <button class="btn btn-default acc_btn">Supprimer</button>
@@ -61,9 +92,13 @@
                                 <h4 class="post_title"><a
                                             href="{{ path('blog_detail', {'id':Blog.id}) }}">{{ Blog.titre }}</a></h4>
                                 <ul class="post-bar">
-                                    <li><i class="fa fa-user"></i>{{ Blog.idUser.nom }}</li>
+                                    {% for user in users %}
+                                        {% if user.id == Blog.idUser %}
+                                            <li><i class="fa fa-user"></i>{{ user.username }}</li>
+                                        {% endif %}
+                                    {% endfor %}
                                     <li><i class="fa fa-comments-o"></i> <a href="{{ path('blog_detail', {'id':Blog.id}) }}">Comments</a></li>
-                                    <li><i class="fa fa-heart-o"></i> <a href="#">{{ Blog.nbrLike }}</a></li>
+
                                 </ul>
                                 <p>{{ Blog.description }}</p>
                             </div>
@@ -75,9 +110,11 @@
                     <div class="single_sidebar search_widget">
                         <h3 class="sdbr_title">Search</h3>
                         <div class="sdbr_inner">
-                            <form class="search_form" method="post" action="#">
-                                <input type="text" class="form-control search_input" name="s" id="s"
+                            <form class="search_form" method="GET" action="{{ path('Rech_blog') }}">
+
+                                <input type="text" class="form-control search_input" name="text" id="text"
                                        placeholder="Search Here ...">
+
                                 <button type="submit" class="search_button"><i class="fa fa-search"></i></button>
                             </form>
                         </div>
@@ -113,7 +150,7 @@
                 </div><!-- End Blog Sidebar -->
         </div>
     </div>
-    <div class="blog_pagination text-center" aria-label="Page navigation example">
-        {{ knp_pagination_render(Blogs) }}
-    </div>
+    {#<div class="blog_pagination text-center" aria-label="Page navigation example">#}
+        {#{{ knp_pagination_render(Blogs) }}#}
+    {#</div>#}
 {% endblock %}

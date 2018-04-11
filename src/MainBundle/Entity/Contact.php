@@ -21,12 +21,25 @@ class Contact
      */
     private $id;
 
+
+    /**
+     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User")
+     * @ORM\JoinColumn(name="idUser", referencedColumnName="id")
+     */
+    private $idUser;
+
     /**
      * @var string
      *
      * @ORM\Column(name="Name", type="string", length=255)
      */
     private $name;
+
+    /**
+     * @var notification
+     * @ORM\Column(name="Etat", type="boolean", nullable=true, options={"default":false})
+     */
+    protected $etat;
 
     /**
      * @var string
@@ -155,5 +168,54 @@ class Contact
     {
         return $this->message;
     }
-}
 
+    /**
+     * Set etat
+     *
+     * @param boolean $etat
+     *
+     * @return Contact
+     */
+    public function setEtat($etat)
+    {
+        $this->etat = $etat;
+
+        return $this;
+    }
+
+    /**
+     * Get etat
+     *
+     * @return boolean
+     */
+    public function getEtat()
+    {
+        return $this->etat;
+    }
+
+
+    /**
+     * Set idUser
+     *
+     * @param \UserBundle\Entity\User $idUser
+     *
+     * @return Contact
+     */
+    public function setIdUser(\UserBundle\Entity\User $idUser = null)
+    {
+        $this->idUser = $idUser;
+
+        return $this;
+    }
+
+    /**
+     * Get idUser
+     *
+     * @return \UserBundle\Entity\User
+     */
+    public function getIdUser()
+    {
+        return $this->idUser;
+    }
+
+}

@@ -1,0 +1,302 @@
+{% extends 'layout/layout.html.twig' %}
+{% block mailco %}
+    {% if app.user is not null %}
+        {{ app.user.email }}
+    {% endif %}
+{% endblock %}
+{% block nameco %}
+    {% if app.user is not null %}
+        {{ app.user.username }}
+    {% endif %}
+{% endblock %}
+{% block loginbtn %}
+    {% if app.user is not null %}
+        <li class="account_area"><a href="{{ path('fos_user_security_logout') }}"><i class="fa fa-lock"></i> Se
+                Déconnecter</a></li>
+    {% else %}
+        <li class="account_area"><a href="{{ path('fos_user_registration_register') }}"><i class="fa fa-lock"></i>
+                Register</a></li>
+        <li class="account_area"><a href="{{ path('fos_user_security_login') }}"><i class="fa fa-lock"></i> Se Connecter</a>
+        </li>
+
+    {% endif %}
+
+{% endblock %}
+
+{#{% block notificationBlock %}#}
+    {#{% if app.user is not null %}#}
+
+        {#{% for notif in notifs %}#}
+            {#{% if app.user.id != notif.idProduit.idArtisan %}#}
+                {#<div class="mc-sin-pro fix">#}
+                    {#<a href="#" class="mc-pro-image float-left"><img#}
+                                {#src="{{ asset('bundles/main/img/mini-cart/2.jpg') }}"#}
+                                {#alt=""/></a>#}
+                    {#<div class="mc-pro-details fix">#}
+                        {#<a href="#" style="font-size: 12px">{{ notif.message }}</a><br>#}
+                        {#<img style="width: 60px" src="{{ asset("Uploads/images/") ~ notif.idProduit.image }}" alt=""/>#}
+                        {#<a href="{{ path('produit_artisan_details', {'id':notif.idProduit.id}) }}">{{ notif.idProduit.titre }}</a>#}
+
+                        {#<a class="pro-del" href="#"><i#}
+                                    {#class="fa fa-times-circle"></i></a>#}
+                    {#</div>#}
+
+                {#</div>#}
+            {#{% endif %}#}
+        {#{% endfor %}#}
+        {#<!-- Cart Button -->#}
+        {#<div class="mc-button">#}
+            {#<a href="#" class="checkout_btn">Voir plus</a>#}
+        {#</div>#}
+
+    {#{% endif %}#}
+{#{% endblock %}#}
+{% block body %}
+    <div id="page_item_area">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6 text-left">
+                    <h3>Ajouter un evenement</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Map styling-->
+    <style>
+
+        #map {
+            height: 400px;
+
+        }
+        .pac-container {
+            font-family: Roboto;
+        }
+
+        #type-selector {
+            color: #fff;
+            background-color: #4d90fe;
+            padding: 5px 11px 0px 11px;
+        }
+
+        #type-selector label {
+            font-family: Roboto;
+            font-size: 13px;
+            font-weight: 300;
+        }
+    </style>
+    <div class="row">
+        <br><br><br>
+    <div class="col-md-1"></div>
+    <div class="col-md-5">
+        <!-- creatin a new event form -->
+        {{ form_start(form) }}
+        {{ form_widget(form.titre,{'attr':{'class':'form-control','placeholder':"Nom de l'evenement"}}) }}
+        {{ form_widget(form.description,{'attr':{'class':'form-control','placeholder':"description de l'evenement"}}) }}
+        {{ form_widget(form.datedebut,{'attr':{'class':'form-control ','placeholder':"Date de l'evenement"}}) }}
+        {{ form_widget(form.datefin,{'attr':{'class':'form-control ','placeholder':"Date de Fin de l'evenement s'il y a plusieurs jours"}}) }}
+        {{ form_widget(form.photo,{'attr':{'class':'form-control ','placeholder':"Logo de l'evenement"}}) }}
+        {{ form_widget(form.nbMax,{'attr':{'class':'form-control ','placeholder':"Nombre de place"}}) }}
+
+        {{ form_widget(form.lieu,{'attr':{'class':'form-control controls','placeholder':'Où vas se passer?'}}) }}
+
+        {#<div class="col-md-6" hidden id="long">#}
+            {#{{ form_widget(form.longitude,{'attr':{'class':'form-control','placeholder':'longitude'}}) }}#}
+        {#</div>#}
+        {#<div class="col-md-6" hidden id="lat">#}
+            {#{{ form_widget(form.latitude,{'attr':{'class':'form-control','placeholder':'latitude'}}) }}#}
+
+        {#</div>#}
+        {{ form_widget(form.categorie,{'attr':{'class':'form-control ','placeholder':"Categorie de l'evenement"}}) }}
+
+
+        {{ form_widget(form) }}
+
+        <input type="submit" value="Publier l'evenement" onclick="xy()" /><br><br><br>
+        {{ form_end(form) }}
+    </div>
+
+    <div class="col-md-5" id="map">
+        <input type="hidden" id="latDepart" name="latDepart">
+        <input type="hidden" id="lngDepart" name="lngDepart">
+    </div>
+    </div>
+
+
+    <script>
+        //the fonction which gonna be triggered on submit
+        function xy() {
+
+            // document.getElementById('evenementbundle_event_longitude').value=map.center.lat();
+            //
+            // document.getElementById('evenementbundle_event_latitude').value=map.center.lng();
+        }
+
+
+
+
+
+        // parameter when you first load the API. For example:
+        // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
+        var marker;
+        function initMap() {
+            var map = new google.maps.Map(document.getElementById('map'), {
+                center: {lat: 36, lng: 10},
+                zoom: 10
+            });
+            var input = /** @type {!HTMLInputElement} */(
+                document.getElementById('evenementtbundle_event_lieu'));
+
+
+            var autocomplete = new google.maps.places.Autocomplete(input);
+            autocomplete.bindTo('bounds', map);
+
+            var infowindow = new google.maps.InfoWindow();
+            var marker = new google.maps.Marker({
+                map: map,
+                anchorPoint: new google.maps.Point(0, -29)
+
+            });
+            marker = new google.maps.Marker({
+                map: map,
+                draggable: true,
+                animation: google.maps.Animation.DROP,
+                position: map.center
+
+
+            });
+            marker.setMap(map);
+            marker.addListener('click', toggleBounce);
+
+
+            google.maps.event.addListener(marker, 'drag', function(event) {
+                document.getElementById('evenementbundle_event_longitude').value =event.latLng.lat();
+                document.getElementById('evenementbundle_event_latitude').value= event.latLng.lng();
+
+            });
+
+
+
+
+
+
+            autocomplete.addListener('place_changed', function() {
+                infowindow.close();
+                marker.setVisible(false);
+
+                var place = autocomplete.getPlace();
+
+                // If the place has a geometry, then present it on a map.
+                if (place.geometry.viewport) {
+                    map.fitBounds(place.geometry.viewport);
+
+                } else {
+
+                    map.setCenter(place.geometry.location);
+                    map.setZoom(10);  // Why 17? Because it looks good.
+
+                }
+                $('#idDepart').val(this.originPlaceId);
+                $('#idDestination').val(this.destinationPlaceId);
+
+                ;
+                marker.setPosition(place.geometry.location);
+                marker.setVisible(true);
+
+
+                var address = '';
+                if (place.address_components) {
+                    address = [
+                        (place.address_components[0] && place.address_components[0].short_name || ''),
+                        (place.address_components[1] && place.address_components[1].short_name || ''),
+                        (place.address_components[2] && place.address_components[2].short_name || '')
+                    ].join(' ');
+                }
+
+                infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + address);
+                infowindow.open(map, marker);
+            });
+
+            // Sets a listener on a radio button to change the filter type on Places
+            // Autocomplete.
+            function setupClickListener(id, types) {
+                var radioButton = document.getElementById(id);
+                radioButton.addEventListener('click', function() {
+                    autocomplete.setTypes(types);
+                });
+            }
+            function geolocate() {
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(function(position) {
+                        var geolocation = {
+                            lat: position.coords.latitude,
+                            lng: position.coords.longitude
+                        };
+                        var circle = new google.maps.Circle({
+                            center: geolocation,
+                            radius: position.coords.accuracy
+                        });
+                        autocomplete.setBounds(circle.getBounds());
+                    });
+                }
+            }
+
+
+        }
+        function toggleBounce() {
+            if (marker.getAnimation() !== null) {
+                marker.setAnimation(null);
+            } else {
+                marker.setAnimation(google.maps.Animation.BOUNCE);
+            }
+        }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCWb0i4faRZm8P5oEN-ukUF_CACQzWt480&libraries=places&callback=initMap"
+            async defer></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock body %}

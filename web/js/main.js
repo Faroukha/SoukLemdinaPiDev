@@ -57,7 +57,7 @@ jQuery(document).on('ready', function(){
 		$('a').on('click', function(e){
 			var anchor = $(this);
 			$('html, body').stop().animate({
-				scrollTop: $(anchor.attr('href')).offset().top - 50
+				scrollTop: $(anchor.attr('href')).offset()
 			}, 1500);
 			e.preventDefault();
 		});

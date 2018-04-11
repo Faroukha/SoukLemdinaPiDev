@@ -1,7 +1,19 @@
-{% extends 'layout/layout.html.twig' %}
+{% extends 'layout/adminLayout.html.twig' %}
+{% block mailco %}
+    {% if app.user is not null %}
+        {{ app.user.email }}
+    {% endif %}
+{% endblock %}
+{% block nameco %}
+    {% if app.user is not null %}
+        {{ app.user.username }}
+    {% endif %}
+{% endblock %}
 {% block loginbtn %}
     {% if app.user is not null %}
-        <li class="account_area"><a href="{{ path('fos_user_security_logout') }}"><i class="fa fa-lock"></i> Se Déconnecter</a></li>
+
+        <li class="account_area "><a href="{{ path('fos_user_security_logout') }}"><i class="fa fa-lock"></i> Se Déconnecter</a></li>
+
     {% else %}
         <li class="account_area"><a href="{{ path('fos_user_registration_register') }}"><i class="fa fa-lock"></i> Register</a></li>
         <li class="account_area"><a href="{{ path('fos_user_security_login') }}"><i class="fa fa-lock"></i> Se Connecter</a></li>

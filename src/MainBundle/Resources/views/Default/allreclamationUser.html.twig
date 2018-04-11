@@ -1,0 +1,141 @@
+{% extends 'layout/layout.html.twig' %}
+{% block mailco %}
+    {% if app.user is not null %}
+        {{ app.user.email }}
+    {% endif %}
+{% endblock %}
+{% block nameco %}
+    {% if app.user is not null %}
+        {{ app.user.username }}
+    {% endif %}
+{% endblock %}
+{% block loginbtn %}
+    {% if app.user is not null %}
+        <li class="account_area"><a href="{{ path('fos_user_security_logout') }}"><i class="fa fa-lock"></i> Se Déconnecter</a></li>
+    {% else %}
+        <li class="account_area"><a href="{{ path('fos_user_registration_register') }}"><i class="fa fa-lock"></i> Register</a></li>
+        <li class="account_area"><a href="{{ path('fos_user_security_login') }}"><i class="fa fa-lock"></i> Se Connecter</a></li>
+
+    {% endif %}
+{% endblock %}
+
+{% block admin %}
+    {% if is_granted('ROLE_ADMIN') %}
+        <li><a href="{{ path('allPub') }}">Publicite</a></li>
+        <li>
+            <a href="{{ path('blog') }}">Blog <i class="fa fa-angle-down"></i></a>
+
+        </li>
+        <li>
+            <a href="{{ path('allreclam') }}">Reclamation <i class="fa fa-angle-down"></i> </a>
+        </li>
+
+        <li><a href="{{ path('ff') }}">Profil admin</a></li>
+
+
+    {% else %}
+        <li>
+            <a href="{{ path('contact') }}">Reclamations</a>
+            {% if app.user is not null %}
+                <ul class="sub-menu">
+                    <li>
+                        <a href="{{ path('allreclamationUser', {'idUser':app.user.id}) }}">Mes Reclamations</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('contact') }}">Ajouter Reclamation</a>
+                    </li>
+                </ul>
+            {% endif %}
+        </li>
+        <li>
+            <a href="{{ path('blog') }}">Blog <i class="fa fa-angle-down"></i></a>
+
+        </li>
+
+        <li><a href="{{ path('ff') }}">Profil</a></li>
+    {% endif %}
+{% endblock %}
+
+{% block notificationBlock %}
+    {% if app.user is not null %}
+
+        {% for notif in notifs %}
+            {% if app.user.id != notif.idProduit.idArtisan %}
+                <div class="mc-sin-pro fix">
+                    <a href="#" class="mc-pro-image float-left"><img
+                                src="{{ asset('bundles/main/img/mini-cart/2.jpg') }}"
+                                alt=""/></a>
+                    <div class="mc-pro-details fix">
+                        <a href="#" style="font-size: 12px">{{ notif.message }}</a><br>
+                        <img style="width: 60px" src="{{ asset("Uploads/images/") ~ notif.idProduit.image }}" alt=""/>
+                        <a href="{{ path('produit_artisan_details', {'id':notif.idProduit.id}) }}">{{ notif.idProduit.titre }}</a>
+
+                        <a class="pro-del" href="#"><i
+                                    class="fa fa-times-circle"></i></a>
+                    </div>
+
+                </div>
+            {% endif %}
+        {% endfor %}
+        <!-- Cart Button -->
+        <div class="mc-button">
+            <a href="#" class="checkout_btn">Voir plus</a>
+        </div>
+
+    {% endif %}
+{% endblock %}
+
+{% block body %}
+    <div class="product_item">
+        <div class="row">
+            <div class="col-md-2"></div>
+
+            <div class="col-md-6">
+                {% for recs in recs %}
+                    {% if recs.idUser.id == app.user.id  %}
+
+                    <div class="col-md-6 col-xs-12">
+                        <div class="prdct_dtls_content">
+                            <div class="pd_text">
+                            <span class="pd_title"
+
+                                  style="font-size: 14px; display: contents;">Nom  :</span> {{ recs.Name }}
+                            </div>
+                            <div class="pd_text">
+                            <span class="pd_title"
+                                  style="font-size: 14px; display: contents;">Email  :</span> {{ recs.Email }}
+                            </div>
+                            <div class="pd_text">
+                            <span class="pd_title"
+                                  style="font-size: 14px; display: contents;">Sujbect :</span> {{ recs.Subject }}
+                            </div>
+                            <div class="pd_text">
+                            <span class="pd_title"
+                                  style="font-size: 14px; display: contents;">Message  :</span> {{ recs.Message }}
+                            </div>
+                            {% if recs.etat == 1 %}
+                                <div class="pd_text">
+                            <span class="pd_title"
+                                  style="font-size: 14px; display: contents;">Etat  :</span> Traité
+                                </div>
+                            {% else %}
+                                <div class="pd_text">
+                            <span class="pd_title"
+                                  style="font-size: 14px; display: contents;">Etat  :</span> Non Traité
+                                </div>
+                            {% endif %}
+
+                        </div>
+
+
+
+                    {% endif %}
+                {% endfor %}
+                    </div>
+        </div>
+    </div>
+    </div>
+
+
+{% endblock %}
+

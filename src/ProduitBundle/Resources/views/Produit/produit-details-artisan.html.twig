@@ -1,4 +1,43 @@
 {% extends 'layout/layout.html.twig' %}
+{% block mailco %}
+    {% if app.user is not null %}
+        {{ app.user.email }}
+    {% endif %}
+{% endblock %}
+{% block nameco %}
+    {% if app.user is not null %}
+        {{ app.user.username }}
+    {% endif %}
+{% endblock %}
+
+{% block notificationBlock %}
+    {% if app.user is not null %}
+
+        {% for notif in notifs %}
+            {% if app.user.id != notif.idProduit.idArtisan %}
+                <div class="mc-sin-pro fix">
+                    <a href="#" class="mc-pro-image float-left"><img
+                                src="{{ asset('bundles/main/img/mini-cart/2.jpg') }}"
+                                alt=""/></a>
+                    <div class="mc-pro-details fix">
+                        <a href="#" style="font-size: 12px">{{ notif.message }}</a><br>
+                        <img style="width: 60px" src="{{ asset("Uploads/images/") ~ notif.idProduit.image }}" alt=""/>
+                        <a href="{{ path('produit_artisan_details', {'id':notif.idProduit.id}) }}">{{ notif.idProduit.titre }}</a>
+
+                        <a class="pro-del" href="#"><i
+                                    class="fa fa-times-circle"></i></a>
+                    </div>
+
+                </div>
+            {% endif %}
+        {% endfor %}
+        <!-- Cart Button -->
+        <div class="mc-button">
+            <a href="#" class="checkout_btn">Voir plus</a>
+        </div>
+
+    {% endif %}
+{% endblock %}
 {% block body %}
 
     <div id="page_item_area">
@@ -66,6 +105,15 @@
                             <form action="{{ path('Supprimer_produit') }}">
                                 <input type="hidden"  value="{{ produit.id }}" name="id" >
                                 <button class="btn btn-default acc_btn" >supprimer produit</button>
+
+                            </form>
+                        </div>
+
+                        <div class="pd_btn fix">
+
+                            <form action="{{ path('modifier_temp' )}}" method="get">
+                                <input type="hidden"  value="{{ produit.id }}" name="id" >
+                                <button class="btn btn-default acc_btn" >modifier produit</button>
 
                             </form>
                         </div>

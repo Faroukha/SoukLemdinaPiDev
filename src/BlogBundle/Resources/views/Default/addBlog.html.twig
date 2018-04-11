@@ -1,4 +1,14 @@
 {% extends 'layout/layout.html.twig' %}
+{% block mailco %}
+    {% if app.user is not null %}
+        {{ app.user.email }}
+    {% endif %}
+{% endblock %}
+{% block nameco %}
+    {% if app.user is not null %}
+        {{ app.user.username }}
+    {% endif %}
+{% endblock %}
 {% block loginbtn %}
     {% if app.user is not null %}
         <li class="account_area"><a href="{{ path('fos_user_security_logout') }}"><i class="fa fa-lock"></i> Se Déconnecter</a></li>
@@ -9,6 +19,34 @@
     {% endif %}
 {% endblock %}
 
+{% block notificationBlock %}
+    {% if app.user is not null %}
+
+        {% for notif in notifs %}
+            {% if app.user.id != notif.idProduit.idArtisan %}
+                <div class="mc-sin-pro fix">
+                    <a href="#" class="mc-pro-image float-left"><img
+                                src="{{ asset('bundles/main/img/mini-cart/2.jpg') }}"
+                                alt=""/></a>
+                    <div class="mc-pro-details fix">
+                        <a href="#" style="font-size: 12px">{{ notif.message }}</a><br>
+                        <img style="width: 60px" src="{{ asset("Uploads/images/") ~ notif.idProduit.image }}" alt=""/>
+                        <a href="{{ path('produit_artisan_details', {'id':notif.idProduit.id}) }}">{{ notif.idProduit.titre }}</a>
+
+                        <a class="pro-del" href="#"><i
+                                    class="fa fa-times-circle"></i></a>
+                    </div>
+
+                </div>
+            {% endif %}
+        {% endfor %}
+        <!-- Cart Button -->
+        <div class="mc-button">
+            <a href="#" class="checkout_btn">Voir plus</a>
+        </div>
+
+    {% endif %}
+{% endblock %}
 {% block admin %}
     {% if is_granted('ROLE_ADMIN') %}
         <li><a href="{{ path('allPub') }}">Publicite</a></li>
@@ -25,10 +63,16 @@
 
     {% else %}
         <li><a href="{{ path('contact') }}">contact</a></li>
+
+        <li>
+            <a href="{{ path('contact') }}">Reclamation <i class="fa fa-angle-down"></i> </a>
+        </li>
         <li>
             <a href="{{ path('blog') }}">Blog <i class="fa fa-angle-down"></i></a>
-
         </li>
+
+
+
 
         <li><a href="{{ path('ff') }}">Profil</a></li>
     {% endif %}
@@ -76,6 +120,56 @@
             {#</div>#}
         {#</div>#}
     {#</div>#}
+    <div class="login_page_area">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-md-12 col-sm-6 col-xs-12">
+
+                    <div class="create_account_area">
+                        <h2 class="caa_heading">Ajouter Blog </h2>
+                        {{ form_start(form) }}
+
+                        <div class="caa_form_area">
+                            <div class="caa_form_group">
+
+                                <div class="login_email">
+                                    <label>Titre</label>
+                                    <div class="input-area">
+                                        {{ form_widget(form.titre ,{'attr':{'id':'titre','placeholder':'Ajouter titre'}    }) }}
+                                    </div>
+                                </div>
+                                <div class="">
+                                    <label>Description</label>
+                                    <div class="input-area">
+                                        {{ form_widget(form.description ,{'attr':{'id':'description','placeholder':'Ajouter description'}    }) }}
+
+                                    </div>
+                                </div>
+
+
+                                <div class="">
+                                    <label>Image</label>
+                                    <div class="input-area">
+                                        {{ form_widget(form.image) }}
+                                    </div>
+                                </div>
+
+                                <span> {{ form_widget(form.Submit) }} </span>
+
+                            </div>
+                        </div>
+                    </div>
+                    {{ form_end(form) }}
+
+
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
     {{ form_start(form) }}
     {{ form_row(form.image) }}
     {{ form_end(form) }}
