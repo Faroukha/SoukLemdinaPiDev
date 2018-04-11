@@ -28,7 +28,7 @@ deleteEvent:
     path:     /delEvent/{id}
     defaults: { _controller: AdminBundle:Default:deleteEvent }
 updatePub:
-    path:     /update
+    path:     /update/{id}
     defaults: { _controller: AdminBundle:Default:updatePub }
 updatePubView:
     path:     /updatePub

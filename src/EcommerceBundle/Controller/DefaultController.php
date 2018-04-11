@@ -8,7 +8,7 @@ use Symfony\Component\BrowserKit\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
+
 use MainBundle\Entity\Produit;
 use MainBundle\Entity\Panier;
 use MainBundle\Entity\Commande;

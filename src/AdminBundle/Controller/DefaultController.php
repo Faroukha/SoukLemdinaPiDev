@@ -112,15 +112,15 @@ class DefaultController extends Controller
     {
         $id = $request->query->get('id');
         $em = $this->getDoctrine()->getManager();
-        $pub = $em->getRepository("MainBundle:Pubg")->find($id);
+        $pub = $em->getRepository("MainBundle:Pubg")->find($request->get('id'));
 
         $data = [
             'datedeb' => $request->get('datedeb'),
             'datefin' => $request->get('datefin'),
         ];
-        if ($pub->getDatedeb() <= $pub->getDatefin()) {
-            $pub->setDatedeb($data['datedeb']);
-            $pub->setDatefin($data['datefin']);
+        if ($request->get('datedeb') < $request->get('datefin')) {
+            $pub->setDatedeb(new \DateTime($data['datedeb']));
+            $pub->setDatefin(new \DateTime($data['datefin']));
 
             $em->persist($pub);
             $em->flush();
@@ -131,10 +131,10 @@ class DefaultController extends Controller
 
     public function updatePubViewAction(Request $request)
     {
+        //return new Response($request->get('id'));
         $em = $this->getDoctrine()->getManager();
-        $id = $em->getRepository(Pubg::class)->find($request->get("id"));
-        $pub = $em->getRepository(Pubg::class)->find($request->get("id"));
-        return $this->render('AdminBundle:Pub:updatePub.html.twig', ['id' => $id,'pubs'=>$pub]);
+        $id = $em->getRepository(Pubg::class)->find($request->get('id'));
+        return $this->render('AdminBundle:Pub:updatePub.html.twig', ['id' => $id]);
     }
 
     public function deletePubAction(Request $request)
