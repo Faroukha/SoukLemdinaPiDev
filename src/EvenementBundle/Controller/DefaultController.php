@@ -73,7 +73,7 @@ class DefaultController extends Controller
             $file = $event->getPhoto();
 
             $fileName = md5(uniqid('', true)) . '.' . $file->guessExtension();
-            $path = "C:/wamp64/www/pidev";
+            $path = "C:/wamp64/www/SouklemdinaPiDev/web/Uploads/images";
             $file->move(
                 $path,
                 $fileName
