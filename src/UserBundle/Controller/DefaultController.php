@@ -8,11 +8,14 @@ use MainBundle\Entity\Notification;
 use MainBundle\Entity\Produit;
 use MainBundle\Entity\Pubg;
 use MainBundle\Entity\Rate;
+use ProduitBundle\Entity\Avis;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use UserBundle\Entity\User;
 use MainBundle\Entity\Promotion;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use blackknight467\StarRatingBundle\Form\RatingType;
+
 
 
 class DefaultController extends Controller
@@ -29,7 +32,8 @@ class DefaultController extends Controller
         $users = $em->getRepository(User::class)->findAll();
         $promotion = $this->getDoctrine()->getRepository(Promotion::class)->findAll();
         $Pubs = $em->getRepository(Pubg::class)->findAll();
-        $rates = $em->getRepository(Rate::class)->findAll();
+        $rating = $em->getRepository(Avis::class)->avgrating();
+
 
         $paginator = $this->get('knp_paginator');
         $produit = $paginator->paginate(
@@ -45,7 +49,7 @@ class DefaultController extends Controller
             if ($user->hasRole("ROLE_ADMIN")) {
                 return $this->render('AdminBundle::admin.html.twig', ['produits' => $produit]);
             } else {
-                return $this->render('MainBundle:Default:index.html.twig', ['rates' => $rates ,'produits' => $produit, 'user' => $user, 'produitp' => $promotion, 'Pubs' => $Pubs, 'users' => $users, 'notifs' => $notif, 'abos', $abonnement]);
+                return $this->render('MainBundle:Default:index.html.twig', ['rating'=>$rating,'produits' => $produit, 'user' => $user, 'produitp' => $promotion, 'Pubs' => $Pubs, 'users' => $users, 'notifs' => $notif, 'abos', $abonnement]);
             }
 
 

@@ -7,9 +7,6 @@ nouveau_produit:
 Ajouter_promotion:
     path:     /promotion
     defaults: { _controller: ProduitBundle:Promotion:AjouterPromotion }
-product_details:
-    path:     /details
-    defaults: { _controller: ProduitBundle:Default:details  }
 shop_produit:
     path:     /shop
     defaults: { _controller: ProduitBundle:Default:shop  }
@@ -52,3 +49,12 @@ addRate:
 envoyer_mail:
        path:     /maile
        defaults: { _controller: MainBundle:Default:index }
+product_detailss:
+    path:     /detailss/{id}
+    defaults: { _controller: ProduitBundle:Rate:info  }
+dd:
+    path:     /d
+    defaults: { _controller: ProduitBundle:Default:details  }
+product_details:
+    path:     /details
+    defaults: { _controller: ProduitBundle:Default:details  }

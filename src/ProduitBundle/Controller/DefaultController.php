@@ -12,8 +12,10 @@ class DefaultController extends Controller
 {
     public function indexAction()
     {
+
         return $this->render('ProduitBundle:Produit:index.html.twig');
     }
+
     public function ajouterAction()
     {
         return $this->render('ProduitBundle:Produit:ajouter.html.twig');
@@ -27,7 +29,6 @@ class DefaultController extends Controller
         $em=$this->getDoctrine()->getRepository(Produit::class);
         $es=$this->getDoctrine()->getRepository(Commentaire::class);
         $commentaire=$es->findAll();
-
         $produit=$em->find($request->get('id'));
 
         return $this->render('ProduitBundle:Produit:product-details.html.twig',['produit'=>$produit,'commentaire'=>$commentaire, 'notifs'=>$notif]);
