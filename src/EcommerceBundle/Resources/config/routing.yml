@@ -6,3 +6,22 @@ AddToCart:
     path:     /AddToCart
     defaults: { _controller: EcommerceBundle:Default:AddToCart }
 
+RemoveItem:
+    path:     /RemoveItem
+    defaults: { _controller: EcommerceBundle:Default:removeItem }
+
+UpdateItem:
+    path:     /UpdateItem
+    defaults: { _controller: EcommerceBundle:Default:updateItem }
+
+ValiderAchat:
+    path:     /ValiderAchat
+    defaults: { _controller: EcommerceBundle:Default:ValiderAchat }
+
+ApplyCoupon:
+    path:     /ApplyCoupon
+    defaults: { _controller: EcommerceBundle:Default:ApplyCoupon }
+
+PasserCommande:
+    path:     /PasserCommande
+    defaults: { _controller: EcommerceBundle:Default:PasserCommande }

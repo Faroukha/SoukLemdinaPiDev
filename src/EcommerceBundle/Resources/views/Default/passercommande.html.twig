@@ -1,0 +1,50 @@
+{% extends 'layout/layout.html.twig' %}
+
+
+{% block mailco %}
+    {% if app.user is not null %}
+        {{ app.user.email }}
+    {% endif %}
+{% endblock %}
+{% block loginbtn %}
+    {% if app.user is not null %}
+        <li class="account_area"><a href="{{ path('fos_user_security_logout') }}"><i class="fa fa-lock"></i> Se
+                Déconnecter</a></li>
+    {% else %}
+        <li class="account_area"><a href="{{ path('fos_user_registration_register') }}"><i class="fa fa-lock"></i>
+                Register</a></li>
+        <li class="account_area"><a href="{{ path('fos_user_security_login') }}"><i class="fa fa-lock"></i> Se Connecter</a>
+        </li>
+
+    {% endif %}
+
+{% endblock %}
+
+{% block body %}
+
+
+    <div class="col-md-4">
+        <div class="cuppon-wrap">
+            <h4>Discount Code</h4>
+            <p>Enter your coupon code if you have</p>
+            <form action="{{ path('ApplyCoupon') }}" class="cuppon-form" method="post">
+                <input type="text" />
+                <button type="submit" class="btn border-btn">apply coupon</button>
+            </form>
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <form action="{{ path('PasserCommande') }}" class="cuppon-form" method="post">
+
+            <button type="submit" class="btn border-btn">Commander</button>
+        </form>
+    </div>
+
+    <div class="col-md-4">
+        <form action="{{  }}" class="cuppon-form" method="post">
+
+            <button type="submit" class="btn border-btn">Visualiser Facture</button>
+        </form>
+    </div>
+
+{% endblock %}
