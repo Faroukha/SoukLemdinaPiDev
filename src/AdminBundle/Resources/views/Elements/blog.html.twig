@@ -33,7 +33,6 @@
             </div>
         </div>
     </div>
-    <br><br><br><br><br><br><br><br>
     <div class="row" style="margin-top: 0px ;margin-left: 180px">
         <style>
             table, td, th {
@@ -52,17 +51,17 @@
         </style>
 {% for b in blog %}
 
-    <div style="padding-bottom: 2px; margin-left: 150px">
+    <div style="padding-bottom: 2px; margin-left: 50px">
         <table class="table table-striped table-fw-widget table-hover" style="font-size: larger">
             <tbody class="no-border-x">
             <tr>
                 <td class="onhovericon" style="font-size:20px; width: 30px;">
-                    {#<a href="{{ path('Supprimer_blog') }}">#}
+                    <a href="{{ path('deleteBlog' ,{'id': b.id}) }}">
+                        <input type="hidden" value="{{ b.id }}" name="id">
                     <span class="icon s7-close-circle onhovericon" data-toggle="tooltip" data-placement="top"
                           title="" data-original-title="close"></span>
                     </a>
                 </td>
-                <td style="width: 120px;"></td>
                 <td style="width: 120px;"><span class="labels">Titre : </span> {{ b.titre }}</td>
                 <td style="width: 300px;"><span class="labels">Description : </span> {{ b.description }}</td>
                 <td style="width: 300px;"><span class="labels">Date : </span> {{ b.dateBlog|date("m/d/Y") }}</td>
@@ -84,22 +83,5 @@
 {% endfor %}
 
     </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 {% endblock %}

@@ -171,11 +171,24 @@ class DefaultController extends Controller
     public  function reclamerAction (Request $request){
         $em = $this->getDoctrine()->getManager();
         $rec = $em->getRepository(Contact::class)->find($request->get("id"));
+        $em1 =$this->getDoctrine()->getManager();
+               $em2 =$this->getDoctrine()->getManager();
+
+                $etat = $em1->getRepository(Etat::class)->find(1);
+                $etat ->setNbr($etat ->getNbr() +1) ;
+
+                $etat2 =$em2->getRepository(Etat::class)->find(2);
+                $etat2 ->setNbr($etat2->getNbr()-1);
 
         if($rec->getEtat()==false) {
             $rec ->setEtat(true) ;
             $em->persist($rec);
             $em->flush();
+
+            $em1->persist($etat);
+                        $em1->flush();
+                        $em2->persist($etat2);
+                        $em2->flush();
         }
 
         return $this->redirectToRoute('allreclam');
@@ -185,6 +198,30 @@ class DefaultController extends Controller
         $em = $this->getDoctrine()->getManager();
         $blog = $em->getRepository(Blog::class)->findAll();
         return $this->render('AdminBundle:Elements:blog.html.twig', ['blog'=>$blog]);
+    }
+    public function deleteBlogAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $blog = $em->getRepository(Blog::class)->find($request->get("id"));;
+        $em->remove($blog);
+        $em->flush();
+        return $this->redirectToRoute("all_blogs");
+    }
+    public function deleteEventAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $blog = $em->getRepository(Event::class)->find($request->get("id"));;
+        $em->remove($blog);
+        $em->flush();
+        return $this->redirectToRoute("all_eventss");
+    }
+    public function deleteProduitAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $blog = $em->getRepository(Produit::class)->find($request->get("id"));;
+        $em->remove($blog);
+        $em->flush();
+        return $this->redirectToRoute("all_produitss");
     }
 
     public function eventsAction(){
@@ -196,7 +233,7 @@ class DefaultController extends Controller
     public function usersAction(){
         $em = $this->getDoctrine()->getManager();
         $user = $em->getRepository(User::class)->findAll();
-        return $this->render('AdminBundle:Elements:users.html.twig', ['users'=>$user]);
+        return $this->render('AdminBundle:Elements:users.html.twig', ['user'=>$user]);
     }
 
     public function produitsAction(){
