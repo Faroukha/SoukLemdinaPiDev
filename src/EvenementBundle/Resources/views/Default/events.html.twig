@@ -82,16 +82,19 @@
                                     <button class="btn btn-default acc_btn">Supprimer l'evenement</button>
 
                                     </form>{% endif %}
+
                             {% endif %}
                             <div class="blog_date text-center">
                                 <div class="bd_month">{{ event.createdAt |date("m/d/Y") }}</div>
 
                             </div>
+                            {% if event.user!= app.user %}
+
                             {% if event.nbMax > 0 %}
                             <a class="btn btn-default follow_btn" href="{{ path('participate_event',{'idEvent':event.id}) }}">Participer à l'évènement </a>
                             {% else %}
                                 <a class="btn btn-default outofplaces_btn">Places finies</a>
-                            {% endif %}
+                            {% endif %} {% endif %}
                         </div>
 
 
