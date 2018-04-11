@@ -1,0 +1,79 @@
+{% extends 'layout/adminLayout.html.twig' %}
+{% block mailco %}
+    {% if app.user is not null %}
+        {{ app.user.email }}
+    {% endif %}
+{% endblock %}
+{% block nameco %}
+    {% if app.user is not null %}
+        {{ app.user.username }}
+    {% endif %}
+{% endblock %}
+{% block loginbtn %}
+    {% if app.user is not null %}
+        <li class="account_area"><a href="{{ path('fos_user_security_logout') }}"><i class="fa fa-lock"></i> Se
+                Déconnecter</a></li>
+    {% else %}
+        <li class="account_area"><a href="{{ path('fos_user_registration_register') }}"><i class="fa fa-lock"></i>
+                Register</a></li>
+        <li class="account_area"><a href="{{ path('fos_user_security_login') }}"><i class="fa fa-lock"></i> Se Connecter</a>
+        </li>
+
+    {% endif %}
+{% endblock %}
+{% block body %}
+
+    <div id="page_item_area" style="margin-left: 200px ; background: #524D4D">
+        <div class="container ">
+            <div class="row">
+                <div class="col-sm-9 ">
+                    <h3>Users</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" style="margin-top: 0px ;margin-left: 180px">
+    <style>
+        table, td, th {
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            padding: 15px;
+        }
+    </style>
+    {% for u in user %}
+
+        <div style="padding-bottom: 2px; margin-left: 50px">
+            <table class="table table-striped table-fw-widget table-hover" style="font-size: larger">
+                <tbody class="no-border-x">
+                <tr>
+
+
+                    <td style="width: 200px;"><span class="labels">Nom : </span> {{ u.nom }}</td>
+                    <td style="width: 300px;"><span class="labels">Prenom : </span> {{ u.prenom }}</td>
+                    <td style="width: 300px;"><span class="labels">E-mail : </span> {{ u.email }}</td>
+
+
+                    <td class="onhovericon" style="font-size:25px;">
+
+                    </td>
+                    <td class="onhovericon" style="font-size:25px;">
+
+                    </td>
+
+
+                </tr>
+                </tbody>
+            </table>
+
+        </div>
+    {% endfor %}
+{% endblock %}

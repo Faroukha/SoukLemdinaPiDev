@@ -9,7 +9,11 @@
 namespace ProduitBundle\Controller;
 
 use MainBundle\Entity\Commentaire;
+use MainBundle\Entity\Notification;
 use MainBundle\Entity\Produit;
+use ProduitBundle\Entity\Avis;
+use ProduitBundle\Form\RatingType;
+use ProduitBundle\ProduitBundle;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use UserBundle\Entity\User;
 use Symfony\Component\HttpFoundation\Request;
@@ -24,6 +28,9 @@ class CommentaireController extends Controller
         $em = $this->getDoctrine()->getManager();
         $user = $em->getRepository(User::class)->find($request->get('idUser'));
         $produit = $em->getRepository(Produit::class)->find($request->get('id'));
+        $notif = $em->getRepository(Notification::class)->findAll();
+
+
 
         $commentaire->setEmailuser($user);
         $commentaire->setIdproduit($request->get('id'));
@@ -31,7 +38,11 @@ class CommentaireController extends Controller
         $em->persist($commentaire);
         $em->flush();
         $Coms = $em->getRepository(Commentaire::class)->findAll();
-        return $this->render('ProduitBundle:Produit:product-details.html.twig', ['commentaire' => $Coms,'produit'=>$produit]);
+        $f=$em->getRepository("ProduitBundle:Avis");
+
+
+
+        return $this->redirectToRoute('ff', [array('f'=>$f),'commentaire' => $Coms,'produit'=>$produit,'notifs'=>$notif]);
     }
 
 }
