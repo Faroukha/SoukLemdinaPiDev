@@ -2,12 +2,14 @@
 
 namespace EcommerceBundle\Controller;
 
+use MainBundle\Entity\Coupon;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\Request;
 use MainBundle\Entity\Produit;
 use MainBundle\Entity\Panier;
+use MainBundle\Entity\Commande;
 use MainBundle\Entity\Produitspanier;
 
 use UserBundle\Entity\User;
@@ -18,11 +20,22 @@ class DefaultController extends Controller
     {
         $em=$this->getDoctrine()->getRepository(Produitspanier::class);
         $es=$this->getDoctrine()->getRepository(Produit::class);
+        $eg=$this->getDoctrine()->getRepository(Panier::class);
 
-        $Produitpanier=$em->findAll();
         $Produit=$es->findAll();
+        $userConnected = $this->getUser();
+        $panier=$eg->findByIduser($userConnected->getId());
+        foreach ($panier as $p){
+        $Produitpanier=$em->findByIdpanier($p->getId());
 
-        return $this->render('EcommerceBundle:Default:index.html.twig',['Produitpanier'=>$Produitpanier,'Produit'=>$Produit]);
+        }
+
+
+
+
+
+
+        return $this->render('EcommerceBundle:Default:index.html.twig',['Produitpanier'=>$Produitpanier,'Produit'=>$Produit,'Panier'=>$panier]);
 
     }
 
@@ -54,25 +67,197 @@ class DefaultController extends Controller
          $session->replace(array('panier' => $panier." ".$id));*/
 
         // return $this->render('EcommerceBundle:Default:index.html.twig');
-        $panier=new Panier();
-        $user = $this->getUser();
+
+
 
       /*  $panier->setIduser($user->getId());
         $panier->setPrixtotal(0);*/
-        $iduserConnected=$user->getId();
+        $userConnected = $this->getUser();
 
+        $em=$this->getDoctrine()->getRepository(Panier::class);
+        $panier=$em->findAll();
+
+foreach ($panier as $p){
+
+    if(($p->getIduser()==$userConnected->getId()) &&($request->isMethod('POST')))
+
+    {
         $Produitpanier = new Produitspanier();
-        if ($request->isMethod('POST') ) {
-            $Produitpanier->setIdpanier($panier->getId());
+if($p->getPrixtotal()!= 0)
+{ $p->setPrixtotal(0);}
+else{
+
+            $Produitpanier->setIdpanier($p->getId());
             $Produitpanier->setIdproduit($request->get('idproduit')) ;
             $Produitpanier->setNomproduit($request->get('titreproduit'));
             $Produitpanier->setQuantite($request->get('quantite'));
-
             $em = $this->getDoctrine()->getManager();
             $em->persist($Produitpanier);
+            $em->flush();}
+            //$lastid=$Produitpanier->getIdpanier();
+
+
+
+    }elseif($p->getIduser()==0)
+    {
+
+        $Produitpanier = new Produitspanier();
+            $panierr=new panier();
+            $panierr->setPrixtotal(0);
+            $panierr->setIduser($userConnected->getId());
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($panierr);
             $em->flush();
-        }
+            $Produitpanier->setIdpanier($panierr->getId());
+            $Produitpanier->setIdproduit($request->get('idproduit')) ;
+            $Produitpanier->setNomproduit($request->get('titreproduit'));
+            $Produitpanier->setQuantite($request->get('quantite'));
+           $es = $this->getDoctrine()->getManager();
+            $es->persist($Produitpanier);
+            $es->flush();
+
+
+   }}
+
+
+
+
+
+
+
+
+
+
+
         return $this->redirectToRoute('redirecttohome');
         //return $this->render('EcommerceBundle:Default:index.html.twig');
     }
+
+public function removeItemAction(Request $request)
+{
+    $em=$this->getDoctrine()->getManager();
+    $pr=$em->getRepository(Produitspanier::class)->findByIdproduit($request->get("idProduit"));
+   // var_dump($request->get("idProduit"));
+    //die();
+    foreach ($pr as $p) {
+        $em->remove($p);
+    }
+
+    $em->flush();
+    return $this->redirectToRoute("ecommerce_homepage");
+}
+
+    public function updateItemAction(Request $request)
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $product = $entityManager->getRepository(Produitspanier::class)->findByIdproduit($request->get("idProduit"));
+        foreach ($product as $p) {
+          $p->setQuantite($request->get("quantity"));
+            $entityManager->persist($p);
+          //var_dump($p->getQuantite());
+
+        }
+
+
+
+        $entityManager->flush();
+        return $this->redirectToRoute("ecommerce_homepage");
+    }
+
+    public function ApplyCouponAction(Request $request)
+    {
+        $user=$this->getUser();
+        $entityManager = $this->getDoctrine()->getManager();
+        $coupon = $entityManager->getRepository(Coupon::class)->findAll();
+        $panier = $entityManager->getRepository(Panier::class)->findByIduser($user->getId());
+        foreach ($coupon as $p) {
+            if($p->getNumero()==$request->get("coupon"));
+            foreach ($panier as $pa) {
+                $pa->setPrixtotal($p->getTaux()*$pa->getPrixtotal()/100);
+            }
+            $entityManager->persist($pa);
+            //var_dump($p->getQuantite());
+
+        }
+        $entityManager->flush();
+        return $this->redirectToRoute("ecommerce_homepage");
+
+    }
+
+    public function ValiderAchatAction(Request $request)
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $panier = $entityManager->getRepository(Panier::class)->findByIduser($this->getUser()->getId());
+
+        foreach ($panier as $p) {
+            //var_dump($request->get("total"));
+            if($p->getPrixtotal()==0) {
+                $p->setPrixtotal($request->get("total"));
+
+                $entityManager->persist($p);
+                $prr = $entityManager->getRepository(Produitspanier::class)->findByIdpanier($p->getId());
+                foreach ($prr as $pr) {
+                    $entityManager->remove($pr);
+                }
+                //var_dump($p->getQuantite());
+            }else{
+                return $this->render('@Ecommerce/Default/passercommande.html.twig');
+            }
+
+        }
+
+//die();
+        $entityManager->flush();
+        return $this->render('@Ecommerce/Default/passercommande.html.twig');
+    }
+
+
+    public function PasserCommandeAction(Request $request)
+    {
+
+        $entityManager = $this->getDoctrine()->getManager();
+        $panier = $entityManager->getRepository(Panier::class)->findByIduser($this->getUser()->getId());
+        $commande= new Commande();
+        foreach($panier as $p)
+        {
+            $commande->setIdpanier($p->getId());
+            $commande->setIduser($this->getUser()->getId());
+            $commande->setDate(new \DateTime('now'));
+            $commande->setEtat(false);
+            $entityManager->persist($commande);
+        }
+        $entityManager->flush();
+        return $this->redirectToRoute('PasserCommande');
+
+    }
+
+    public function ValiderCommandeAction(Request $request)
+    {
+
+        $entityManager = $this->getDoctrine()->getManager();
+        $panier = $entityManager->getRepository(Panier::class)->findByIduser($this->getUser()->getId());
+        $commande = $entityManager->getRepository(Panier::class)->findAll();
+
+        foreach($commande as $p)
+        {
+           if($commande->getEtat()==false)
+           {
+               $commande->setEtat(true);
+               $entityManager->persist($commande);
+           }
+        }
+        $entityManager->flush();
+        return $this->redirectToRoute('PasserCommande');
+
+    }
+
+
+
+
+
+
+
+
+
 }

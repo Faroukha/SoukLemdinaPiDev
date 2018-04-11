@@ -20,6 +20,10 @@ use blackknight467\StarRatingBundle\Form\RatingType;
 
 class DefaultController extends Controller
 {
+
+
+
+
     public function indexAction(Request $request)
     {
 

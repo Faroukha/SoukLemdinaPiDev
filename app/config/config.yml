@@ -136,6 +136,13 @@ nomaya_social:
     theme:                  'default' # optional
 
 
+#pdf
+knp_snappy:
+    pdf:
+       enabled:   true
+       binary:     "\"C:\\Program Files\\wkhtmltopdf\\bin\\wkhtmltopdf.exe\""
+       options:   []
+
 hwi_oauth:
     # list of names of the firewalls in which this bundle is active, this setting MUST be set
     connect:
@@ -158,5 +165,3 @@ hwi_oauth:
         client_id:  ?
         client_secret:  ?
         scope:  ?
-
-
