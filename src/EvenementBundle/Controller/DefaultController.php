@@ -92,7 +92,7 @@ class DefaultController extends Controller
             $user = $em->getRepository(User::class)->findAll();
             $event = $em->getRepository(Event::class)->findAll();
             $rating = $em->getRepository(Rating::class)->find($request->get('id'));
-            return $this->render('EvenementBundle:Default:events.html.twig', ['rating'=>$rating, 'notifs' => $notif, 'users' => $user, 'events' => $event]);
+            return $this->render('EvenementBundle:Default:events.html.twig', ['rating'=>null, 'notifs' => $notif, 'users' => $user, 'events' => $event]);
             // return $this->redirectToRoute('e_show', array('id' => $event->getId()));
         }
 
