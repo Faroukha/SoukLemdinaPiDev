@@ -27,6 +27,8 @@
         "doctrine/doctrine-bundle": "^1.6",
         "doctrine/orm": "^2.5",
         "friendsofsymfony/user-bundle": "~2.0@dev",
+        "h4cc/wkhtmltopdf-amd64": "^0.12.4",
+        "knplabs/knp-snappy-bundle": "^1.4",
         "hwi/oauth-bundle": "^0.6.2",
         "incenteev/composer-parameter-handler": "^2.0",
         "knplabs/knp-paginator-bundle": "^2.7",
@@ -40,6 +42,7 @@
         "symfony/polyfill-apcu": "^1.0",
         "symfony/swiftmailer-bundle": "^2.3.10",
         "symfony/symfony": "3.3.*",
+
         "twig/twig": "^1.0||^2.0",
         "knplabs/knp-snappy-bundle": "^1.4",
         "uran1980/fancybox-bundle": "*"
