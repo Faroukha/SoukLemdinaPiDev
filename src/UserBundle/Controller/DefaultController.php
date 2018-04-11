@@ -60,7 +60,7 @@ class DefaultController extends Controller
             //return $this->render('@User/layout.html.twig', ['user' => $user]);
         }
 
-        return $this->render('MainBundle:Default:index.html.twig', ['produits' => $produit, 'user' => null, 'produitp' => $promotion, 'users' => $users, 'Pubs' => $Pubs, 'notifs' => null]);
+        return $this->render('MainBundle:Default:index.html.twig', ['rating'=>$rating,'produits' => $produit, 'user' => null, 'produitp' => $promotion, 'users' => $users, 'Pubs' => $Pubs, 'notifs' => null]);
     }
 
     public function ishowAction()
