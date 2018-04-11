@@ -4,10 +4,11 @@ namespace EcommerceBundle\Controller;
 
 use MainBundle\Entity\Coupon;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\BrowserKit\Response;
+//use Symfony\Component\BrowserKit\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use MainBundle\Entity\Produit;
 use MainBundle\Entity\Panier;
 use MainBundle\Entity\Commande;
@@ -231,7 +232,7 @@ public function removeItemAction(Request $request)
         }
 
         $entityManager->flush();
-        return $this->redirectToRoute('PasserCommande');
+        return $this->redirectToRoute('redirecttohome');
 
     }
 
@@ -265,7 +266,7 @@ public function removeItemAction(Request $request)
 
 
         $html = $this->renderView('EcommerceBundle:Default:ListeCommandes.html.twig', array(
-            'Commande'  => $commande));
+            'commande'  => $commande));
 
         $filename = sprintf('test-%s.pdf', date('Y-m-d'));
 
