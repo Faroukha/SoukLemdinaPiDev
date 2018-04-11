@@ -94,4 +94,3 @@ class Rating
         return $this->idE;
     }
 }
-

@@ -86,6 +86,7 @@ class DefaultController extends Controller
             $event->setLongitude(38.65987);
             $event->setUser($user);
             $event->setPhoto($fileName);
+            $event->setSeat($event->getNbMax());
             $em->persist($event);
             $em->flush();
             $em = $this->getDoctrine()->getManager();

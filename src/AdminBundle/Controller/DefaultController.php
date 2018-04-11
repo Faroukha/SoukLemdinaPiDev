@@ -3,7 +3,10 @@
 namespace AdminBundle\Controller;
 
 use AdminBundle\AdminBundle;
+use EvenementBundle\Entity\Event;
+use MainBundle\Entity\Blog;
 use MainBundle\Entity\Contact;
+use MainBundle\Entity\Produit;
 use MainBundle\Entity\Pubg;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -14,6 +17,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Validator\Constraints\DateTime;
+use UserBundle\Entity\User;
 
 
 class DefaultController extends Controller
@@ -22,6 +26,7 @@ class DefaultController extends Controller
     {
         return $this->render('AdminBundle::admin.html.twig');
     }
+
 
     public function allPubAction(Request $request)
     {
@@ -173,4 +178,27 @@ class DefaultController extends Controller
         return $this->redirectToRoute('allreclam');
     }
 
+    public function blogsAction(){
+        $em = $this->getDoctrine()->getManager();
+        $blog = $em->getRepository(Blog::class)->findAll();
+        return $this->render('AdminBundle:Elements:blog.html.twig', ['blog'=>$blog]);
+    }
+
+    public function eventsAction(){
+        $em = $this->getDoctrine()->getManager();
+        $event = $em->getRepository(Event::class)->findAll();
+        return $this->render('AdminBundle:Elements:events.html.twig', ['events'=>$event]);
+    }
+
+    public function usersAction(){
+        $em = $this->getDoctrine()->getManager();
+        $user = $em->getRepository(User::class)->findAll();
+        return $this->render('AdminBundle:Elements:users.html.twig', ['users'=>$user]);
+    }
+
+    public function produitsAction(){
+        $em = $this->getDoctrine()->getManager();
+        $produit = $em->getRepository(Produit::class)->findAll();
+        return $this->render('AdminBundle:Elements:produits.html.twig', ['produits'=>$produit]);
+    }
 }
