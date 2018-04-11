@@ -98,6 +98,7 @@
         {{ form_widget(form.nbMax,{'attr':{'class':'form-control ','placeholder':"Nombre de place"}}) }}
 
         {{ form_widget(form.lieu,{'attr':{'class':'form-control controls','placeholder':'Où vas se passer?'}}) }}
+
         {#<div class="col-md-6" hidden id="long">#}
             {#{{ form_widget(form.longitude,{'attr':{'class':'form-control','placeholder':'longitude'}}) }}#}
         {#</div>#}
@@ -222,6 +223,21 @@
                 radioButton.addEventListener('click', function() {
                     autocomplete.setTypes(types);
                 });
+            }
+            function geolocate() {
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(function(position) {
+                        var geolocation = {
+                            lat: position.coords.latitude,
+                            lng: position.coords.longitude
+                        };
+                        var circle = new google.maps.Circle({
+                            center: geolocation,
+                            radius: position.coords.accuracy
+                        });
+                        autocomplete.setBounds(circle.getBounds());
+                    });
+                }
             }
 
 

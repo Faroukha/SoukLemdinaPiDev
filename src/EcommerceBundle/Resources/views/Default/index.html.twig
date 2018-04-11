@@ -1,17 +1,26 @@
 {% extends 'layout/layout.html.twig' %}
+
+
+{% block mailco %}
+    {% if app.user is not null %}
+        {{ app.user.email }}
+    {% endif %}
+{% endblock %}
 {% block loginbtn %}
     {% if app.user is not null %}
-        <li class="account_area"><a href="{{ path('fos_user_security_logout') }}"><i class="fa fa-lock"></i> Se Déconnecter</a></li>
+        <li class="account_area"><a href="{{ path('fos_user_security_logout') }}"><i class="fa fa-lock"></i> Se
+                Déconnecter</a></li>
     {% else %}
-        <li class="account_area"><a href="{{ path('fos_user_registration_register') }}"><i class="fa fa-lock"></i> Register</a></li>
-        <li class="account_area"><a href="{{ path('fos_user_security_login') }}"><i class="fa fa-lock"></i> Se Connecter</a></li>
+        <li class="account_area"><a href="{{ path('fos_user_registration_register') }}"><i class="fa fa-lock"></i>
+                Register</a></li>
+        <li class="account_area"><a href="{{ path('fos_user_security_login') }}"><i class="fa fa-lock"></i> Se Connecter</a>
+        </li>
 
     {% endif %}
 
 {% endblock %}
 
 {% block body %}
-
 
 
 
@@ -88,6 +97,7 @@
         </div>
     </div>
 
+
     <!-- Cart Page -->
     <div class="cart_page_area">
         <div class="container">
@@ -101,38 +111,57 @@
                                 <th class="cpt_img">image</th>
                                 <th class="cpt_pn">product name</th>
                                 <th class="cpt_q">quantity</th>
-                                <th class="cpt_p">price</th>
-                                <th class="cpt_t">total</th>
-                                <th class="cpt_r">remove</th>
+                                <th class="cpt_p">Update</th>
+                                <th class="cpt_t">Price</th>
+                                <th class="cpt_r">TOTAL</th>
+                                <th class="cpt_r">Remove</th>
                             </tr>
                             </thead>
+    {% if app.user is not null %}
+
+
                             <tbody>
-    {% for p in Produitpanier %}
-    {% for pr in Produit %}
-        {% if pr.id==p.idProduit %}
+                            {% for p in Produitpanier %}
+
+
+
                             <tr>
                                 <td><span class="cp_no">1</span></td>
                                 <td><a href="#" class="cp_img"><img src="img/cart-prdct/1.jpg" alt="" /></a></td>
                                 <td><a href="#" class="cp_title">{{ p.nomproduit }}</a></td>
                                 <td>
+                                    <form method="post" action="{{ path('UpdateItem') }}">
                                     <div class="cp_quntty">
-                                        <input name="quantity" value="{{ p.quantite }}" size="2" type="number">
+                                        <input name="quantity" placeholder="{{ p.quantite }}" value="" size="2" type="number">
+                                        <input type="hidden" value="{{ p.idProduit }}" name="idProduit">
                                     </div>
+                                <td><button type="submit" class="btn btn-default"><i class="fa fa-edit"></i></button></td>
+                                </form>
                                 </td>
+{% for pr in Produit %}
+    {% if pr.id==p.idProduit %}
                                 <td><p class="cp_price">{{ pr.prix }}DT</p></td>
                                 <td><p class="cpp_total">{{ pr.prix*p.quantite  }}DT</p></td>
-                                <td><a class="btn btn-default cp_remove"><i class="fa fa-trash"></i></a></td>
-                            </tr>
+
+                    <form method="post" action="{{ path('RemoveItem') }}">
+                    <input type="hidden" value="{{ p.idProduit }}" name="idProduit">
+                                <td><button type="submit" class="btn btn-default cp_remove"><i class="fa fa-trash"></i></button></td>
+                                 </form>
+
+
+
+    {% endif %}
+    {% endfor %}                            </tr>
 
 
 
 
+
+
+    {% endfor %}
 
 
                             </tbody>
-            {% endif %}
-        {% endfor %}
-            {% endfor %}
                         </table>
                     </div>
                 </div>
@@ -143,34 +172,50 @@
                     <div class="row">
                         <div class="col-sm-7">
                             <div class="cart-action">
-                                <a href="#" class="btn border-btn">continiue shopping</a>
-                                <a href="#" class="btn border-btn">update shopping bag</a>
+                                <a href="{{ path('main_homepage') }}" class="btn border-btn">continiue shopping</a>
+
                             </div>
                         </div>
 
-                        <div class="col-sm-5">
-                            <div class="cuppon-wrap">
-                                <h4>Discount Code</h4>
-                                <p>Enter your coupon code if you have</p>
-                                <form action="#" class="cuppon-form">
-                                    <input type="text" />
-                                    <button class="btn border-btn">apply coupon</button>
-                                </form>
-                            </div>
-                        </div>
+
                     </div>
                 </div>
 
                 <div class="col-md-4 col-xs-12 cart-checkout-process text-right">
                     <div class="wrap">
-                        <p><span>Subtotal</span><span>$200.00</span></p>
-                        <h4><span>Grand total</span><span>$190.00</span></h4>
-                        <a href="checkout.html" class="btn border-btn">process to checkout</a>
-                    </div>
-                </div>
+                        {% set total = 0  %}
+                        {% set prix = 0  %}
+                        {% set quantite = 0 %}
+{% for pr in Produit %}
+    {% for pa in Produitpanier %}
+    {% if pr.idProduit== pa.idProduit %}
+                        {% set prix =  pr.prix %}
 
+
+
+
+                        {% set quantite = pa.quantite %}
+        {% set total = quantite*prix+total %}
+        {% endif %}
+    {% endfor %}
+        {% endfor %}
+<form method="post" action="{{ path('ValiderAchat') }}">
+                        <h4><span>Grand total</span><span>{{ total }}</span></h4>
+    <input type="hidden" name="total" value="{{ total }}">
+    <button type="submit" class="btn border-btn">process to checkout</button>
+</form>
+
+                    </div>
+
+                </div>
             </div>
         </div>
     </div>
+    {% else %}
+
+        You have to connect <a href="{{ path('fos_user_security_login') }}">click here </a> !
+
+
+    {% endif %}
 
 {% endblock %}
