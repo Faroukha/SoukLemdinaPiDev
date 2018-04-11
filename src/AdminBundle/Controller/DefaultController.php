@@ -3,9 +3,11 @@
 namespace AdminBundle\Controller;
 
 use AdminBundle\AdminBundle;
+use CMEN\GoogleChartsBundle\GoogleCharts\Charts\PieChart;
 use EvenementBundle\Entity\Event;
 use MainBundle\Entity\Blog;
 use MainBundle\Entity\Contact;
+use MainBundle\Entity\Etat;
 use MainBundle\Entity\Produit;
 use MainBundle\Entity\Pubg;
 use Symfony\Component\HttpFoundation\Response;
@@ -201,5 +203,39 @@ class DefaultController extends Controller
         $em = $this->getDoctrine()->getManager();
         $produit = $em->getRepository(Produit::class)->findAll();
         return $this->render('AdminBundle:Elements:produits.html.twig', ['produits'=>$produit]);
+    }
+
+   public function StatistiqueAction()
+    {
+        $pieChart = new PieChart();
+        $em= $this->getDoctrine();
+
+        $test = $em->getRepository(Etat::class)->findAll();
+
+        $data= array();
+        $stat=['etat', 'nbr'];
+        $nb=0;
+        array_push($data,$stat);
+        foreach($test as $tests) {
+            $stat=array();
+
+            array_push($stat,$tests->getInfo(), $tests->getNbr());
+            $nb=($tests->getNbr());
+            $stat=[$tests->getInfo(),$nb];
+            array_push($data,$stat);
+        }
+        $pieChart->getData()->setArrayToDataTable(
+                $data
+           );
+        $pieChart->getOptions()->setTitle('Statistique sur les reclamations');
+        $pieChart->getOptions()->setHeight(500);
+        $pieChart->getOptions()->setWidth(900);
+        $pieChart->getOptions()->getTitleTextStyle()->setBold(true);
+        $pieChart->getOptions()->getTitleTextStyle()->setColor('#009900');
+        $pieChart->getOptions()->getTitleTextStyle()->setItalic(true);
+        $pieChart->getOptions()->getTitleTextStyle()->setFontName('Arial');
+        $pieChart->getOptions()->getTitleTextStyle()->setFontSize(20);
+        return $this->render('AdminBundle::stat.html.twig', array('piechart' =>
+                $pieChart));
     }
 }

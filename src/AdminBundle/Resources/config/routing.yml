@@ -42,4 +42,7 @@ all_users:
 all_produitss:
     path:     /all_produits
     defaults: { _controller: AdminBundle:Default:produits }
+stat:
+    path:     /stats
+    defaults: { _controller: AdminBundle:Default:Statistique }
 
