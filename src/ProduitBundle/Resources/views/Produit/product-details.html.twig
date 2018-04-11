@@ -73,12 +73,7 @@
                     </div>
                 </div>
 
-                {{ form_start(f) }}
-                <br><br>
-                <div class="row">{{ form_widget(f.rating ) }}
-                    {{ form_widget(f.valider) }}
-                </div>
-                {{ form_end(f) }}
+
 
                 <!-- Product Details Content -->
                 <div class="col-md-6 col-xs-12">
@@ -91,7 +86,6 @@
                             <a class="pd_title" href="#">Categorie:</a>
                             <h4>{{ produit.categorie }}</h4>
                         </div>
-<br>
                         <div class="prdct_dtls_content ">
 
                             <a class="pd_title" href="#">Prix:</a>
@@ -120,7 +114,12 @@
                                 <button type="submit" class="btn btn-default acc_btn">add to cart</button>
 
                             </div>
-
+                            {{ form_start(f) }}
+                            <br><br>
+                            <div class="row">{{ form_widget(f.rating ) }}
+                                {{ form_widget(f.valider) }}
+                            </div>
+                            {{ form_end(f) }}
                         </form>
 
 

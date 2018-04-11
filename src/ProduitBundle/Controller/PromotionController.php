@@ -34,6 +34,7 @@ class PromotionController extends Controller
         $produit = new Produit();
         $produit = $em->getRepository(Produit::class)->find($request->get('idproduit'));
 
+
         $produit->setPrix($request->get('taux') * $produit->getPrix() / 100);
         $em->persist($produit);
         $em->flush();

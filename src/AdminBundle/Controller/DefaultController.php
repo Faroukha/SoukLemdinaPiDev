@@ -107,6 +107,7 @@ class DefaultController extends Controller
     }
 
 
+
         public function updatePubAction(Request $request)
     {
         $id = $request->query->get('id');
