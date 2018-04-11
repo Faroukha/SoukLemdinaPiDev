@@ -77,11 +77,12 @@
                             <img src="{{ asset("Uploads/images/") ~ m.photo }}" alt="">
                             {% if app.user is not null %}
                                 {% if m.user== app.user %}
-                                    <form action="">
+                                        <form action="{{ path('Supprimer_evan') }}">
+                                            <input type="hidden"  value="{{ evenement.id }}" name="id" >
 
                                         <button class="btn btn-default acc_btn">Supprimer l'evenement</button>
-
-                                    </form>{% endif %}
+                                        </form>
+                                    {% endif %}
                             {% endif %}
                             <div class="blog_date text-center">
                                 <div class="bd_month">{{ m.createdAt |date("m/d/Y") }}</div>

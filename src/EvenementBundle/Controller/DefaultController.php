@@ -124,6 +124,15 @@ class DefaultController extends Controller
             return $this->render("EvenementBundle:Default:events.html.twig", ['notifs' => $notif, 'events' => $event, 'users' => $user, 'strs' => $str]);
         }
     }
+    public function supprimerAction(Request $request )
+    {
+        $em=$this->getDoctrine()->getManager();
+        $e=$em->getRepository(Event::class)->find($request->get("id"));
+        $em->remove($e);
+        $em->flush();
+        return $this->redirectToRoute("main_homepage");
+
+    }
 
 
 }
