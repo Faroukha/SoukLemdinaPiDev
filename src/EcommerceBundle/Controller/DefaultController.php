@@ -4,6 +4,7 @@ namespace EcommerceBundle\Controller;
 
 use MainBundle\Entity\Coupon;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+//use Symfony\Component\BrowserKit\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\Request;
@@ -11,7 +12,7 @@ use MainBundle\Entity\Produit;
 use MainBundle\Entity\Panier;
 use MainBundle\Entity\Commande;
 use MainBundle\Entity\Produitspanier;
-
+use Knp\Bundle\SnappyBundle\Snappy\Response;
 use UserBundle\Entity\User;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 class DefaultController extends Controller
@@ -98,7 +99,7 @@ else{
 
 
 
-    }elseif($p->getIduser()==0)
+    }elseif($p->getIduser()!=$userConnected->getId())
     {
 
         $Produitpanier = new Produitspanier();
@@ -249,6 +250,38 @@ public function removeItemAction(Request $request)
         }
         $entityManager->flush();
         return $this->redirectToRoute('PasserCommande');
+
+    }
+
+    public function listerCommandesAction()
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $panier = $entityManager->getRepository(Panier::class)->findByIduser($this->getUser()->getId());
+        $commande = $entityManager->getRepository(Commande::class)->findByIduser($this->getUser()->getId());
+
+        //$lc= $this->renderView('EcommerceBundle:Default:ListeCommandes.html.twig',['commande'=>$commande]);
+       // $snapper=$this->get('knp_snappy.pdf');
+        //$filename="file";
+        //return new Response($snapper->getOutputFromHtml($lc),200,array('content-Type'=>'application/pdf',
+            //'content-Disposition'=>'inline;filename"'.$filename.'.pdf"' ));
+       /* $this->get('knp_snappy.pdf')->generateFromHtml(
+            $this->renderView(
+                'EcommerceBundle:Default:ListeCommandes.html.twig',
+                array(
+                    'commande'=>$commande
+                )
+            ),
+            '/path/to/the/file.pdf'
+        );*/
+        $html = $this->renderView('EcommerceBundle:Default:ListeCommandes.html.twig', array(
+            'Commande'  => $commande
+        ));
+
+        return new Response(
+            $this->get('knp_snappy.pdf')->generateFromHtml($html),
+            'file.pdf'
+        );
+
 
     }
 

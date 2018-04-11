@@ -25,3 +25,7 @@ ApplyCoupon:
 PasserCommande:
     path:     /PasserCommande
     defaults: { _controller: EcommerceBundle:Default:PasserCommande }
+
+ListerCommande:
+    path:     /ListerCommande
+    defaults: { _controller: EcommerceBundle:Default:listerCommandes }
