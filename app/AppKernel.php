@@ -31,6 +31,8 @@ class AppKernel extends Kernel
             new Http\HttplugBundle\HttplugBundle(),
             new HWI\Bundle\OAuthBundle\HWIOAuthBundle(),
             new blackknight467\StarRatingBundle\StarRatingBundle(),
+            new Uran1980\FancyBoxBundle\Uran1980FancyBoxBundle(),
+            new CMEN\GoogleChartsBundle\CMENGoogleChartsBundle(),
 
 
         ];

@@ -82,55 +82,98 @@
         </div>
 
 
+        <div class="col-md-10">
+            <section id="product_area" class="section_padding">
+                <div class="container">
 
-    <div class="col-md-10">
-    <section id="product_area" class="section_padding">
-        <div class="container">
-
-            <div class="row">
-
-                <div class="col-md-12 text-center">
-                    <div class="section_title">
-                        <h2>Nos <span>Produits</span></h2>
-                        <div class="divider"></div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="text-center">
-                <div class="product_filter">
-                    <ul>
-                        <li class=" active filter" data-filter="all">ALL</li>
-                        <li class="filter" data-filter=".sale">Promo</li>
-
-
-                    </ul>
-                </div>
-
-                <div class="product_item">
                     <div class="row">
-                        {% for p in produits %}
-                            {% set i = 0 %}
-                            {% for x in produitp %}
-                                {% if x.idProduit == p.id and i == 0 %}
-                                    {% set i = 1 %}
-                                    <div class="col-lg-3 col-md-4 col-sm-6 mix sale">
+
+                        <div class="col-md-12 text-center">
+                            <div class="section_title">
+                                <h2>Nos <span>Produits</span></h2>
+                                <div class="divider"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="text-center">
+                        <div class="product_filter">
+                            <ul>
+                                <li class=" active filter" data-filter="all">ALL</li>
+                                <li class="filter" data-filter=".sale">Promo</li>
+
+
+                            </ul>
+                        </div>
+
+                        <div class="product_item">
+                            <div class="row">
+                                {% for p in produits %}
+                                    {% set i = 0 %}
+                                    {% for x in produitp %}
+                                        {% if x.idProduit == p.id and i == 0 %}
+                                            {% set i = 1 %}
+                                            <div class="col-lg-3 col-md-4 col-sm-6 mix sale">
+                                                <div class="single_product">
+                                                    <div class="product_image">
+                                                        <img src="{{ asset("Uploads/images/") ~ p.image }}" alt=""/>
+                                                        <div class="new_badge">{{ x.taux }} %</div>
+                                                        <div class="box-content">
+                                                            <a href="#"><i class="fa fa-heart-o"></i></a>
+                                                            <a href="#"><i class="fa fa-cart-plus"></i></a>
+                                                            <a href="{{ path('detailspromotion',{'id':p.id}) }}"><i
+                                                                        class="fa fa-search"></i></a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="product_btm_text">
+                                                        <h4><a href="#">{{ p.titre }}</a></h4>
+                                                        {% if app.user != null %}
+                                                            {% set i = 0 %}
+                                                            {% for x in users %}
+                                                                {% if x.id == p.idartisan and i == 0 %}
+                                                                    {% set i = 1 %}
+                                                                    <h6 style="font-size: small; color: #1b1e21">
+                                                                        <a href="{{ path('others_profil',{'id':x.id}) }}">Par: {{ x.nom }}</a>
+                                                                    </h6>
+                                                                {% endif %}
+                                                            {% endfor %}
+                                                        {% endif %}
+                                                        <div class="p_rating">
+
+                                                        </div>
+                                                        <span class="price">{{ p.prix }}</span>
+                                                    </div>
+
+
+                                                </div>
+
+                                            </div> <!-- End Col -->
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endfor %}
+
+                                {% for produit in produits %}
+
+
+                                    <!-- Mix starts here -->
+                                    <div class="col-lg-3 col-md-4 col-sm-6  mix ">
                                         <div class="single_product">
                                             <div class="product_image">
-                                                <img src="{{ asset("Uploads/images/") ~ p.image }}" alt=""/>
-                                                <div class="new_badge">{{ x.taux }} %</div>
+                                                <img src="{{ asset("Uploads/images/") ~ produit.image }}" alt=""/>
                                                 <div class="box-content">
                                                     <a href="#"><i class="fa fa-heart-o"></i></a>
                                                     <a href="#"><i class="fa fa-cart-plus"></i></a>
-                                                    <a href="{{ path('detailspromotion',{'id':p.id}) }}"><i class="fa fa-search"></i></a>
+                                                    <a href="{{ path('product_details',{'id':produit.id}) }}"><i
+                                                                class="fa fa-search"></i></a>
                                                 </div>
                                             </div>
+
                                             <div class="product_btm_text">
-                                                <h4><a href="#">{{ p.titre }}</a></h4>
+                                                <h4><a href="#">{{ produit.titre }}</a></h4>
                                                 {% if app.user != null %}
                                                     {% set i = 0 %}
                                                     {% for x in users %}
-                                                        {% if x.id == p.idartisan and i == 0 %}
+                                                        {% if x.id == produit.idartisan and i == 0 %}
                                                             {% set i = 1 %}
                                                             <h6 style="font-size: small; color: #1b1e21">
                                                                 <a href="{{ path('others_profil',{'id':x.id}) }}">Par: {{ x.nom }}</a>
@@ -139,70 +182,29 @@
                                                     {% endfor %}
                                                 {% endif %}
                                                 <div class="p_rating">
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
+                                                    {% set i=0 %}
+                                                    {% for rate in rates %}
+
+                                                        {% if produit.id == rate.idProduit %}
+                                                            {{ rate.value }}
+                                                        {% endif %}
+                                                    {% endfor %}
+
                                                 </div>
-                                                <span class="price">{{ p.prix }}</span>
+                                                <span class="price">{{ produit.prix }}0</span>
                                             </div>
-
-
-                                        </div>
-
-                                    </div> <!-- End Col -->
-                                {% endif %}
-                            {% endfor %}
-                        {% endfor %}
-
-                        {% for produit in produits %}
-                            <!-- Mix starts here -->
-                            <div class="col-lg-3 col-md-4 col-sm-6  mix ">
-                                <div class="single_product">
-                                    <div class="product_image">
-                                        <img src="{{ asset("Uploads/images/") ~ produit.image }}" alt=""/>
-                                        <div class="box-content">
-                                            <a href="#"><i class="fa fa-heart-o"></i></a>
-                                            <a href="#"><i class="fa fa-cart-plus"></i></a>
-                                            <a href="{{ path('product_details',{'id':produit.id}) }}"><i
-                                                        class="fa fa-search"></i></a>
                                         </div>
                                     </div>
+                                    <!--Mix ends here-->
+                                {% endfor %}
 
-                                    <div class="product_btm_text">
-                                        <h4><a href="#">{{ produit.titre }}</a></h4>
-                                        {% if app.user != null %}
-                                            {% set i = 0 %}
-                                            {% for x in users %}
-                                                {% if x.id == produit.idartisan and i == 0 %}
-                                                    {% set i = 1 %}
-                                                    <h6 style="font-size: small; color: #1b1e21">
-                                                        <a href="{{ path('others_profil',{'id':x.id}) }}">Par: {{ x.nom }}</a>
-                                                    </h6>
-                                                {% endif %}
-                                            {% endfor %}
-                                        {% endif %}
-                                        <div class="p_rating">
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                        </div>
-                                        <span class="price">{{ produit.prix }}0</span>
-                                    </div>
-                                </div>
+
                             </div>
-                            <!--Mix ends here-->
-                        {% endfor %}
-
+                        </div>
                     </div>
                 </div>
-            </div>
+            </section>
         </div>
-    </section>
-</div>
     </div>
     <div class="blog_pagination text-center" aria-label="Page navigation example">
         {{ knp_pagination_render(produits) }}
