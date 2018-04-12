@@ -182,6 +182,7 @@
                                                     {% endfor %}
                                                 {% endif %}
                                                 <div class="p_rating">
+
                                                 {% if app.user is not null %}
                                                     {% for rate in rating %}
                                                     {% if produit.id == rate.idE %}
@@ -191,7 +192,7 @@
                                                  {% endif %}
 
                                                 </div>
-                                                <span class="price">{{ produit.prix }}0</span>
+                                                <span class="price">{{ produit.prix }}</span>
                                             </div>
                                         </div>
                                     </div>
