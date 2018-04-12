@@ -16,6 +16,7 @@ use MainBundle\Entity\Produitspanier;
 use Knp\Bundle\SnappyBundle\Snappy;
 use UserBundle\Entity\User;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 class DefaultController extends Controller
 {
     public function indexAction(Request $request)
@@ -77,60 +78,53 @@ class DefaultController extends Controller
         $userConnected = $this->getUser();
 
         $em=$this->getDoctrine()->getRepository(Panier::class);
-        $panier=$em->findAll();
-
-foreach ($panier as $p){
-
-    if(($p->getIduser()==$userConnected->getId()) &&($request->isMethod('POST')))
-
-    {
-        $Produitpanier = new Produitspanier();
-if($p->getPrixtotal()!= 0)
-{ $p->setPrixtotal(0);}
-else{
-
-            $Produitpanier->setIdpanier($p->getId());
-            $Produitpanier->setIdproduit($request->get('idproduit')) ;
-            $Produitpanier->setNomproduit($request->get('titreproduit'));
-            $Produitpanier->setQuantite($request->get('quantite'));
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($Produitpanier);
-            $em->flush();}
-            //$lastid=$Produitpanier->getIdpanier();
+        $panier=$em->findByIduser($userConnected->getId());
+        //var_dump($panier->getIduser());
+        //die();
 
 
+    //var_dump($p->getIduser());
+    // die();
+        foreach($panier as $p) {
 
-    }elseif( $p->getIduser()!=$userConnected->getId() && $p->getIduser()==0 )
-    {
+            if (($p->getIduser() == $userConnected->getId()) && ($request->isMethod('POST'))) {
+                $Produitpanier = new Produitspanier();
 
-        $Produitpanier = new Produitspanier();
-            $panierr=new panier();
-            $panierr->setPrixtotal(0);
-            $panierr->setIduser($userConnected->getId());
-
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($panierr);
-            $em->flush();
-            $Produitpanier->setIdpanier($panierr->getId());
-            $Produitpanier->setIdproduit($request->get('idproduit')) ;
-            $Produitpanier->setNomproduit($request->get('titreproduit'));
-            $Produitpanier->setQuantite($request->get('quantite'));
-           $es = $this->getDoctrine()->getManager();
-            $es->persist($Produitpanier);
-            $es->flush();
+                $p->setPrixtotal(0);
 
 
-   }}
+                $Produitpanier->setIdpanier($p->getId());
+                $Produitpanier->setIdproduit($request->get('idproduit'));
+                $Produitpanier->setNomproduit($request->get('titreproduit'));
+                $Produitpanier->setQuantite($request->get('quantite'));
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($Produitpanier);
+                $em->flush();
+                //$lastid=$Produitpanier->getIdpanier();
 
 
+            } elseif ($p->getIduser() != $userConnected->getId()) {
 
 
+                $Produitpanier = new Produitspanier();
+                $panierr = new panier();
+                $panierr->setPrixtotal(0);
+                $panierr->setIduser($userConnected->getId());
+
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($panierr);
+                $em->flush();
+                $Produitpanier->setIdpanier($panierr->getId());
+                $Produitpanier->setIdproduit($request->get('idproduit'));
+                $Produitpanier->setNomproduit($request->get('titreproduit'));
+                $Produitpanier->setQuantite($request->get('quantite'));
+                $es = $this->getDoctrine()->getManager();
+                $es->persist($Produitpanier);
+                $es->flush();
 
 
-
-
-
-
+            }
+        }
 
         return $this->redirectToRoute('redirecttohome');
         //return $this->render('EcommerceBundle:Default:index.html.twig');
@@ -266,9 +260,9 @@ public function removeItemAction(Request $request)
 
 
         $html = $this->renderView('EcommerceBundle:Default:ListeCommandes.html.twig', array(
-            'commande'  => $commande));
+            'commande'  => $commande,'panier'  => $panier));
 
-        $filename = sprintf('test-%s.pdf', date('Y-m-d'));
+        $filename = sprintf('Facture-%s.pdf', date('Y-m-d'));
 
         return new Response(
             $this->get('knp_snappy.pdf')->getOutputFromHtml($html),
@@ -281,7 +275,7 @@ public function removeItemAction(Request $request)
 
 
 
-
+$this->redirectToRoute('redirecttohome');
 
         //$lc= $this->renderView('EcommerceBundle:Default:ListeCommandes.html.twig',['commande'=>$commande]);
        // $snapper=$this->get('knp_snappy.pdf');
@@ -311,7 +305,29 @@ public function removeItemAction(Request $request)
 
 
 
+public function PayerAction(Request $request)
+{
+    $es=$this->getDoctrine()->getRepository(Commande::class);
+    $em=$this->getDoctrine()->getRepository(Panier::class);
+   $panier= $em->findByIduser($this->getUser()->getId());
+    $commande= $es->findByIduser($this->getUser()->getId());
+    foreach ($commande as $cm)
+    {$cm->setEtat(true);}
+   foreach ($panier as $c) {
 
+       \Stripe\Stripe::setApiKey("sk_test_adQhKBG6hTPw6cgoPC81K4I2");
+
+       \Stripe\Charge::create(array(
+           "amount" => $c->getPrixtotal()+50,
+           "currency" => "usd",
+           "source" => "tok_mastercard", // obtained with Stripe.js
+           "description" => "Paiement"
+
+       ));
+
+   }
+return $this->render('EcommerceBundle:Default:Payement.html.twig');
+}
 
 
 

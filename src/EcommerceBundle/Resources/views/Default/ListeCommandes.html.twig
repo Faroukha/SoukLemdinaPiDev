@@ -4,23 +4,7 @@
 {% block body %}
 
     <!-- Page item Area -->
-    <div id="page_item_area">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-6 text-left">
-                    <h3>Cart</h3>
-                </div>
 
-                <div class="col-sm-6 text-right">
-                    <ul class="p_items">
-                        <li><a href="#">home</a></li>
-                        <li><a href="#">category</a></li>
-                        <li><span>Cart</span></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
 
 
     <!-- Cart Page -->
@@ -42,9 +26,13 @@
 
 {% for cm in commande %}
                             <tbody>
-                            <tr><td>{{ cm.etat }}</td>
+                            <tr><td>{{ app.user.username }}</td>
                             <td>{{ cm.date|date('m/d/y') }}</td>
-                                <td>{{ cm.idPanier }}</td>
+                                {% for p in panier %}
+                                {% if p.idUser== cm.idUser %}
+                                <td>{{ p.PrixTotal }}</td>
+                                {% endif %}
+                                {% endfor %}
                             </tr>
                             {% endfor %}
                             </tbody>
