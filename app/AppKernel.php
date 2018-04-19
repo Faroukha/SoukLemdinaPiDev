@@ -34,7 +34,7 @@ class AppKernel extends Kernel
             new blackknight467\StarRatingBundle\StarRatingBundle(),
             new Uran1980\FancyBoxBundle\Uran1980FancyBoxBundle(),
             new CMEN\GoogleChartsBundle\CMENGoogleChartsBundle(),
-
+            new ApiBundle\ApiBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {
