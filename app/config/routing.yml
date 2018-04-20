@@ -1,3 +1,8 @@
+api:
+    resource: "@ApiBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
 mail:
     resource: "@MailBundle/Resources/config/routing.yml"
     prefix:   /
@@ -64,3 +69,6 @@ redirecttohome:
     path: /home
     defaults: { _controller: UserBundle:Default:index }
 
+esprit_mobile:
+    resource: "@ApiBundle/Resources/config/routing.yml"
+    prefix:   /api
