@@ -28,6 +28,7 @@ class AppKernel extends Kernel
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
             new Nomaya\SocialBundle\NomayaSocialBundle(),
             new Knp\Bundle\SnappyBundle\KnpSnappyBundle(),
+
             new MailBundle\MailBundle(),
             new Http\HttplugBundle\HttplugBundle(),
             new HWI\Bundle\OAuthBundle\HWIOAuthBundle(),
@@ -35,6 +36,7 @@ class AppKernel extends Kernel
             new Uran1980\FancyBoxBundle\Uran1980FancyBoxBundle(),
             new CMEN\GoogleChartsBundle\CMENGoogleChartsBundle(),
             new ApiBundle\ApiBundle(),
+
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

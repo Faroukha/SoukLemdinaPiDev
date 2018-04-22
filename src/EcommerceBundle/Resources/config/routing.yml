@@ -29,3 +29,7 @@ PasserCommande:
 ListerCommande:
     path:     /ListerCommande
     defaults: { _controller: EcommerceBundle:Default:listerCommandes }
+
+Payer:
+    path:     /Payer
+    defaults: { _controller: EcommerceBundle:Default:Payer }
