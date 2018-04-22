@@ -32,6 +32,7 @@
             <li>
                 <div class="cart_menu_area">
 
+                    {% for p in Produitpanier %}
 
 
                     <!-- Mini Cart Wrapper -->
@@ -41,28 +42,21 @@
                             <div class="mc-sin-pro fix">
                                 <a href="#" class="mc-pro-image float-left"><img src="img/mini-cart/1.jpg" alt="" /></a>
                                 <div class="mc-pro-details fix">
-                                    <a href="#">This is Product Name</a>
-                                    <span>1x$25.00</span>
+                                    <a href="#">{{ p.nomProduit }}</a>
+                                    {% for pr in Produit %}
+                                    <span>{{ pr.prix }}</span>
+                                    {% endfor %}
                                     <a class="pro-del" href="#"><i class="fa fa-times-circle"></i></a>
                                 </div>
                             </div>
-                            <div class="mc-sin-pro fix">
-                                <a href="#" class="mc-pro-image float-left"><img src="img/mini-cart/2.jpg" alt="" /></a>
-                                <div class="mc-pro-details fix">
-                                    <a href="#">This is Product Name</a>
-                                    <span>1x$25.00</span>
-                                    <a class="pro-del" href="#"><i class="fa fa-times-circle"></i></a>
-                                </div>
-                            </div>
+                            {% endfor %}
+
+
                         </div>
                         <!-- Sub Total -->
-                        <div class="mc-subtotal fix">
-                            <h4>Subtotal <span>$50.00</span></h4>
-                        </div>
+
                         <!-- Cart Button -->
-                        <div class="mc-button">
-                            <a href="#" class="checkout_btn">checkout</a>
-                        </div>
+
                     </div>
                 </div>
 
@@ -102,8 +96,8 @@
                         <table class="table cart_prdct_table text-center">
                             <thead>
                             <tr>
-                                <th class="cpt_no">No.</th>
-                                <th class="cpt_img">image</th>
+
+
                                 <th class="cpt_pn">product name</th>
                                 <th class="cpt_q">quantity</th>
                                 <th class="cpt_p">Update</th>
@@ -121,8 +115,8 @@
 
 
                             <tr>
-                                <td><span class="cp_no">1</span></td>
-                                <td><a href="#" class="cp_img"><img src="img/cart-prdct/1.jpg" alt="" /></a></td>
+
+
                                 <td><a href="#" class="cp_title">{{ p.nomproduit }}</a></td>
                                 <td>
                                     <form method="post" action="{{ path('UpdateItem') }}">

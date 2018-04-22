@@ -78,7 +78,9 @@ class DefaultController extends Controller
         $userConnected = $this->getUser();
 
         $em=$this->getDoctrine()->getRepository(Panier::class);
+        $es=$this->getDoctrine()->getRepository(Produit::class);
         $panier=$em->findByIduser($userConnected->getId());
+        $produit=$es->findAll();
         //var_dump($panier->getIduser());
         //die();
 
@@ -93,17 +95,21 @@ class DefaultController extends Controller
                 $p->setPrixtotal(0);
 
 
-                $Produitpanier->setIdpanier($p->getId());
-                $Produitpanier->setIdproduit($request->get('idproduit'));
-                $Produitpanier->setNomproduit($request->get('titreproduit'));
-                $Produitpanier->setQuantite($request->get('quantite'));
-                $em = $this->getDoctrine()->getManager();
-                $em->persist($Produitpanier);
-                $em->flush();
-                //$lastid=$Produitpanier->getIdpanier();
+                    $Produitpanier->setIdpanier($p->getId());
+                    $Produitpanier->setIdproduit($request->get('idproduit'));
+                    $Produitpanier->setNomproduit($request->get('titreproduit'));
+
+                        $Produitpanier->setQuantite($request->get('quantite'));
 
 
-            } elseif ($p->getIduser() != $userConnected->getId()) {
+                    $em = $this->getDoctrine()->getManager();
+                    $em->persist($Produitpanier);
+                    $em->flush();
+                //echo "<script>alert(\"Added to cart\")</script>";
+                    //$lastid=$Produitpanier->getIdpanier();
+
+                }
+            elseif ($p->getIduser() != $userConnected->getId()) {
 
 
                 $Produitpanier = new Produitspanier();
@@ -121,13 +127,15 @@ class DefaultController extends Controller
                 $es = $this->getDoctrine()->getManager();
                 $es->persist($Produitpanier);
                 $es->flush();
+                //echo "<script>alert(\"Added to cart\")</script>";
 
 
             }
-        }
 
-        return $this->redirectToRoute('redirecttohome');
+
+            return $this->redirectToRoute('redirecttohome');
         //return $this->render('EcommerceBundle:Default:index.html.twig');
+    }
     }
 
 public function removeItemAction(Request $request)
@@ -326,7 +334,7 @@ public function PayerAction(Request $request)
        ));
 
    }
-return $this->render('EcommerceBundle:Default:Payement.html.twig');
+return $this->render('EcommerceBundle:Default:index.html.twig');
 }
 
 
