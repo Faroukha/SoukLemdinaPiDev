@@ -16,3 +16,12 @@ allUsers:
 allComents:
     path:     /all/coments
     defaults: { _controller: ApiBundle:Default:AllComents }
+allMessageUser:
+    path:     /all/messages/{id}
+    defaults: { _controller: ApiBundle:Default:AllMessageUser }
+allMessage:
+    path:     /all/messages
+    defaults: { _controller: ApiBundle:Default:AllMessage }
+login:
+    path:     /login
+    defaults: { _controller: ApiBundle:Default:login }

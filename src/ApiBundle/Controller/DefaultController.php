@@ -2,11 +2,14 @@
 
 namespace ApiBundle\Controller;
 
+
 use MainBundle\Entity\Commentaire;
+use MainBundle\Entity\Message;
 use MainBundle\Entity\Produit;
 use MainBundle\Entity\Promotion;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Serializer;
 use UserBundle\Entity\User;
@@ -23,6 +26,21 @@ class DefaultController extends Controller
       $serializer = new Serializer([new ObjectNormalizer()]);
       $formatted = $serializer->normalize($produit);
       return new JsonResponse($formatted);
+    }
+
+    public function AllMessageUserAction($id){
+
+        $message = $this->getDoctrine()->getManager()->getRepository(Message::class)->find($id);
+        $serializer = new Serializer([new ObjectNormalizer()]);
+        $formatted = $serializer->normalize($message);
+        return new JsonResponse($formatted);
+    }
+
+    public function AllMessageAction(){
+        $produit = $this->getDoctrine()->getManager()->getRepository(Message::class)->findAll();
+        $serializer = new Serializer([new ObjectNormalizer()]);
+        $formatted = $serializer->normalize($produit);
+        return new JsonResponse($formatted);
     }
 
 
@@ -45,6 +63,23 @@ class DefaultController extends Controller
         $serializer = new Serializer([new ObjectNormalizer()]);
         $formatted = $serializer->normalize($produit);
         return new JsonResponse($formatted);
+    }
+
+    public function loginAction (Request $request) {
+        $em=$this->getDoctrine()->getManager();
+        $user=$em->getRepository(User::class)->findOneBy(['email' =>$request->get('email')]);
+        if($user){
+            $factory = $this->get('security.encoder_factory');
+            $encoder = $factory->getEncoder($user);
+            $salt = $user->getSalt();
+
+            if($encoder->isPasswordValid($user->getPassword(),$request->get('password'), $salt)){
+                $serializer=new Serializer([new ObjectNormalizer()]);
+                $formatted=$serializer->normalize($user);
+                return new JsonResponse($formatted);
+            }
+        }
+        return new JsonResponse("Failed");
     }
 
 //    public function artisansProductAction(){
