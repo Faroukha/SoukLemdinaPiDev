@@ -5,7 +5,7 @@
 
     <!-- Page item Area -->
 
-
+<h2 align="center">Facture D'achat chez SoukLemdina</h2>
 
     <!-- Cart Page -->
     <div class="cart_page_area">
@@ -13,13 +13,13 @@
             <div class="row">
                 <div class="col-sm-12">
                     <div class="cart_table_area table-responsive">
-                        <table class="table cart_prdct_table text-center">
+                        <table border="1" style=" max-width:300px; background-color: #9fcdff;align-content: center; font-style: italic;" class="table cart_prdct_table text-center">
                             <thead>
                             <tr>
 
-                                <th class="cpt_img">Etat</th>
+                                <th class="cpt_img">Client</th>
                                 <th class="cpt_pn">Date</th>
-                                <th class="cpt_r">TOTAL</th>
+                                <th class="cpt_r">TOTAL Commande</th>
 
                             </tr>
                             </thead>
@@ -29,14 +29,15 @@
                             <tr><td>{{ app.user.username }}</td>
                             <td>{{ cm.date|date('m/d/y') }}</td>
                                 {% for p in panier %}
-                                {% if p.idUser== cm.idUser %}
+                                {% if p.idUser == cm.idUser and p.id==cm.idPanier %}
                                 <td>{{ p.PrixTotal }}</td>
                                 {% endif %}
                                 {% endfor %}
                             </tr>
                             {% endfor %}
                             </tbody>
-
+    <h3 align="center">Votre commande sera livré à l'adresse:{{ app.user.adresse }}</h3>
+    <h2 align="center">Merci pour votre Confiance</h2>
 
 
 
