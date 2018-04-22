@@ -20,3 +20,7 @@ delCom:
 Supprimer_blog:
     path:     /deleteBlog
     defaults: { _controller: BlogBundle:Default:deleteBlog }
+
+Rech_blog:
+    path:     /Rech
+    defaults: { _controller: BlogBundle:Default:Search }

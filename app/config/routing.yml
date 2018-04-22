@@ -1,6 +1,11 @@
-esprit_api:
-    resource: "@EspritAPIBundle/Controller/"
+
+api:
+    resource: "@ApiBundle/Controller/"
     type:     annotation
+    prefix:   /
+
+mail:
+    resource: "@MailBundle/Resources/config/routing.yml"
     prefix:   /
 
 admin:
@@ -43,6 +48,18 @@ app:
     resource: '@AppBundle/Controller/'
     type: annotation
 
+hwi_oauth_redirect:
+    resource: "@HWIOAuthBundle/Resources/config/routing/redirect.xml"
+    prefix:   /connect
+
+hwi_oauth_connect:
+    resource: "@HWIOAuthBundle/Resources/config/routing/connect.xml"
+    prefix:   /connect
+
+hwi_oauth_login:
+    resource: "@HWIOAuthBundle/Resources/config/routing/login.xml"
+    prefix:   /connect
+
 user:
     resource: '@UserBundle/Resources/config/routing.yml'
 
@@ -57,3 +74,6 @@ redirecttohome:
     path: /home
     defaults: { _controller: UserBundle:Default:index }
 
+esprit_mobile:
+    resource: "@ApiBundle/Resources/config/routing.yml"
+    prefix:   /api

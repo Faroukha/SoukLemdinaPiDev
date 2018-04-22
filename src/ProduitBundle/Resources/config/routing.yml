@@ -7,9 +7,6 @@ nouveau_produit:
 Ajouter_promotion:
     path:     /promotion
     defaults: { _controller: ProduitBundle:Promotion:AjouterPromotion }
-product_details:
-    path:     /details
-    defaults: { _controller: ProduitBundle:Default:details  }
 shop_produit:
     path:     /shop
     defaults: { _controller: ProduitBundle:Default:shop  }
@@ -37,7 +34,27 @@ Supprimer_produit:
 detailscome:
     path:     /comm
     defaults: { _controller: ProduitBundle:Default:detailscom }
-
-
-
-
+modifier_produit:
+    path:     /modifer/update
+    defaults: { _controller: ProduitBundle:Produit:update }
+modifier_temp:
+    path:     /modifer
+    defaults: { _controller: ProduitBundle:Produit:render }
+rechercher_produit:
+     path:     /rechercher
+     defaults: { _controller: ProduitBundle:Produit:Recherche }
+addRate:
+    path:     /rate
+    defaults: { _controller: ProduitBundle:Rate:add }
+envoyer_mail:
+       path:     /maile
+       defaults: { _controller: MainBundle:Default:index }
+product_detailss:
+    path:     /detailss/{id}
+    defaults: { _controller: ProduitBundle:Rate:info  }
+dd:
+    path:     /d
+    defaults: { _controller: ProduitBundle:Default:details  }
+product_details:
+    path:     /details
+    defaults: { _controller: ProduitBundle:Default:details  }

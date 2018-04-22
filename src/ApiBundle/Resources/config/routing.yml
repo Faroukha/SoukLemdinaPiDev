@@ -1,0 +1,18 @@
+api_homepage:
+    path:     /
+    defaults: { _controller: ApiBundle:Default:index }
+allProducts:
+    path:     /all/produit
+    defaults: { _controller: ApiBundle:Default:AllProducts }
+
+allPromotions:
+    path:     /all/promotions
+    defaults: { _controller: ApiBundle:Default:AllPromotions }
+
+allUsers:
+    path:     /all/users
+    defaults: { _controller: ApiBundle:Default:AllUsers }
+
+allComents:
+    path:     /all/coments
+    defaults: { _controller: ApiBundle:Default:AllComents }

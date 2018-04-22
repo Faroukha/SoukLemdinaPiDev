@@ -1,116 +1,291 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
 {% block body %}
+    {% if produits is not defined  %}
+        <script>
+            window.location = '{{ path('main_homepage') }}';
+        </script>
+    {% endif %}
     <div id="page_item_area">
         <div class="container">
             <div class="row">
-                <div class="col-sm-6 text-left">
+                <div class="col-sm-4 text-left">
                     <h3>Profile</h3>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Product Details Area  -->
-    <div class="prdct_dtls_page_area">
-        <div class="container">
-            <div class="row">
-                <!-- Product Details Image -->
-                <div class="col-md-4 col-xs-12">
-                    <div class="pd_img fix">
-                        <img src="{{ asset(user.image) }}" alt=""/></a>
+
+    <!-- Profil user  -->
+    {% if app.user.id == user.id %}
+        <div class="prdct_dtls_page_area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3 col-md-5 col-sm-6">
+                        <div class="our-team">
+                            <div class="pic">
+                                <img src="{{ asset("Uploads/images/") ~ user.image }}" alt="">
+                            </div>
+                            <div class="team-content">
+                                <h3 class="title">{{ user.prenom }} {{ user.nom }}</h3>
+                                <span class="post">{{ user.username }}</span>
+                                <ul class="social">
+                                    <li><a href="#"><i class="fa fa-cogs"></i></a></li>
+                                    <li><a href="{{ path('fos_user_change_password') }}"><i class="fa fa-unlock-alt"></i></a></li>
+
+                                </ul>
+                            </div>
+                        </div>
+
                     </div>
+
+
+                    <!-- Product Details Content -->
+                    <div class="col-md-8 col-xs-12">
+                        <table border="0" width="0">
+                            <tr>
+                                <td><br></td>
+                            </tr>
+                            <tr><br></tr>
+                            <tr> <ul class="post-bar">
+                                    <li><h2 class="title" style="font-family: 'Lato'">Informations générales</h2></li>
+                                    <li><i class="fa fa-credit-card" style="color: #ff0000; height: 40px" ></i></li>
+
+                                </ul></tr>
+                            <tr>
+                                <td><div class="single_info">
+                                        <div class="con_icon"><i class="fa fa-user"></i></div>
+                                    </div><br></td>
+                                <td>{{ user.prenom }} {{ user.nom }}</td>
+                            </tr>
+                            <tr>
+                                <td><div class="single_info">
+                                        <div class="con_icon"><i class="fa fa-envelope"></i></div>
+                                    </div><br></td>
+                                <td>{{ user.email }}</td>
+                            </tr>
+                            <tr>
+                                <td><div class="single_info">
+                                        <div class="con_icon"><i class="fa fa-birthday-cake"></i></div>
+                                    </div><br></td>
+                                <td>{{ user.birthdate|date("m/d/Y") }}</td>
+                            </tr>
+                            <tr>
+                                <td><div class="single_info">
+                                        <div class="con_icon"><i class="fa fa-phone-square"></i></div>
+                                    </div><br></td>
+                                <td>{{ user.phone }}</td>
+                            </tr>
+                            <tr>
+                                <td><div class="single_info">
+                                        <div class="con_icon"><i class="fa fa-map-pin"></i></div>
+                                    </div><br></td>
+                                <td>{{ user.adresse }}</td>
+                            </tr>
+                        </table>
+
+                        {##}
+                        {#<div class="prdct_dtls_content">#}
+                            {##}
+                            {#<span class="pd_title">{{ user.username }}</span>#}
+                            {#<div class="pd_text">#}
+                            {#<span class="pd_title"#}
+                                  {#style="font-size: 14px; display: contents;">Nom  :</span> {{ user.nom }}#}
+                            {#</div>#}
+                            {#<div class="pd_text">#}
+                            {#<span class="pd_title"#}
+                                  {#style="font-size: 14px; display: contents;">Prenom  :</span> {{ user.prenom }}#}
+                            {#</div>#}
+                            {#<div class="pd_text">#}
+                            {#<span class="pd_title"#}
+                                  {#style="font-size: 14px; display: contents;">E-mail  :</span> {{ user.email }}#}
+                            {#</div>#}
+                            {#<div class="pd_text">#}
+                            {#<span class="pd_title"#}
+                                  {#style="font-size: 14px; display: contents;">Date de naissance  :</span> {{ user.birthdate|date("m/d/Y") }}#}
+                            {#</div>#}
+                            {#<div class="pd_text">#}
+                            {#<span class="pd_title"#}
+                                  {#style="font-size: 14px; display: contents;">Phone  :</span> {{ user.phone }}#}
+                            {#</div>#}
+                            {#<div class="pd_text">#}
+                            {#<span class="pd_title"#}
+                                  {#style="font-size: 14px; display: contents;">Adresse  :</span> {{ user.adresse }}#}
+
+                            {#</div>#}
+
+
+
+                        </div>
+
+                        <!-- Product Action -->
+                        {% if is_granted('ROLE_ARTISAN') %}
+                            {% if app.user == user %}
+                                <div class="pd_btn fix">
+                                    <a class="btn btn-default acc_btn" href="{{ path('Ajouter_Produit') }}">Ajouter
+                                        Produit</a>
+                                </div>
+                            {% endif %}
+                        {% endif %}
+
+                    </div>
+
                 </div>
-                <!-- Product Details Content -->
-                <div class="col-md-6 col-xs-12">
-                    <div class="prdct_dtls_content">
-                        <span class="pd_title">{{ user.username }}</span>
-                        <div class="pd_text">
-                            <span class="pd_title"
-                                  style="font-size: 14px; display: contents;">Nom  :</span> {{ user.nom }}
-                        </div>
-                        <div class="pd_text">
-                            <span class="pd_title"
-                                  style="font-size: 14px; display: contents;">Prenom  :</span> {{ user.prenom }}
-                        </div>
-                        <div class="pd_text">
-                            <span class="pd_title"
-                                  style="font-size: 14px; display: contents;">E-mail  :</span> {{ user.email }}
-                        </div>
-                        <div class="pd_text">
-                            <span class="pd_title"
-                                  style="font-size: 14px; display: contents;">Date de naissance  :</span> {{ user.birthdate|date("m/d/Y") }}
-                        </div>
-                        <div class="pd_text">
-                            <span class="pd_title"
-                                  style="font-size: 14px; display: contents;">Phone  :</span> {{ user.phone }}
-                        </div>
-                        <div class="pd_text">
-                            <span class="pd_title"
-                                  style="font-size: 14px; display: contents;">Adresse  :</span> {{ user.adresse }}
+            </div>
+        </div>
+        </div>
+
+        <!-- Related Product Area -->
+        {% if is_granted('ROLE_ARTISAN') %}
+            <div class="related_prdct_area text-center">
+                <div class="container">
+                    <!-- Section Title -->
+                    <div class="col-md-12 text-center">
+                        <div class="section_title">
+                            <h2>Vos <span>Produits</span></h2>
+                            <div class="divider"></div>
                         </div>
                     </div>
-                    <!-- Product Action -->
-                    {% if is_granted('ROLE_ARTISAN') %}
-                    {% if app.user == user %}
-                    <div class="pd_btn fix">
-                        <a class="btn btn-default acc_btn" href="{{ path('Ajouter_Produit') }}">Ajouter Produit</a>
+                    <div class="product_item">
+
+                        {% for produit in produits %}
+                            <div class="col-lg-3 col-md-4 col-sm-6 mix">
+                                <div class="single_product">
+                                    <div class="product_image">
+                                        <img src="{{ asset("Uploads/images/") ~ produit.image }}" alt=""/>
+                                        <div class="box-content">
+
+                                            <a href="#"><i class="fa fa-cart-plus"></i></a>
+                                            <a href="{{ path('produit_artisan_details',{'id':produit.id}) }}"><i
+                                                        class="fa fa-search"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="product_btm_text">
+                                        <h4><a href="#">{{ produit.titre }}</a></h4>
+                                        <div class="p_rating">
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                        </div>
+                                        <span class="price">{{ produit.prix }}</span>
+                                    </div>
+
+                                </div>
+                            </div>
+                        {% endfor %}
+
                     </div>
-                    {% endif %}
-                    {% endif %}
-                    {% if app.user != user %}
-                    {% if is_granted('ROLE_MEMBER') %}
-                        {% if bool == false %}
+
+                </div>
+            </div>
+        {% endif %}
+    {% endif %}
+
+
+
+
+    {% if app.user != user %}
+        <script src="{{ asset('bundles/jquery-3.2.1.min.js') }}"></script>
+
+        <div class="row">
+        <div class="col-lg-3 col-md-3 col-sm-6">
+            <div></div>
+            <div class="our-team">
+                <div class="pic">
+                    <img src="{{ asset("Uploads/images/") ~ user.image }}" alt="">
+                </div>
+
+                <h3 class="title">{{ user.prenom }} {{ user.nom }}</h3>
+                <span class="post">{{ user.username }}</span>
+
+                {% if is_granted('ROLE_MEMBER') %}
+
+                    {% if bool == false %}
                         <div class="pd_btn fix">
-                            <a class="btn btn-default acc_btn" href="{{ path('abonnementdemerde', {'idA':user.id, 'idM':app.user.id}) }}">S'abonner</a>
+                            <a class="btn btn-default follow_btn" href="{{ path('abonnementdemerde', {'idartisan':user.id, 'idmembre':app.user.id}) }}">S'abonner
+                                </a>
                         </div>
-                        {% endif %}
-                        {% if bool == true %}
-                            <div class="pd_btn fix">
-                                <a class="btn btn-default acc_btn" href="{{ path('desabo', {'idA':user.id, 'idM':app.user.id}) }}">Desabo</a>
-                            </div>
-                        {% endif %}
 
                     {% endif %}
+                    {% if bool == true %}
+                        <div class="pd_btn fix">
+                            <a class="btn btn-default unfollow_btn" href="{{ path('desabo', {'idartisan':user.id, 'idmembre':app.user.id}) }}">Désabonner
+                            </a>
+                        </div>
                     {% endif %}
-                </div>
+
+                {% endif %}
+
+
+
+            </div>
+
+        </div>
+
+        <div class="col-md-4 col-xs-7">
+            <h2 class="title">{{ user.prenom }} {{ user.nom }}</h2><h6>Artisan</h6>
+            <div class="line-separator" style="width: 300px"></div><br><br>
+            <span class="post">Informations de contact</span><br><br>
+            <div class="single_info">
+                <div class="con_icon"><i class="fa fa-map-marker"></i></div>
+                <p>{{ user.adresse }}</p>
+            </div><br>
+            <div class="single_info">
+                <div class="con_icon"><i class="fa fa-phone"></i></div>
+                <p>Phone : {{ user.phone }}</p>
+
+            </div><br>
+            <div class="single_info">
+                <div class="con_icon"><i class="fa fa-envelope"></i></div>
+                <a href="#">{{ user.email }} </a>
+
             </div>
         </div>
-    </div>
-    </div>
-    <!-- Related Product Area -->
-    <div class="related_prdct_area text-center">
-        <div class="container">
-            <!-- Section Title -->
-            <div class="rp_title text-center"><h3>Related products</h3></div>
-            <div class="product_item">
-                {% for produit in produits %}
-                    <div class="col-lg-3 col-md-4 col-sm-6 mix sale">
-                        <div class="single_product">
-                            <div class="product_image">
-                                <img src="{{ asset("Uploads/images/") ~ produit.image }}" alt=""/>
-                                <div class="new_badge">New</div>
-                                <div class="box-content">
 
-                                    <a href="#"><i class="fa fa-cart-plus"></i></a>
-                                    <a href="{{ path('produit_artisan_details',{'id':produit.id}) }}"><i class="fa fa-search"></i></a>
-                                </div>
-                            </div>
-                            <div class="product_btm_text">
-                                <h4><a href="#">{{ produit.titre}}</a></h4>
-                                <div class="p_rating">
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                </div>
-                                <span class="price">{{ produit.prix}}</span>
-                            </div>
-                        </div>
+            <div class="col-xs-8 col-md-5 col-lg-3">
+                <ul class="post-bar">
+                    <li><h2 class="title" style="font-family: 'Lato'">Liste des abonnés</h2></li>
+                    <li><i class="fa fa-heart-o" style="color: #ff0000"></i> <a href="#"></a></li>
+
+                </ul>
+               <br><br>
+
+<!--Single abooned person-->
+
+
+                {% for abo in abos %}
+                    {% set i=0 %}
+                    {% set i=i+1 %}
+
+                <div class="single_blog">
+                    <div class="single_blog_img">
+                        <img src="" alt="">
                     </div>
+
+
+                    <div class="blog_content" style="width: 200px">
+                        <ul class="post-bar">
+                            <li><img src=""></li>
+                            <li><h5 class="post_title" style="font-family: 'Lato'"> {{ abo.idMembre.username }}</h5></li>
+                            <li><i class="fa fa-envelope-square" style="color: #0000F0; width: 15px" ></i> <a href="#">{{ abo.idMembre.email }}</a></li>
+                        </ul>
+                    </div>
+                </div>
                 {% endfor %}
+
+
             </div>
+
+
         </div>
-    </div>
+
+
+{% endif %}
+
+
+
+
 {% endblock %}

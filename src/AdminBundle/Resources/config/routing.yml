@@ -5,7 +5,6 @@ admin_homepage:
 addPub:
     path:     /addPub
     defaults: { _controller: AdminBundle:Default:addpub }
-
 allPub:
     path:     /allpub
     defaults: { _controller: AdminBundle:Default:allPub }
@@ -16,3 +15,43 @@ ajouterPub:
 allreclam:
     path:     /all
     defaults: { _controller: AdminBundle:Default:allreclam }
+deletePub:
+    path:     /delPub
+    defaults: { _controller: AdminBundle:Default:deletePub }
+deleteProduit:
+    path:     /delProduit/{id}
+    defaults: { _controller: AdminBundle:Default:deleteProduit }
+deleteBlog:
+    path:     /delPub/{id}
+    defaults: { _controller: AdminBundle:Default:deleteBlog }
+deleteEvent:
+    path:     /delEvent/{id}
+    defaults: { _controller: AdminBundle:Default:deleteEvent }
+updatePub:
+    path:     /update/{id}
+    defaults: { _controller: AdminBundle:Default:updatePub }
+updatePubView:
+    path:     /updatePub
+    defaults: { _controller: AdminBundle:Default:updatePubView }
+reclamer:
+    path:     /reclamer
+    defaults: { _controller: AdminBundle:Default:reclamer }
+
+all_blogs:
+    path:     /all_blogs
+    defaults: { _controller: AdminBundle:Default:blogs }
+
+all_eventss:
+    path:     /all_events
+    defaults: { _controller: AdminBundle:Default:events }
+all_users:
+    path:     /all_users
+    defaults: { _controller: AdminBundle:Default:users }
+
+all_produitss:
+    path:     /all_produits
+    defaults: { _controller: AdminBundle:Default:produits }
+stat:
+    path:     /stats
+    defaults: { _controller: AdminBundle:Default:Statistique }
+

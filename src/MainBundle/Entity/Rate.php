@@ -44,11 +44,11 @@ class Rate
 
 
     /**
-     * @var integer
+     * @var string
      *
-     * @ORM\Column(name="avis", type="integer", nullable=false)
+     * @ORM\Column(name="avis", type="text", nullable=true)
      */
-    private $avis=0;
+    private $avis;
     /**
      * Get id
      *
