@@ -89,14 +89,6 @@ class ProduitController extends Controller
             $em1= $this->getDoctrine()->getManager();
             $em1->persist($n);
             $em1->flush();
-
-
-
-
-
-
-
-
         }
 
         $em = $this->getDoctrine()->getManager();
