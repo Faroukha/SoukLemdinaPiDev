@@ -25,3 +25,6 @@ allMessage:
 login:
     path:     /login
     defaults: { _controller: ApiBundle:Default:login }
+UserById:
+    path:     /get/user
+    defaults: { _controller: ApiBundle:Default:GetUserbyId }
