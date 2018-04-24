@@ -25,3 +25,7 @@ allMessage:
 login:
     path:     /login
     defaults: { _controller: ApiBundle:Default:login }
+
+add_produit:
+    path:     /add/produit
+    defaults: { _controller: ApiBundle:Default:AddProduct }

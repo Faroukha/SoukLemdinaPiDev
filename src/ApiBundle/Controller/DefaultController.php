@@ -82,6 +82,36 @@ class DefaultController extends Controller
         return new JsonResponse("Failed");
     }
 
+
+
+    public function AddProductAction(Request $request){
+
+            $em=$this->getDoctrine()->getManager();
+            $produit = new Produit();
+            $produit->setIdartisan($request->get('idartisan')) ;
+
+            $produit->setQuantite($request->get('quantite')) ;
+            $produit->setPrix($request->get('prix')) ;
+            $produit->setImage($request->get('image')) ;
+            $produit->setDescription($request->get('description')) ;
+            $produit->setCategorie($request->get('categorie')) ;
+            $produit->setTitre($request->get('titre')) ;
+            $em->persist($produit);
+            $em->flush();
+            $serializer = new Serializer([new ObjectNormalizer()]);
+            $formatted = $serializer->normalize($produit);
+            return new JsonResponse($formatted);
+
+
+        }
+
+        public function GetUserByEmailAction($email){
+
+        }
+
+
+
+
 //    public function artisansProductAction(){
 //        $produit = $this->getDoctrine()->getManager()->getRepository(Produit::class)->findBy([]);
 //        $serializer = new Serializer([new ObjectNormalizer()]);
