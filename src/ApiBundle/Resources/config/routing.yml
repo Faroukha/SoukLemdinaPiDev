@@ -25,6 +25,7 @@ allMessage:
 login:
     path:     /login
     defaults: { _controller: ApiBundle:Default:login }
+
 addproduit:
     path:     /add/produit/{quantite}/{image}/{description}/{categorie}/{titre}/{prix}/{idartisan}
     defaults: { _controller: ApiBundle:Default:Addproduit }
@@ -37,3 +38,8 @@ allproduitartisan:
 deleateproduit:
     path:     /delete/{id}
     defaults: { _controller: ApiBundle:Default:delet }
+
+UserById:
+    path:     /get/user
+    defaults: { _controller: ApiBundle:Default:GetUserbyId }
+

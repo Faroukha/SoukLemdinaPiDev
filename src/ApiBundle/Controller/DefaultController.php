@@ -49,14 +49,16 @@ class DefaultController extends Controller
         $formatted = $serializer->normalize($message);
         return new JsonResponse($formatted);
     }
-
     public function AllMessageAction(){
         $produit = $this->getDoctrine()->getManager()->getRepository(Message::class)->findAll();
+//        $message = new Message();
+//        $message->setContenu($request->get('contenu'));
+//        $message->setIdEnv($request->get('idEnv'));
+//        $message->setIdRes($request->get('idRes'));
         $serializer = new Serializer([new ObjectNormalizer()]);
         $formatted = $serializer->normalize($produit);
         return new JsonResponse($formatted);
     }
-
 
     public function AllPromotionsAction(){
         $promotion = $this->getDoctrine()->getManager()->getRepository(Promotion::class)->findAll();
@@ -72,6 +74,7 @@ class DefaultController extends Controller
         $formatted = $serializer->normalize($produit);
         return new JsonResponse($formatted);
     }
+
     public function AddproduitAction(Request $request,$quantite,$image,$description,$categorie,$titre, $prix,User $idartisan){
         $em=$this->getDoctrine()->getManager();
         $produit = new Produit();
@@ -110,6 +113,14 @@ class DefaultController extends Controller
         $formatted = $serializer->normalize($promotion);
         return new JsonResponse($formatted);
 
+    public function GetUserbyIdAction(Request $request){
+        $user = $this->getDoctrine()->getRepository(User::class)->find($request->get('id'));
+        $serializer = new Serializer([new ObjectNormalizer()]);
+        $formatted = $serializer->normalize($user);
+        return new JsonResponse($formatted);
+    }
+
+
 
     }
     public function AllComentsAction(){
@@ -118,6 +129,12 @@ class DefaultController extends Controller
         $formatted = $serializer->normalize($produit);
         return new JsonResponse($formatted);
     }
+//    public function FindUserByIdAction(){
+//        $produit = $this->getDoctrine()->getManager()->getRepository(User::class)->find();
+//        $serializer = new Serializer([new ObjectNormalizer()]);
+//        $formatted = $serializer->normalize($produit);
+//        return new JsonResponse($formatted);
+//    }
 
     public function loginAction (Request $request) {
         $em=$this->getDoctrine()->getManager();
