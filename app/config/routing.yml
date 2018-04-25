@@ -41,6 +41,7 @@ main:
     prefix:   /
 
 
+
 app:
     resource: '@AppBundle/Controller/'
     type: annotation
