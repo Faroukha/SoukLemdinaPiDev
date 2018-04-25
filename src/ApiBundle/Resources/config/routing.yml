@@ -28,3 +28,12 @@ login:
 addproduit:
     path:     /add/produit/{quantite}/{image}/{description}/{categorie}/{titre}/{prix}/{idartisan}
     defaults: { _controller: ApiBundle:Default:Addproduit }
+addpromotion:
+    path:     /add/promotion/{taux}/{idproduit}
+    defaults: { _controller: ApiBundle:Default:Addproduitpromotion }
+allproduitartisan:
+    path:     /all/produitartisant/{id}
+    defaults: { _controller: ApiBundle:Default:AllProductsArtisan }
+deleateproduit:
+    path:     /delete/{id}
+    defaults: { _controller: ApiBundle:Default:delet }
