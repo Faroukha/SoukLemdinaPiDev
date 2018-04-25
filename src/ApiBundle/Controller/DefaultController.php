@@ -105,8 +105,11 @@ class DefaultController extends Controller
 
         }
 
-        public function GetUserByEmailAction($email){
-
+        public function GetUserByIdAction(Request $request){
+            $user=$this->getDoctrine()->getManager()->getRepository(User::class)->findOneBy(['id' =>$request->get('id')]);
+            $serializer=new Serializer([new ObjectNormalizer()]);
+                $formatted=$serializer->normalize($user);
+                return new JsonResponse($formatted);
         }
 
 

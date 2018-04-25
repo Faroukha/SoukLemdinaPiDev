@@ -29,3 +29,7 @@ login:
 add_produit:
     path:     /add/produit
     defaults: { _controller: ApiBundle:Default:AddProduct }
+
+getUser:
+    path:     /get/user
+    defaults: { _controller: ApiBundle:Default:GetUserById }
