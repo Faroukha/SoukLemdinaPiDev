@@ -28,6 +28,20 @@ class DefaultController extends Controller
       return new JsonResponse($formatted);
     }
 
+    public function AllProductsArtisanAction($id){
+        $produit = $this->getDoctrine()->getManager()->getRepository(Produit::class)->findBy(array("idartisan"=>$id));
+        $serializer = new Serializer([new ObjectNormalizer()]);
+        $formatted = $serializer->normalize($produit);
+        return new JsonResponse($formatted);
+    }
+    public function deletAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $Publicite = $em->getRepository("MainBundle:Produit")->find($id);
+        $em->remove($Publicite);
+        $em->flush();
+        return 0 ;
+    }
     public function AllMessageUserAction($id){
 
         $message = $this->getDoctrine()->getManager()->getRepository(Message::class)->find($id);
@@ -35,19 +49,22 @@ class DefaultController extends Controller
         $formatted = $serializer->normalize($message);
         return new JsonResponse($formatted);
     }
-
     public function AllMessageAction(){
         $produit = $this->getDoctrine()->getManager()->getRepository(Message::class)->findAll();
+//        $message = new Message();
+//        $message->setContenu($request->get('contenu'));
+//        $message->setIdEnv($request->get('idEnv'));
+//        $message->setIdRes($request->get('idRes'));
         $serializer = new Serializer([new ObjectNormalizer()]);
         $formatted = $serializer->normalize($produit);
         return new JsonResponse($formatted);
     }
 
-
     public function AllPromotionsAction(){
-        $produit = $this->getDoctrine()->getManager()->getRepository(Promotion::class)->findAll();
+        $promotion = $this->getDoctrine()->getManager()->getRepository(Promotion::class)->findAll();
+
         $serializer = new Serializer([new ObjectNormalizer()]);
-        $formatted = $serializer->normalize($produit);
+        $formatted = $serializer->normalize($promotion);
         return new JsonResponse($formatted);
     }
 
@@ -58,12 +75,66 @@ class DefaultController extends Controller
         return new JsonResponse($formatted);
     }
 
+    public function AddproduitAction(Request $request,$quantite,$image,$description,$categorie,$titre, $prix,User $idartisan){
+        $em=$this->getDoctrine()->getManager();
+        $produit = new Produit();
+        $user = $em->getRepository("UserBundle:User")->find($idartisan);
+        $produit->setIdartisan($user->getId()) ;
+        $produit->setQuantite($quantite) ;
+        $produit->setPrix($prix) ;
+        $produit->setImage($image) ;
+        $produit->setDescription($description) ;
+        $produit->setCategorie($categorie) ;
+        $produit->setTitre($titre) ;
+        $encoder = new JsonResponse();
+        $nor = new ObjectNormalizer();
+        $nor->setCircularReferenceHandler(function ($obj){return $obj->getId() ;});
+        $em->persist($produit);
+        $em->flush();
+
+        $serializer = new Serializer(array($nor,$encoder));
+        $formatted = $serializer->normalize($produit);
+        return new JsonResponse($formatted);
+
+
+    }
+    public function AddproduitpromotionAction(Request $request,$taux, $idproduit){
+        $em=$this->getDoctrine()->getManager();
+        $promotion = new Promotion();
+        $promotion->setIdproduit($idproduit);
+        $promotion->setTaux($taux);
+        $encoder = new JsonResponse();
+        $nor = new ObjectNormalizer();
+        $nor->setCircularReferenceHandler(function ($obj){return $obj->getId() ;});
+        $em->persist($promotion);
+        $em->flush();
+
+        $serializer = new Serializer(array($nor,$encoder));
+        $formatted = $serializer->normalize($promotion);
+        return new JsonResponse($formatted);
+
+    public function GetUserbyIdAction(Request $request){
+        $user = $this->getDoctrine()->getRepository(User::class)->find($request->get('id'));
+        $serializer = new Serializer([new ObjectNormalizer()]);
+        $formatted = $serializer->normalize($user);
+        return new JsonResponse($formatted);
+    }
+
+
+
+    }
     public function AllComentsAction(){
         $produit = $this->getDoctrine()->getManager()->getRepository(Commentaire::class)->findAll();
         $serializer = new Serializer([new ObjectNormalizer()]);
         $formatted = $serializer->normalize($produit);
         return new JsonResponse($formatted);
     }
+//    public function FindUserByIdAction(){
+//        $produit = $this->getDoctrine()->getManager()->getRepository(User::class)->find();
+//        $serializer = new Serializer([new ObjectNormalizer()]);
+//        $formatted = $serializer->normalize($produit);
+//        return new JsonResponse($formatted);
+//    }
 
     public function loginAction (Request $request) {
         $em=$this->getDoctrine()->getManager();
