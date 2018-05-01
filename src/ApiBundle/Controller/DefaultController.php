@@ -4,6 +4,8 @@ namespace ApiBundle\Controller;
 
 use MainBundle\Entity\Commentaire;
 use MainBundle\Entity\Produit;
+use MainBundle\Entity\Commande;
+use MainBundle\Entity\Panier;
 use MainBundle\Entity\Promotion;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -45,6 +47,39 @@ class DefaultController extends Controller
         $serializer = new Serializer([new ObjectNormalizer()]);
         $formatted = $serializer->normalize($produit);
         return new JsonResponse($formatted);
+    }
+
+
+    public function ValiderpanierAction(Request $request){
+
+        $em=$this->getDoctrine()->getManager();
+        $panier = new Panier();
+        $panier->setIduser($request->get('idUser')) ;
+        $panier->setPrixtotal($request->get('prixTotal'));
+
+        $em->persist($panier);
+        $em->flush();
+        $serializer = new Serializer([new ObjectNormalizer()]);
+        $formatted = $serializer->normalize($panier);
+        return new JsonResponse($formatted);
+
+    }
+    public function CommanderAction(Request $request){
+
+        $em=$this->getDoctrine()->getManager();
+        $commande = new Commande();
+        $commande->setIduser($request->get('idUser')) ;
+        $commande->setEtat(0);
+        $commande->setDate(new \DateTime('now'));
+        $commande->setIdpanier($request->get('idPanier'));
+
+        $em->persist($commande);
+        $em->flush();
+        $serializer = new Serializer([new ObjectNormalizer()]);
+        $formatted = $serializer->normalize($commande);
+        return new JsonResponse($formatted);
+
+
     }
 
 //    public function artisansProductAction(){

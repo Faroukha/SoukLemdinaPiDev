@@ -16,3 +16,10 @@ allUsers:
 allComents:
     path:     /all/coments
     defaults: { _controller: ApiBundle:Default:AllComents }
+ValiderPanier:
+     path:     /Valider/panier/{idUser}/{prixTotal}
+     defaults: { _controller: ApiBundle:Default:Validerpanier }
+
+Commander:
+      path:     /Commander/commande/{idUser}/{IdPanier}
+      defaults: { _controller: ApiBundle:Default:Validerpanier }
