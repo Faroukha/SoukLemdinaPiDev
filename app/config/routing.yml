@@ -40,9 +40,7 @@ main:
     resource: "@MainBundle/Resources/config/routing.yml"
     prefix:   /
 
-esprit_api:
-    resource: "@EspritAPIBundle/Resources/config/routing.yml"
-    prefix:   /api
+
 
 app:
     resource: '@AppBundle/Controller/'
