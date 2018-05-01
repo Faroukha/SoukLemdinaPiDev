@@ -10,4 +10,22 @@ namespace MainBundle\Repository;
  */
 class MessageRepository extends \Doctrine\ORM\EntityRepository
 {
+
+    public function getmsg($idEnv ,$idRes) {
+        $q=$this->getEntityManager()->createQuery("SELECT p 
+            FROM MainBundle:Message p 
+            WHERE p.idEnv =:idEnv
+            AND   p.idRes =:idRes Or p.idEnv =:idRes
+            AND   p.idRes =:idEnv   ")->setParameter('idEnv',$idEnv)->setParameter('idRes',$idRes);
+        return $q->getResult();
+    }
+    public function getmessages($idUser) {
+        $q=$this->getEntityManager()->createQuery("SELECT p.id
+            FROM MainBundle:Message p 
+            WHERE p.idEnv =:idUser 
+            OR p.idRes =:idUser 
+            ")->setParameter('idUser',$idUser);
+        return $q->getResult();
+    }
+
 }

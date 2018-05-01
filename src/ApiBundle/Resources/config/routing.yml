@@ -25,12 +25,12 @@ allMessage:
 login:
     path:     /login
     defaults: { _controller: ApiBundle:Default:login }
-
-
 getUser:
     path:     /get/user
     defaults: { _controller: ApiBundle:Default:GetUserById }
-
+AjouterRate:
+    path:     /add/rate/{idp}/{idu}/{value}
+    defaults: { _controller: ApiBundle:Default:AjouterRate }
 addproduit:
     path:     /add/produit/{quantite}/{image}/{description}/{categorie}/{titre}/{prix}/{idartisan}
     defaults: { _controller: ApiBundle:Default:Addproduit }
@@ -43,4 +43,28 @@ allproduitartisan:
 deleateproduit:
     path:     /delete/{id}
     defaults: { _controller: ApiBundle:Default:delet }
+addMessage:
+    path:     /add/message/{idenv}/{idres}/{contenu}
+    defaults: { _controller: ApiBundle:Default:AddMessage }
+MesMessages:
+    path:     /Messages/{idUser}
+    defaults: { _controller: ApiBundle:Default:MesMessages }
+HistoryMessages:
+    path:     /add/history/{idenv}/{idres}
+    defaults: { _controller: ApiBundle:Default:HistoryMessages }
+addComm:
+    path:     /add/Comm/{text}/{idP}/{user}
+    defaults: { _controller: ApiBundle:Default:AddComm }
+allCom:
+    path:     /all/Comm/{idP}
+    defaults: { _controller: ApiBundle:Default:AllComs }
+
+
+
+
+
+
+
+
+
 
