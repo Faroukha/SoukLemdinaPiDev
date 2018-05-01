@@ -91,6 +91,26 @@ class DefaultController extends Controller
 
     }
 
+
+    public function AddMessageAction(User $idenv , User $idres,$contenu){
+        $em=$this->getDoctrine()->getManager();
+        $message = new Message();
+        $message->setIdEnv($idenv) ;
+        $message->setIdRes($idres) ;
+        $message->setContenu($contenu) ;
+
+        $encoder = new JsonResponse();
+        $nor = new ObjectNormalizer();
+        $nor->setCircularReferenceHandler(function ($obj){return $obj->getId() ;});
+        $em->persist($message);
+        $em->flush();
+
+        $serializer = new Serializer(array($nor,$encoder));
+        $formatted = $serializer->normalize($message);
+        return new JsonResponse($formatted);
+
+
+    }
 //
 //
 //    public function supprimerCommentaireAction(Request $request)

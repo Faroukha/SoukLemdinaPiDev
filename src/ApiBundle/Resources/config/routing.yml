@@ -59,15 +59,6 @@ allCom:
     path:     /all/Comm/{idP}
     defaults: { _controller: ApiBundle:Default:AllComs }
 
-
-
-
-
-
-
-
-
-
 abo_verif:
     path:     /abo
     defaults: { _controller: ApiBundle:Default:isAbo }
