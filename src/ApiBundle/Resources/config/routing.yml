@@ -44,3 +44,22 @@ deleateproduit:
     path:     /delete/{id}
     defaults: { _controller: ApiBundle:Default:delet }
 
+abo_verif:
+    path:     /abo
+    defaults: { _controller: ApiBundle:Default:isAbo }
+
+maps:
+    path:     /map
+    defaults: { _controller: ApiBundle:Default:map }
+
+abo_add:
+    path:     /add/abo
+    defaults: { _controller: ApiBundle:Default:addAbo }
+
+get_abo:
+    path:     /get/abo
+    defaults: { _controller: ApiBundle:Default:getAboByMember }
+
+desabo:
+    path:     /desabo
+    defaults: { _controller: ApiBundle:Default:desabo }
