@@ -8,6 +8,7 @@ use MainBundle\Entity\Commentaire;
 use MainBundle\Entity\Message;
 use MainBundle\Entity\Produit;
 use MainBundle\Entity\Promotion;
+use MainBundle\Entity\Rate;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -59,10 +60,6 @@ class DefaultController extends Controller
     public function AllMessageAction()
     {
         $produit = $this->getDoctrine()->getManager()->getRepository(Message::class)->findAll();
-//        $message = new Message();
-//        $message->setContenu($request->get('contenu'));
-//        $message->setIdEnv($request->get('idEnv'));
-//        $message->setIdRes($request->get('idRes'));
         $serializer = new Serializer([new ObjectNormalizer()]);
         $formatted = $serializer->normalize($produit);
         return new JsonResponse($formatted);
@@ -76,6 +73,60 @@ class DefaultController extends Controller
         $formatted = $serializer->normalize($promotion);
         return new JsonResponse($formatted);
     }
+
+
+    public function AddCommAction($user, $idP, $text)
+    {
+
+        $commentaire = New Commentaire();
+        $em = $this->getDoctrine()->getManager();
+        $commentaire->setText($text);
+        $commentaire->setIdproduit($idP);
+        $commentaire->setEmailuser($user);
+        $em->persist($commentaire);
+        $em->flush();
+        $serializer = new Serializer([new ObjectNormalizer()]);
+        $formatted = $serializer->normalize($commentaire);
+        return new JsonResponse("done");
+
+    }
+
+//
+//
+//    public function supprimerCommentaireAction(Request $request)
+//    {
+//        $em = $this->getDoctrine()->getManager();
+//        $id1 = $request->get('id_commentaire');
+//        $id = $request->get('id_user');
+//        $commentaire = $em->getRepository(CommentaireR::class);
+//        $commentaire1 = $commentaire->findOneBy(array('id' => $id1));
+//        // $reponse=$em->getRepository(ReponseC::class)->deletelesreponses($commentaire1);
+//        $rubrique = $commentaire1->getIdPublication();
+//        $commentaire->deleteCommentaire($id1, $id);
+//        $rubrique->setNbcommentaire($rubrique->getNbcommentaire() - 1);
+//        $em->persist($rubrique);
+//        $em->flush();
+//        $serializer = new Serializer([new ObjectNormalizer()]);
+//        $formatted = $serializer->normalize($rubrique);
+//        return new JsonResponse($formatted);
+//    }
+    public function AjouterRateAction($idu, $idp, $value)
+    {
+        $rate = new Rate();
+        $em = $this->getDoctrine()->getManager();
+        $user = $em->getRepository(User::class)->find($idu);
+        $produit = $em->getRepository(Produit::class)->find($idp);
+        $rate->setIduser($user->getId());
+        $rate->setIdproduit($produit->getId());
+        $rate->setValue($value);
+        $em->persist($rate);
+        $em->flush();
+        $serializer = new Serializer([new ObjectNormalizer()]);
+        $formatted = $serializer->normalize($rate);
+        return new JsonResponse($formatted);
+
+    }
+
 
     public function AllUsersAction()
     {
@@ -131,22 +182,44 @@ class DefaultController extends Controller
         return new JsonResponse($formatted);
     }
 
+
     public function GetUserbyIdAction(Request $request)
     {
         $user = $this->getDoctrine()->getManager()->getRepository(User::class)->find($request->get('id'));
+
+
         $serializer = new Serializer([new ObjectNormalizer()]);
         $formatted = $serializer->normalize($user);
         return new JsonResponse($formatted);
     }
 
-
-    public function AllComentsAction()
+    public function HistoryMessagesAction(User $idenv, User $idres)
     {
-        $produit = $this->getDoctrine()->getManager()->getRepository(Commentaire::class)->findAll();
+        $message = $this->getDoctrine()->getRepository(Message::class)->getmsg($idenv, $idres);
+        $serializer = new Serializer([new ObjectNormalizer()]);
+        $formatted = $serializer->normalize($message);
+        return new JsonResponse($formatted);
+    }
+
+
+    public function MesMessagesAction(User $idUser)
+    {
+        $message = $this->getDoctrine()->getRepository(Message::class)->getmessages($idUser);
+        $serializer = new Serializer([new ObjectNormalizer()]);
+        $formatted = $serializer->normalize($message);
+        return new JsonResponse($formatted);
+    }
+
+
+    public function AllComsAction($idP)
+    {
+        $produit = $this->getDoctrine()->getManager()->getRepository(Commentaire::class)->findBy(array('idproduit'=>$idP));
+
         $serializer = new Serializer([new ObjectNormalizer()]);
         $formatted = $serializer->normalize($produit);
         return new JsonResponse($formatted);
     }
+
 //    public function FindUserByIdAction(){
 //        $produit = $this->getDoctrine()->getManager()->getRepository(User::class)->find();
 //        $serializer = new Serializer([new ObjectNormalizer()]);
@@ -175,6 +248,7 @@ class DefaultController extends Controller
 
     public function AddProductAction(Request $request)
     {
+
 
         $em = $this->getDoctrine()->getManager();
         $produit = new Produit();
@@ -289,6 +363,9 @@ class DefaultController extends Controller
         $destinationLng= $request->get('destinationLng');
         return $this->render('ApiBundle:Default:MapsView.html.twig', ['originLat'=>$originLat, 'originLng'=>$originLng, 'destinationLat'=>$destinationLat, 'destinationLng'=>$destinationLng]);
     }
+
+
+
 
 
 
