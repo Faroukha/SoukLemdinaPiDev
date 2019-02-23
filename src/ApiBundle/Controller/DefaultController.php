@@ -7,6 +7,8 @@ use MainBundle\Entity\Abonnement;
 use MainBundle\Entity\Commentaire;
 use MainBundle\Entity\Message;
 use MainBundle\Entity\Produit;
+use MainBundle\Entity\Commande;
+use MainBundle\Entity\Panier;
 use MainBundle\Entity\Promotion;
 use MainBundle\Entity\Rate;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -389,6 +391,39 @@ class DefaultController extends Controller
 
 
 
+
+
+    public function ValiderpanierAction(Request $request){
+
+        $em=$this->getDoctrine()->getManager();
+        $panier = new Panier();
+        $panier->setIduser($request->get('idUser')) ;
+        $panier->setPrixtotal($request->get('prixTotal'));
+
+        $em->persist($panier);
+        $em->flush();
+        $serializer = new Serializer([new ObjectNormalizer()]);
+        $formatted = $serializer->normalize($panier);
+        return new JsonResponse($formatted);
+
+    }
+    public function CommanderAction(Request $request){
+
+        $em=$this->getDoctrine()->getManager();
+        $commande = new Commande();
+        $commande->setIduser($request->get('idUser')) ;
+        $commande->setEtat(0);
+        $commande->setDate(new \DateTime('now'));
+        $commande->setIdpanier($request->get('idPanier'));
+
+        $em->persist($commande);
+        $em->flush();
+        $serializer = new Serializer([new ObjectNormalizer()]);
+        $formatted = $serializer->normalize($commande);
+        return new JsonResponse($formatted);
+
+
+    }
 
 //    public function artisansProductAction(){
 //        $produit = $this->getDoctrine()->getManager()->getRepository(Produit::class)->findBy([]);
